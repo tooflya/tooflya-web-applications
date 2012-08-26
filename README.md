@@ -1,4 +1,3 @@
-tooflya-web-applications
-========================
-
-Repository for the development of the necessary web applications
+Information about repository
+============================
+The repository serves as a working repository for all web applications of _Tooflya Inc._
