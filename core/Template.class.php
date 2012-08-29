@@ -52,6 +52,16 @@ class Template extends Smarty {
     $this->assign('ajax', Ajax::isResponse());
     $this->assign('user', Session::user());
   }
+  
+  /**
+   *
+   * 
+   *
+   */
+   public function display($controller, $template = 'index')
+   {
+    parent::display($controller.'/'.$template.'.html');
+   }
 }
 
 /**

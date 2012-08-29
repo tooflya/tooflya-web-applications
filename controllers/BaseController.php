@@ -21,6 +21,7 @@
 abstract class BaseController {
 
   protected $templates;
+  protected $name;
 
   /**
    *
@@ -35,6 +36,8 @@ abstract class BaseController {
      *
      */
     $this->templates = new Template();
+
+    $this->name = get_class($this);
   }
 
   /**

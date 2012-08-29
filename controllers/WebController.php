@@ -27,7 +27,7 @@ class WebController extends BaseController {
    */
   public function indexAction()
   {
-  	print 'index action';
+  	$this->templates->display($this->name);
   }
 }
 
