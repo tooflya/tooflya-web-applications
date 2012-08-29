@@ -1,0 +1,9 @@
+*.log
+*.bin
+*.settings
+*.ai
+*conf
+.project
+uploads/
+tools/Smarty/templates/
+tools/Smarty/cache/
