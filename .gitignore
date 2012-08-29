@@ -5,5 +5,5 @@
 *conf
 .project
 uploads/
-tools/Smarty/templates/
-tools/Smarty/cache/
+tools/smarty/templates/
+tools/smarty/cache/
