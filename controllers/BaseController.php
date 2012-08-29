@@ -19,6 +19,29 @@
  */
 
 abstract class BaseController {
+
+  protected $templates;
+
+  /**
+   *
+   *
+   *
+   */
+  function __construct()
+  {
+    /**
+     *
+     * Create Smarty templator object
+     *
+     */
+    $this->templates = new Template();
+  }
+
+  /**
+   *
+   *
+   *
+   */
   abstract public function indexAction();
 }
 

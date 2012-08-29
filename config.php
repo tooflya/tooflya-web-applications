@@ -62,14 +62,6 @@ mysql_query("SET NAMES UTF8");
 
 /**
  *
- * Create Smarty templator object
- * TODO: Remove this to the $templates __get or whatever...
- *
- */
-$templates = new Template();
-
-/**
- *
  * Designed specifically for using this code in projects of Tooflya Inc.
  * Tooflya Inc., 2012
  *

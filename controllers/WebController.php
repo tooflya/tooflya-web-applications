@@ -20,6 +20,11 @@
 
 class WebController extends BaseController {
 
+  /**
+   *
+   *
+   *
+   */
   public function indexAction()
   {
   	print 'index action';
