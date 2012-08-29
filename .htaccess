@@ -9,3 +9,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 
 # otherwise forward it to index.php
 RewriteRule . index.php
+
+<Files "config.php">
+    Deny from all
+</Files>
