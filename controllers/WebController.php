@@ -29,6 +29,66 @@ class WebController extends BaseController {
   {
   	$this->templates->display($this->name);
   }
+
+  /**
+   *
+   *
+   *
+   */
+  public function companyAction()
+  {
+  	$this->templates->display($this->name, 'company');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function activitiesAction()
+  {
+  	$this->templates->display($this->name, 'activities');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function partnershipAction()
+  {
+  	$this->templates->display($this->name, 'partnership');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function careerAction()
+  {
+  	$this->templates->display($this->name, 'career');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function teamAction()
+  {
+  	$this->templates->display($this->name, 'team');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function distributionAction()
+  {
+  	$this->templates->display($this->name, 'distribution');
+  }
 }
 
 /**

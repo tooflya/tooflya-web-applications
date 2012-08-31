@@ -26,6 +26,8 @@
 define('PATH', '/var/www');
 define('DEBUG', true);
 define('EVENTS', true);
+//define('URL', 'http://www.tooflya.com');
+define('URL', 'http://127.0.0.1');
 
 require('autoload.php');
 require('router.php');
@@ -37,7 +39,7 @@ require('router.php');
  * TODO: Check some variants to remove this
  *
  */
-//error_reporting(0);
+error_reporting(0);
 
 /**
  *

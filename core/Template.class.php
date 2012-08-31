@@ -49,6 +49,7 @@ class Template extends Smarty {
      * Define variables for the template engine
      *
      */
+    $this->assign('url', URL);
     $this->assign('ajax', Ajax::isResponse());
     $this->assign('user', Session::user());
   }
