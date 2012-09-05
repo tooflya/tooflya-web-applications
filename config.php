@@ -23,11 +23,10 @@
  * Define some constants
  *
  */
-define('PATH', '/var/www');
+define('PATH', '/var/www/www.tooflya.com');
 define('DEBUG', true);
 define('EVENTS', true);
-//define('URL', 'http://www.tooflya.com');
-define('URL', 'http://127.0.0.1');
+define('URL', 'http://127.0.0.1/www.tooflya.com');
 
 require('autoload.php');
 require('router.php');
