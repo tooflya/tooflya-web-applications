@@ -1,0 +1,258 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  color: #222;
+  font: 14px/19px Roboto, sans-serif;
+  font-family: 'Roboto',arial,sans-serif;
+  font-weight: 400;
+  letter-spacing: .1;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+section {
+  border-top: 1px #ccc solid;
+  border-bottom: 1px #ccc solid;
+  background: #FFF url(../img/stripes.png);
+}
+ul {
+  list-style: none;
+}
+h1 {
+  color: #333;
+  font-size: 22px;
+  margin: 20px 0 20px;
+  padding: 0 0 10px;
+}
+p {
+  margin-bottom: 10px;
+}
+a {
+  color: #33B5E5;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 13px;
+   -webkit-transition: all 0.25s linear;
+      -moz-transition: all 0.25s linear;
+       -ms-transition: all 0.25s linear;
+        -o-transition: all 0.25s linear;
+           transition: all 0.25s linear;
+}
+a:hover {
+  color: #7aa1b0;
+  text-decoration: underline;
+}
+.button, a.button {
+  background-color: #09c;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#2faddb), to(#09c));
+  background-image: -webkit-linear-gradient(top, #2faddb, #09c);
+  background-image: -moz-linear-gradient(top, #2faddb, #09c);
+  background-image: -ms-linear-gradient(top, #2faddb, #09c);
+  background-image: -o-linear-gradient(top, #2faddb, #09c);
+  background-image: linear-gradient(top, #2faddb, #09c);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#2faddb', EndColorStr='#0099cc',GradientType=0);
+  border: 1px solid #3990ab;
+  color: #fff;
+  border-image: initial;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  cursor: pointer;    height: 28px;
+  line-height: 28px;
+  margin-right: 16px;
+  font-weight: 400;
+  min-width: 54px;
+  outline: 0;
+  padding: 8px 15px;
+  text-align: center;
+  text-decoration: none;
+}
+.button:hover, a.button:hover {
+  border-color: #09c;
+  background-color: #4cadcb;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#5dbcd9), to(#4cadcb));
+  background-image: -webkit-linear-gradient(top, #5dbcd9, #4cadcb);
+  background-image: -moz-linear-gradient(top, #5dbcd9, #4cadcb);
+  background-image: -ms-linear-gradient(top, #5dbcd9, #4cadcb);
+  background-image: -o-linear-gradient(top, #5dbcd9, #4cadcb);
+  background-image: linear-gradient(top, #5dbcd9, #4cadcb);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#5dbcd9', EndColorStr='#4cadcb',GradientType=0);
+  color: #fff !important;
+}
+.button:active, a.button:active {
+  background-color: #1e799a;
+  background-image: none;
+  border-color: #30b7e6;
+}
+
+header {
+}
+header div.content {
+  position: relative;
+  padding: 10px 0;
+}
+header div.content ul.menu {
+  float: right;
+}
+header div.content ul.menu li {
+  display: inline-block;
+  padding: 10px 10px;
+}
+header div.content ul.menu li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+   -webkit-transition: all 0.25s linear;
+      -moz-transition: all 0.25s linear;
+       -ms-transition: all 0.25s linear;
+        -o-transition: all 0.25s linear;
+           transition: all 0.25s linear;
+}
+header div.content ul.menu li a:hover {
+  color: #33B5E5;
+}
+footer {
+
+}
+footer div.content {
+  position: relative;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+footer h3 {
+  padding: 15px 0;
+  font-size: 20px;
+}
+footer h4 {
+  padding: 15px 0;
+  font-size: 16px;
+}
+footer ul.main li {
+  display: inline-block;
+  vertical-align: top;
+}
+footer ul.main li.column-1 {
+  width: 300px;
+}
+footer ul.main li.column-2 {
+  width: 200px;
+}
+footer ul.main li.column-3 {
+  width: 200px;
+}
+footer ul.main li.column-4 {
+  width: 260px;
+}
+footer ul.main li.column-2 ul {
+  width: 100px;
+  float: left;
+}
+footer ul.main li.column-2 ul li {
+  width: 100px;
+}
+footer input {
+  border: 1px silver solid;
+  padding: 5px 3px;
+  margin: 10px 0;
+  width: 190px;
+}
+footer input:focus {
+  border: 1px #33B5E5 solid;
+}
+footer div.subscribers {
+  margin-top: 20px;
+  padding-top: 10px;
+  padding-left: 80px;
+  padding-bottom: 30px;
+  background: transparent url(../img/android-icon-64.png) no-repeat;
+}
+footer div.subscribers span {
+  font-size: 24px;
+}
+footer div.subscribers div {
+  padding-left: 10px;
+  font-size: 16px;
+}
+section.products-presentation ul.control-links li {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin: 0 2px;
+  border-radius: 6px;
+  background-color: #CCC;
+  cursor: pointer;
+}
+section.products-presentation ul.control-links li.active {
+  background-color: #33B5E5;
+}
+section.products-presentation ul.control-links {
+  width: 150px;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+section.products-presentation div.slider {
+  width: 980px;
+  height: 400px;
+  position: relative;
+}
+section.products-presentation div.slider img {
+  border: 1px #ccc solid;
+  padding: 3px;
+  background-color: #fff;
+}
+section.products-presentation div.slider div.arrow {
+  cursor: pointer;
+  position: absolute;
+  top: 130px;
+  width: 20px;
+  height: 36px;
+}
+section.products-presentation div.slider div.arrow-left {
+  left: 0;
+  background: transparent url(../img/arrow-left.png) no-repeat;
+}
+section.products-presentation div.slider div.arrow-right {
+  right: 0;
+  background: transparent url(../img/arrow-right.png) no-repeat;
+}
+section.products-presentation div.slider div.arrow-left:hover {
+  background-position: 0 -36px;
+}
+section.products-presentation div.slider div.arrow-right:hover {
+  background-position: 0 -36px;
+}
+section.products-presentation div.slider div.arrow-left:active {
+  background-position: 0 -72px;
+}
+section.products-presentation div.slider div.arrow-right:active {
+  background-position: 0 -72px;
+}
+section.products-presentation div.slider div.ads {
+  width: 705px;
+  height: 345px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+div.content {
+  width: 980px;
+  margin: 0 auto;
+}
+div.information {
+  position: relative;
+  padding: 10px 0;
+  margin-top: 10px;
+}
+.clearfix {
+  clear: both;
+}
+div.copyright {
+  font-size: 13px;
+  border-top: 1px #ccc solid;
+  padding-top: 5px;
+}
+span.special {
+  color: #333;
+  font-size: 22px;
+}
