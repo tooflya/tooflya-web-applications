@@ -341,9 +341,6 @@ img.image {
   -webkit-box-shadow: 1px 1px 10px #AAA;
   background: white;
 }
-section.contacts {
-  height: 40px;
-}
 form input {
   border: 1px #ccc solid;
   width: 240px;
@@ -379,6 +376,17 @@ ul.team-list div.title, ul.team-list div.text {
 ul.team-list div.text {
   width: 800px;
   margin-top: 10px;
+}
+
+
+section.contacts {
+  height: 40px;
+}
+section.team {
+  height: 40px;
+}
+section.company {
+  height: 40px;
 }
 
 
