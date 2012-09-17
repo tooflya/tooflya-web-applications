@@ -2,9 +2,17 @@
   <section class="products-presentation">
     <div class="content">
       <div class="slider">
-        <div class="arrow arrow-left"></div>
-        <div class="arrow arrow-right"></div>
-        <div class="ads"><img src="https://lh6.ggpht.com/w3YpMoAA5JBLsG4qtDzgBc22K7ktMDNjPiBb2TCOVnDLgTDo0Lt4lEeTm6unlmlocc_r=w705"></div>
+        <a id="slider-left" class="arrow arrow-left"></a>
+        <a id="slider-right" class="arrow arrow-right"></a>
+        <div class="ads">
+          <ul id="slider">
+            <li class="banner banner-2"><a><img src="{$url}/assets/img/1.jpg" alt="" /></a></li>
+            <li class="banner"><a><img src="{$url}/assets/img/2.jpg" alt="" /></a></li>
+            <li class="banner"><a><img src="{$url}/assets/img/3.jpg" alt="" /></a></li>
+            <li class="banner"><a><img src="{$url}/assets/img/4.jpg" alt="" /></a></li>
+            <li class="banner"><a><img src="{$url}/assets/img/5.jpg" alt="" /></a></li>
+          </ul>
+        </div>
         <div class="clearfix"></div>
       </div>
       <ul class="control-links">
@@ -15,8 +23,43 @@
         <li data-index="4"></li>
         <li data-index="5"></li>
       </ul>
-      <div class="information">
+      <div class="information"
       </div>
     </div>
   </section>
+
+  <div class="content">
+    <div style="padding-bottom:20px">
+      <h1>Check our games on Google Play</h1>
+      <p>
+          <img alt="Google Play" src="{$url}/assets/img/android-market-icon.png" class="left" style="width: 100px" />
+          With hundreds of thousands of apps, the Google Play store has the right ones for you. When you download apps, they're delivered directly to your device — instantly.
+          You can also find your next first-rate read, a hot new album, or a flick from a catalog that includes everything from movie blockbusters and best selling e-books to millions of songs.
+          <p style="margin-left: 70px;">
+            <a class="button">Visit to the Google Play</a>
+          </p>
+      </p>
+    </div>
+    <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
+        <img src="{$url}/assets/img/6.jpg" alt="" style="width:55%" class="float-left image" />
+      <div class="float-left" style="width: 400px;margin-left: 20px;">
+        <h1>Cut the Rope</h1>
+        <p>Don't be fooled, Cut the Rope may look like a simple game, but give it a try and hours later you may find what over 55 million other players already know...that this game is addicting.</p>
+        <p>The little monster Om Nom is hungry and the only thing standing between him and a full belly is you...</p>
+        <a class="button">Download from Google Play</a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+     <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
+        <h1>Check our other games and software</h1>
+        <ul class="sites-list">
+          <li><a><img src="{$url}/assets/img/7.jpg" alt="" /></a></li>
+          <li><a><img src="{$url}/assets/img/7.jpg" alt="" /></a></li>
+          <li><a><img src="{$url}/assets/img/7.jpg" alt="" /></a></li>
+          <li><a><img src="{$url}/assets/img/7.jpg" alt="" /></a></li>
+          <li><a><img src="{$url}/assets/img/7.jpg" alt="" /></a></li>
+          <li><a><img src="{$url}/assets/img/7.jpg" alt="" /></a></li>
+        </ul>
+     </div>
+  </div>
 {include file="BaseViews/footer.html"}

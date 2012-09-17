@@ -26,7 +26,7 @@
 define('PATH', '/var/www/www.tooflya.com');
 define('DEBUG', true);
 define('EVENTS', true);
-define('URL', 'http://192.168.1.102/www.tooflya.com');
+define('URL', 'http://192.168.1.2/www.tooflya.com');
 
 require('autoload.php');
 require('router.php');

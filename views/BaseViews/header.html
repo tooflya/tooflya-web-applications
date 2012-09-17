@@ -9,6 +9,9 @@
 
     <link href="{$url}/assets/css/style.css" rel="stylesheet">
 
+    <script src="{$url}/assets/js/jquery.js"></script>
+    <script src="{$url}/assets/js/library.js"></script>
+
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -25,17 +28,14 @@
       <div class="content">
         <div class="logo"></div>
         <ul class="menu">
-          <li><a href="{$url}">Home</a></li>
-          <li><a href="{$url}/web/company/">Company</a></li>
-          <li><a href="{$url}/web/partnership/">Partnership</a></li>
-          <li><a href="{$url}/press/">Press</a></li>
-          <li><a href="{$url}/blog/">Blog</a></li>
-          <li><a href="{$url}/web/team/">Team</a></li>
-          <li><a href="{$url}/contacts/">Contacts</a></li>
+          <li><a href="{$url}" {if $tab == 'WebController/index'}class="active"{/if}>Home</a></li>
+          <li><a href="{$url}/web/company/" {if $tab == 'WebController/company'}class="active"{/if}>Company</a></li>
+          <li><a href="{$url}/web/partnership/" {if $tab == 'WebController/partnership'}class="active"{/if}>Partnership</a></li>
+          <li><a href="{$url}/press/" {if $tab == 'PressController/index'}class="active"{/if}>Press</a></li>
+          <li><a href="{$url}/blog/" {if $tab == 'BlogController/index'}class="active"{/if}>Blog</a></li>
+          <li><a href="{$url}/web/team/" {if $tab == 'WebController/team'}class="active"{/if}>Team</a></li>
+          <li><a href="{$url}/contacts/" {if $tab == 'ContactsController/index'}class="active"{/if}>Contacts</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>
     </header>
-    <!-- Items with resolution for debuging
-    <div class="tablets" style="position:fixed;border:1px blue solid;width:979px;height:100%;left:50%;margin-left:-490px;top:0;"></div>
-    <div class="tablets" style="position:fixed;border:1px green solid;width:480px;height:100%;left:50%;margin-left:-240px;top:0;"></div> -->

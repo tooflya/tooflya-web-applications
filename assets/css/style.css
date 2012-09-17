@@ -2,15 +2,49 @@
   padding: 0;
   margin: 0;
 }
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 500;
+  src: local('Roboto Medium Italic'), local('Roboto-MediumItalic'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: local('Roboto Italic'), local('Roboto-Italic'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Roboto Thin'), local('Roboto-Thin'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+}
 body {
   color: #222;
   font: 14px/19px Roboto, sans-serif;
   font-family: 'Roboto',arial,sans-serif;
   font-weight: 400;
   letter-spacing: .1;
+  line-height: 1.8;
   padding: 0;
   margin: 0;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  min-width: 980px;
 }
 section {
   border-top: 1px #ccc solid;
@@ -25,6 +59,7 @@ h1 {
   font-size: 22px;
   margin: 20px 0 20px;
   padding: 0 0 10px;
+  font-weight: 400;
 }
 p {
   margin-bottom: 10px;
@@ -34,11 +69,11 @@ a {
   cursor: pointer;
   text-decoration: none;
   font-size: 13px;
-   -webkit-transition: all 0.25s linear;
-      -moz-transition: all 0.25s linear;
-       -ms-transition: all 0.25s linear;
-        -o-transition: all 0.25s linear;
-           transition: all 0.25s linear;
+   -webkit-transition: color 0.25s linear;
+      -moz-transition: color 0.25s linear;
+       -ms-transition: color 0.25s linear;
+        -o-transition: color 0.25s linear;
+           transition: color 0.25s linear;
 }
 a:hover {
   color: #7aa1b0;
@@ -89,12 +124,15 @@ a:hover {
 
 header {
 }
+header div.logo {
+}
 header div.content {
   position: relative;
   padding: 10px 0;
 }
 header div.content ul.menu {
   float: right;
+  margin-right: 60px;
 }
 header div.content ul.menu li {
   display: inline-block;
@@ -110,11 +148,13 @@ header div.content ul.menu li a {
         -o-transition: all 0.25s linear;
            transition: all 0.25s linear;
 }
-header div.content ul.menu li a:hover {
+header div.content ul.menu li a:hover, header div.content ul.menu li a.active  {
   color: #33B5E5;
 }
 footer {
-
+  background: #FFF url(../img/stripes.png);
+  border-top: 1px #ccc solid;
+  clear: both;
 }
 footer div.content {
   position: relative;
@@ -124,10 +164,12 @@ footer div.content {
 footer h3 {
   padding: 15px 0;
   font-size: 20px;
+  font-weight: 500;
 }
 footer h4 {
   padding: 15px 0;
   font-size: 16px;
+  font-weight: 500;
 }
 footer ul.main li {
   display: inline-block;
@@ -140,10 +182,16 @@ footer ul.main li.column-2 {
   width: 200px;
 }
 footer ul.main li.column-3 {
-  width: 200px;
+  width: 250px;
+}
+footer ul.main li.column-3 li {
+  margin-bottom: 10px;
 }
 footer ul.main li.column-4 {
-  width: 260px;
+  width: 210px;
+}
+footer ul.main li.column-4 li {
+  margin-bottom: 10px;
 }
 footer ul.main li.column-2 ul {
   width: 100px;
@@ -153,20 +201,16 @@ footer ul.main li.column-2 ul li {
   width: 100px;
 }
 footer input {
-  border: 1px silver solid;
-  padding: 5px 3px;
   margin: 10px 0;
   width: 190px;
-}
-footer input:focus {
-  border: 1px #33B5E5 solid;
+  padding-left: 5px;
 }
 footer div.subscribers {
   margin-top: 20px;
   padding-top: 10px;
   padding-left: 80px;
   padding-bottom: 30px;
-  background: transparent url(../img/android-icon-64.png) no-repeat;
+  background: transparent url(../img/android-icon.png) no-repeat;
 }
 footer div.subscribers span {
   font-size: 24px;
@@ -194,46 +238,60 @@ section.products-presentation ul.control-links {
 }
 section.products-presentation div.slider {
   width: 980px;
-  height: 400px;
+  height: 444px;
   position: relative;
 }
 section.products-presentation div.slider img {
   border: 1px #ccc solid;
   padding: 3px;
   background-color: #fff;
+-moz-box-shadow: 1px 1px 10px #aaa;
+-webkit-box-shadow: 1px 1px 10px #AAA;
+background: white;
 }
-section.products-presentation div.slider div.arrow {
+section.products-presentation div.slider a.arrow {
   cursor: pointer;
   position: absolute;
-  top: 130px;
+  top: 180px;
   width: 20px;
   height: 36px;
 }
-section.products-presentation div.slider div.arrow-left {
+section.products-presentation div.slider a.arrow-left {
   left: 0;
   background: transparent url(../img/arrow-left.png) no-repeat;
 }
-section.products-presentation div.slider div.arrow-right {
+section.products-presentation div.slider a.arrow-right {
   right: 0;
   background: transparent url(../img/arrow-right.png) no-repeat;
 }
-section.products-presentation div.slider div.arrow-left:hover {
+section.products-presentation div.slider a.arrow-left:hover {
   background-position: 0 -36px;
 }
-section.products-presentation div.slider div.arrow-right:hover {
+section.products-presentation div.slider a.arrow-right:hover {
   background-position: 0 -36px;
 }
-section.products-presentation div.slider div.arrow-left:active {
+section.products-presentation div.slider a.arrow-left:active {
   background-position: 0 -72px;
 }
-section.products-presentation div.slider div.arrow-right:active {
+section.products-presentation div.slider a.arrow-right:active {
   background-position: 0 -72px;
 }
 section.products-presentation div.slider div.ads {
-  width: 705px;
-  height: 345px;
+  width: 858px;
+  height: 424px;
   margin: 0 auto;
   margin-top: 30px;
+}
+section.products-presentation div.slider div.ads li {
+  position: absolute;
+}
+section.products-presentation div.slider div.ads li.banner {
+  transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -webkit-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  opacity: 0.35;
 }
 div.content {
   width: 980px;
@@ -255,4 +313,199 @@ div.copyright {
 span.special {
   color: #333;
   font-size: 22px;
+}
+img.left {
+  float: left;
+  padding-right: 20px;
+  padding-bottom: 20px;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+ul.sites-list li {
+  display: inline-block;
+  margin: 0 2px;
+}
+ul.sites-list li img {
+  width: 50px;
+  padding: 3px;
+  border:1px #CCC solid;
+}
+img.image {
+  padding: 3px;
+  border:1px #CCC solid;
+  -moz-box-shadow: 1px 1px 10px #aaa;
+  -webkit-box-shadow: 1px 1px 10px #AAA;
+  background: white;
+}
+section.contacts {
+  height: 40px;
+}
+form input {
+  border: 1px #ccc solid;
+  width: 240px;
+  height: 30px;
+  color: ;
+}
+ul.team-list {
+  padding-bottom: 30px;
+}
+ul.team-list li {
+  clear: both;
+  padding-bottom: 15px;
+}
+ul.team-list img {
+  width: 130px;
+  height: 210px;
+  padding: 3px;
+  border: 1px #ccc solid;
+-moz-box-shadow: 1px 1px 10px #aaa;
+-webkit-box-shadow: 1px 1px 10px #AAA;
+background: white;
+}
+ul.team-list div.title {
+  font-weight: bold;
+}
+ul.team-list div.text p {
+  margin-top: 26px !important;
+}
+ul.team-list div.title, ul.team-list div.text {
+  margin-left: 20px;
+  float: left;
+}
+ul.team-list div.text {
+  width: 800px;
+  margin-top: 10px;
+}
+
+
+
+
+
+textarea {
+margin-left:0px;
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+
+display: inline-block;
+padding: 4px;
+font-size: 13px;
+line-height: 18px;
+color: gray;
+border: 1px solid #CCC;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+textarea:focus {
+  outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+textarea.error {
+outline: 0;
+  border-color: rgba(185, 74, 72, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+}
+input[type=submit] {width:0;height:0;border:none;background-color:#fff;position:absolute;}
+input[type=text], .dataInputs input[type=password] {
+width: 327px;
+
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+
+display: inline-block;
+height: 22px;
+padding: 4px;
+font-size: 13px;
+line-height: 18px;
+color: gray;
+border: 1px solid #CCC;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+input[type=text].error, input[type=password].error
+{
+    color: #B94A48;
+    border-color: #EE5F5B;
+  outline: 0;
+  border-color: rgba(185, 74, 72, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+}
+input[type=text].error:focus, input[type=password].error:focus {
+  outline: 0;
+  border-color: rgba(185, 74, 72, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(185, 74, 72, 0.6);
+}
+label {
+font-style:normal;
+font-size: 14px;
+line-height: 18px;
+color:#333;
+padding-right: 15px;
+}
+select{
+         display: inline-block;
+height: 30px;
+padding: 4px;
+font-size: 13px;
+line-height: 18px;
+color: gray;
+border: 1px solid #CCC;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+width:250px;
+}
+select:focus{
+    outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+input[type=text], input[type=password] {
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+  -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+  transition: border linear 0.2s, box-shadow linear 0.2s;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+input[type=text]:focus, input[type=password]:focus {
+  outline: 0;
+  border-color: rgba(82, 168, 236, 0.8);
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6);
+}
+input[type=text].search {
+  padding-left:25px;
+  background:transparent url(../images/b/search.png) 7px 9px no-repeat;
 }
