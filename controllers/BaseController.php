@@ -38,6 +38,8 @@ abstract class BaseController {
     $this->templates = new Template();
 
     $this->name = get_class($this);
+
+    $this->templates->assign('subscribers_count', SubscribersController::Instance()->getSubscribedCount());
   }
 
   /**

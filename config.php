@@ -20,19 +20,6 @@
 
 /**
  *
- * Define some constants
- *
- */
-define('PATH', '/var/www/www.tooflya.com');
-define('DEBUG', true);
-define('EVENTS', true);
-define('URL', 'http://192.168.1.2/www.tooflya.com');
-
-require('autoload.php');
-require('router.php');
-
-/**
- *
  * Turn off error display to protect ajax/json queries
  * from crashes
  * TODO: Check some variants to remove this
@@ -57,9 +44,23 @@ session_start();
  * TODO: Think about own controller 
  *
  */
-@mysql_connect("127.0.0.1", "root", "password");
-mysql_select_db("base");
+mysql_connect("127.0.0.1", "root", "password") or die("Could not connect to mysql server");
+mysql_select_db("tooflya.com") or die("Could not select database");
 mysql_query("SET NAMES UTF8");
+
+/**
+ *
+ * Define some constants
+ *
+ */
+define('PATH', '/var/www/www.tooflya.com');
+define('DEBUG', true);
+define('EVENTS', true);
+define('URL', 'http://192.168.1.2/www.tooflya.com');
+define('SUBSCRIBERS_COUNT', 10043);
+
+require('autoload.php');
+require('router.php');
 
 /**
  *
