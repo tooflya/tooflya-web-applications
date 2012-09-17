@@ -18,32 +18,18 @@
  *
  */
 
-class SubscribersController {
+class SubscribersController extends BaseController
+{
 
   private $getSubscribedCount = false;
-  private static $instance = null;
 
   /**
-   * 
-   * Private ctor so nobody else can instance it
+   *
+   *
    *
    */
-  private function __construct() {}
-
-  private function __clone() {}
-
-  /**
-   * Call this method to get singleton
-   *
-   * @return SubscribersController
-   */
-  public static function Instance()
+  function __construct()
   {
-    if (!isset(static::$instance)) {
-      static::$instance = new static;
-    }
-    
-    return static::$instance;
   }
 
   /**

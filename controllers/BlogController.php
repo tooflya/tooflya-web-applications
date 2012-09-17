@@ -18,7 +18,17 @@
  *
  */
 
-class BlogController extends BaseController {
+class BlogController extends BaseController
+{
+
+  /**
+   *
+   *
+   *
+   */
+  function __construct()
+  {
+  }
 
   /**
    *
@@ -28,6 +38,16 @@ class BlogController extends BaseController {
   public function indexAction()
   {
   	$this->templates->display($this->name);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getLatestArticles()
+  {
+  	
   }
 }
 

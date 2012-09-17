@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file webController.php
+ * @file PermanentController.php
  * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
@@ -18,77 +18,48 @@
  *
  */
 
-class WebController extends BaseController
+class PermanentController
 {
 
+  private static $instance = null;
+
+  private $templates;
+  private $name;
+
+  private $SubscribersController;
+  private $BlogController;
+
   /**
-   *
-   *
+   * 
+   * Private constructor so nobody else can instance it
    *
    */
-  public function indexAction()
+  private function __construct($templates)
   {
-  	$this->templates->display($this->name);
+    $this->templates = $templates;
+
+    $this->BlogController = new BlogController();
+    $this->SubscribersController = new SubscribersController();
+
+    $this->templates->assign('subscribers_count', $this->SubscribersController->getSubscribedCount());
+    $this->templates->assign('blog_latest_articles', $this->BlogController->getLatestArticles());
   }
+
+  private function __clone() {}
 
   /**
    *
+   * Call this method to get singleton
    *
-   *
+   * @return SubscribersController
    */
-  public function companyAction()
+  public static function Instance($templates)
   {
-  	$this->templates->display($this->name, 'company');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function activitiesAction()
-  {
-  	$this->templates->display($this->name, 'activities');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function partnershipAction()
-  {
-  	$this->templates->display($this->name, 'partnership');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function careerAction()
-  {
-  	$this->templates->display($this->name, 'career');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function teamAction()
-  {
-  	$this->templates->display($this->name, 'team');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function distributionAction()
-  {
-  	$this->templates->display($this->name, 'distribution');
+    if (!isset(static::$instance)) {
+      static::$instance = new PermanentController($templates);
+    }
+    
+    return static::$instance;
   }
 }
 

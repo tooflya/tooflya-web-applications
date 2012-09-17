@@ -1,8 +1,8 @@
 <?
 
 /**
- * @file BaseController.php
- * @category Controller
+ * @file IBaseController.php
+ * @category Interface
  *
  * @author Igor Mats from Tooflya Inc.
  * @copyright (c) 2012 by Igor Mats
@@ -18,30 +18,14 @@
  *
  */
 
-abstract class BaseController implements IBaseController
-{
-
-  protected $templates;
-  protected $name;
+interface IBaseController {
 
   /**
    *
    *
    *
    */
-  function __construct()
-  {
-    /**
-     *
-     * Create Smarty templator object
-     *
-     */
-    $this->templates = new Template();
-
-    $this->name = get_class($this);
-
-    PermanentController::Instance($this->templates);
-  }
+  public function indexAction();
 }
 
 /**
