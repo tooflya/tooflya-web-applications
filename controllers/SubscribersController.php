@@ -28,15 +28,6 @@ class SubscribersController extends BaseController
    *
    *
    */
-  function __construct()
-  {
-  }
-
-  /**
-   *
-   *
-   *
-   */
   public function indexAction()
   {
   	if(Ajax::isResponse())

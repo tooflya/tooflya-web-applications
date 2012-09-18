@@ -21,7 +21,7 @@
 class PermanentController
 {
 
-  private static $instance = null;
+  private static $instance;
 
   private $templates;
   private $name;
@@ -31,21 +31,24 @@ class PermanentController
 
   /**
    * 
-   * Private constructor so nobody else can instance it
+   *
    *
    */
   private function __construct($templates)
   {
     $this->templates = $templates;
+  }
 
+  private function __clone() {}
+
+  private function Prepare()
+  {
     $this->BlogController = new BlogController();
     $this->SubscribersController = new SubscribersController();
 
     $this->templates->assign('subscribers_count', $this->SubscribersController->getSubscribedCount());
     $this->templates->assign('blog_latest_articles', $this->BlogController->getLatestArticles());
   }
-
-  private function __clone() {}
 
   /**
    *
@@ -55,11 +58,12 @@ class PermanentController
    */
   public static function Instance($templates)
   {
-    if (!isset(static::$instance)) {
-      static::$instance = new PermanentController($templates);
+    if (!self::$instance) {
+      self::$instance = new PermanentController($templates);
+      self::$instance->Prepare();
     }
     
-    return static::$instance;
+    return self::$instance;
   }
 }
 

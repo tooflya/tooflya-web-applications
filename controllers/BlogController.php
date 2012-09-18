@@ -26,15 +26,6 @@ class BlogController extends BaseController
    *
    *
    */
-  function __construct()
-  {
-  }
-
-  /**
-   *
-   *
-   *
-   */
   public function indexAction()
   {
   	$this->templates->display($this->name);
