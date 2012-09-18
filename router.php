@@ -51,7 +51,14 @@ else
 
       if(method_exists($controller ,$action))
       {
-        $controller->$action();
+        if(isset($params['path'][3]))
+        {
+          $controller->$action($params['path'][3]);
+        }
+        else
+        {
+          $controller->$action();
+        }
       }
       else
       {

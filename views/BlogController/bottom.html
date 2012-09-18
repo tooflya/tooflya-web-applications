@@ -1,15 +1,11 @@
 <h4>Recent blog entries</h4>
 <ul>
+  {foreach from=$blog_latest_articles item=some}
   <li>
-    <div>Amazing link and awesome content</div>
-    <div><a>Read more</a></div>
+    <div>{$some.name}</div>
+    <div><a href="{$url}/blog/article/{$some.id}">Read more</a></div>
   </li>
-  <li>
-    <div>Amazing link and awesome content</div>
-    <div><a>Read more</a></div>
-  </li>
-  <li>
-    <div>Amazing link and awesome content</div>
-    <div><a>Read more</a></div>
-  </li>
+  {foreachelse}
+  <li>No articles</li>
+  {/foreach}
 </ul>

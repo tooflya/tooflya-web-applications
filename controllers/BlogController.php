@@ -36,8 +36,20 @@ class BlogController extends BaseController
    *
    *
    */
+  public function articleAction($id)
+  {
+    $this->templates->display($this->name, 'article');
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function getLatestArticles()
   {
+    $this->templates->assign_array("SELECT * FROM `blog`", 'blog_latest_articles');
+
   	return $this->templates->capture($this->name, "bottom");
   }
 }

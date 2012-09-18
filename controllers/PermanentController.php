@@ -47,7 +47,7 @@ class PermanentController
     $this->SubscribersController = new SubscribersController();
 
     $this->templates->assign('subscribers_count', $this->SubscribersController->getSubscribedCount());
-    $this->templates->assign('blog_latest_articles', $this->BlogController->getLatestArticles());
+    $this->templates->assign('blog_latest_articles_template', $this->BlogController->getLatestArticles());
   }
 
   /**

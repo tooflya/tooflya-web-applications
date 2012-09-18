@@ -1,2 +1,19 @@
 {include file="BaseViews/header.html"}
+<section class="space">
+</section>
+<div class="content">
+  <h1>Blog</h1>
+  <p>Blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog </p>
+  <div>
+    {foreach from=$blog_latest_articles item=some}
+    <div>
+      <div>{$some.name}</div>
+      <div>{$some.text}</div>
+      <div><a href="{$url}/blog/article/{$some.id}">Read more</a></div>
+    </div>
+    {foreachelse}
+    <div>No articles</div>
+    {/foreach}
+  </div>
+</div>
 {include file="BaseViews/footer.html"}

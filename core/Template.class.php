@@ -92,6 +92,24 @@ class Template extends Smarty {
    {
     return parent::fetch($controller.'/'.$template.'.html');
    }
+  
+  /**
+   *
+   * 
+   *
+   */
+   public function assign_array($query, $name)
+   {
+    $data = mysql_query($query);
+
+    $results = array();
+    while($row = mysql_fetch_assoc($data))
+    {
+      $results[] = $row;
+    }
+
+    $this->assign($name, $results); 
+  } 
 }
 
 /**
