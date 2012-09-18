@@ -31,14 +31,8 @@ abstract class BaseController implements IBaseController
    */
   function __construct()
   {
-    /**
-     *
-     * Create Smarty templator object
-     *
-     */
-    $this->templates = new Template();
-
     $this->name = get_class($this);
+    $this->templates = Template::Instance();
 
     PermanentController::Instance($this->templates);
   }

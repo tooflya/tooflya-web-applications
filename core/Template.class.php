@@ -19,6 +19,8 @@
  */
 
 class Template extends Smarty {
+
+  private static $instance;
   
   /**
    *
@@ -53,6 +55,21 @@ class Template extends Smarty {
     $this->assign('ajax', Ajax::isResponse());
     $this->assign('user', Session::user());
   }
+
+  /**
+   *
+   * Call this method to get singleton
+   *
+   * @return SubscribersController
+   */
+  public static function Instance()
+  {
+    if (!self::$instance) {
+      self::$instance = new Template();
+    }
+    
+    return self::$instance;
+  }
   
   /**
    *
@@ -64,6 +81,16 @@ class Template extends Smarty {
     $this->assign('tab', $controller.'/'.$template);
     
     parent::display($controller.'/'.$template.'.html');
+   }
+  
+  /**
+   *
+   * 
+   *
+   */
+   public function capture($controller, $template = 'index')
+   {
+    return parent::fetch($controller.'/'.$template.'.html');
    }
 }
 

@@ -38,7 +38,7 @@ class BlogController extends BaseController
    */
   public function getLatestArticles()
   {
-  	
+  	return $this->templates->capture($this->name, "bottom");
   }
 }
 
