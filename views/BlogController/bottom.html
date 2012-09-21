@@ -1,8 +1,8 @@
-<h4>Recent blog entries</h4>
+<h4>Recent Blog Entries</h4>
 <ul>
   {foreach from=$blog_latest_articles item=some}
   <li>
-    <div>{$some.name}</div>
+    <div>{$some.title}</div>
     <div><a href="{$url}/blog/article/{$some.id}">Read more</a></div>
   </li>
   {foreachelse}

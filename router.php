@@ -62,8 +62,7 @@ else
       }
       else
       {
-        $controller = new ErrorController();
-        $controller->notFound();
+        $controller->indexAction($params['path'][2]);
       }
     }
     else

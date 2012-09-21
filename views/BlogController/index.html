@@ -1,19 +1,29 @@
 {include file="BaseViews/header.html"}
-<section class="space">
-</section>
-<div class="content">
-  <h1>Blog</h1>
-  <p>Blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog blog </p>
-  <div>
-    {foreach from=$blog_latest_articles item=some}
-    <div>
-      <div>{$some.name}</div>
-      <div>{$some.text}</div>
-      <div><a href="{$url}/blog/article/{$some.id}">Read more</a></div>
+<section class="content">
+  <div class="left nomargin">
+    <div class="blog_classes">
+      <h2>Article Categories</h2>
+      {foreach from=$blog_classes item=some}
+      <div><a href="{$url}/blog/{$some.alias}">{$some.class}</a></div>
+      {foreachelse}
+      <div>No categories</div>
+      {/foreach}
     </div>
-    {foreachelse}
-    <div>No articles</div>
-    {/foreach}
   </div>
-</div>
+  <div class="right">
+    <div class="blog">
+      {foreach from=$blog_latest_articles item=some}
+      <div style="padding-bottom: 20px">
+        <h2><a href="{$url}/blog/{$some.article_alias}/">{$some.title}</a></h2>
+        <div class="info">Published by {$some.job}, <a>{$some.name} {$some.surname}</a> | Friday, 21 Sep 2012 | <a>{$some.class}</a></div>
+        <div>{$some.text}</div>
+        <div><a href="{$url}/blog/{$some.article_alias}/">Read more</a></div>
+      </div>
+      {foreachelse}
+      <div>No articles</div>
+      {/foreach}
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</section>
 {include file="BaseViews/footer.html"}

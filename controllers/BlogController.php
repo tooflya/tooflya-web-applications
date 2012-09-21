@@ -26,9 +26,56 @@ class BlogController extends BaseController
    *
    *
    */
-  public function indexAction()
+  public function indexAction($articleOrClass = false)
   {
-  	$this->templates->display($this->name);
+    if(!$articleOrClass)
+    {
+      $this->getArticlesClasses();
+      $this->templates->display($this->name);
+    }
+    else
+    {
+      /** Check for class **/
+      if($this->isClassExist($articleOrClass))
+      {
+        $this->getArticlesClasses();
+        $this->getLatestArticles($articleOrClass);
+        $this->templates->display($this->name);
+      }
+      /** Check for article **/
+      elseif($this->isArticleExist($articleOrClass))
+      {
+        $this->templates->display($this->name, 'article');
+      }
+      /** Nothing found **/
+      else
+      {
+        $controller = new ErrorController();
+        $controller->notFound();
+      }
+    }
+  }
+
+  /**
+   *
+   *
+   *
+   *
+   */
+  private function isClassExist($class)
+  {
+    return mysql_num_rows(mysql_query("SELECT * FROM `blog_classes` WHERE `alias` = '$class'")) > 0;
+  }
+
+  /**
+   *
+   *
+   *
+   *
+   */
+  private function isArticleExist($class)
+  {
+    return mysql_num_rows(mysql_query("SELECT * FROM `blog` WHERE `article_alias` = '$class'")) > 0;
   }
 
   /**
@@ -36,9 +83,9 @@ class BlogController extends BaseController
    *
    *
    */
-  public function articleAction($id)
+  public function getArticlesClasses()
   {
-    $this->templates->display($this->name, 'article');
+    $this->templates->assign_array("SELECT * FROM `blog_classes`", 'blog_classes');
   }
 
   /**
@@ -46,11 +93,18 @@ class BlogController extends BaseController
    *
    *
    */
-  public function getLatestArticles()
+  public function getLatestArticles($class = false)
   {
-    $this->templates->assign_array("SELECT * FROM `blog`", 'blog_latest_articles');
+    if(!$class)
+    {
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`)", 'blog_latest_articles');
+    }
+    else
+    {
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."')", 'blog_latest_articles');
+    }
 
-  	return $this->templates->capture($this->name, "bottom");
+    return $this->templates->capture($this->name, "bottom");
   }
 }
 
