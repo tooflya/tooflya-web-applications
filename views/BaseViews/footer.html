@@ -8,7 +8,7 @@
               <p>Get some <span class="special">free versions</span> of our games and many others benefits!</p>
             </div>
             <form>
-              <input type="email" value="" placeholder="Your email" />
+              <input type="text" value="" placeholder="Your email" />
               <a class="button">Subscribe</a>
             </form>
             <div class="subscribers">
@@ -22,8 +22,6 @@
               <li><a href="{$url}"><b>Home</b></a></li>
               <li><a href="{$url}/web/company/">Company</a></li>
               <li><a href="{$url}/web/activities/">Activities</a></li>
-              <li><a href="{$url}/web/partnership/">Partnership</a></li>
-              <li><a href="{$url}/projects/">Projects</a></li>
               <li><a href="{$url}/web/career/">Career</a></li>
               <li><a href="{$url}/press/">Press</a></li>
             </ul>
@@ -31,18 +29,17 @@
               <li><a href="{$url}/contacts/"><b>Contacts</b></a></li>
               <li><a href="{$url}/blog/">Blog</a></li>
               <li><a href="{$url}/web/team/">Team</a></li>
-              <li><a href="{$url}/development/">Development</a></li>
-              <li><a href="{$url}/web/distribution/">Distribution</a></li>
+              <li><a href="{$url}/web/partnership/">Partnership</a></li>
+              <li><a href="{$url}/projects/">Projects</a></li>
+              <!--<li><a href="{$url}/development/" rel="nofollow">Development</a></li>-->
+              <!--<li><a href="{$url}/web/distribution/" rel="nofollow">Distribution</a></li>-->
             </ul>
           </li>
           <li class="column-3">
             {$blog_latest_articles_template}
           </li>
           <li class="column-4">
-            <h4>Our Social Activities</h4>
-            <ul>
-              <li></li>
-            </ul>
+            {$social_last_tweets}
           </li>
         </ul>
         <div class="footer">

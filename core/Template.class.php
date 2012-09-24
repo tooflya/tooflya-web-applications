@@ -100,12 +100,30 @@ class Template extends Smarty {
    */
    public function assign_array($query, $name)
    {
-    $data = mysql_query($query);
+    $data = mysql_query($query) or die(mysql_error());
 
     $results = array();
     while($row = mysql_fetch_assoc($data))
     {
       $results[] = $row;
+    }
+
+    $this->assign($name, $results); 
+  }
+  
+  /**
+   *
+   * 
+   *
+   */
+   public function assign_element($query, $name)
+   {
+    $data = mysql_query($query) or die(mysql_error());
+
+    $results = array();
+    while($row = mysql_fetch_assoc($data))
+    {
+      $results = $row;
     }
 
     $this->assign($name, $results); 

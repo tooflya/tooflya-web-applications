@@ -28,6 +28,7 @@ class WebController extends BaseController
    */
   public function indexAction()
   {
+    $this->templates->assign('index', true);
   	$this->templates->display($this->name);
   }
 

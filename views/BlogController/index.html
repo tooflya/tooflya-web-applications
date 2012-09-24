@@ -1,8 +1,9 @@
 {include file="BaseViews/header.html"}
 <section class="content">
   <div class="left nomargin">
-    <div class="blog_classes">
+    <div class="classes">
       <h2>Article Categories</h2>
+      <div><a href="{$url}/blog/">All articles</a></div>
       {foreach from=$blog_classes item=some}
       <div><a href="{$url}/blog/{$some.alias}">{$some.class}</a></div>
       {foreachelse}
@@ -15,12 +16,13 @@
       {foreach from=$blog_latest_articles item=some}
       <div style="padding-bottom: 20px">
         <h2><a href="{$url}/blog/{$some.article_alias}/">{$some.title}</a></h2>
-        <div class="info">Published by {$some.job}, <a>{$some.name} {$some.surname}</a> | Friday, 21 Sep 2012 | <a>{$some.class}</a></div>
-        <div>{$some.text}</div>
-        <div><a href="{$url}/blog/{$some.article_alias}/">Read more</a></div>
+        <div class="info">Published by {$some.job}, <a>{$some.name} {$some.surname}</a> | Friday, 21 Sep 2012 | {if $some.class}<a href="{$url}/blog/{$some.alias}">{$some.class}</a>{else}Not Categorized{/if}</div>
+        {assign var=text value="•"|explode:$some.text}
+        <div>{$text[0]}</div>
+        <div><a href="{$url}/blog/{$some.article_alias}/#cut">Read more</a></div>
       </div>
       {foreachelse}
-      <div>No articles</div>
+      <div><b>Sorry, but we have no articles in this section.</b></div>
       {/foreach}
     </div>
   </div>

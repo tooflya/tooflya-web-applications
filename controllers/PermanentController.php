@@ -28,6 +28,7 @@ class PermanentController
 
   private $SubscribersController;
   private $BlogController;
+  private $SocialController;
 
   /**
    * 
@@ -45,9 +46,11 @@ class PermanentController
   {
     $this->BlogController = new BlogController();
     $this->SubscribersController = new SubscribersController();
+    $this->SocialController = new SocialController();
 
     $this->templates->assign('subscribers_count', $this->SubscribersController->getSubscribedCount());
     $this->templates->assign('blog_latest_articles_template', $this->BlogController->getLatestArticles());
+    $this->templates->assign('social_last_tweets', $this->SocialController->getLatestTweets());
   }
 
   /**

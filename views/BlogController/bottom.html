@@ -3,7 +3,7 @@
   {foreach from=$blog_latest_articles item=some}
   <li>
     <div>{$some.title}</div>
-    <div><a href="{$url}/blog/article/{$some.id}">Read more</a></div>
+    <div><a href="{$url}/blog/{$some.article_alias}">Read more</a></div>
   </li>
   {foreachelse}
   <li>No articles</li>

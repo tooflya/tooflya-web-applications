@@ -45,6 +45,7 @@ class BlogController extends BaseController
       /** Check for article **/
       elseif($this->isArticleExist($articleOrClass))
       {
+        $this->getArticle($articleOrClass);
         $this->templates->display($this->name, 'article');
       }
       /** Nothing found **/
@@ -83,6 +84,16 @@ class BlogController extends BaseController
    *
    *
    */
+  private function getArticle($article)
+  {
+    $this->templates->assign_element("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`article_alias` = '".$article."'", 'some');
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function getArticlesClasses()
   {
     $this->templates->assign_array("SELECT * FROM `blog_classes`", 'blog_classes');
@@ -97,11 +108,11 @@ class BlogController extends BaseController
   {
     if(!$class)
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`)", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
     }
     else
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."')", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."') ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
     }
 
     return $this->templates->capture($this->name, "bottom");

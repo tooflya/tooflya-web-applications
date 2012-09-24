@@ -26,7 +26,11 @@
   <body>
     <header>
       <div class="content">
-        <div class="logo"></div>
+        <div class="logo" {if isset($index)}style="margin-left: 60px;"{/if}>
+          <div class="logo-text"></div>
+          <div class="logo-hero animation-1"></div>
+          <a href="{$url}"></a>
+        </div>
         <ul class="menu">
           <li><a href="{$url}" {if $tab == 'WebController/index'}class="active"{/if}>Home</a></li>
           <li><a href="{$url}/web/company/" {if $tab == 'WebController/company'}class="active"{/if}>Company</a></li>

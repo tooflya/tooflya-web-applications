@@ -10,31 +10,31 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(../fonts/RxZJdnzeo3R5zSexge8UUT8E0i7KZn-EPnyo3HZu7kw.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 500;
-  src: local('Roboto Medium Italic'), local('Roboto-MediumItalic'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+  src: local('Roboto Medium Italic'), local('Roboto-MediumItalic'), url(../fonts/OLffGBTaF0XFOW1gnuHF0YbN6UDyHWBl620a-IRfuBk.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: italic;
   font-weight: 400;
-  src: local('Roboto Italic'), local('Roboto-Italic'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
+  src: local('Roboto Italic'), local('Roboto-Italic'), url(../fonts/1pO9eUAp8pSF8VnRTP3xnvesZW2xOQ-xsNqO47m55DA.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto Regular'), local('Roboto-Regular'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(../fonts/2UX7WLTfW3W8TclTUvlFyQ.woff) format('woff');
 }
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 100;
-  src: local('Roboto Thin'), local('Roboto-Thin'), url(http://themes.googleusercontent.com/static/fonts/roboto/v3/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
+  src: local('Roboto Thin'), local('Roboto-Thin'), url(../fonts/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
 }
 body {
   color: #444;
@@ -58,7 +58,7 @@ section.reflection {
   background: #FFF url(../img/stripes.png);
 }
 ul {
-  list-style: none;
+  list-style-image: url(../img/marker.png);
 }
 h1 {
   color: #197EAD;
@@ -81,6 +81,9 @@ h3 {
 }
 p {
   margin-bottom: 10px;
+}
+ul, ol {
+  list-style-position: inside;
 }
 a {
   color: #33B5E5;
@@ -159,11 +162,56 @@ p.button-link a {
 header {
 }
 header div.logo {
-  width: 300px;
-  height: 80px;
-  background: transparent url(../img/logo.png) 60px 0px no-repeat;
-  margin-top: 10px;
+  width: 148px;
+  height: 56px;
+  margin-top: -5px;
   position: absolute;
+}
+header div.logo div.logo-text {
+  position: absolute;
+  background: transparent url(../img/logo_text.png) no-repeat;
+  width: 122px;
+  height: 38px;
+  margin-left: 30px;
+  margin-top: 18px;
+}
+header div.logo div.logo-hero {
+  position: absolute;
+  background: transparent url(../img/logo_animation.png) no-repeat;
+  width: 39px;
+  height: 51px;
+}
+header div.logo div.logo-hero.animation-1 { background-position: 0 0; }
+header div.logo div.logo-hero.animation-2 { background-position: -39px 0; }
+header div.logo div.logo-hero.animation-3 { background-position: -78px 0; }
+header div.logo div.logo-hero.animation-4 { background-position: -117px 0; }
+header div.logo div.logo-hero.animation-5 { background-position: -156px 0; }
+
+
+header div.logo div.logo-hero.animation-6 { background-position: 0 -51px; }
+header div.logo div.logo-hero.animation-7 { background-position: -39px -51px; }
+header div.logo div.logo-hero.animation-8 { background-position: -78px -51px; }
+header div.logo div.logo-hero.animation-9 { background-position: -117px -51px; }
+header div.logo div.logo-hero.animation-10 { background-position: -156px -51px; }
+header div.logo div.logo-hero.animation-11 { background-position: 0 -102px; }
+header div.logo div.logo-hero.animation-12 { background-position: -39px -102px; }
+header div.logo div.logo-hero.animation-13 { background-position: -78px -102px; }
+header div.logo div.logo-hero.animation-14 { background-position: -117px -102px; }
+header div.logo div.logo-hero.animation-15 { background-position: -156px -102px; }
+header div.logo div.logo-hero.animation-16 { background-position: 0 -153px; }
+header div.logo div.logo-hero.animation-17 { background-position: -39px -153px; }
+header div.logo div.logo-hero.animation-18 { background-position: -78px -153px; }
+header div.logo div.logo-hero.animation-19 { background-position: -117px -153px; }
+header div.logo div.logo-hero.animation-20 { background-position: -156px -153px; }
+header div.logo a {
+  display: block;
+  width: 160px;
+  height: 56px;
+  position: absolute;
+  margin-top: -2px;
+}
+header div.logo:active {
+  margin-top: -4px;
 }
 header div.content {
   position: relative;
@@ -203,9 +251,10 @@ footer div.content {
 footer h3 {
   color: #197EAD;
   text-shadow: #fff 0 2px 2px;
-  padding: 15px 0;
+  padding: 10px 0;
   font-size: 20px;
   font-weight: 500;
+  margin-top: 0;
 }
 footer h4 {
   color: #197EAD;
@@ -225,12 +274,14 @@ footer ul.main li.column-2 {
   width: 200px;
 }
 footer ul.main li.column-3 {
-  width: 250px;
+  width: 220px;
 }
 footer ul.main li.column-3 li {
   margin-bottom: 10px;
+  width: 220px;
 }
 footer ul.main li.column-4 {
+  background: transparent url(../img/twitter.png) 150px 5px no-repeat;
   width: 210px;
 }
 footer ul.main li.column-4 li {
@@ -278,6 +329,12 @@ section.products-presentation ul.control-links {
   width: 150px;
   margin: 0 auto;
   padding: 10px 0;
+  list-style-image: none;
+  list-style: none;
+}
+ul#slider {
+  list-style-image: none;
+  list-style: none;
 }
 section.products-presentation div.slider {
   width: 980px;
@@ -361,7 +418,7 @@ section.content div.left {
 section.content div.right {
   width: 709px;
   padding-left: 20px;
-  float: left;
+  float: right;
   background: transparent url(../img/lr.png) top left repeat-y;
 }
 div.information {
@@ -415,14 +472,14 @@ img.image {
   -webkit-box-shadow: 1px 1px 10px #AAA;
   background: white;
 }
-form input {
-  border: 1px #ccc solid;
-  width: 240px;
-  height: 30px;
-  color: ;
+footer form input {
+  width: 240px !important;
+  height: 20px !important;
 }
 ul.team-list {
   padding-bottom: 30px;
+  list-style-type: none;
+  list-style-image: none;
 }
 ul.team-list li {
   clear: both;
@@ -451,11 +508,11 @@ ul.team-list div.text {
   width: 800px;
   margin-top: 10px;
 }
-div.blog_classes div {
+div.classes div {
   text-align: left;
   margin-right: 40px;
 }
-div.blog_classes div a {
+div.classes div a {
   font-size: 16px;
   -webkit-transition: all linear 0.2s;
   -moz-transition: all linear 0.2s;
@@ -463,7 +520,7 @@ div.blog_classes div a {
   -o-transition: all linear 0.2s;
   transition: all linear 0.2s;
 }
-div.blog_classes div a:hover {
+div.classes div a:hover {
   padding-left: 10px;
   text-decoration: none;
 }
@@ -478,8 +535,35 @@ div.blog div.info a {
   font-size: 11px;
   text-decoration: underline;
 }
-
-
+img.blog-img {
+  margin-right: 10px;
+}
+div.blog p.centered {
+  margin: 0 auto;
+  text-align: center;
+}
+img.blog-img-center {
+  display: inline-block;
+  margin: 10px auto;
+  padding: 3px;
+  border: 1px #CCC solid;
+}
+ul.tweets div.image {
+  float: left;
+  margin-top: 5px;
+  padding-right: 10px;
+}
+ul.tweets div.image img {
+  width: 40px;
+}
+ul.tweets li {
+  width: 100%;
+}
+ul.tweets div.description {
+  color: #BBB;
+  font-size: 13px;
+  padding-left: 50px;
+}
 
 textarea {
 margin-left:0px;

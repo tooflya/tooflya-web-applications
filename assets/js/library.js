@@ -46,4 +46,64 @@ $(document).ready(function() {
       });
       $(this).addClass('active');
     });
+
+    var animationTimer = Math.floor((Math.random()*100)+1),
+        animationFrame = 0,
+        animationReverse = 0,
+        animationType = 0;
+    setInterval(function() {
+      if(animationFrame == 0)
+        animationTimer++;
+
+      if(animationTimer%100 != 0) {
+        return false;
+      } else {
+        if(animationType == 0) {
+          animationType = Math.floor((Math.random()*2)+1);
+        }
+      }
+
+      if(animationType == 1)
+      {
+        if(animationReverse == 0) {
+          $('div.logo-hero').removeClass('animation-' + animationFrame).addClass('animation-' + (animationFrame + 1));
+          animationFrame++;
+        } else {
+          $('div.logo-hero').removeClass('animation-' + animationFrame).addClass('animation-' + (animationFrame - 1));
+          animationFrame--;
+        }
+
+        if(animationFrame == 5) {
+          animationReverse = 1;
+        } else if(animationFrame == 0) {
+          if(animationReverse == 1) {
+            animationType = 0;
+          }
+
+          animationReverse = 0;
+        }
+      }
+
+      if(animationType == 2)
+      {
+        if(animationReverse == 0) {
+          $('div.logo-hero').removeClass('animation-' + (animationFrame + 5)).addClass('animation-' + (animationFrame + 6));
+          animationFrame++;
+        } else {
+          $('div.logo-hero').removeClass('animation-' + (animationFrame + 5)).addClass('animation-' + (animationFrame + 4));
+          animationFrame--;
+        }
+
+        if(animationFrame == 15) {
+          animationReverse = 1;
+        } else if(animationFrame == 0) {
+          if(animationReverse == 1) {
+            $('div.logo-hero').removeClass('animation-5').addClass('animation-1');
+            animationType = 0;
+          }
+
+          animationReverse = 0;
+        }
+      }
+    }, 80);
 });
