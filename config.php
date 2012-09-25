@@ -25,7 +25,7 @@
  * TODO: Check some variants to remove this
  *
  */
-//error_reporting(0);
+error_reporting(0);
 
 /**
  *
