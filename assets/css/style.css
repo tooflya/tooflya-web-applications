@@ -162,7 +162,7 @@ p.button-link a {
 header {
 }
 header div.logo {
-  width: 148px;
+  width: 160px;
   height: 56px;
   margin-top: -5px;
   position: absolute;
@@ -203,6 +203,18 @@ header div.logo div.logo-hero.animation-17 { background-position: -39px -153px; 
 header div.logo div.logo-hero.animation-18 { background-position: -78px -153px; }
 header div.logo div.logo-hero.animation-19 { background-position: -117px -153px; }
 header div.logo div.logo-hero.animation-20 { background-position: -156px -153px; }
+
+header div.logo div.logo-hero.animation-21 { background-position: 0 -204px; }
+header div.logo div.logo-hero.animation-22 { background-position: -39px -204px; }
+header div.logo div.logo-hero.animation-23 { background-position: -78px -204px; }
+header div.logo div.logo-hero.animation-24 { background-position: -117px -204px; }
+header div.logo div.logo-hero.animation-25 { background-position: -156px -204px; }
+header div.logo div.logo-hero.animation-26 { background-position: 0 -255px; }
+header div.logo div.logo-hero.animation-27 { background-position: -39px -255px; }
+header div.logo div.logo-hero.animation-28 { background-position: -78px -255px; }
+header div.logo div.logo-hero.animation-29 { background-position: -117px -255px; }
+header div.logo div.logo-hero.animation-30 { background-position: -156px -255px; }
+
 header div.logo a {
   display: block;
   width: 160px;

@@ -59,7 +59,7 @@ $(document).ready(function() {
         return false;
       } else {
         if(animationType == 0) {
-          animationType = Math.floor((Math.random()*2)+1);
+          animationType = Math.floor((Math.random()*3)+1);
         }
       }
 
@@ -99,6 +99,28 @@ $(document).ready(function() {
         } else if(animationFrame == 0) {
           if(animationReverse == 1) {
             $('div.logo-hero').removeClass('animation-5').addClass('animation-1');
+            animationType = 0;
+          }
+
+          animationReverse = 0;
+        }
+      }
+
+      if(animationType == 3)
+      {
+        if(animationReverse == 0) {
+          $('div.logo-hero').removeClass('animation-' + (animationFrame + 20)).addClass('animation-' + (animationFrame + 21));
+          animationFrame++;
+        } else {
+          $('div.logo-hero').removeClass('animation-' + (animationFrame + 20)).addClass('animation-' + (animationFrame + 19));
+          animationFrame--;
+        }
+
+        if(animationFrame == 10) {
+          animationReverse = 1;
+        } else if(animationFrame == 0) {
+          if(animationReverse == 1) {
+            $('div.logo-hero').removeClass('animation-20').addClass('animation-1');
             animationType = 0;
           }
 
