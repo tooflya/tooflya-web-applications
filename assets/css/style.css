@@ -56,7 +56,7 @@ body.blank {
   background-color: #fff;
 }
 section.e404 {
-  width: 700px;
+  width: 800px;
   margin: 0 auto;
   margin-top: 250px;
 }
@@ -68,6 +68,7 @@ section.e404 div.title {
 section.e404 div.text {
   float: left;
   padding-left: 20px;
+  max-width: 360px;
 }
 section.e404 div.text h1 {
   color: #197EAD;
