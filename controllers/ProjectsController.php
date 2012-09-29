@@ -27,6 +27,7 @@ class ProjectsController extends BaseController {
    */
   public function indexAction()
   {
+    $this->templates->assign(TITLE, 'Our projects');
   	$this->templates->display($this->name);
   }
 }

@@ -27,6 +27,7 @@ class ContactsController extends BaseController {
    */
   public function indexAction()
   {
+    $this->templates->assign(TITLE, 'Please contact us!');
   	$this->templates->display($this->name);
   }
 }

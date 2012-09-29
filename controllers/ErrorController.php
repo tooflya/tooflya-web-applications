@@ -39,6 +39,7 @@ class ErrorController extends BaseController {
   {
     header('HTTP/1.0 404 Not Found');
 
+    $this->templates->assign(TITLE, 'Sorry, we did not want!');
     $this->templates->display($this->name, '404');
   }
 }

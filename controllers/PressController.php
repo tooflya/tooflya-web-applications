@@ -27,6 +27,7 @@ class PressController extends BaseController {
    */
   public function indexAction()
   {
+    $this->templates->assign(TITLE, 'More information about us');
   	$this->templates->display($this->name);
   }
 }

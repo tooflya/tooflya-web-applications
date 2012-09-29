@@ -31,6 +31,8 @@ abstract class BaseController implements IBaseController
    */
   function __construct()
   {
+    define('TITLE', 'customTitle');
+    
     $this->name = get_class($this);
     $this->templates = Template::Instance();
 

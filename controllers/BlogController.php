@@ -30,6 +30,7 @@ class BlogController extends BaseController
   {
     if(!$articleOrClass)
     {
+      $this->templates->assign(TITLE, 'Interesting records for you');
       $this->getArticlesClasses();
       $this->templates->display($this->name);
     }
@@ -40,12 +41,14 @@ class BlogController extends BaseController
       {
         $this->getArticlesClasses();
         $this->getLatestArticles($articleOrClass);
+        $this->templates->assign(TITLE, ucfirst($articleOrClass));
         $this->templates->display($this->name);
       }
       /** Check for article **/
       elseif($this->isArticleExist($articleOrClass))
       {
         $this->getArticle($articleOrClass);
+        $this->templates->assign(TITLE, $this->templates->getTemplateVars('some')['title']);
         $this->templates->display($this->name, 'article');
       }
       /** Nothing found **/

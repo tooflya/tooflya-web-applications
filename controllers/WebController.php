@@ -53,6 +53,7 @@ class WebController extends BaseController
    */
   public function companyAction()
   {
+    $this->templates->assign(TITLE, 'About our company');
     $this->templates->display($this->name, 'company');
   }
 
@@ -73,6 +74,7 @@ class WebController extends BaseController
    */
   public function partnershipAction()
   {
+    $this->templates->assign(TITLE, 'We are open for partnership');
     $this->templates->display($this->name, 'partnership');
   }
 
@@ -83,6 +85,7 @@ class WebController extends BaseController
    */
   public function careerAction()
   {
+    $this->templates->assign(TITLE, 'Career');
     $this->templates->display($this->name, 'career');
   }
 
@@ -93,6 +96,7 @@ class WebController extends BaseController
    */
   public function teamAction()
   {
+    $this->templates->assign(TITLE, 'We are the best team!');
     $this->templates->display($this->name, 'team');
   }
 
