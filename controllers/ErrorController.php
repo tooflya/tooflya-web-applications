@@ -20,25 +20,26 @@
 
 class ErrorController extends BaseController {
 
-	/**
-	 *
-	 *
-	 *
-	 */
+  /**
+   *
+   *
+   *
+   */
   public function indexAction()
   {
 
   }
 
-	/**
-	 *
-	 *
-	 *
-	 */
+  /**
+   *
+   *
+   *
+   */
   public function notFound()
   {
-  	// TODO: generate 404 page
-  	echo 'Not found';
+    header('HTTP/1.0 404 Not Found');
+
+    $this->templates->display($this->name, '404');
   }
 }
 
