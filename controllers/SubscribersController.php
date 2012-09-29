@@ -30,15 +30,11 @@ class SubscribersController extends BaseController
    */
   public function indexAction()
   {
-  	if(Ajax::isResponse())
-    {
-
-    }
-    else
-    {
-      $controller = new ErrorController();
-      $controller->notFound();
-    }
+    // else
+    // {
+    //   $controller = new ErrorController();
+    //   $controller->notFound();
+    // }
   }
 
   /**

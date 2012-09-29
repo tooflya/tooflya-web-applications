@@ -7,9 +7,9 @@
               <p>If you like what you see you may subscribe on us and receive information about all important events.</p>
               <p>Get some <span class="special">free versions</span> of our games and many others benefits!</p>
             </div>
-            <form>
+            <form action="{$url}/subscribers/add/" method="POST">
               <input type="text" value="" placeholder="Your email" />
-              <a class="button">Subscribe</a>
+              <button type="submit" style="border:none;padding:3px 3px 3px 0;background-color:transparent"><a class="button">Subscribe</a></button>
             </form>
             <div class="subscribers">
               <span>{$subscribers_count}</span>
