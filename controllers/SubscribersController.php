@@ -43,13 +43,15 @@ class SubscribersController extends BaseController
   {
     $mail = Validate::post('mail');
 
-    if(Validate::email($mail))
+    if(Validate::email($mail) && mysql_num_rows(mysql_query("SELECT * FROM `subscriptions` WHERE `mail` = '$mail'")) < 1)
     {
-      print 'OK';
+      mysql_query("INSERT INTO `subscriptions` SET `mail` = '$mail'");
+
+      header('Location: '.URL.'/web/subsribe/#footer');
     }
     else
     {
-      header('Location: '.URL.'/web/subsribe-fail/#footer');print 'lol';
+      header('Location: '.URL.'/web/subsribe-fail/#footer');
     }
   }
 
