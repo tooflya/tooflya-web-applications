@@ -56,21 +56,23 @@ body.blank {
   background-color: #fff;
 }
 section.e404 {
-  width: 600px;
+  width: 700px;
   margin: 0 auto;
-  margin-top: 300px;
-  border-bottom: 3px #197EAD solid;
+  margin-top: 250px;
 }
 section.e404 div.title {
-  font-size: 78px;
-  color: #197EAD;
   float: left;
+  border-right: 3px #197EAD solid;
+  padding-right: 20px;
 }
 section.e404 div.text {
   float: left;
-  font-size: 24px;
-  padding-top: 45px;
-  padding-left: 30px;
+  padding-left: 20px;
+}
+section.e404 div.text h1 {
+  color: #197EAD;
+  padding-top: 0;
+  margin-top: 0;
 }
 section.reflection {
   border-top: 1px #ccc solid;
