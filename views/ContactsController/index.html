@@ -2,7 +2,7 @@
 <section class="content">
     <h1>Contact Us</h1>
     <p>We will be glad to use your offers and suggestions to make our website and applications more comfortable for you. So, if you want to request something, or contact on any other question, please fill the mail form. We will be glad to your letters.</p>
-    <form>
+    <form action="{$url}/contacts/send/" method="POST">
       <table border="0" cellspacing="6">
         <thead>
           <th></th>
@@ -10,19 +10,19 @@
         <tbody>
           <tr>
             <td><label for="">Your name:</label></td>
-            <td><input type="text" placeholder="Enter your name"></td>
+            <td><input name="name" type="text" placeholder="Enter your name"></td>
           </tr>
           <tr>
             <td><label for="">Your email:</label></td>
-            <td><input type="text" placeholder="Enter your email"></td>
+            <td><input name="mail" type="text" placeholder="Enter your email"></td>
           </tr>
           <tr>
             <td><label for="">Message:</label></td>
-            <td><textarea cols="70" rows="14" placeholder="Area for your message"></textarea></td>
+            <td><textarea name="text" cols="70" rows="14" placeholder="Area for your message"></textarea></td>
           </tr>
           <tr>
             <td></td>
-            <td><a class="button">Send message</a></td>
+            <td><button type="submit" style="border:none;padding:3px 3px 3px 0;background-color:transparent"><a class="button">Send message</a></button></td>
           </tr>
         </tbody>
       </table>

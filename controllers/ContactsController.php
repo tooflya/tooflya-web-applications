@@ -30,6 +30,32 @@ class ContactsController extends BaseController {
     $this->templates->assign(TITLE, 'Please contact us!');
   	$this->templates->display($this->name);
   }
+
+  /**
+   *
+   *
+   *
+   */
+  public function successAction()
+  {
+    $this->templates->display($this->name, 'success');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function sendAction()
+  {
+    $name = Validate::post('name');
+    $mail = Validate::post('mail');
+    $text = Validate::post('text');
+
+    mail('company@www.tooflya.com', 'Feedback from website', $name.'\n'.$text);
+
+    header('Location: '.URL.'/contacts/success');
+  }
 }
 
 /**
