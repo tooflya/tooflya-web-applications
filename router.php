@@ -53,7 +53,7 @@ else
       {
         if(isset($params['path'][3]))
         {
-          $controller->$action($params['path'][3]);
+          $controller->$action(Validate::sql($params['path'][3]));
         }
         else
         {
@@ -62,7 +62,7 @@ else
       }
       else
       {
-        $controller->indexAction($params['path'][2]);
+        $controller->indexAction(Validate::sql($params['path'][2]));
       }
     }
     else
