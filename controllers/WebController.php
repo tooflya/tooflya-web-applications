@@ -26,10 +26,24 @@ class WebController extends BaseController
    *
    *
    */
-  public function indexAction()
+  public function indexAction($param = false)
   {
+    switch($param)
+    {
+      default:
+      break;
+      
+      case 'subsribe-fail':
+        $this->templates->assign('subscribe', false);
+      break;
+      
+      case 'subsribe':
+        $this->templates->assign('subscribe', true);
+      break;
+    }
+    
     $this->templates->assign('index', true);
-  	$this->templates->display($this->name);
+    $this->templates->display($this->name);
   }
 
   /**
@@ -39,7 +53,7 @@ class WebController extends BaseController
    */
   public function companyAction()
   {
-  	$this->templates->display($this->name, 'company');
+    $this->templates->display($this->name, 'company');
   }
 
   /**
@@ -49,7 +63,7 @@ class WebController extends BaseController
    */
   public function activitiesAction()
   {
-  	$this->templates->display($this->name, 'activities');
+    $this->templates->display($this->name, 'activities');
   }
 
   /**
@@ -59,7 +73,7 @@ class WebController extends BaseController
    */
   public function partnershipAction()
   {
-  	$this->templates->display($this->name, 'partnership');
+    $this->templates->display($this->name, 'partnership');
   }
 
   /**
@@ -69,7 +83,7 @@ class WebController extends BaseController
    */
   public function careerAction()
   {
-  	$this->templates->display($this->name, 'career');
+    $this->templates->display($this->name, 'career');
   }
 
   /**
@@ -79,7 +93,7 @@ class WebController extends BaseController
    */
   public function teamAction()
   {
-  	$this->templates->display($this->name, 'team');
+    $this->templates->display($this->name, 'team');
   }
 
   /**
@@ -89,7 +103,7 @@ class WebController extends BaseController
    */
   public function distributionAction()
   {
-  	$this->templates->display($this->name, 'distribution');
+    $this->templates->display($this->name, 'distribution');
   }
 }
 

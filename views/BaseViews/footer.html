@@ -1,4 +1,4 @@
-    <footer>
+    <footer id="footer">
       <div class="content">
         <ul class="main">
           <li class="column-1">
@@ -8,7 +8,7 @@
               <p>Get some <span class="special">free versions</span> of our games and many others benefits!</p>
             </div>
             <form action="{$url}/subscribers/add/" method="POST">
-              <input type="text" value="" placeholder="Your email" />
+              <input name="mail" type="text" value="" placeholder="{if isset($subscribe)}{if $subscribe}Thank you for subscribing{else}Invalid email or if it is already in use.{/if}{else}Your email{/if}" {if isset($subscribe)}style="border:1px {if $subscribe}green{else}red{/if} solid"{/if}/>
               <button type="submit" style="border:none;padding:3px 3px 3px 0;background-color:transparent"><a class="button">Subscribe</a></button>
             </form>
             <div class="subscribers">

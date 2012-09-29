@@ -30,11 +30,27 @@ class SubscribersController extends BaseController
    */
   public function indexAction()
   {
-    // else
-    // {
-    //   $controller = new ErrorController();
-    //   $controller->notFound();
-    // }
+    $controller = new ErrorController();
+    $controller->notFound();
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function addAction()
+  {
+    $mail = Validate::post('mail');
+
+    if(Validate::email($mail))
+    {
+      print 'OK';
+    }
+    else
+    {
+      header('Location: '.URL.'/web/subsribe-fail/#footer');print 'lol';
+    }
   }
 
   /**
