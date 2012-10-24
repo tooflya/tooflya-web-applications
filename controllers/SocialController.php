@@ -46,7 +46,7 @@ class SocialController extends BaseController
     if($date->getTimestamp() - $dateDb > 300)
     {
       $url = 'http://api.twitter.com/1/statuses/user_timeline.json?screen_name=Tooflya&count=3';
-      $tweets = json_decode(file_get_contents($url), TRUE);
+      $tweets = array_reverse(json_decode(file_get_contents($url), TRUE));
 
       foreach($tweets as $k => $v)
       {
@@ -56,7 +56,7 @@ class SocialController extends BaseController
       mysql_query("UPDATE `tweets_update` SET `last` = NOW() WHERE 1");
     }
 
-    $this->templates->assign_array("SELECT * FROM `tweets` ORDER by `id` LIMIT 5", 'last_tweets');
+    $this->templates->assign_array("SELECT * FROM `tweets` ORDER by `id` DESC LIMIT 5", 'last_tweets');
     return $this->templates->capture($this->name, "last");
   }
 }
