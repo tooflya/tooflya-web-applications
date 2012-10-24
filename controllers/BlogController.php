@@ -48,7 +48,8 @@ class BlogController extends BaseController
       elseif($this->isArticleExist($articleOrClass))
       {
         $this->getArticle($articleOrClass);
-        $this->templates->assign(TITLE, $this->templates->getTemplateVars('some')['title']);
+        $temp = $this->templates->getTemplateVars('some');
+        $this->templates->assign(TITLE, $temp['title']);
         $this->templates->display($this->name, 'article');
       }
       /** Nothing found **/
