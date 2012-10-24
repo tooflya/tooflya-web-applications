@@ -518,6 +518,9 @@ ul.base-team-list li {
   clear: both;
   padding-bottom: 40px;
 }
+ul.base-team-list li img {
+  margin-bottom: 20px;
+}
 ul.team-list {
   padding-bottom: 30px;
   list-style-type: none;
