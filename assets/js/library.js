@@ -18,7 +18,7 @@
   } 
 })(jQuery);
 $(document).ready(function() {
-  var startPosition = -1732;
+  /**var startPosition = -1732;
   var count = 0;
   var now = 3;
   $('#slider').shuffle();
@@ -32,7 +32,7 @@ $(document).ready(function() {
         $(element).css({'left': 60});
       }
       startPosition += 861;
-   });
+   });**/
     $('a#slider-left').live('click', function(e) {
       
     });

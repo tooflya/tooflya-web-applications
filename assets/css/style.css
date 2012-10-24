@@ -421,12 +421,12 @@ section.products-presentation div.slider div.ads li {
   position: absolute;
 }
 section.products-presentation div.slider div.ads li.banner {
-  transform: scale(0.9);
+  /**transform: scale(0.9);
   -ms-transform: scale(0.9);
   -webkit-transform: scale(0.9);
   -o-transform: scale(0.9);
   -moz-transform: scale(0.9);
-  opacity: 0.35;
+  opacity: 0.35;*/
 }
 div.content, section.content {
   width: 980px;
