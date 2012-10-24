@@ -595,11 +595,16 @@ img.blog-img-center {
 }
 ul.tweets div.image {
   float: left;
-  margin-top: 5px;
-  padding-right: 10px;
+  padding: 3px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 40px;
 }
 ul.tweets div.image img {
   width: 40px;
+  border-radius: 5px;
 }
 ul.tweets li {
   width: 100%;

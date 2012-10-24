@@ -111,11 +111,11 @@ class BlogController extends BaseController
   {
     if(!$class)
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`visible` = '1' ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
     }
     else
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."') ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."') AND `blog`.`visible` = '1' ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
     }
 
     return $this->templates->capture($this->name, "bottom");
