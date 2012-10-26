@@ -54,6 +54,38 @@ class Template extends Smarty {
     $this->assign('url', URL);
     $this->assign('ajax', Ajax::isResponse());
     $this->assign('user', Session::user());
+
+    /**
+     *
+     * This function is create for smarty templates
+     * She using in engine like abstract function for Language class
+     *
+     * @param array $params On of smarty strings params
+     *
+     */
+    if(!function_exists('l'))
+    {
+      function l($params)
+      {
+        @include(PATH.'languages/en.php');
+
+        if(isset($_LANGUAGES[Encode::code($params['s'])]))
+          return $_LANGUAGES[Encode::code($params['s'])];
+
+        return /*Encode::code*/($params['s']);
+      }
+    }
+
+    /**
+     *
+     * Register smarty functions wich 
+     * we will using in Smarty templates
+     *
+     * function p() - Insert BBCodes for using in templates
+     * function l() - Insert language function for using in templates
+     *
+     */
+    $this->registerPlugin("function", "l", "l");
   }
 
   /**
