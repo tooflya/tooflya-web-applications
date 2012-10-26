@@ -23,7 +23,7 @@
  * Check client query params, detect and parse query string
  *
  */
-$params = parse_url(str_replace('/'.str_replace('/var/www/', '', PATH), '', $_SERVER['REQUEST_URI']));
+$params = parse_url(str_replace('/'.str_replace('/var/www', '', PATH), '', $_SERVER['REQUEST_URI']));
 $params['path'] = array_filter(explode('/', $params['path']));
 
 /**
