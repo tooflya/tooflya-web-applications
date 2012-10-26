@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>Tooflya {if isset($customTitle)}| {$customTitle}{/if}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tooflya Inc. - a unique combination of knowledge, experience and skills required for a successful IT business.">
+    <meta name="description" content="Tooflya Inc. - {l s='a unique combination of knowledge, experience and skills required for a successful IT business'}.">
     <meta name="keywords" content="Tooflya, tooflya, games, android, Android OS, free games, mobile, buy game, new games.">
     <meta name="author" content="Tooflya Inc.">
 
@@ -34,12 +34,12 @@
         </div>
         <ul class="menu">
           <li><a href="{$url}" {if $tab == 'WebController/index'}class="active"{/if}>{l s='Home'}</a></li>
-          <li><a href="{$url}/web/company/" {if $tab == 'WebController/company'}class="active"{/if}>Company</a></li>
-          <li><a href="{$url}/web/partnership/" {if $tab == 'WebController/partnership'}class="active"{/if}>Partnership</a></li>
-          <li><a href="{$url}/press/" {if $tab == 'PressController/index'}class="active"{/if}>Press</a></li>
-          <li><a href="{$url}/blog/" {if $tab == 'BlogController/index'}class="active"{/if}>Blog</a></li>
-          <li><a href="{$url}/web/team/" {if $tab == 'WebController/team'}class="active"{/if}>Team</a></li>
-          <li><a href="{$url}/feedback/" {if $tab == 'ContactsController/index'}class="active"{/if}>Feedback</a></li>
+          <li><a href="{$url}/web/company/" {if $tab == 'WebController/company'}class="active"{/if}>{l s='Company'}</a></li>
+          <li><a href="{$url}/web/partnership/" {if $tab == 'WebController/partnership'}class="active"{/if}>{l s='Partnership'}</a></li>
+          <li><a href="{$url}/press/" {if $tab == 'PressController/index'}class="active"{/if}>{l s='Press'}</a></li>
+          <li><a href="{$url}/blog/" {if $tab == 'BlogController/index'}class="active"{/if}>{l s='Blog'}</a></li>
+          <li><a href="{$url}/web/team/" {if $tab == 'WebController/team'}class="active"{/if}>{l s='Team'}</a></li>
+          <li><a href="{$url}/feedback/" {if $tab == 'ContactsController/index'}class="active"{/if}>{l s='Feedback'}</a></li>
         </ul>
         <div class="clearfix"></div>
       </div>

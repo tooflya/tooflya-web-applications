@@ -33,6 +33,9 @@ $(document).ready(function() {
       }
       startPosition += 861;
    });**/
+    $('#languages-select').change(function() {
+      $('#languages').submit();
+    });
     $('a#slider-left').live('click', function(e) {
       
     });

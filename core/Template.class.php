@@ -22,6 +22,8 @@ class Template extends Smarty {
 
   private static $instance;
   
+  public static $language;
+  
   /**
    *
    * 
@@ -30,6 +32,23 @@ class Template extends Smarty {
   function __construct()
   {
     parent::__construct();
+
+    if(Validate::isPost())
+    {
+      if(Validate::post('language'))
+      {
+        Session::write('language', Validate::post('language'));
+        header("Refresh: 0;");
+      }
+      else
+      {
+      Template::$language = Session::read('language') ? Session::read('language') : 'en';
+      }
+    }
+    else
+    {
+      Template::$language = Session::read('language') ? Session::read('language') : 'en';
+    }
 
     /**
      *
@@ -54,6 +73,7 @@ class Template extends Smarty {
     $this->assign('url', URL);
     $this->assign('ajax', Ajax::isResponse());
     $this->assign('user', Session::user());
+    $this->assign('language', Template::$language);
 
     /**
      *
@@ -67,12 +87,12 @@ class Template extends Smarty {
     {
       function l($params)
       {
-        @include(PATH.'languages/en.php');
+        @include(PATH.'languages/'.Template::$language.'.php');
 
         if(isset($_LANGUAGES[Encode::code($params['s'])]))
           return $_LANGUAGES[Encode::code($params['s'])];
 
-        return /*Encode::code*/($params['s']);
+        return Encode::code($params['s']);
       }
     }
 

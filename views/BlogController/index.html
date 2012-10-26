@@ -2,7 +2,7 @@
 <section class="content">
   <div class="left nomargin">
     <div class="classes">
-      <h2>Article Categories</h2>
+      <h2>{l s='Article Categories'}</h2>
       <div><a href="{$url}/blog/">All articles</a></div>
       {foreach from=$blog_classes item=some}
       <div><a href="{$url}/blog/{$some.alias}">{$some.class}</a></div>
@@ -16,14 +16,14 @@
       {foreach from=$blog_latest_articles item=some}
       <div style="padding-bottom: 20px">
         <h2><a href="{$url}/blog/{$some.article_alias}/">{$some.title}</a></h2>
-        <div class="info">Published by {$some.job}, <a>{$some.name} {$some.surname}</a> | {$some.date|date_format:"%A, %B %e, %Y"} | {if $some.class}<a href="{$url}/blog/{$some.alias}">{$some.class}</a>{else}Not Categorized{/if}</div>
+        <div class="info">{l s='Published by'} {$some.job}, <a>{$some.name} {$some.surname}</a> | {$some.date|date_format:"%A, %B %e, %Y"} | {if $some.class}<a href="{$url}/blog/{$some.alias}">{$some.class}</a>{else}Not Categorized{/if}</div>
         {assign var=text value="•"|explode:$some.text}
         <div>{$text[0]}</div>
-        <div><a class="button" href="{$url}/blog/{$some.article_alias}/#cut">Read more</a> <!--and share with friends:--></div>
+        <div><a class="button" href="{$url}/blog/{$some.article_alias}/#cut">{l s='Read more'}</a> <!--and share with friends:--></div>
       </div>
       <div class="elements-devider"></div>
       {foreachelse}
-      <div><b>Sorry, but we have no articles in this section.</b></div>
+      <div><b>{l s='Sorry, but we have no articles in this section'}.</b></div>
       {/foreach}
     </div>
   </div>

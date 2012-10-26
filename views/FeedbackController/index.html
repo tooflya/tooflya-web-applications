@@ -1,7 +1,7 @@
 {include file="BaseViews/header.html"}
 <section class="content">
-    <h1>Contact Us</h1>
-    <p>We will be glad to use your offers and suggestions to make our website and applications more comfortable for you. So, if you want to request something, or contact on any other question, please fill the mail form. We will be glad to your letters.</p>
+    <h1>{l s='Contact Us'}</h1>
+    <p>{l s='We will be glad to use your offers and suggestions to make our website and applications more comfortable for you. So, if you want to request something, or contact on any other question, please fill the mail form. We will be glad to your letters'}.</p>
     <form action="{$url}/feedback/send/" method="POST">
       <table border="0" cellspacing="6">
         <thead>
@@ -9,16 +9,16 @@
         </thead>
         <tbody>
           <tr>
-            <td><label for="">Your name:</label></td>
-            <td><input name="name" type="text" placeholder="Enter your name"></td>
+            <td><label for="">{l s='Your name'}:</label></td>
+            <td><input name="name" type="text" placeholder="{l s='Enter your name'}"></td>
           </tr>
           <tr>
-            <td><label for="">Your email:</label></td>
-            <td><input name="mail" type="text" placeholder="Enter your email"></td>
+            <td><label for="">{l s='Your email'}:</label></td>
+            <td><input name="mail" type="text" placeholder="{l s='Enter your email'}"></td>
           </tr>
           <tr>
-            <td><label for="">Message:</label></td>
-            <td><textarea name="text" cols="70" rows="14" placeholder="Area for your message"></textarea></td>
+            <td><label for="">{l s='Message'}:</label></td>
+            <td><textarea name="text" cols="70" rows="14" placeholder="{l s='Area for your message'}"></textarea></td>
           </tr>
           <tr>
             <td></td>

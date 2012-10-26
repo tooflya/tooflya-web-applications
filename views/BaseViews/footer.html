@@ -2,35 +2,35 @@
       <div class="content">
         <ul class="main">
           <li class="column-1">
-            <h3>Like What You See?</h3>
+            <h3>{l s='Like What You See?'}</h3>
             <div>
-              <p>If you like what you see you may subscribe on us and receive information about all important events.</p>
-              <p>Get some <span class="special">free versions</span> of our games and many others benefits!</p>
+              <p>{l s='If you like what you see you may subscribe on us and receive information about all important events'}.</p>
+              <p>{l s='Get some'} <span class="special">{l s='free versions'}</span> {l s='of our games and many others benefits'}!</p>
             </div>
             <form action="{$url}/subscribers/add/" method="POST">
-              <input name="mail" type="text" value="" placeholder="{if isset($subscribe)}{if $subscribe}Thank you for subscribing{else}Invalid email or if it is already in use.{/if}{else}Your email{/if}" {if isset($subscribe)}style="border:1px {if $subscribe}green{else}red{/if} solid"{/if}/>
-              <button type="submit" style="border:none;padding:3px 3px 3px 0;background-color:transparent"><a class="button">Subscribe</a></button>
+              <input name="mail" type="text" value="" placeholder="{if isset($subscribe)}{if $subscribe}Thank you for subscribing{else}Invalid email or if it is already in use.{/if}{else}{l s='Your email'}{/if}" {if isset($subscribe)}style="border:1px {if $subscribe}green{else}red{/if} solid"{/if}/>
+              <button type="submit" style="border:none;padding:3px 3px 3px 0;background-color:transparent"><a class="button">{l s='Subscribe'}</a></button>
             </form>
             <div class="subscribers">
               <span>{$subscribers_count}</span>
-              <div>people already subscribed</div>
+              <div>{l s='people already subscribed'}</div>
             </div>
           </li>
           <li class="column-2">
-            <h4>Our Website Quick Links</h4>
+            <h4>{l s='Our Website Quick Links'}</h4>
             <ul>
-              <li><a href="{$url}"><b>Home</b></a></li>
-              <li><a href="{$url}/web/company/">Company</a></li>
+              <li><a href="{$url}"><b>{l s='Home'}</b></a></li>
+              <li><a href="{$url}/web/company/">{l s='Company'}</a></li>
               <!--<li><a href="{$url}/web/activities/" rel="nofollow">Activities</a></li>-->
-              <li><a href="{$url}/web/career/">Career</a></li>
-              <li><a href="{$url}/press/">Press</a></li>
+              <li><a href="{$url}/web/career/">{l s='Career'}</a></li>
+              <li><a href="{$url}/press/">{l s='Press'}</a></li>
             </ul>
             <ul>
-              <li><a href="{$url}/contacts/"><b>Contacts</b></a></li>
-              <li><a href="{$url}/blog/">Blog</a></li>
-              <li><a href="{$url}/web/team/">Team</a></li>
-              <li><a href="{$url}/web/partnership/">Partnership</a></li>
-              <li><a href="{$url}/projects/">Projects</a></li>
+              <li><a href="{$url}/feedback/"><b>{l s='Feedback'}</b></a></li>
+              <li><a href="{$url}/blog/">{l s='Blog'}</a></li>
+              <li><a href="{$url}/web/team/">{l s='Team'}</a></li>
+              <li><a href="{$url}/web/partnership/">{l s='Partnership'}</a></li>
+              <li><a href="{$url}/projects/">{l s='Projects'}</a></li>
               <!--<li><a href="{$url}/development/" rel="nofollow">Development</a></li>-->
               <!--<li><a href="{$url}/web/distribution/" rel="nofollow">Distribution</a></li>-->
             </ul>
@@ -46,6 +46,19 @@
           <div class="content">
             <div class="copyright">
               <div>&copy; Tooflya Inc. 2012 | Android Games Development</div>
+            </div>
+            <div class="language">
+              <form id="languages" action="" method="post">
+                <select name="language" id="languages-select">
+                  {if $language == 'en'}
+                  <option value="en">English</option>
+                  <option value="ru">Русский</option>
+                  {else}
+                  <option value="ru">Русский</option>
+                  <option value="en">English</option>
+                  {/if}
+                </select>
+              </form>
             </div>
             <div class="clearfix"></div>
           </div>

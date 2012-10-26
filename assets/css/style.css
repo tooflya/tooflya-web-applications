@@ -316,7 +316,7 @@ footer ul.main li.column-3 li {
   width: 220px;
 }
 footer ul.main li.column-4 {
-  background: transparent url(../img/twitter.png) 150px 5px no-repeat;
+  background: transparent url(../img/twitter.png) 170px 5px no-repeat;
   width: 210px;
 }
 footer ul.main li.column-4 li {
@@ -464,10 +464,26 @@ div.information {
 .clearfix {
   clear: both;
 }
-div.copyright {
+div.footer {
   font-size: 13px;
   border-top: 1px #ccc solid;
-  padding-top: 5px;
+}
+div.footer div.content {
+  margin-top: 0;
+}
+div.copyright {
+  float: left;
+  width: 300px;
+}
+div.footer div.language {
+  float: right;
+}
+div.footer div.language select {
+  margin: 0;
+  padding: 0;
+  background-color: #FFF;
+  height: 23px;
+  width: 200px;
 }
 span.special {
   color: #333;
