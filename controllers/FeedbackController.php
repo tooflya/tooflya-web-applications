@@ -18,7 +18,7 @@
  *
  */
 
-class ContactsController extends BaseController {
+class FeedbackController extends BaseController {
 
   /**
    *
@@ -54,7 +54,7 @@ class ContactsController extends BaseController {
 
     mail('company@www.tooflya.com', 'Feedback from website', $name.'\n'.$text);
 
-    header('Location: '.URL.'/contacts/success');
+    header('Location: '.URL.'/feedback/success');
   }
 }
 
