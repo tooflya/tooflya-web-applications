@@ -92,7 +92,7 @@ class Template extends Smarty {
         if(isset($_LANGUAGES[Encode::code($params['s'])]))
           return $_LANGUAGES[Encode::code($params['s'])];
 
-        return Encode::code($params['s']);
+        return /*Encode::code*/($params['s']);
       }
     }
 
