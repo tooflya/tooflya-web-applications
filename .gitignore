@@ -5,6 +5,5 @@
 *conf
 .project
 uploads/
-tools/smarty/templates/
-tools/smarty/cache/
+tools/smarty/
 config.php
