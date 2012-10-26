@@ -617,7 +617,10 @@ ul.tweets div.description {
   font-size: 13px;
   padding-left: 55px;
 }
-
+.elements-devider {
+  background: transparent url(../img/devider.png) center no-repeat;
+  height: 6px;
+}
 textarea {
 margin-left:0px;
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
