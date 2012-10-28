@@ -4,7 +4,7 @@ IndexIgnore */*
 
 RewriteEngine on
 
-RewriteRule ^(en|ru|fr|ua|ch|ge)(.*)$ $2 [L]
+RewriteRule ^(en|ru|fr|ua|ch|de)(.*)$ $2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
