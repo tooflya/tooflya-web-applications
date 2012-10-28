@@ -177,7 +177,7 @@ CREATE TABLE `tweets_update` (
 
 LOCK TABLES `tweets_update` WRITE;
 /*!40000 ALTER TABLE `tweets_update` DISABLE KEYS */;
-INSERT INTO `tweets_update` VALUES ('2012-10-28 19:29:44');
+INSERT INTO `tweets_update` VALUES ('2012-10-28 21:48:33');
 /*!40000 ALTER TABLE `tweets_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,4 +219,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-28 21:33:24
+-- Dump completed on 2012-10-28 23:48:57
