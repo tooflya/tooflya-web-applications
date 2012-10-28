@@ -42,12 +42,12 @@ class Template extends Smarty {
       }
       else
       {
-      Template::$language = Session::read('language') ? Session::read('language') : 'en';
+        Template::$language = Session::read('language') ? Session::read('language') : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
       }
     }
     else
     {
-      Template::$language = Session::read('language') ? Session::read('language') : 'en';
+      Template::$language = Session::read('language') ? Session::read('language') : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     }
 
     /**
