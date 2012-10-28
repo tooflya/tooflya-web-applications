@@ -3,7 +3,7 @@
   <div class="left nomargin">
     <div class="classes">
       <h2>{l s='Article Categories'}</h2>
-      <div><a href="{$url}/blog/">All articles</a></div>
+      <div><a href="{$url}/blog/">{l s='All articles'}</a></div>
       {foreach from=$blog_classes item=some}
       <div><a href="{$url}/blog/{$some.alias}">{$some.class}</a></div>
       {foreachelse}

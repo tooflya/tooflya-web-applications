@@ -50,6 +50,19 @@ class Template extends Smarty {
       Template::$language = Session::read('language') ? Session::read('language') : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     }
 
+    switch(Session::read('language'))
+    {
+      case 'en':
+        $language = 0;
+      break;
+
+      case 'ru':
+        $language = 1;
+      break;
+    }
+
+    define('LANGUAGE', $language);
+
     /**
      *
      * This instructions created for support Smarty templates

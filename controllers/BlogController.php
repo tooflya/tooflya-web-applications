@@ -69,7 +69,7 @@ class BlogController extends BaseController
    */
   private function isClassExist($class)
   {
-    return mysql_num_rows(mysql_query("SELECT * FROM `blog_classes` WHERE `alias` = '$class'")) > 0;
+    return mysql_num_rows(mysql_query("SELECT * FROM `blog_classes` WHERE `alias` = '$class' AND `language` = ".LANGUAGE)) > 0;
   }
 
   /**
@@ -80,7 +80,7 @@ class BlogController extends BaseController
    */
   private function isArticleExist($class)
   {
-    return mysql_num_rows(mysql_query("SELECT * FROM `blog` WHERE `article_alias` = '$class'")) > 0;
+    return mysql_num_rows(mysql_query("SELECT * FROM `blog` WHERE `article_alias` = '$class' AND `language` = ".LANGUAGE)) > 0;
   }
 
   /**
@@ -90,7 +90,7 @@ class BlogController extends BaseController
    */
   private function getArticle($article)
   {
-    $this->templates->assign_element("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`article_alias` = '".$article."'", 'some');
+    $this->templates->assign_element("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`article_alias` = '".$article."' AND  `blog`.`language` = ".LANGUAGE, 'some');
   }
 
   /**
@@ -100,7 +100,7 @@ class BlogController extends BaseController
    */
   public function getArticlesClasses()
   {
-    $this->templates->assign_array("SELECT * FROM `blog_classes`", 'blog_classes');
+    $this->templates->assign_array("SELECT * FROM `blog_classes` WHERE `language` = '".LANGUAGE."'", 'blog_classes');
   }
 
   /**
@@ -112,11 +112,11 @@ class BlogController extends BaseController
   {
     if(!$class)
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`visible` = '1' ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`visible` = '1' AND `blog`.`language` = '".LANGUAGE."' ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
     }
     else
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."') AND `blog`.`visible` = '1' ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `id` FROM `blog_classes` WHERE `alias` = '".$class."' AND `language` = ".LANGUAGE.") AND `blog`.`visible` = '1' AND  `blog`.`language` = ".LANGUAGE." ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
     }
 
     return $this->templates->capture($this->name, "bottom");
