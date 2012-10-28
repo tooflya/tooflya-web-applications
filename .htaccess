@@ -1,13 +1,14 @@
 AddDefaultCharset utf-8
 Options +FollowSymLinks
 IndexIgnore */*
+
 RewriteEngine on
 
-# if a directory or a file exists, use it directly
+RewriteRule ^(en|ru)(.*)$ $2 [L]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
-# otherwise forward it to index.php
 RewriteRule . index.php
 
 <Files "config.php">

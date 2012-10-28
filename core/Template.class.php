@@ -22,8 +22,6 @@ class Template extends Smarty {
 
   private static $instance;
   
-  public static $language;
-  
   /**
    *
    * 
@@ -33,35 +31,9 @@ class Template extends Smarty {
   {
     parent::__construct();
 
-    if(Validate::isPost())
-    {
-      if(Validate::post('language'))
-      {
-        Session::write('language', Validate::post('language'));
-        header("Refresh: 0;");
-      }
-      else
-      {
-        Template::$language = Session::read('language') ? Session::read('language') : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-      }
-    }
-    else
-    {
-      Template::$language = Session::read('language') ? Session::read('language') : substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-    }
+    global $language, $language_iso;
 
-    switch(Session::read('language'))
-    {
-      case 'en':
-        $language = 0;
-      break;
-
-      case 'ru':
-        $language = 1;
-      break;
-    }
-
-    define('LANGUAGE', $language);
+    define('LANGUAGE', $language_iso);
 
     /**
      *
@@ -83,10 +55,10 @@ class Template extends Smarty {
      * Define variables for the template engine
      *
      */
-    $this->assign('url', URL);
+    $this->assign('url', URL.'/'.$language);
     $this->assign('ajax', Ajax::isResponse());
     $this->assign('user', Session::user());
-    $this->assign('language', Template::$language);
+    $this->assign('language', $language);
 
     /**
      *
@@ -100,7 +72,9 @@ class Template extends Smarty {
     {
       function l($params)
       {
-        @include(PATH.'languages/'.Template::$language.'.php');
+        global $language;
+
+        @include(PATH.'languages/'.$language.'.php');
 
         if(isset($_LANGUAGES[Encode::code($params['s'])]))
           return $_LANGUAGES[Encode::code($params['s'])];

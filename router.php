@@ -23,35 +23,39 @@
  * Check client query params, detect and parse query string
  *
  */
-$params = parse_url(str_replace('/'.str_replace('/var/www', '', PATH), '', $_SERVER['REQUEST_URI']));
+$params = parse_url( str_replace('/'.str_replace('/var/www', '', PATH), '', preg_replace('/\/{1,}/', '/',$_SERVER['REQUEST_URI'])));
+$origin = preg_replace('/\/{1,}/', '/', $_SERVER['REQUEST_URI']);
 $params['path'] = array_filter(explode('/', $params['path']));
+
+require('languages.php');
 
 /**
  *
  * Detect controllers and other controllers and models parameters
  *
  */
-if(empty($params['path']))
+
+if(empty($params['path'][2]))
 {
   $controller = new WebController();
   $controller->indexAction();
 }
 else
 {
-  $params['path'][1] = ucfirst(strtolower($params['path'][1]));
-  $params['path'][1] .= 'Controller';
+  $params['path'][2] = ucfirst(strtolower($params['path'][2]));
+  $params['path'][2] .= 'Controller';
 
-  if(file_exists(PATH.'/controllers/'.$params['path'][1].'.php')) {
+  if(file_exists(PATH.'/controllers/'.$params['path'][2].'.php')) {
 
-    $controller = new $params['path'][1];
+    $controller = new $params['path'][2];
 
-    if(isset($params['path'][2]))
+    if(isset($params['path'][3]))
     {
-      $action = $params['path'][2].'Action';
+      $action = $params['path'][3].'Action';
 
       if(method_exists($controller ,$action))
       {
-        if(isset($params['path'][3]))
+        if(isset($params['path'][4]))
         {
           $controller->$action(Validate::sql($params['path'][3]));
         }
@@ -62,7 +66,7 @@ else
       }
       else
       {
-        $controller->indexAction(Validate::sql($params['path'][2]));
+        $controller->indexAction(Validate::sql($params['path'][3]));
       }
     }
     else
