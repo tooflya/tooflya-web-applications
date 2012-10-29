@@ -56,7 +56,7 @@ class SocialController extends BaseController
       mysql_query("UPDATE `tweets_update` SET `last` = NOW() WHERE 1");
     }
 
-    $this->templates->assign_array("SELECT * FROM `tweets` ORDER by `id` DESC LIMIT 5", 'last_tweets');
+    $this->templates->assign_array("SELECT * FROM `tweets` ORDER by `id` DESC LIMIT 4", 'last_tweets');
     return $this->templates->capture($this->name, "last");
   }
 }
