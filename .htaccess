@@ -14,3 +14,6 @@ RewriteRule . index.php
 <Files "config.php">
     Deny from all
 </Files>
+
+php_value session.cookie_lifetime 360000
+php_value session.gc_maxlifetime 360000
