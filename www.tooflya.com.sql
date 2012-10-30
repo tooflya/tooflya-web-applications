@@ -36,8 +36,8 @@ CREATE TABLE `blog` (
   KEY `user` (`user`),
   KEY `class` (`class`),
   KEY `class_2` (`class`),
-  CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
-  CONSTRAINT `blog_ibfk_2` FOREIGN KEY (`class`) REFERENCES `blog_classes` (`id`)
+  CONSTRAINT `blog_ibfk_3` FOREIGN KEY (`class`) REFERENCES `blog_classes` (`cid`),
+  CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Table for store blog entries';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -67,11 +67,13 @@ DROP TABLE IF EXISTS `blog_classes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `blog_classes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) NOT NULL,
   `class` varchar(255) NOT NULL,
   `position` int(11) NOT NULL,
   `alias` varchar(150) NOT NULL,
   `language` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `cid` (`cid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Table for the store blog categories.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -81,18 +83,18 @@ CREATE TABLE `blog_classes` (
 
 LOCK TABLES `blog_classes` WRITE;
 /*!40000 ALTER TABLE `blog_classes` DISABLE KEYS */;
-INSERT INTO `blog_classes` VALUES (1,'Reviews',0,'reviews',0);
-INSERT INTO `blog_classes` VALUES (2,'News',1,'news',0);
-INSERT INTO `blog_classes` VALUES (3,'Articles',2,'articles',0);
-INSERT INTO `blog_classes` VALUES (4,'Technical side',3,'technical-side',0);
-INSERT INTO `blog_classes` VALUES (5,'Graphics',4,'graphics',0);
-INSERT INTO `blog_classes` VALUES (6,'Social Life',5,'social-life',0);
-INSERT INTO `blog_classes` VALUES (7,'Обзоры',0,'reviews',1);
-INSERT INTO `blog_classes` VALUES (8,'Новости',1,'news',1);
-INSERT INTO `blog_classes` VALUES (9,'Статьи',1,'articles',1);
-INSERT INTO `blog_classes` VALUES (10,'Техническая сторона',1,'technical-side',1);
-INSERT INTO `blog_classes` VALUES (11,'Графика',1,'graphics',1);
-INSERT INTO `blog_classes` VALUES (12,'Социальная жизнь',1,'social-life',1);
+INSERT INTO `blog_classes` VALUES (1,1,'Reviews',0,'reviews',0);
+INSERT INTO `blog_classes` VALUES (2,2,'News',1,'news',0);
+INSERT INTO `blog_classes` VALUES (3,3,'Articles',2,'articles',0);
+INSERT INTO `blog_classes` VALUES (4,4,'Technical side',3,'technical-side',0);
+INSERT INTO `blog_classes` VALUES (5,5,'Graphics',4,'graphics',0);
+INSERT INTO `blog_classes` VALUES (6,6,'Social Life',5,'social-life',0);
+INSERT INTO `blog_classes` VALUES (7,1,'Обзоры',0,'reviews',1);
+INSERT INTO `blog_classes` VALUES (8,2,'Новости',1,'news',1);
+INSERT INTO `blog_classes` VALUES (9,3,'Статьи',1,'articles',1);
+INSERT INTO `blog_classes` VALUES (10,4,'Техническая сторона',1,'technical-side',1);
+INSERT INTO `blog_classes` VALUES (11,5,'Графика',1,'graphics',1);
+INSERT INTO `blog_classes` VALUES (12,6,'Социальная жизнь',1,'social-life',1);
 /*!40000 ALTER TABLE `blog_classes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +182,7 @@ CREATE TABLE `tweets_update` (
 
 LOCK TABLES `tweets_update` WRITE;
 /*!40000 ALTER TABLE `tweets_update` DISABLE KEYS */;
-INSERT INTO `tweets_update` VALUES ('2012-10-30 22:04:56');
+INSERT INTO `tweets_update` VALUES ('2012-10-30 22:52:53');
 /*!40000 ALTER TABLE `tweets_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-31  0:09:10
+-- Dump completed on 2012-10-31  0:55:03
