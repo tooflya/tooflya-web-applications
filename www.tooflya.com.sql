@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.5.27, for debian-linux-gnu (i686)
+-- MySQL dump 10.13  Distrib 5.1.63, for debian-linux-gnu (i686)
 --
 -- Host: localhost    Database: www.tooflya.com
 -- ------------------------------------------------------
--- Server version	5.5.27-0ubuntu2
+-- Server version	5.1.63-0ubuntu0.11.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -108,7 +108,7 @@ CREATE TABLE `subscriptions` (
   `mail` varchar(150) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='Table for store subscriptions';
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Table for store subscriptions';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +126,7 @@ INSERT INTO `subscriptions` VALUES (6,'insuregent4ever@gmail.com','2012-10-24 20
 INSERT INTO `subscriptions` VALUES (7,'nirvana3038@mail.ru','2012-10-24 20:48:56');
 INSERT INTO `subscriptions` VALUES (8,'wharin@yandex.ru','2012-10-25 03:05:17');
 INSERT INTO `subscriptions` VALUES (9,'ffcar@rambler.ru','2012-10-25 15:19:50');
+INSERT INTO `subscriptions` VALUES (10,'xye-mae-vzlom@kill.game','2012-10-30 15:25:51');
 /*!40000 ALTER TABLE `subscriptions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `tweets` (
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `text` (`text`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,6 +157,8 @@ INSERT INTO `tweets` VALUES (1,'\"Friday Event\", attempt number two...','https:
 INSERT INTO `tweets` VALUES (2,'Friday Event - the game made in the night from Friday to Monday...','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-10-24 14:58:45');
 INSERT INTO `tweets` VALUES (3,'World is crazy!!! imho','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-10-24 14:58:45');
 INSERT INTO `tweets` VALUES (4,'Soon you will see our website. After about an hour, if not sooner...','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-10-24 19:02:29');
+INSERT INTO `tweets` VALUES (5,'Our site is already running. Welcome :) http://t.co/wRl47tgQ','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-10-30 14:09:34');
+INSERT INTO `tweets` VALUES (6,'Russian version of our site is available. Try it :) \nhttp://t.co/9y3XxjSg','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-10-30 16:26:07');
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -177,7 +180,7 @@ CREATE TABLE `tweets_update` (
 
 LOCK TABLES `tweets_update` WRITE;
 /*!40000 ALTER TABLE `tweets_update` DISABLE KEYS */;
-INSERT INTO `tweets_update` VALUES ('2012-10-28 21:48:33');
+INSERT INTO `tweets_update` VALUES ('2012-10-30 20:37:00');
 /*!40000 ALTER TABLE `tweets_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,4 +222,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-28 23:48:57
+-- Dump completed on 2012-10-31  1:58:59
