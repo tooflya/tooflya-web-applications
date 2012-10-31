@@ -80,7 +80,7 @@ else
     $controller->notFound();
   }
 }
-
+exit;
 /**
  *
  * Designed specifically for using this code in projects of Tooflya Inc.
