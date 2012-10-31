@@ -84,7 +84,7 @@ switch(Session::read('language') ? Session::read('language') : $params['path'][1
     $language_iso = 1;
   break;
 }
-print_r($_SESSION);print_r($params);
+
 /**
  *
  * Designed specifically for using this code in projects of Tooflya Inc.
