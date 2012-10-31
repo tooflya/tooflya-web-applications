@@ -30,6 +30,7 @@ if(Validate::isPost())
       $origin = str_replace('/ru', '', $origin);
       $origin = str_replace('/en', '', $origin);
 
+      header("HTTP/1.1 301 Moved Permanently");
       header('Location: /'.$language.''.$origin);
       exit;
     }
@@ -52,6 +53,7 @@ else
       Session::write('language', $language);
     }
 
+    header("HTTP/1.1 301 Moved Permanently");
     header('Location: /'.$language.''.$origin);
     exit;
   }
