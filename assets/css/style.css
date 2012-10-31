@@ -673,6 +673,12 @@ div.social-buttons ul li.youtube {
 div.social-buttons ul li.vk {
   background-image: url(../img/vk.png);
 }
+div.code {
+  background-color: #fff;
+  padding: 8px;
+  border: 1px #ccc solid;
+}
+
 textarea {
 margin-left:0px;
   -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
