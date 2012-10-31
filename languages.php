@@ -74,8 +74,7 @@ else
   }
 }
 
-$switch = Session::read('language') ? Session::read('language') : $params['path'][1];
-switch($switch)
+switch(Session::read('language') ? Session::read('language') : $params['path'][1])
 {
   case 'en':
      $language_iso = 0;
