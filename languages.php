@@ -53,8 +53,8 @@ else
       Session::write('language', $language);
     }
 
-    //header("HTTP/1.1 301 Moved Permanently");
-    //header('Location: /'.$language.''.$origin);
+    header("HTTP/1.1 301 Moved Permanently");
+    header('Location: /'.$language.''.$origin);
     exit;
   }
   else
