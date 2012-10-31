@@ -49,7 +49,7 @@ else
     }
     else
     {
-      $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+      $language = $params['path'][1];
       Session::write('language', $language);
     }
 
