@@ -74,7 +74,8 @@ else
   }
 }
 
-switch(Session::read('language'))
+$switch = Session::read('language') ? Session::read('language') : $params['path'][1];
+switch($switch)
 {
   case 'en':
      $language_iso = 0;
@@ -84,7 +85,7 @@ switch(Session::read('language'))
     $language_iso = 1;
   break;
 }
-
+print_r($_SESSION);print_r($params);
 /**
  *
  * Designed specifically for using this code in projects of Tooflya Inc.
