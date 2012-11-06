@@ -25,7 +25,7 @@ if(Validate::isPost())
     if(Session::read('language') != Validate::post('language'))
     {
       $language = Validate::post('language');
-      Session::write('language', $language);
+      //Session::write('language', $language);
 
       $origin = str_replace('/ru', '', $origin);
       $origin = str_replace('/en', '', $origin);
@@ -38,7 +38,7 @@ if(Validate::isPost())
 else
 {
   if(
-  $params['path'][1] != 'ru' &&
+  $params['path'][1] != 'ru' ||
   $params['path'][1] != 'en'
   )
   {
@@ -48,12 +48,18 @@ else
     }
     else
     {
-      $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-      Session::write('language', $language);
+     $language = $params['path'][1];
+      //Session::write('language', $language);
     }
 
+if(
+  $params['path'][1] != 'ru' &&
+  $params['path'][1] != 'en'
+  ) {
+     $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     header('Location: /'.$language.''.$origin);
     exit;
+  }
   }
   else
   {
@@ -61,7 +67,7 @@ else
     {
       if(Session::read('language') != $params['path'][1])
       {
-        Session::write('language', $params['path'][1]);
+        //Session::write('language', $params['path'][1]);
         $language = Session::read('language');
       }
       else
@@ -69,10 +75,14 @@ else
         $language = Session::read('language');
       }
     }
+    else
+    {
+      $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    }
   }
 }
 
-switch(Session::read('language'))
+switch($language)
 {
   case 'en':
      $language_iso = 0;

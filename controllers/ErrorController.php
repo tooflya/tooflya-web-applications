@@ -41,6 +41,8 @@ class ErrorController extends BaseController {
 
     $this->templates->assign(TITLE, 'Sorry, we did not want!');
     $this->templates->display($this->name, '404');
+
+    print '<!--'.$_SERVER['REQUEST_URI'].'-->';
   }
 }
 
