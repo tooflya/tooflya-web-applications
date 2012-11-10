@@ -1,0 +1,2 @@
+<?
+	print 'It work\'s!';
