@@ -10,7 +10,7 @@
     <div class="blog">
       <div style="padding-bottom: 20px">
         <h2>{$some.title}</h2>
-        <div class="info">Published by {$some.job}, <a>{$some.name} {$some.surname}</a> | {$some.date|date_format:"%A, %B %e, %Y"} | {if $some.class}<a>{$some.class}</a>{else}Not Categorized{/if}</div>
+        <div class="info">{l s="Published by"} {$some.job}, <a>{$some.name} {$some.surname}</a> | {$some.date|date_format:"%A, %B %e, %Y"} | {if $some.class}<a>{$some.class}</a>{else}Not Categorized{/if}</div>
         {assign var=text value="•"|explode:$some.text}
         <div>{$text[0]}</div>
         <div id="cut">{$text[1]}</div>
