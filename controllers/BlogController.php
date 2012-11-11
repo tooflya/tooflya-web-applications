@@ -112,11 +112,11 @@ class BlogController extends BaseController
   {
     if(!$class)
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`visible` = '1' AND `blog`.`language` = '".LANGUAGE."' ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`visible` = '1' AND `blog`.`language` = '".LANGUAGE."' ORDER by `blog`.`id` DESC", 'blog_latest_articles');
     }
     else
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `cid` FROM `blog_classes` WHERE `alias` = '".$class."' AND `language` = ".LANGUAGE.") AND `blog`.`visible` = '1' AND  `blog`.`language` = ".LANGUAGE." ORDER by `blog`.`id` DESC LIMIT 5", 'blog_latest_articles');
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`id`) WHERE `blog`.`class` = (SELECT `cid` FROM `blog_classes` WHERE `alias` = '".$class."' AND `language` = ".LANGUAGE.") AND `blog`.`visible` = '1' AND  `blog`.`language` = ".LANGUAGE." ORDER by `blog`.`id` DESC", 'blog_latest_articles');
     }
 
     return $this->templates->capture($this->name, "bottom");
