@@ -22,17 +22,17 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    {literal}
     {if $language == 'ru'}
+    {literal}
     <script type="text/javascript" src="http://vk.com/js/api/openapi.js?64"></script>
     <script type="text/javascript">VK.init({apiId: 3239022, onlyWidgets: true});</script>
-    {/if}
     {/literal}
+    {/if}
   </head>
 
   <body>
-    {literal}
     {if $language == 'en'}
+    {literal}
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -41,8 +41,8 @@
       js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=368439279914485";
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
-    {/if}
     {/literal}
+    {/if}
     <header>
       <div class="content">
         <div class="logo" {if isset($index)}style="margin-left: 60px;"{/if}>
