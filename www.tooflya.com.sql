@@ -114,7 +114,7 @@ CREATE TABLE `subscriptions` (
   `mail` varchar(150) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='Table for store subscriptions';
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='Table for store subscriptions';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,6 +133,8 @@ INSERT INTO `subscriptions` VALUES (7,'nirvana3038@mail.ru','2012-10-24 20:48:56
 INSERT INTO `subscriptions` VALUES (8,'wharin@yandex.ru','2012-10-25 03:05:17');
 INSERT INTO `subscriptions` VALUES (9,'ffcar@rambler.ru','2012-10-25 15:19:50');
 INSERT INTO `subscriptions` VALUES (10,'xye-mae-vzlom@kill.game','2012-10-30 15:25:51');
+INSERT INTO `subscriptions` VALUES (11,'filosoff1989@gmail.com','2012-11-14 15:07:22');
+INSERT INTO `subscriptions` VALUES (12,'mail@nattfodd.com','2012-11-16 14:12:30');
 /*!40000 ALTER TABLE `subscriptions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +152,7 @@ CREATE TABLE `tweets` (
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `text` (`text`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,6 +169,7 @@ INSERT INTO `tweets` VALUES (5,'Our site is already running. Welcome :) http://t
 INSERT INTO `tweets` VALUES (6,'Russian version of our site is available. Try it :) \nhttp://t.co/9y3XxjSg','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-10-30 16:26:07');
 INSERT INTO `tweets` VALUES (7,'At the nearest time you\'ll see our awesome game - Bubble Fun.\nhttp://t.co/1JzF6SB8','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-11-10 22:13:07');
 INSERT INTO `tweets` VALUES (8,'New review about nice game. Try it :)\nhttp://t.co/tRCXwcB8\n#games #android #review','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-11-11 15:43:14');
+INSERT INTO `tweets` VALUES (9,'You can now comment on all articles on our blog.\nhttp://t.co/PQrkFdwi','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2012-11-16 15:21:07');
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,7 +191,7 @@ CREATE TABLE `tweets_update` (
 
 LOCK TABLES `tweets_update` WRITE;
 /*!40000 ALTER TABLE `tweets_update` DISABLE KEYS */;
-INSERT INTO `tweets_update` VALUES ('2012-11-13 11:03:42');
+INSERT INTO `tweets_update` VALUES ('2012-11-17 15:06:46');
 /*!40000 ALTER TABLE `tweets_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,4 +233,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-11-13 15:49:26
+-- Dump completed on 2012-11-17 19:56:56
