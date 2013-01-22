@@ -1,8 +1,8 @@
 <?
 
 /**
- * @file index.php
- * @category Executable files
+ * @file CorpController.php
+ * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
  * @copyright (c) 2012 by Igor Mats
@@ -18,7 +18,55 @@
  *
  */
 
-require('config.php');
+class CorpController extends BaseController
+{
+
+  private $corpCommunityController;
+  private $corpEventsController;
+
+  /**
+   *
+   *
+   *
+   */
+  public function __construct()
+  {
+    parent::__construct();
+
+    $this->corpCommunityController = new CorpCommunityController();
+    $this->corpCommunityController->assignUsersList();
+
+    $this->corpEventsController = new CorpEventsController();
+    $this->corpEventsController->getHistory();
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function create()
+  {
+
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function indexAction()
+  {
+    if(Session::user())
+    {
+      $this->templates->display('CorpController/base/');
+    }
+    else
+    {
+      $this->templates->display($this->name);
+    }
+  }
+}
 
 /**
  *

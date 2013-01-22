@@ -54,7 +54,8 @@ else
 
 if(
   $params['path'][1] != 'ru' &&
-  $params['path'][1] != 'en'
+  $params['path'][1] != 'en' &&
+  $params['path'][1] != 'ajax'
   ) {
      $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     header('Location: /'.$language.''.$origin);

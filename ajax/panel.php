@@ -1,10 +1,10 @@
 <?
 
 /**
- * @file index.php
- * @category Executable files
+ * @file panel.php
+ * @category Ajax files
  *
- * @author Igor Mats from Tooflya Inc.
+ * @author Igor Mats from Gloryon Kharkov
  * @copyright (c) 2012 by Igor Mats
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License v3
@@ -16,16 +16,32 @@
  * content, constitutes a covered work.  This License acknowledges your
  * rights of fair use or other equivalent, as provided by copyright law.
  *
+ * @version 1.0.0
+ *
  */
 
-require('config.php');
+require('../config.php');
+
+if(Ajax::isResponse())
+{
+  $controller = new MainController();
+
+  switch(Validate::post('type'))
+  {
+    default:
+
+      $controller->showLayout(true, 'section', 'Main/MainContentView');
+
+    break;
+  }
+}
 
 /**
  *
- * Designed specifically for using this code in projects of Tooflya Inc.
- * Tooflya Inc., 2012
+ * Designed specifically for using this code in projects of Gloryon Kharkov
+ * Gloryon Kharkov, 2012
  *
- * @author Igor Mats from Tooflya Inc.
+ * @author Igor Mats from Gloryon Kharkov
  * @copyright (c) 2012 by Igor Mats
  *
  */

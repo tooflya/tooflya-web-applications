@@ -1,8 +1,8 @@
 <?
 
 /**
- * @file index.php
- * @category Executable files
+ * @file CorpEventsController.php
+ * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
  * @copyright (c) 2012 by Igor Mats
@@ -18,7 +18,35 @@
  *
  */
 
-require('config.php');
+class CorpEventsController extends BaseController
+{
+
+  /**
+   *
+   *
+   *
+   */
+  public function indexAction()
+  {
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getHistory()
+  {
+    $eventsInformation = array();
+    $getSitesInformation = mysql_query("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) WHERE `events`.`sender` != '" . Session::read('id') . "' GROUP by `events`.`timestamp` ORDER by `events`.`id` DESC");
+    while ($data = mysql_fetch_assoc($getSitesInformation))
+    {
+      $eventsInformation[] = $data;
+    }
+
+    $this->templates->assign('events', $eventsInformation);
+  }
+}
 
 /**
  *

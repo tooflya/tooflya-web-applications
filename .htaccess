@@ -4,10 +4,15 @@ IndexIgnore */*
 
 RewriteEngine on
 
+#RewriteCond %{HTTP_HOST} !^tooflya\.com$ [NC]
+#RewriteRule ^(.*)$ http://www.tooflya.com/$1 [R=301,L]
+
 RewriteRule ^(en|ru|fr|ua|ch|de)(.*)$ $2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteCond %{REQUEST_URI} !^/ajax
 
 RewriteRule . index.php
 

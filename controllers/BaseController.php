@@ -38,6 +38,24 @@ abstract class BaseController implements IBaseController
 
     PermanentController::Instance($this->templates);
   }
+
+  /**
+   *
+   *
+   *
+   */
+  public function showLayout($view, $fetch = false, $area = 'body')
+  {
+
+    if($fetch)
+    {
+      Ajax::generate()->value($area, $this->templates->fetch($view));
+    }
+    else
+    {
+      $this->templates->display($view);
+    }
+  }
 }
 
 /**

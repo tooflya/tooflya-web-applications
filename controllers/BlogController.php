@@ -52,11 +52,20 @@ class BlogController extends BaseController
         $this->templates->assign(TITLE, $temp['title']);
         $this->templates->display($this->name, 'article');
       }
-      /** Nothing found **/
+      /** Maybe it's page number? **/
       else
       {
-        $controller = new ErrorController();
-        $controller->notFound();
+        if(is_numeric($articleOrClass))
+        {
+          $this->indexAction();
+        }
+        else
+        {
+          /** Nothing found **/
+
+          $controller = new ErrorController();
+          $controller->notFound();
+        }
       }
     }
   }

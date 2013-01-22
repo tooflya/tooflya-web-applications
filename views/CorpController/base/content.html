@@ -1,0 +1,102 @@
+
+
+<div class="span9">
+  <div class="well sidebar-nav" id="content">
+
+    <div id="content-1" class="local-content">
+
+    	<div style="border:1px red solid;min-height:300px;">
+    		<textarea></textarea>
+    	</div>
+
+
+    </div>
+
+
+
+
+<div id="content-3" class="local-content" style="display: none">
+  <div class="block">
+    <div>
+      //
+    </div>
+  </div>
+
+  <table id="music-list" class="table">
+    <thead>
+      <tr>
+        <th class="events-id" width="25"><a class="sort-column-0"></a></th>
+        <th><a class="sort-column-1"></a></th>
+        <th><a class="sort-column21"></a></th>
+      </tr>
+    </thead>
+    <tbody class="events-body">{foreach from=$events item=some}
+<tr class="event" data-id="{$some.id}">
+  <td class=""><img src="/assets/img/corp/play.png" width="25" height="25" class="avatar"></td>
+  <td class="">
+    <span class="name">The Prodigy</span> - <span class="name">{$some.surname}</span>
+  </td>
+  <td class=""></td>
+  <td class="">
+    
+</td>
+
+  <td class="events-time">{$some.timestamp|date_format:'%H:%M:%S'}</td>
+</tr>
+<tr class="event">
+  <td class=""><img src="/assets/img/corp/{$some.avatar}" width="25" height="25" class="avatar"></td>
+  <td> <span class="name">{$some.name} {$some.surname}</span> <b>added this song</b> to the playlist.
+ </td>
+</tr>
+{foreachelse}
+<div class="info">No event in the database, or an event in your search were found.</div>
+{/foreach}
+    </tbody>
+  </table>
+
+</div>
+
+
+<div id="content-4" class="local-content" style="display: none">
+  <div class="block">
+    <div>
+      It displays the various active users. With this tool, you can track the overall changes in the data structure of the system, as well as to monitor actin employees.
+    </div>
+  </div>
+
+  <table id="events-list" class="table">
+    <thead>
+      <tr>
+        <th class="events-id" width="25"><a class="sort-column-0"></a></th>
+        <th><a class="sort-column-1"></a></th>
+        <th><a class="sort-column21"></a></th>
+      </tr>
+    </thead>
+    <tbody class="events-body">{foreach from=$events item=some}
+<tr class="event" data-id="{$some.id}">
+  <td class=""><img src="/assets/img/corp/{$some.avatar}" width="25" height="25" class="avatar"></td>
+  <td class="">
+    <span class="name">{$some.name} {$some.surname}</span>
+
+    {if $some.type == 1}
+      {if $some.sex == 1}<b>entered</b>{else}<b>entered</b>{/if} into the system.
+    {elseif $some.type == 2}
+      {if $some.sex == 1}<b>left</b>{else}<b>left</b>{/if} the system.
+    {/if}
+  </td>
+  <td class="events-time">{$some.timestamp|date_format:'%H:%M:%S'}</td>
+</tr>
+{foreachelse}
+<div class="info">No event in the database, or an event in your search were found.</div>
+{/foreach}
+    </tbody>
+  </table>
+
+</div>
+
+</div>
+
+  </div>
+</div>
+
+<div class="clearfix"></div>

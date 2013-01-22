@@ -1,0 +1,58 @@
+{include file="CorpController/header.html"}
+
+<div class="container">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </a>
+        <a class="brand disabled"><span class="blue">Tooflya</span> corporate¡</a>
+        <div class="nav-collapse">
+          <ul class="nav pull-right">
+            <li><a class="disabled">You are not logged in</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="span3 sign-in">
+    <div class="well sidebar-nav" id="content">
+      <div class="password">
+          <div class="password-corner"></div>
+            <input type="password" name="password" id="password" value="" placeholder="Введите пароль и нажмите Enter" />
+      </div>
+      <div class="sign-in-scroll">
+        <ul class="sign-in">
+          {foreach from=$users item=some}
+          <li class="sign-in" data-id="{$some.id}">
+            <img src="{$url}/assets/img/corp/{$some.avatar}" width="50" height="50" class="avatar">
+            <div class="profile-name">{$some.name} {$some.surname}</div>
+            <div class="profile">{if $some.status == 1}Now offline{else}Online{/if}</div>
+            <div class="clearfix"></div>
+          </li>
+          {foreachelse}
+            There are no members
+          {/foreach}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="span9 sign-in">
+    <div class="well sidebar-nav">
+      <div><b><span class="blue">Welcome</span></b></div><br />
+      <div>
+        <span class="blue">Tooflya</span> corporate¡ - is the best web-based application for business.
+      </div><br />
+      <div><b><span class="blue"></span></b></div><br />
+      <div></div>
+    </div>
+  </div>
+
+</div>
+
+{include file="CorpController/footer.html"}

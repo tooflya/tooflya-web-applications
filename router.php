@@ -76,8 +76,11 @@ else
   }
   else
   {
-    $controller = new ErrorController();
-    $controller->notFound();
+    if($params['path'][1] != 'ajax')
+    {
+      $controller = new ErrorController();
+      $controller->notFound();
+    }
   }
 }
 
