@@ -32,21 +32,18 @@
     </thead>
     <tbody class="events-body">{foreach from=$events item=some}
 <tr class="event" data-id="{$some.id}">
-  <td class=""><img src="/assets/img/corp/play.png" width="25" height="25" class="avatar"></td>
+  <td class="play"><div class="play"></div></td>
   <td class="">
-    <span class="name">The Prodigy</span> - <span class="name">{$some.surname}</span>
+    <div><span class="name">The Spirit Indestructible (Spanish + English Version)</span></div>
+    <div>Исполнитель: Nelly Furtado</div>
+    <div>
+      <div style="float: left;"><img src="/assets/img/corp/{$some.avatar}" width="25" height="25" class="avatar"></div>
+      <div style="margin-top: 12px;float: left;"><span class="name">{$some.name} {$some.surname}</span> <b>added this song</b> to the playlist.</div>
+    </div>
   </td>
   <td class=""></td>
-  <td class="">
-    
-</td>
-
+  <td class=""></td>
   <td class="events-time">{$some.timestamp|date_format:'%H:%M:%S'}</td>
-</tr>
-<tr class="event">
-  <td class=""><img src="/assets/img/corp/{$some.avatar}" width="25" height="25" class="avatar"></td>
-  <td> <span class="name">{$some.name} {$some.surname}</span> <b>added this song</b> to the playlist.
- </td>
 </tr>
 {foreachelse}
 <div class="info">No event in the database, or an event in your search were found.</div>
