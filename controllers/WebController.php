@@ -42,6 +42,8 @@ class WebController extends BaseController
       break;
     }
     
+    $this->templates->assign('rand_banner', rand(0, 1));
+
     $this->templates->assign('index', true);
     $this->templates->display($this->name);
   }

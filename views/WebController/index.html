@@ -6,22 +6,17 @@
         <a id="slider-right" class="arrow arrow-right"></a>
         <div class="ads">
           <ul id="slider">
-            <li class="banner banner-2"><a href="{$url}/blog/bubble-fun-review/"><img src="{$url}/assets/img/Bubble-Fun-Big-Banner.jpg" alt="" /></a></li>
-            <!--<li class="banner"><a><img src="{$url}/assets/img/2.jpg" alt="" /></a></li>
-            <li class="banner"><a><img src="{$url}/assets/img/3.jpg" alt="" /></a></li>
-            <li class="banner"><a><img src="{$url}/assets/img/4.jpg" alt="" /></a></li>
-            <li class="banner"><a><img src="{$url}/assets/img/5.jpg" alt="" /></a></li>-->
+            <li class="banner banner-1"><a href="{$url}/blog/bubble-fun-review/"><img src="{$url}/assets/img/Bubble-Fun-Big-Banner.jpg" alt="" /></a></li>
+            <li class="banner banner-2"><a><img src="{$url}/assets/img/Signs-Big-Banner.jpg" alt="" /></a></li>
+            <li class="banner banner-3"><a href="{$url}/blog/bubble-fun-review/"><img src="{$url}/assets/img/Bubble-Fun-Big-Banner.jpg" alt="" /></a></li>
           </ul>
         </div>
         <div class="clearfix"></div>
       </div>
-      <ul class="control-links" style="width: 12px !important;">
-        <li data-index="3" class="active"></li>
-        <!--<li data-index="1"></li>
+      <ul class="control-links">
+        <li data-index="0"></li>
+        <li data-index="1" class="active"></li>
         <li data-index="2"></li>
-        <li data-index="3"></li>
-        <li data-index="4"></li>
-        <li data-index="5"></li>-->
       </ul>
     </div>
   </section>
@@ -41,16 +36,13 @@
           </p>
       </p>
     </div>
+
+    {if $rand_banner == 1}
+    <!-- Bubble Fun -->
     <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
         <img src="{$url}/assets/img/Bubble-Fun-Small-Banner.jpg" alt="" style="width:55%" class="float-left image" />
       <div class="float-left presentation">
         <h2>{l s='Our Next Game Under Development'}</h2>
-        <!--<p>
-          At the nearest time all the world will see the new creation from our developers.
-          The game will be performed in genre “runner”, in genre that contains the elements of arcade and action.
-          It still have no name, but characters and graphics are awesome.
-          You can see it yourself in the picture to the left.
-        </p>-->
         <p>
           {l s='At the nearest time all the world will see the new creation from our developers.'}
           {l s='The game will be performed in genre “casual”, in genre that contains the elements of arcade and action'}.
@@ -63,11 +55,30 @@
       </div>
       <div class="clearfix"></div>
     </div>
+    {else}
+    <!-- Signs HD -->
+    <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
+        <img src="{$url}/assets/img/Signs-Small-Banner.jpg" alt="" style="width:55%" class="float-left image" />
+      <div class="float-left presentation">
+        <h2>{l s='Our Next Game Under Development'}</h2>
+        <p>
+          {l s='Вскоре вы увидите нашу новую игру - Signs'}.<br />
+          {l s='Вам понравится убивать время на одном дыхании'}.
+        </p><br /><br /><br />
+        <p>
+          {l s='For more information, please visit our blog'}.
+        </p>
+        <a class="button" href="{$url}/blog/">{l s='Read more from our blog'}</a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    {/if}
+
      <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
         <h2>{l s='Check Our Other Games and Software'}</h2>
         <ul class="sites-list">
           <li><a href="{$url}/blog/bubble-fun-review/"><img src="{$url}/assets/img/bubble-fun-icon-small.png" alt="" />Bubble Fun</a></li>
-          <!--<li><a><img src="{$url}/assets/img/7.jpg" alt="" />Some Awesome Game</a></li>-->
+          <li><a href="{$url}/blog/signs-review/"><img src="{$url}/assets/img/signs-icon-small.png" alt="" />Signs HD</a></li>
         </ul>
      </div>
   </div>
