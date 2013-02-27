@@ -39,14 +39,14 @@ $(document).ready(function() {
 
 
   $('#slider-left').click(function() {
-    if(sliderCount >= 2) return;
+    if(sliderCount <=0) return;
 
-    sliderCount++;
+    sliderCount--;
 
-    if(twoTimes) {sliderCount++;}
+    if(twoTimes) {sliderCount--;}
   count = 0;
   $('#slider li').each(function(index, element) {
-    $(element).animate({'left': $(element).position().left- (twoTimes ? 2000 : 1000)});
+    $(element).animate({'left': $(element).position().left+ (twoTimes ? 2000 : 1000)});
 
 
 
@@ -71,15 +71,15 @@ $('.control-links li').each(function(index, element) {
   });
 
   $('#slider-right').click(function() {
-    if(sliderCount <= 0) return;
+    if(sliderCount >= 2) return;
 
-    sliderCount--;
+    sliderCount++;
 
-    if(twoTimes) {sliderCount--;}
+    if(twoTimes) {sliderCount++;}
 
   count = 0;
   $('#slider li').each(function(index, element) {
-    $(element).animate({'left': $(element).position().left+(twoTimes ? 2000 : 1000)});
+    $(element).animate({'left': $(element).position().left-(twoTimes ? 2000 : 1000)});
 
       $(element).css({'opacity': 0.5});
       //$(element).css({'transform': 'scale(0.8)'});
