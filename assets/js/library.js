@@ -411,6 +411,9 @@ $('input[class*=show-error-sites]').change(function() {
   $('a[rel=2]').click();
 });
 
+y = 1;
+y2 = 3;
+
 $(function() {
     $('ul.control-links li').click(function(e) {
       $.each($('ul.control-links li'), function(i, item) {
@@ -426,4 +429,27 @@ $(function() {
         [".control-links .1", ".control-links .2",
         ".control-links .3"]
     });
+
+    $('#slider-left').click(function(e) {
+      y--;
+      if(y < 1) y = 3;
+
+      yy();
+    });
+
+    $('#slider-right').click(function(e) {
+      y++;
+      if(y > 3) y = 1;
+
+      yy();
+    });
 });
+
+function yy()
+{
+  $.each($('ul.control-links li'), function(i, item) {
+    $(item).removeClass('active');
+
+    if(i == y-1) $(item).addClass('active');
+  });
+}
