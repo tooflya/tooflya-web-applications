@@ -7,8 +7,9 @@
         <div class="slider">
           <ul id="slider">
             <li><a href="{$url}/blog/bubble-fun-review/"><img src="{$url}/assets/img/Bubble-Fun-Big-Banner.jpg" alt=""  width="850" height="416"/></a></li>
-            <li ><a href="{$url}/blog/signs-review/"><img src="{$url}/assets/img/Signs-Big-Banner.jpg" alt="" width="850" height="416" /></a></li>
-            <li ><a href="{$url}/blog/products-subscription/"><img src="{$url}/assets/img/Subscribe-Banner.jpg" alt="" width="850" height="416" /></a></li>
+            <li><a href="{$url}/blog/nuclear-pizza-war-review/"><img src="{$url}/assets/img/Nuclear-Pizza-War-Big-Banner.png" alt="" width="850" height="416" /></a></li>
+            <li><a href="{$url}/blog/signs-review/"><img src="{$url}/assets/img/Signs-Big-Banner.jpg" alt="" width="850" height="416" /></a></li>
+            <li><a href="{$url}/blog/products-subscription/"><img src="{$url}/assets/img/Subscribe-Banner.jpg" alt="" width="850" height="416" /></a></li>
           </ul>
         </div>
         <div class="clearfix"></div>
@@ -17,6 +18,7 @@
         <li class="1 active"></li>
         <li class="2"></li>
         <li class="3"></li>
+        <li class="4"></li>
       </ul>
     </div>
   </section>
@@ -55,7 +57,7 @@
       </div>
       <div class="clearfix"></div>
     </div>
-    {else}
+    {elseif $rand_banner == 0}
     <!-- Signs HD -->
     <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
         <img src="{$url}/assets/img/Signs-Small-Banner.jpg" alt="" style="width:55%" class="float-left image" />
@@ -67,6 +69,23 @@
           {l s='Reduce as much as possible signs for 1 minute.'}
           {l s='You\'ll pleasure to kill time in the same breath.'}
         </p><br />
+        <p>
+          {l s='For more information, please visit our blog'}.
+        </p>
+        <a class="button" href="{$url}/blog/">{l s='Read more from our blog'}</a>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    {elseif $rand_banner == 2}
+    <!-- Nuclear Pizza War -->
+    <div style="border-top:1px #ccc solid;padding-top: 20px;padding-bottom: 20px">
+        <img src="{$url}/assets/img/Nuclear-Pizza-War-Small-Banner.png" alt="" style="width:55%" class="float-left image" />
+      <div class="float-left presentation">
+        <h2>{l s='Our Next Game Under Development'}</h2>
+        <p>
+          {l s='Exciting game in arcade genre from favorite of all of us company - Mojang!'}
+          {l s='Originally, this game was created only for PC, but we - Tooflya Inc. does not seem this restriction fair! And we did this game available for mobile platforms! So, from now on you will be able to enjoy it on their phones and tablets!'}
+        </p>
         <p>
           {l s='For more information, please visit our blog'}.
         </p>

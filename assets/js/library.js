@@ -412,7 +412,7 @@ $('input[class*=show-error-sites]').change(function() {
 });
 
 y = 1;
-y2 = 3;
+y2 = 4;
 
 $(function() {
     $('ul.control-links li').click(function(e) {
@@ -427,19 +427,20 @@ $(function() {
         speed: 600,
         btnGo:
         [".control-links .1", ".control-links .2",
-        ".control-links .3"]
+        ".control-links .3",
+        ".control-links .4"]
     });
 
     $('#slider-left').click(function(e) {
       y--;
-      if(y < 1) y = 3;
+      if(y < 1) y = y2;
 
       yy();
     });
 
     $('#slider-right').click(function(e) {
       y++;
-      if(y > 3) y = 1;
+      if(y > y2) y = 1;
 
       yy();
     });
