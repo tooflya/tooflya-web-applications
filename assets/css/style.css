@@ -361,7 +361,7 @@ section.products-presentation ul.control-links li.active {
   background-color: #33B5E5;
 }
 section.products-presentation ul.control-links {
-  width: 80px;
+  width: 100px;
   margin: 0 auto;
   padding: 10px 0;
   list-style-image: none;
@@ -398,7 +398,7 @@ section.products-presentation a.arrow {
   z-index: 5000;
 }
 section.products-presentation a.arrow-left {
-  left: 450px;
+  left: 440px;
   background: transparent url(../img/arrow-left.png) no-repeat;
 }
 section.products-presentation a.arrow-right {

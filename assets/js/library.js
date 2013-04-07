@@ -412,7 +412,7 @@ $('input[class*=show-error-sites]').change(function() {
 });
 
 y = 1;
-y2 = 4;
+y2 = 5;
 
 $(function() {
     $('ul.control-links li').click(function(e) {
@@ -422,8 +422,8 @@ $(function() {
       $(this).addClass('active');
     });
     $(".slider").jCarouselLite({
-        btnNext: "#slider-left",
-        btnPrev: "#slider-right",
+        btnNext: "#slider-right",
+        btnPrev: "#slider-left",
         speed: 600,
         btnGo:
         [".control-links .1", ".control-links .2",
