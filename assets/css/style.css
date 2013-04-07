@@ -372,46 +372,52 @@ ul#slider {
   list-style: none;
 }
 section.products-presentation div.slider {
-  width: 980px;
+  width: 2577 !important;
   height: 444px;
   position: relative;
+  margin-left: -1000px;
+}
+section.products-presentation div.slider li {
+  margin-left: 100px;
+  margin-top: 20px;
 }
 section.products-presentation div.slider img {
   border: 1px #ccc solid;
   padding: 3px;
   background-color: #fff;
--moz-box-shadow: 1px 1px 10px #aaa;
--webkit-box-shadow: 1px 1px 10px #AAA;
-background: white;
+  -moz-box-shadow: 1px 1px 10px #aaa;
+  -webkit-box-shadow: 1px 1px 10px #AAA;
+  background: white;
 }
-section.products-presentation div.slider a.arrow {
+section.products-presentation a.arrow {
   cursor: pointer;
   position: absolute;
-  top: 180px;
+  top: 280px;
   width: 20px;
   height: 36px;
+  z-index: 5000;
 }
-section.products-presentation div.slider a.arrow-left {
-  left: 0;
+section.products-presentation a.arrow-left {
+  left: 450px;
   background: transparent url(../img/arrow-left.png) no-repeat;
 }
-section.products-presentation div.slider a.arrow-right {
-  right: 0;
+section.products-presentation a.arrow-right {
+  right: 450px;
   background: transparent url(../img/arrow-right.png) no-repeat;
 }
-section.products-presentation div.slider a.arrow-left:hover {
+section.products-presentation a.arrow-left:hover {
   background-position: 0 -36px;
 }
-section.products-presentation div.slider a.arrow-right:hover {
+section.products-presentation a.arrow-right:hover {
   background-position: 0 -36px;
 }
-section.products-presentation div.slider a.arrow-left:active {
+section.products-presentation a.arrow-left:active {
   background-position: 0 -72px;
 }
-section.products-presentation div.slider a.arrow-right:active {
+section.products-presentation a.arrow-right:active {
   background-position: 0 -72px;
 }
-section.products-presentation div.slider div.ads {
+section.products-presentation div.ads {
   width: 858px;
   height: 424px;
   margin: 0 auto;
