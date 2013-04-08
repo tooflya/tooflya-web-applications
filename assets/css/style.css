@@ -313,7 +313,8 @@ footer ul.main li.column-3 {
 }
 footer ul.main li.column-3 li {
   margin-bottom: 10px;
-  width: 220px;
+  width: 210px;
+  padding-right: 30px;
 }
 footer ul.main li.column-4 {
   background: transparent url(../img/twitter.png) 170px 5px no-repeat;
@@ -621,7 +622,6 @@ ul.tweets div.image {
   float: left;
   padding: 3px;
   margin-right: 10px;
-  margin-bottom: 10px;
   background-color: #fff;
   border-radius: 5px;
   height: 40px;
@@ -636,7 +636,6 @@ ul.tweets li {
 ul.tweets div.description {
   color: #BBB;
   font-size: 13px;
-  padding-left: 55px;
 }
 .elements-devider {
   background: transparent url(../img/devider.png) center no-repeat;
