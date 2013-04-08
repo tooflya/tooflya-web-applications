@@ -133,7 +133,8 @@ class Template extends Smarty {
    */
    public function display($controller, $template = 'index')
    {
-    $this->assign('tab', $controller.'/'.$template);
+    //$this->assign('tab', $controller.'/'.$template);
+    $this->assign('tab', $controller.'/index');
     
     parent::display($controller.'/'.$template.'.html');
    }

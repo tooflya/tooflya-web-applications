@@ -21,13 +21,18 @@
 class BlogController extends BaseController
 {
 
+  private $page;
+  private $itemsOnPage = 4;
+  
   /**
    *
    *
    *
    */
-  public function indexAction($articleOrClass = false)
+  public function indexAction($articleOrClass = false, $page = 0)
   {
+    $this->page = $page;
+
     if(!$articleOrClass)
     {
       $this->templates->assign(TITLE, 'Interesting records for you');
@@ -57,7 +62,12 @@ class BlogController extends BaseController
       {
         if(is_numeric($articleOrClass))
         {
-          $this->indexAction();
+          $this->page = $articleOrClass;
+      
+          $this->templates->assign(TITLE, 'Interesting records for you');
+          $this->getArticlesClasses();
+          $this->getLatestArticles();
+          $this->templates->display($this->name);
         }
         else
         {
@@ -119,14 +129,24 @@ class BlogController extends BaseController
    */
   public function getLatestArticles($class = false)
   {
+    $elements_count = 0;
+
     if(!$class)
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`cid` AND `blog_classes`.`language` = '".LANGUAGE."') WHERE `blog`.`visible` = '1' AND `blog`.`language` = '".LANGUAGE."' ORDER by `blog`.`id` DESC", 'blog_latest_articles');
+      $elements_count = mysql_num_rows(mysql_query("SELECT * FROM `blog` WHERE `visible` = '1' AND `language` = ".LANGUAGE.""));
+
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`cid` AND `blog_classes`.`language` = '".LANGUAGE."') WHERE `blog`.`visible` = '1' AND `blog`.`language` = '".LANGUAGE."' ORDER by `blog`.`id` DESC LIMIT ". ($this->page * $this->itemsOnPage) .", ". ($this->itemsOnPage), 'blog_latest_articles');
     }
     else
     {
-      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`cid` AND `blog_classes`.`language` = '".LANGUAGE."') WHERE `blog`.`class` = (SELECT `cid` FROM `blog_classes` WHERE `alias` = '".$class."' AND `language` = ".LANGUAGE.") AND `blog`.`visible` = '1' AND  `blog`.`language` = ".LANGUAGE." ORDER by `blog`.`id` DESC", 'blog_latest_articles');
+      $elements_count = mysql_num_rows(mysql_query("SELECT * FROM `blog` WHERE `blog`.`class` = (SELECT `cid` FROM `blog_classes` WHERE `alias` = '".$class."' AND `language` = ".LANGUAGE.") AND `visible` = '1' AND `language` = ".LANGUAGE.""));
+
+      $this->templates->assign_array("SELECT * FROM `blog` LEFT JOIN `users` ON (`blog`.`user` = `users`.`id`) LEFT JOIN `blog_classes` ON (`blog`.`class` = `blog_classes`.`cid` AND `blog_classes`.`language` = '".LANGUAGE."') WHERE `blog`.`class` = (SELECT `cid` FROM `blog_classes` WHERE `alias` = '".$class."' AND `language` = ".LANGUAGE.") AND `blog`.`visible` = '1' AND  `blog`.`language` = ".LANGUAGE." ORDER by `blog`.`id` DESC LIMIT ". ($this->page * $this->itemsOnPage) .", ". ($this->itemsOnPage), 'blog_latest_articles');
+      $this->templates->assign('class', $class .'/');
     }
+
+    $this->templates->assign('page', $this->page);
+    $this->templates->assign('maxPage', $elements_count / $this->itemsOnPage - 1);
 
     return $this->templates->capture($this->name, "bottom");
   }

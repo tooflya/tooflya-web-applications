@@ -53,7 +53,7 @@ else
     {
       $action = $params['path'][3].'Action';
 
-      if(method_exists($controller ,$action))
+      if(method_exists($controller, $action))
       {
         if(isset($params['path'][4]))
         {
@@ -66,7 +66,14 @@ else
       }
       else
       {
-        $controller->indexAction(Validate::sql($params['path'][3]));
+        if(isset($params['path'][4]))
+        {
+          $controller->indexAction(Validate::sql($params['path'][3]), Validate::sql($params['path'][4]));
+        }
+        else
+        {
+          $controller->indexAction(Validate::sql($params['path'][3]));
+        }
       }
     }
     else
