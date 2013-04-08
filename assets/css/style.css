@@ -398,11 +398,11 @@ section.products-presentation a.arrow {
   z-index: 5000;
 }
 section.products-presentation a.arrow-left {
-  left: 440px;
+  margin-right: 440px;
   background: transparent url(../img/arrow-left.png) no-repeat;
 }
 section.products-presentation a.arrow-right {
-  right: 450px;
+  margin-left: 950px;
   background: transparent url(../img/arrow-right.png) no-repeat;
 }
 section.products-presentation a.arrow-left:hover {
