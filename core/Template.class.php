@@ -85,6 +85,21 @@ class Template extends Smarty {
 
     /**
      *
+     * This function is
+     *
+     * @param 
+     *
+     */
+    if(!function_exists('i'))
+    {
+      function i($params)
+      {
+        return preg_replace('!http://([a-zA-Z0-9./-]+[a-zA-Z0-9/-])!i', '<a href="\\0" target="_blank">\\0</a>', $params['s']);
+      }
+    }
+
+    /**
+     *
      * Register smarty functions wich 
      * we will using in Smarty templates
      *
@@ -93,6 +108,7 @@ class Template extends Smarty {
      *
      */
     $this->registerPlugin("function", "l", "l");
+    $this->registerPlugin("function", "i", "i");
   }
 
   /**

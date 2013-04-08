@@ -3,7 +3,7 @@
   {foreach from=$last_tweets item=some}
   <li>
     <div class="image"><img src="{$some.image}" alt="" /></div>
-    <div class="text">{$some.text}</div>
+    <div class="text">{i s=$some.text}</div>
     <div class="description">Tooflya Inc. <a href="http://www.twitter.com/tooflya" target="_blank">@tooflya</a></div>
   </li>
   {foreachelse}
