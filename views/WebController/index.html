@@ -1,7 +1,55 @@
 {include file="BaseViews/header.html"}
-  <section class="products-presentation reflection">
+  <section>
+    <div class="presentation">
+      <div class="content">
+        <div class="description">
+            <p class="special"><h3>До запуска проекта осталось 20 дней</h3></p>
+            <p class="small">
+                Уже <b>3 апреля мы представим</b> нашим пользователям первый сборник приложений для мобильных платформ, которые возможно будет преобрести по принципу
+                <a href="">"Заплати сколько считаешь нужным"</a>.
+            </p>
+        </div>
+        <div class="counter">
+        <script src="{$url}/assets/js/countdown.js"></script>
+            {literal}
+            <script>
+                new Countdown({
+                    year : 2013,
+                    month  : 4,
+                    day    : 30,
+                    hour   : 12,
+                    ampm   : "pm",
+                    minute : 0,
+                    second : 0,
+                    style: 'boring',
+                    rangeHi: 'day',
+                    width: 300,
+                    height: 100,
+                    labels : {
+                        font : "Arial",
+                        color : "transparent",
+                        weight : "normal"
+                    },
+                    numbers : {
+                        font : "Arial",
+                        color : "#E81962",
+                        bkgd : [["#FFFFFF", 1, 20], ["#DDDDDD", 1, 100], ["#C9C9C9", 1, 60]],
+                        rounded : 5,
+                        shadow : [0,0,10, "#000000", 0.5]
+                    },
+                });
+            </script>
+            {/literal}
+        </div>
+      </div>
+    </div>
+
     <div class="content">
-      AppsBundles.com is coming soon! (;
+      <div class="offers">
+          <div class="shadow-left"></div>
+          <div class="shadow-right"></div>
+          <div class="shadow"></div>
+      </div>
     </div>
   </section>
 {include file="BaseViews/footer.html"}
