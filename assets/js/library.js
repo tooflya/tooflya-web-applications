@@ -415,6 +415,8 @@ y = 1;
 y2 = 5;
 
 $(function() {
+    $('#slider').shuffle();
+    $('#center-slider').shuffle();
     $('ul.control-links li').click(function(e) {
       $.each($('ul.control-links li'), function(i, item) {
         $(item).removeClass('active');
