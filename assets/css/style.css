@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Dosis:600|Open+Sans:400italic,600italic,400,600,700&subset=latin-ext,latin,cyrillic-ext);
+@import url(http://fonts.googleapis.com/css?family=Roboto:200,400|Dosis:200,400,600|Open+Sans:400italic,600italic,400,600,700&subset=latin-ext,latin,cyrillic-ext);
 * {
   padding: 0 0;
   margin: 0;
@@ -15,6 +15,7 @@ body {
 a {
 	text-decoration: none;
 	color: #FABFAB;
+	cursor: pointer;
 }
 a:hover {
 
@@ -188,4 +189,61 @@ h3 {
 p {
 	text-shadow: 1px 1px #2C2B2B;
 	line-height: 16px;
+}
+div.content div.left {
+	float: left;
+	width: 290px;
+	padding-right: 20px;
+
+	font-family: 'Open Sans', Arial, Tahoma, sans-serif;
+	font-size: 13px;
+	font-weight: 600;
+}
+div.content div.right {
+	float: right;
+	width: 650px;
+	background: transparent url('../img/lr.png') left repeat-y;
+	padding-left: 20px;
+
+	font-family: 'Open Sans', Arial, Tahoma, sans-serif;
+	font-size: 13px;
+}
+div.content div.left h2 {
+	color: #E81962;
+	font-size: 20px;
+	padding-bottom: 40px;
+	text-shadow: 1px 2px #FFFFFF;
+}
+div.content div.right h1 {
+	color: #E81962;
+	font-size: 20px;
+	padding-bottom: 40px;
+	text-shadow: 1px 2px #FFFFFF;
+}
+div.content div.right h2 {
+	color: #E81962;
+	font-size: 14px;
+	padding-bottom: 10px;
+	text-shadow: 1px 2px #FFFFFF;
+}
+div.content div.left ul {
+	list-style-type: none;
+}
+div.content div.left ul li {
+	margin-bottom: 7px;
+}
+div.content div.left ul a {
+	color: #E81962;
+	font-size: 15px;
+}
+div.content div.right p {
+	text-shadow: 1px 2px #FFFFFF;
+	line-height: 18px;
+	font-family: 'Roboto', Arial, Tahoma, sans-serif;
+	color: #444;
+	font-weight: 400;
+	padding-bottom: 20px;
+}
+.clearfix {
+	clear: both;
 }
