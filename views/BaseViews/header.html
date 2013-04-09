@@ -2,18 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Tooflya {if isset($customTitle)}| {$customTitle}{/if}</title>
+    <title>AppsBundles.com {if isset($customTitle)}| {$customTitle}{/if}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Tooflya Inc. - {l s='a unique combination of knowledge, experience and skills required for a successful IT business'}.">
-    <meta name="keywords" content="Tooflya, tooflya, games, android, Android OS, free games, mobile, buy game, new games.">
-    <meta name="author" content="Tooflya Inc.">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
 
     <link href="{$url}/assets/css/style.css" rel="stylesheet">
 
     <script src="{$url}/assets/js/jquery.js"></script>
     <script src="{$url}/assets/js/library.js"></script>
-
-    <script type="text/javascript" src="{$url}/assets/js/jcarousellite.js"></script>
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -24,43 +22,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
-    {if $language == 'ru'}
-    {literal}
-    <script type="text/javascript" src="http://vk.com/js/api/openapi.js?64"></script>
-    <script type="text/javascript">VK.init({apiId: 3239022, onlyWidgets: true});</script>
-    {/literal}
-    {/if}
   </head>
 
   <body>
-    {if $language == 'en'}
-    {literal}
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=368439279914485";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-    {/literal}
-    {/if}
     <header>
-      <div class="content">
-        <div class="logo" {if isset($index)}style="margin-left: 60px;"{/if}>
-          <div class="logo-text"></div>
-          <div class="logo-hero animation-1"></div>
-          <a href="{$url}"></a>
-        </div>
-        <ul class="menu">
-          <li><a href="{$url}" {if $tab == 'WebController/index'}class="active"{/if}>{l s='Home'}</a></li>
-          <li><a href="{$url}/web/company/" {if $tab == 'WebController/company'}class="active"{/if}>{l s='Company'}</a></li>
-          <li><a href="{$url}/web/partnership/" {if $tab == 'WebController/partnership'}class="active"{/if}>{l s='Partnership'}</a></li>
-          <li><a href="{$url}/press/" {if $tab == 'PressController/index'}class="active"{/if}>{l s='Press'}</a></li>
-          <li><a href="{$url}/blog/" {if $tab == 'BlogController/index'}class="active"{/if}>{l s='Blog'}</a></li>
-          <li><a href="{$url}/projects/" {if $tab == 'ProjectsController/index'}class="active"{/if}>{l s='Projects'}</a></li>
-          <li><a href="{$url}/feedback/" {if $tab == 'FeedbackController/index'}class="active"{/if}>{l s='Feedback'}</a></li>
-        </ul>
-        <div class="clearfix"></div>
-      </div>
     </header>
