@@ -1,1 +1,0 @@
-mysql -u root -p2450512 www.tooflya.com < /var/www/www.tooflya.com.sql

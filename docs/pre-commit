@@ -1,5 +1,0 @@
-#!/bin/sh
-exec mysqldump -u root -p2450512 --skip-extended-insert www.tooflya.com > /var/www/www.tooflya.com.sql
-exec cd /var/www/
-exec git add www.tooflya.com.sql
-echo "Database dump was updated!"
