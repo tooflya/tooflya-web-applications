@@ -421,6 +421,13 @@ $(function() {
       });
       $(this).addClass('active');
     });
+    $(".center-slider").jCarouselLite({
+      btnNext: "#center-slider-right",
+      btnPrev: "#center-slider-left",
+      visible: 1,
+      auto: false,
+      speed: 1000
+    });
     $(".slider").jCarouselLite({
         btnNext: "#slider-right",
         btnPrev: "#slider-left",

@@ -390,7 +390,7 @@ section.products-presentation div.slider img {
   -webkit-box-shadow: 1px 1px 10px #AAA;
   background: white;
 }
-section.products-presentation a.arrow {
+a.arrow {
   cursor: pointer;
   position: absolute;
   top: 280px;
@@ -807,4 +807,42 @@ input[type=text]:focus, input[type=password]:focus {
 input[type=text].search {
   padding-left:25px;
   background:transparent url(../images/b/search.png) 7px 9px no-repeat;
+}
+div.center-slider {
+  position: relative;
+  width: 980px !important;
+  overflow: auto;
+}
+div.pre-center-slider a.arrow {
+  top: 130px;
+}
+div.pre-center-slider a.arrow-left {
+  left: -100px;
+  background: transparent url(../img/arrow-left.png) no-repeat;
+}
+div.pre-center-slider a.arrow-right {
+  right: -100px;
+  background: transparent url(../img/arrow-right.png) no-repeat;
+}
+div.pre-center-slider a.arrow-left:hover {
+  background-position: 0 -36px;
+}
+div.pre-center-slider a.arrow-right:hover {
+  background-position: 0 -36px;
+}
+div.pre-center-slider a.arrow-left:active {
+  background-position: 0 -72px;
+}
+div.pre-center-slider a.arrow-right:active {
+  background-position: 0 -72px;
+}
+div.center-slider ul {
+  list-style-image: none;
+  list-style-type: none;
+}
+div.center-slider li {
+  width: 980px !important;
+}
+div.pre-center-slider {
+  position: relative;
 }
