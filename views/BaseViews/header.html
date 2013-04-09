@@ -32,13 +32,25 @@
             <div class="navigation">
                 <ul>
                     <li class="home">
-                        <a href=""></a>
+                        <a href="{$url}"></a>
                         <div class="arrow"></div>
                     </li>
-                    <li><a href="">О проекте</a></li>
+                    <li class="drop">
+                        <a href="{$url}/web/about/">О проекте</a>
+                        <ul>
+                            <li><a href="">Информация о предложениях проекта</a></li>
+                            <li><a href="">Условия преобритения</a></li>
+                            <li><a href="">Распределение финансирования</a></li>
+                        </ul>
+                    </li>
                     <li><a href="">Благотворительность</a></li>
                     <li><a href="">Постоянные предложения</a></li>
-                    <li><a href="">Блог</a></li>
+                    <li class="drop">
+                        <a href="">Блог</a>
+                        <ul>
+                            <li><a href="">Новости проекта</a></li>
+                        </ul>
+                    </li>
                     <li><a href="">Контакты</a></li>
                     <li><a href="">Поддержка</a></li>
                 </ul>

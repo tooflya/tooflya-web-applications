@@ -51,63 +51,10 @@ class WebController extends BaseController
    *
    *
    */
-  public function companyAction()
+  public function aboutAction()
   {
-    $this->templates->assign(TITLE, 'About our company');
-    $this->templates->display($this->name, 'company');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function activitiesAction()
-  {
-    $this->templates->display($this->name, 'activities');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function partnershipAction()
-  {
-    $this->templates->assign(TITLE, 'We are open for partnership');
-    $this->templates->display($this->name, 'partnership');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function careerAction()
-  {
-    $this->templates->assign(TITLE, 'Career');
-    $this->templates->display($this->name, 'career');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function teamAction()
-  {
-    $this->templates->assign(TITLE, 'We are the best team!');
-    $this->templates->display($this->name, 'team');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function distributionAction()
-  {
-    $this->templates->display($this->name, 'distribution');
+    $this->templates->assign(TITLE, 'О проекте');
+    $this->templates->display($this->name, 'about');
   }
 }
 

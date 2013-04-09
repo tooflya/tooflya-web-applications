@@ -10,6 +10,7 @@
 body {
   background: transparent url('../img/background.png');
   font-family: Helvetica, Arial, sans-serif;
+  overflow-y: scroll;
 }
 a {
 	text-decoration: none;
@@ -27,6 +28,16 @@ header div.line {
 }
 header ul {
 	list-style-type: none;
+}
+header ul ul {
+	display: none;
+	position: absolute;
+	background-color: #FFF;
+}
+header ul ul li {
+	display: block;
+	float: none;
+	border-top: 1px solid #D4D4D4;
 }
 header ul {
 	font-family: 'Open Sans', Arial, Tahoma, sans-serif;
@@ -51,10 +62,19 @@ header ul li:hover {
 }
 header ul li.home div.arrow {
 	position: absolute;
-	background:  transparent url('../img/red_bottom_arrow.png') center center no-repeat;
+	background: transparent url('../img/red_bottom_arrow.png') center center no-repeat;
 	width: 40px;
 	height: 7px;
 	margin-top: -1px;
+}
+header ul li.drop {
+	background-image: url('../img/arrow_down.png');
+	background-position: center right;
+	background-repeat: no-repeat;
+	padding-right: 10px;
+}
+header ul li:hover ul {
+	display: block;
 }
 header ul li a {
 	display: block;
