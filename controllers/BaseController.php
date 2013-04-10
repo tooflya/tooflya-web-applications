@@ -44,7 +44,6 @@ abstract class BaseController implements IBaseController
    */
   public function showLayout($view, $fetch = false, $area = 'body')
   {
-
     if($fetch)
     {
       Ajax::generate()->value($area, $this->templates->fetch($view));
