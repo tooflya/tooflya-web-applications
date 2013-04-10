@@ -31,11 +31,11 @@
             <div class="logo"></div>
             <div class="navigation">
                 <ul>
-                    <li class="home">
+                    <li class="home {if $tab == 'WebController/index'}active{/if}">
                         <a href="{$url}"></a>
                         <div class="arrow"></div>
                     </li>
-                    <li class="drop">
+                    <li class="drop {if $tab == 'WebController/about'}active{/if}">
                         <a href="{$url}/web/about/">О проекте</a>
                         <ul>
                             <li><a href="{$url}/web/about/">Информация о предложениях проекта</a></li>
