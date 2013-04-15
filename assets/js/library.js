@@ -412,7 +412,7 @@ $('input[class*=show-error-sites]').change(function() {
 });
 
 y = 1;
-y2 = 5;
+y2 = 7;
 
 $(function() {
     $('ul.control-links li').click(function(e) {
@@ -428,12 +428,13 @@ $(function() {
         btnGo:
         [".control-links .1", ".control-links .2",
         ".control-links .3",
-        ".control-links .4"]
+        ".control-links .4",
+        ".control-links .5"]
     });
 
     $('#slider-left').click(function(e) {
       y--;
-      if(y < 1) y = y2;
+      if(y < 0) y = y2;
 
       yy();
     });
