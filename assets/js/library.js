@@ -415,11 +415,20 @@ y = 1;
 y2 = 7;
 
 $(function() {
+    $('#slider').shuffle();
+    $('#center-slider').shuffle();
     $('ul.control-links li').click(function(e) {
       $.each($('ul.control-links li'), function(i, item) {
         $(item).removeClass('active');
       });
       $(this).addClass('active');
+    });
+    $(".center-slider").jCarouselLite({
+      btnNext: "#center-slider-right",
+      btnPrev: "#center-slider-left",
+      visible: 1,
+      auto: false,
+      speed: 1000
     });
     $(".slider").jCarouselLite({
         btnNext: "#slider-right",

@@ -313,7 +313,8 @@ footer ul.main li.column-3 {
 }
 footer ul.main li.column-3 li {
   margin-bottom: 10px;
-  width: 220px;
+  width: 210px;
+  padding-right: 30px;
 }
 footer ul.main li.column-4 {
   background: transparent url(../img/twitter.png) 170px 5px no-repeat;
@@ -389,7 +390,7 @@ section.products-presentation div.slider img {
   -webkit-box-shadow: 1px 1px 10px #AAA;
   background: white;
 }
-section.products-presentation a.arrow {
+a.arrow {
   cursor: pointer;
   position: absolute;
   top: 280px;
@@ -398,11 +399,11 @@ section.products-presentation a.arrow {
   z-index: 5000;
 }
 section.products-presentation a.arrow-left {
-  left: 440px;
+  margin-right: 440px;
   background: transparent url(../img/arrow-left.png) no-repeat;
 }
 section.products-presentation a.arrow-right {
-  right: 450px;
+  margin-left: 950px;
   background: transparent url(../img/arrow-right.png) no-repeat;
 }
 section.products-presentation a.arrow-left:hover {
@@ -621,7 +622,6 @@ ul.tweets div.image {
   float: left;
   padding: 3px;
   margin-right: 10px;
-  margin-bottom: 10px;
   background-color: #fff;
   border-radius: 5px;
   height: 40px;
@@ -636,7 +636,6 @@ ul.tweets li {
 ul.tweets div.description {
   color: #BBB;
   font-size: 13px;
-  padding-left: 55px;
 }
 .elements-devider {
   background: transparent url(../img/devider.png) center no-repeat;
@@ -808,4 +807,42 @@ input[type=text]:focus, input[type=password]:focus {
 input[type=text].search {
   padding-left:25px;
   background:transparent url(../images/b/search.png) 7px 9px no-repeat;
+}
+div.center-slider {
+  position: relative;
+  width: 980px !important;
+  overflow: auto;
+}
+div.pre-center-slider a.arrow {
+  top: 130px;
+}
+div.pre-center-slider a.arrow-left {
+  left: -100px;
+  background: transparent url(../img/arrow-left.png) no-repeat;
+}
+div.pre-center-slider a.arrow-right {
+  right: -100px;
+  background: transparent url(../img/arrow-right.png) no-repeat;
+}
+div.pre-center-slider a.arrow-left:hover {
+  background-position: 0 -36px;
+}
+div.pre-center-slider a.arrow-right:hover {
+  background-position: 0 -36px;
+}
+div.pre-center-slider a.arrow-left:active {
+  background-position: 0 -72px;
+}
+div.pre-center-slider a.arrow-right:active {
+  background-position: 0 -72px;
+}
+div.center-slider ul {
+  list-style-image: none;
+  list-style-type: none;
+}
+div.center-slider li {
+  width: 980px !important;
+}
+div.pre-center-slider {
+  position: relative;
 }
