@@ -1,6 +1,19 @@
+<?
+require('../../config.php');
+
+$query = mysql_query("SELECT * FROM `subscriptions`");
+while(false!==($row = mysql_fetch_assoc($query)))
+{
+    //change this to your email. 
+    $to = $row['mail'];
+    $from = "compamy@tooflya.com"; 
+    $subject = "Tooflya | You Are Awesome!"; 
+
+    //begin of HTML message 
+    $message = <<<EOF
 <html>
   <head>
-    <title>Tooflya | </title>
+    <title>Tooflya | You Are Amazing!</title>
   </head>
   <body>
     <table width="100%" cellspacing="0" cellpadding="0">
@@ -65,7 +78,7 @@
               <table width="530" cellspacing="0" cellpadding="0">
                 <tbody><tr>
                   <td>
-                    <p style="color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0 0 15px;">Don't forget to <a href=""  target="_blank">follow Tooflya on Twitter</a> and <a href="" style="color:#00aff0;text-decoration:underline;" target="_blank">like us on Facebook</a>!&nbsp;Any questions? Check out our <a href="" style="color:#00aff0;text-decoration:underline;" target="_blank">website</a>, or reply to this email. Have a good day!</p>
+                    <p style="color:#626262;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0 0 15px;">Don't forget to <a href="http://twitter.com/tooflya"  target="_blank">follow Tooflya on Twitter</a> and <a href="http://www.facebook.com/tooflya" style="color:#00aff0;text-decoration:underline;" target="_blank">like us on Facebook</a>!&nbsp;Any questions? Check out our <a href="" style="color:#00aff0;text-decoration:underline;" target="_blank">website</a>, or reply to this email. Have a good day!</p>
                     <p style="color:#606060;font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:28px;margin:0;">Regards,<br><b>Tooflya Team</b></p>
                   </td>
                 </tr>
@@ -89,14 +102,14 @@
               <tr>
                 <td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#868a8c;line-height:16px;" align="center">
                   You are receiving this email because you (or someone pretending to be you) subscribed to our newsletter.<br>
-                  If this is you no longer interested you can <a href="" style="color:#868a8c;text-decoration:underline;" class="daria-goto-anchor" target="_blank">unsubscribe just now</a>.
+                  If this is you no longer interested you can <a href="http://www.tooflya.com" style="color:#868a8c;text-decoration:underline;" class="daria-goto-anchor" target="_blank">unsubscribe just now</a>.
                 </td>
               </tr>
               <tr>
                 <td height="8"></td>
               </tr>
               <tr>
-                <td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#868a8c;line-height:18px;" align="center"><b>Tooflya Inc</b>., Kharkov, Ukraine 67111</td>
+                <td style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#868a8c;line-height:18px;" align="center"><b>Tooflya Inc</b>., Sunnny Isles Beach, FL. US 33160</td>
               </tr>
               <tr>
                 <td height="8"></td>
@@ -113,4 +126,19 @@
       </tbody>
     </table>
   </body>
-</html>
+</html> 
+EOF;
+   //end of message 
+    $headers  = "From: $from\r\n"; 
+    $headers .= "Content-type: text/html\r\n"; 
+
+    //options to send to cc+bcc 
+    //$headers .= "Cc: [email]maa@p-i-s.cXom[/email]"; 
+    //$headers .= "Bcc: [email]email@maaking.cXom[/email]"; 
+     
+    // now lets send the email. 
+    mail($to, $subject, $message, $headers); 
+
+    echo $to; 
+  }
+?>
