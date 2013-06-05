@@ -38,7 +38,7 @@ CREATE TABLE `blog` (
   KEY `class_2` (`class`),
   CONSTRAINT `blog_ibfk_1` FOREIGN KEY (`user`) REFERENCES `users` (`id`),
   CONSTRAINT `blog_ibfk_3` FOREIGN KEY (`class`) REFERENCES `blog_classes` (`cid`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COMMENT='Table for store blog entries';
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8 COMMENT='Table for store blog entries';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -162,7 +162,7 @@ INSERT INTO `bubblefun_rating` VALUES (18,'Tooflya',300);
 INSERT INTO `bubblefun_rating` VALUES (19,'valera',49550);
 INSERT INTO `bubblefun_rating` VALUES (20,'Игорь',19400);
 INSERT INTO `bubblefun_rating` VALUES (21,'Korobsky',2000);
-INSERT INTO `bubblefun_rating` VALUES (22,'',5650);
+INSERT INTO `bubblefun_rating` VALUES (22,'',1350);
 /*!40000 ALTER TABLE `bubblefun_rating` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -466,7 +466,7 @@ CREATE TABLE `tweets` (
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `text` (`text`)
-) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -491,6 +491,17 @@ INSERT INTO `tweets` VALUES (13,'Fantastic game repeated to the internet mem Har
 INSERT INTO `tweets` VALUES (14,'Small announcement about our next pretty cool game of Roger adventures in space already published on our website :) http://t.co/BhJrggRZAL','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-04-08 16:12:16');
 INSERT INTO `tweets` VALUES (15,'Check out our new #game - #SignsHD\nAlready available in #PlayStore https://t.co/HGlHul3V19\n#Tooflyainc #android #RT http://t.co/Z9mxC8fUKh','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-04-22 16:00:31');
 INSERT INTO `tweets` VALUES (16,'Check out our new #game - #SignsHD\nAlready available in #PlayStore  https://t.co/HGlHul3V19\n#Tooflyainc #Android #RT http://t.co/NZQIBfBM4b','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-04-23 09:10:06');
+INSERT INTO `tweets` VALUES (17,'Awesome android game - #SignsHD\nDownload right now: https://t.co/HGlHul3V19\n#Tooflyainc. #Gamedev #bestandroidgame #PlayStore #RT','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-04-24 08:56:45');
+INSERT INTO `tweets` VALUES (18,'Play in good game - #SignsHD\nAvailable in #PlayStore  https://t.co/HGlHul3V19\n#Tooflyainc. #BestAndroidGame #RT','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-04-24 16:56:35');
+INSERT INTO `tweets` VALUES (19,'Our game at the 104th place in #TopNewFreeGames in the category of Brain&amp;Puzzles. Help us to overcome the TOP-100!\nhttps://t.co/HGlHul3V','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-04-26 12:17:10');
+INSERT INTO `tweets` VALUES (20,'WE STARTED EVENT!\nOn 3 days, without rest and sleep\nwork hard - play hard!))\n\"Popcorn mania\" - be ready! http://t.co/V52RJt8oNL','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-05-24 17:50:43');
+INSERT INTO `tweets` VALUES (21,'#PopcornMania almost done!\nYou already want to play?\n#TooflyaInc #GameDev #iOS #Android #Раскрутка http://t.co/znxOPMTbnB','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-05-28 13:49:35');
+INSERT INTO `tweets` VALUES (22,'Free download our android game:\nhttps://t.co/HGlHul3V19\nUkrainian developer-#TooflyaInc\n#Раскрутка #Gamedev #android #game #Ukraine #Kharkov','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-05-31 09:34:11');
+INSERT INTO `tweets` VALUES (23,'Signs HD – игра от харьковской студии Tooflya inc.: http://t.co/6h6JdvWJ4I','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-05-31 13:30:44');
+INSERT INTO `tweets` VALUES (24,'Happy Friday!!!\nHave a great week end!!  It\'s #summer2013!!! Let\'s go!!! http://t.co/Mnq2xpERjO','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-05-31 15:26:19');
+INSERT INTO `tweets` VALUES (25,'#SignsHD - #amazing #android #game!\n#Free #download #right #now https://t.co/HGlHul3V19\n#Tooflya  #gamedev #RT #retweet #gameinsight #follow','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-06-03 09:09:11');
+INSERT INTO `tweets` VALUES (26,'Now we have new artist!\nLook at new design #PopcornMania\n#Tooflya #RT #gamedev #follow #gameinsight #Ukraine #Kharkov http://t.co/gDrwr7WWhZ','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-06-03 16:33:05');
+INSERT INTO `tweets` VALUES (27,'Download and play in very cool game!\nhttp://t.co/YJmZ9g7cj9 http://t.co/udWrpJ0syS','https://si0.twimg.com/profile_images/2758898694/60afb282f1cff33c04c41fc18829f8bb_normal.png','2013-06-05 12:09:16');
 /*!40000 ALTER TABLE `tweets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -512,7 +523,7 @@ CREATE TABLE `tweets_update` (
 
 LOCK TABLES `tweets_update` WRITE;
 /*!40000 ALTER TABLE `tweets_update` DISABLE KEYS */;
-INSERT INTO `tweets_update` VALUES ('2013-04-23 09:10:06');
+INSERT INTO `tweets_update` VALUES ('2013-06-05 20:09:31');
 /*!40000 ALTER TABLE `tweets_update` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -555,4 +566,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-04-23 13:12:55
+-- Dump completed on 2013-06-06  0:34:51
