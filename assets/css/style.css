@@ -457,11 +457,44 @@ section.content div.left {
   float: left;
   margin-top: 82px;
 }
+section.content div.left.promo {
+  width: 300px;
+}
 section.content div.right {
   width: 709px;
   padding-left: 20px;
   float: right;
   background: transparent url(../img/lr.png) top left repeat-y;
+}
+section.content div.right.promo {
+  width: 609px;
+  margin-top: -180px;
+}
+section.content div.right.promo h1 {
+  position: relative;
+  z-index: 500;
+  text-shadow: none;
+  font-weight: bold;
+  font-size: 28px;
+  background-color: #FFF;
+
+  border: 1px #ccc solid;
+  border-right: none;
+  padding: 3px;
+  background-color: #fff;
+  //-moz-box-shadow: 1px 1px 10px #aaa;
+  //-webkit-box-shadow: 1px 1px 10px #AAA;
+  background: white;
+  width: 599px;
+
+  padding-left: 10px;
+}
+section.content div.right.promo img {
+  max-width: 100%;
+}
+section.content div.right.promo p {
+  position: relative;
+  z-index: 500;
 }
 div.information {
   position: relative;
@@ -892,19 +925,19 @@ span.icon a {
   display: block;
 }
 .icon56 {
-  background: transparent url(../img/icons/picons16.png) no-repeat;
+  background: transparent url(../img/icons/16/picons16.png) no-repeat;
 }
 .icon76 {
   margin-left: 28px !important;
-  background: transparent url(../img/icons/picons36.png) no-repeat;
+  background: transparent url(../img/icons/16/picons36.png) no-repeat;
 }
 .icon32 {
   margin-left: 52px !important;
-  background: transparent url(../img/icons/picons32.png) no-repeat;
+  background: transparent url(../img/icons/16/picons32.png) no-repeat;
 }
 .icon27 {
   margin-left: 76px !important;
-  background: transparent url(../img/icons/picons27.png) no-repeat;
+  background: transparent url(../img/icons/16/picons27.png) no-repeat;
 }
 .icon00 {
   width: 40px !important;
@@ -912,5 +945,75 @@ span.icon a {
   margin-left: 76px !important;
   margin-top: 7px !important;
   right: 0;
-  background: transparent url(../img/icons/picons00.png) no-repeat;
+  background: transparent url(../img/icons/16/picons00.png) no-repeat;
+}
+
+span.bicon {
+  display: inline-block;
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  margin-top: 110px;
+  margin-left: 100px;
+  cursor: pointer;
+}
+span.bicon.disable {
+  opacity: 0.1;
+}
+span.bicon.enable {
+  opacity: 0.5;
+}
+span.bicon a {
+  display: block;
+}
+.bicon56 {
+  background: transparent url(../img/icons/32/picons16.png) no-repeat;
+}
+.bicon76 {
+  margin-left: 140px !important;
+  background: transparent url(../img/icons/32/picons36.png) no-repeat;
+}
+.bicon32 {
+  margin-left: 185px !important;
+  background: transparent url(../img/icons/32/picons32.png) no-repeat;
+}
+.bicon27 {
+  margin-left: 230px !important;
+  background: transparent url(../img/icons/32/picons27.png) no-repeat;
+}
+div.blog {
+}
+div.blog div.promo {
+  position: relative;
+  border-top: 1px #ccc solid;
+  padding-top: 20px;
+}
+div.blog div.promo div.banner {
+  text-align: center;
+  position: relative;
+}
+div.blog div.promo div.banner div {
+}
+div.blog div.promo div.banner img.banner {
+  border: 1px #ccc solid;
+  padding: 3px;
+  background-color: #fff;
+  -moz-box-shadow: 1px 1px 10px #aaa;
+  -webkit-box-shadow: 1px 1px 10px #AAA;
+  background: white;
+  width: 100%;
+}
+div.blog div.promo div.banner img.shadow {
+  margin-top: -260px;
+  margin-left: -494px;
+  position: absolute;
+}
+div.blog div.promo div.icon img {
+  position: absolute;
+  margin-top: -160px;
+  margin-left: 50px;
+}
+div.blog-promo-information {
+  padding-top: 170px;
+  padding-left: 80px;
 }

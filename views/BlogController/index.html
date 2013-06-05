@@ -20,7 +20,10 @@
           {l s='Published by'} {$some.job}, <a>{$some.name} {$some.surname}</a> | {$some.date|date_format:"%A, %B %e, %Y"} |
           {if $some.class}<a href="{$url}/blog/{$some.alias}">{$some.class}</a>{else}Not Categorized{/if}</div>
         {assign var=text value="•"|explode:$some.text}
-        <div>{$text[0]}</div>
+        <div>
+          {if $some.promo}<p><img src="http://www.tooflya.com/assets/img/blog/{$some.icon}" alt="" class="blog-img float-left" /></p>{/if}
+          {$text[0]}
+        </div>
         <div><a class="button" href="{$url}/blog/{$some.article_alias}/#cut">{l s='Read more'}</a> <!--and share with friends:--></div>
       </div>
       {if !$smarty.foreach.blog.last}<div class="elements-devider"></div>{/if}
