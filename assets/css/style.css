@@ -522,6 +522,33 @@ ul.sites-list li img {
   margin: 0 auto;
   margin-bottom: 5px;
 }
+div.sites-list {
+  margin-bottom: 20px;
+}
+div.sites-list div {
+  display: inline-block;
+  margin: 0 2px;
+  text-align: left;
+  vertical-align: top;
+  max-width: 635px;
+  position: relative;
+}
+div.sites-list div img {
+  width: 65px;
+  padding: 3px;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+div.sites-list div a {
+  font-size: 20px;
+}
+div.sites-list div p {
+  font-size: 12px;
+  margin: 0;
+  line-height: 16px;
+  min-width: 620px;
+}
 img.image {
   padding: 3px;
   border:1px #CCC solid;
@@ -845,4 +872,45 @@ div.center-slider li {
 }
 div.pre-center-slider {
   position: relative;
+}
+span.icon {
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin-top: 9px;
+  margin-left: 6px;
+  cursor: pointer;
+}
+span.icon.disable {
+  opacity: 0.1;
+}
+span.icon.enable {
+  opacity: 0.5;
+}
+span.icon a {
+  display: block;
+}
+.icon56 {
+  background: transparent url(../img/icons/picons16.png) no-repeat;
+}
+.icon76 {
+  margin-left: 28px !important;
+  background: transparent url(../img/icons/picons36.png) no-repeat;
+}
+.icon32 {
+  margin-left: 52px !important;
+  background: transparent url(../img/icons/picons32.png) no-repeat;
+}
+.icon27 {
+  margin-left: 76px !important;
+  background: transparent url(../img/icons/picons27.png) no-repeat;
+}
+.icon00 {
+  width: 40px !important;
+  height: 40px !important;
+  margin-left: 76px !important;
+  margin-top: 7px !important;
+  right: 0;
+  background: transparent url(../img/icons/picons00.png) no-repeat;
 }
