@@ -7,13 +7,13 @@ while(false!==($row = mysql_fetch_assoc($query)))
     //change this to your email. 
     $to = $row['mail'];
     $from = "compamy@tooflya.com"; 
-    $subject = "Tooflya | You Are Awesome!"; 
+    $subject = "Tooflya | \"Signs HD\" is Available Now!"; 
 
     //begin of HTML message 
     $message = <<<EOF
 <html>
   <head>
-    <title>Tooflya | You Are Amazing!</title>
+    <title>Tooflya | "Signs HD" is Available Now!</title>
   </head>
   <body>
     <table width="100%" cellspacing="0" cellpadding="0">
@@ -44,8 +44,25 @@ while(false!==($row = mysql_fetch_assoc($query)))
                 <tbody>
                   <tr>
                     <td>
-                      <p style="color:#606060;font-family:Arial,Helvetica,sans-serif;font-size:28px;line-height:1;margin:0 0 10px;">You Are Amazing!</p>
-                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">We are thank's you for subscribe to the our official site. Interesting news from the world of mobile innovation, game reviews for the mobile devices, and of course, our new products - all this and many more of you are now able to find in our newsletter. <b>Thank you for being with us</b>.</p>
+                      <p style="color:#606060;font-family:Arial,Helvetica,sans-serif;font-size:28px;line-height:1;margin:0 0 10px;">"Signs HD" is Available Now!</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">We are very pleased to introduce our new game <a target="_blank" href="https://play.google.com/store/apps/details?id=com.tooflya.signs">Signs HD</a> available now on <b>Google Play</b> store.</p>
+                      <p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;"><img src="http://www.tooflya.com/assets/img/blog/cdKb6qlz7J.png" alt="" class="blog-img float-left" />The Signs – New game of Tooflya Inc. will definitely hit to taste of people fond of puzzles.</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">A layout of signs in form of 5х20 eyes opens on the screen; you have to reduce the signs of the same color. Even within the first seconds you will be pleasantly surprised by funny background music of the game!</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;"><br /></p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">You will smile at the sounds of signs reduction!</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;"><img src="http://www.tooflya.com/assets/img/letters/f34dfdg.jpg" alt="" class="blog-img-center" /></p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">Your major task is to reduce as many signs as possible in 1 minute.</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">The game has 3 levels of complexity, the higher the complexity the more colors are added to the layout and that means that it is more difficult to reduce signs. When you have no more variants to reduce and the time has not run out yet – press button ROLL – refilling of the layout,but then you loose your bonus (game score - stars multiplier).</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;"><img src="http://www.tooflya.com/assets/img/letters/g4sdgd.jpg" alt="" class="blog-img-center" /></p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">Gather stars and buy different funny eyes in the shop.</p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">You agreed to meet anybody and your opponent says that he comes 10 minutes late?<br />
+                      <b>With Signs time passes so that you don’t notice!</b></p>
+                      <p></p>
+                      <p><a target="_blank" href="https://play.google.com/store/apps/details?id=com.tooflya.signs">Download Now and Play!</a></p>
+                      <p></p>
+                      </p>
+                      <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;"><b>Thank you for being with us</b>.</p>
                     </td>
                   </tr>
                 </tbody>
@@ -138,6 +155,8 @@ EOF;
      
     // now lets send the email. 
     //mail($to, $subject, $message, $headers); 
+
+    echo $message;
 
     echo $to . '<br />'; 
   }

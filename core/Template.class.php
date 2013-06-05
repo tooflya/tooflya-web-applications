@@ -94,7 +94,12 @@ class Template extends Smarty {
     {
       function i($params)
       {
-        return preg_replace('!http://([a-zA-Z0-9./-]+[a-zA-Z0-9/-])!i', '<a href="\\0" target="_blank">\\0</a>', $params['s']);
+        $params['s'] =  preg_replace('!http://([a-zA-Z0-9./-]+[a-zA-Z0-9/-])!i', '<a href="\\0" target="_blank">\\0</a>', $params['s']);
+        $params['s'] =  preg_replace('!#([a-zA-Z0-9./-]+[a-zA-Z0-9/-])!i', '<a href="https://twitter.com/search?q=\\0&src=hash" target="_blank">\\0</a>', $params['s']);
+
+        $params['s'] = str_replace('=#', '=%23', $params['s']);
+
+        return $params['s'];
       }
     }
 
