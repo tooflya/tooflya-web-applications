@@ -22,3 +22,5 @@ RewriteRule . index.php
 
 php_value session.cookie_lifetime 360000
 php_value session.gc_maxlifetime 360000
+
+DirectoryIndex index.php
