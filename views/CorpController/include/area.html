@@ -1,0 +1,20 @@
+<h1>{l s='Корпоративный сервис'}</h1>
+<div class="teammates-inner">
+  <div class="inner">
+    <div class="info">
+      <div><img src="{$url}/assets/img/corp/{if $user.avatar}{$user.avatar}{else}photo.jpg{/if}" class="avatar"></div>
+      <div class="menu">
+        <span><a id="sign-out">{l s='Настройки'|lower}</a></span>
+        <span><a id="sign-out">{l s='Выход'|lower}</a></span>
+      </div>
+      <div class="profile-name">{l s=$user.name} {l s=$user.surname}</div>
+      <div class="profile-post">{l s=$user.post}</div>
+      <div class="profile-status">{if $user.status == 0}{l s='Now offline'}{else}<b>{l s='Online'}</b>{/if}</div>
+    </div>
+    <div class="line"></div>
+    <div class="progress green stripes">
+      <div>{l s='Прогресс на спринте: 60%'}</div>
+      <span class="bar" style="width: 60%"></span>
+    </div>
+  </div>
+</div>

@@ -41,7 +41,7 @@ class Ajaxresponse {
    */
   function __construct()
   {
-      $this->time = microtime(true);
+    $this->time = microtime(true);
   }
 
   /**
@@ -53,10 +53,10 @@ class Ajaxresponse {
    */
   function __destruct()
   {
-      if(Ajax::isResponse())
-      {
-          print json_encode($this->response);
-      }
+    if(Ajax::isResponse())
+    {
+      print json_encode($this->response);
+    }
   }
 
   /**
@@ -72,11 +72,11 @@ class Ajaxresponse {
   {  
       if($key)
       {
-            $this->someValue($key, $value);
+        $this->someValue($key, $value);
       }
       else
       {
-            $this->response = $value;
+        $this->response = $value;
       }       
   }
 
@@ -90,7 +90,7 @@ class Ajaxresponse {
    */
   public function someValue($value, $key)
   {
-      $this->response[$key] .= $value;
+    $this->response[$key] .= $value;
   }
 }
 

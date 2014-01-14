@@ -51,9 +51,9 @@ if(Ajax::isResponse())
       $response['delsite'] = array();
       $response['updsite'] = array();
 
-      $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".Session::read('id')."' AND `timestamp` > NOW() - 5 AND `received` = '0'");
+      $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".Session::read('user')['id']."' AND `timestamp` > NOW() - 5 AND `received` = '0'");
             
-      while ($data = mysql_fetch_assoc($selectEventsData))
+      while($data = mysql_fetch_assoc($selectEventsData))
       {
         switch($data['type'])
         {
@@ -64,7 +64,7 @@ if(Ajax::isResponse())
             
             while ($sd = mysql_fetch_assoc($senderData))
             {
-              $response['online'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+              $response['online'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
             }
 
           break;
@@ -76,7 +76,7 @@ if(Ajax::isResponse())
             
             while ($sd = mysql_fetch_assoc($senderData))
             {
-              $response['offline'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+              $response['offline'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
             }
 
           break;
@@ -88,7 +88,6 @@ if(Ajax::isResponse())
 
       if(mysql_num_rows($selectEventsData) > 0)
       {
-            
         Ajax::generate()->value("response", json_encode($response));
 
         $eventStatus = true;
@@ -108,7 +107,7 @@ if(Ajax::isResponse())
   }
   else
   {
-    Ajax::generate()->value("response", 2);
+    Ajax::generate()->value("response", 22);
   }
 }
 

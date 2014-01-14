@@ -57,7 +57,7 @@ else
       {
         if(isset($params['path'][4]))
         {
-          $controller->$action(Validate::sql($params['path'][3]));
+          $controller->$action(Validate::sql($params['path'][4]));
         }
         else
         {

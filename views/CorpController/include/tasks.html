@@ -1,0 +1,34 @@
+<h3><b>{l s='Текущие задачи'} ({$tasks|count})</b></h3>
+<div class="teammates-help">
+  <p>
+    {l s='Здесь отображен список задач на текущем спринте'}.
+    {l s='Нажмите на задачу чтобы отобразить более подробную информацию, комментарии и требования'}.
+  </p>
+  <p>
+    {l s='Невыполненные в срок задачи переносятся на следующий спринт'}.
+  </p>
+  <a href="{$url}/corp/help/#completision">{l s='Почему я не могу отменить задачу или пометить ее как выполненную'}?</a>
+</div>
+<ul class="teammates-tasks-list">
+{foreach from=$tasks item=some}
+  <li class="teammates-task">
+    <img src="{$url}/assets/img/corp/task-{$some.type}.png" class="avatar">
+    <div class="profile-post profile-info">
+      {if $some.comments.count > 0}<a class="icon icon-comments" title="{l s='Количество комментариев к данной задаче'}">{$some.comments.count}</a>{/if}
+      {if $some.requirements.count > 0}<a class="icon icon-task" title="{l s='Количество указанных требований'}">{$some.requirements.count}</a>{/if}
+      {if $some.risks.count > 0}<a class="icon icon-risk" title="{l s='Количество предвиденных рисков'}">{$some.risks.count}</a>{/if}
+    </div>
+    <div class="profile-name">
+      {$some.title}
+      <span class="priority">
+        {if $some.priority == 1}<span class="hight">{l s='высокий приоритет'|lower}</span>{/if}
+        {if $some.priority == 2}<span class="middle">{l s='Средний приоритет'|lower}</span>{/if}
+        {if $some.priority == 3}<span class="low">{l s='Низкий приоритет'|lower}</span>{/if}
+      </span>
+    </div>
+    <div class="profile-post">{$some.description|nl2br|truncate:190}</div>
+    <div class="clearfix"></div>
+  </li>
+{/foreach}
+</ul>
+<div class="line"></div>

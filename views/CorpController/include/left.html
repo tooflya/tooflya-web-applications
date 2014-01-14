@@ -1,0 +1,33 @@
+<div class="left nomargin">
+  <div class="classes">
+    <h2>{l s='Сотрудники'}</h2>
+      <div class="teammates-help">
+        <p>{l s='Вы можете просматривать и изменять доски ваших коллег по клику'}.</p>
+        <a href="{$url}/corp/help/#changes">{l s='Ведь и мою доску могут изменить'}?</a>
+      </div>
+      <ul class="teammates-inner-list">
+      {foreach from=$users item=some}
+        <li class="teammates-user {if $user.id == $some.id} my{/if}" data="{$some.id}">
+          <img src="{$url}/assets/img/corp/{if $some.avatar}{$some.avatar}{else}photo.jpg{/if}" class="avatar">
+          <div class="profile-name">{l s=$some.name} {l s=$some.surname}</div>
+          <div class="teammates-info">
+            <div class="profile-post">{l s=$some.post}</div>
+            <div class="profile-online">{if $some.status == 0}{l s='Now offline'}{else}<b>{l s='Online'}</b>{/if}</div>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      {/foreach}
+    </ul>
+    <h3>{l s='История событий'}</h3>
+      <div class="teammates-help">
+        <p>{l s='История событий может показать активность пользователей'}.</p>
+        <a id="show-total-events">{l s='Полная история'} ({$events.count.total})</a><br />
+        <a id="show-user-events">{l s='Моя история'} ({$events.count.user})</a>
+      </div>
+    <h3>{l s='Музыка в офисе'}</h3>
+      <div class="teammates-help">
+        <p>{l s='Музыка в офисе - уникальное решение, чтобы все остались довольны'}.</p>
+        <a href="{$url}/corp/help/#music">{l s='Подробнее о системе'}</a>
+      </div>
+  </div>
+</div>

@@ -25,7 +25,7 @@ if(Validate::isPost())
     if(Session::read('language') != Validate::post('language'))
     {
       $language = Validate::post('language');
-      //Session::write('language', $language);
+      Session::write('language', $language);
 
       $origin = str_replace('/ru', '', $origin);
       $origin = str_replace('/en', '', $origin);

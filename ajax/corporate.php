@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file sites.php
+ * @file permissions.php
  * @category Ajax files
  *
  * @author Igor Mats from Gloryon Kharkov
@@ -21,56 +21,38 @@
  */
 
 require('../config.php');
+require('../languages.php');
 
 if(Ajax::isResponse())
 {
-  $controller = new SitesController();
+  sleep(rand(0, 3));
+
+  $controller = new CorpCommunityController();
 
   switch(Validate::post('type'))
   {
-    default:
-      
-      $controller->information(Validate::post('id'));
+    case "profile":
 
-      $controller->showLayout(true);
-    
+      $controller->showProfile(Validate::post('id'));
+
     break;
 
-    case "add":
-      
-      if($controller->create(Validate::post('address')))
+    case "events":
+
+      if(Validate::post('user'))
       {
-        Ajax::generate()->value("response", 1);
+        $controller->showUserEvents();
       }
       else
       {
-        Ajax::generate()->value("response", 0);
+        $controller->showEvents();
       }
 
     break;
 
-    case "remove":
-      
-      if($controller->remove(Validate::post('id')))
-      {
-        Ajax::generate()->value("response", 1);
-      }
-      else
-      {
-        Ajax::generate()->value("response", 0);
-      }
+    case "add-task":
 
-    break;
-
-    case "find":
-
-      $controller->find(Validate::post('query'), Validate::post('problem'));
-
-    break;
-
-    case "update":
-
-      $controller->update(Validate::post('id'));
+      $controller->addTask();
 
     break;
   }

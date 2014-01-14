@@ -1,0 +1,149 @@
+{include file="CorpController/header.html"}
+<section class="content">
+  {include file="CorpController/include/left.html"}
+  <div class="right">
+  {include file="CorpController/include/area.html"}
+  {include file="CorpController/include/tasks.html"}
+    <div class="teammates-tasks-add">
+      <h3><b>{l s='Управление задачами'}</b></h3>
+      <div class="teammates-help">
+        <p>
+          {l s='Здесь можно добавить задачу на текущий спринт, описать требования и оценить риски'}.
+        </p>
+        <a href="{$url}/corp/help/#sprints-tasks">{l s='Почему нельзя добавлять задачи в ходе спринта'}?</a><br />
+        <a href="{$url}/corp/help/#sprints-time">{l s='Когда начинаются и заканчиваются спринты'}?</a>
+      </div>
+      <a class="button" id="add-task">{l s='Добавить задачу'}</a>
+    </div>
+    <div class="teammates-tasks-add-area">
+      <h3><b>{l s='Добавить задачу'}</b></h3>
+      <div class="teammates-help">
+        <p>
+          {l s='Вы можете добавить не более 10 требований и рисков'}. {l s='В противном случае рекомендуется разбить задачу на подзадачи'}.
+          {l s='Также рекомендутеся писать развернутое описание к поставленной задаче'}.
+        </p>
+      </div>
+      <div class="block">
+        <div class="block"><b>{l s='Первичная информация по задаче'}</b></div>
+        <input type="hidden" id="task-receiver" value="{$user.id}" />
+        <div class="block"><input type="text" id="task-name" placeholder="{l s='Краткое название задачи'}" /></div>
+        <div class="block"><textarea id="task-description" placeholder="{l s='Подробное описание задачи'}"></textarea></div>
+        <div class="block"><b>{l s='Требования по задаче'}</b></div>
+        <div class="teammates-help">
+          <p>
+            {l s='Задач без требований не бывает'}! {l s='Имеено требования к задачам должны оцениваться шкалой сложности'}! {l s='Вы должны добавить <b>как минимум</b> одно требование'}.
+          </p>
+          <a href="{$url}/corp/help/#requirements">{l s='Подробнее о требованиях к задачам'}</a>
+        </div>
+        <div id="requirements"></div>
+        <div class="block"><a id="add-requirements" class="icon icon-add">{l s='Добавить требование по задаче'}</a></div>
+        <div class="block"><b>{l s='Предвиденные риски'}</b></div>
+        <div class="teammates-help">
+          <p>
+            {l s='Предвиденные риски помогают избежать возможных проблем, но не всегда могут быть применими к конкретной задаче'}.
+          </p>
+          <a href="{$url}/corp/help/#risks">{l s='Узнать подробнее о рисках'}</a>
+        </div>
+        <div id="risks"></div>
+        <div class="block"><a id="add-risks" class="icon icon-add">{l s='Добавить риск'}</a></div>
+        <div class="block"><b>{l s='Опциональные настройки'}</b></div>
+        <div class="block">
+          <select id="task-type">
+            <option value="0" disabled selected>{l s='Характер поставленной задачи'}</option>
+            <option value="1">{l s='Задача по графике'}</option>
+            <option value="2">{l s='Задача по программированию'}</option>
+            <option value="3">{l s='Организационная задача'}</option>
+            <option value="4">{l s='Задача финнансового характера'}</option>
+            <option value="5">{l s='Другое'}</option>
+          </select>
+        </div>
+        <div class="block">
+          <select id="task-priority">
+            <option value="0" disabled selected>{l s='Приоритет выполнения задачи'}</option>
+            <option value="1">{l s='Высокий приоритет'}</option>
+            <option value="2">{l s='Средний приоритет'}</option>
+            <option value="3">{l s='Низкий приоритет'}</option>
+          </select>
+        </div>
+      </div>
+      <br />
+      <a class="button" id="save-task">{l s='Сохранить задачу'}</a>
+    </div>
+    <div id="requirements-template" class="template">
+      <div class="line" id="requirements-{literal}${id}{/literal}" data="{literal}${id}{/literal}">
+        <div class="title">
+          <b>{l s='Новое требование'}</b>
+          <span>
+            <a class="remove-requirements icon icon-remove" data="{literal}${id}{/literal}">{l s='Отменить'}</a>
+          </span>
+        </div>
+        <div class="block"><input id="requirement-name-{literal}${id}{/literal}" type="text" placeholder="{l s='Краткое название требования'}" /></div>
+        <div class="block"><textarea id="requirement-description-{literal}${id}{/literal}" placeholder="{l s='Подробное описание требования'}" style="height: 150px"></textarea></div>
+        <div class="teammates-help">
+          <p>
+            {l s='Вам предлагается оценить начальную сложность поставленного требования'}.
+          </p>
+          <a href="{$url}/corp/help/#">{l s='Подробнее о сложности требований'}</a>
+        </div>
+        <div class="block">
+          <select id="requirement-points-{literal}${id}{/literal}">
+            <option value="0" disabled selected>{l s='Сложность поставленного требования'}</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div class="block">
+          <select id="requirement-priority-{literal}${id}{/literal}">
+            <option value="0" disabled selected>{l s='Приоритет поставленного требования'}</option>
+            <option value="1">{l s='Высокий приоритет'}</option>
+            <option value="2">{l s='Средний приоритет'}</option>
+            <option value="3">{l s='Низкий приоритет'}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div id="risks-template" class="template">
+      <div class="line" id="risks-{literal}${id}{/literal}" data="{literal}${id}{/literal}">
+        <div class="title">
+          <b>{l s='Новый риск'}</b>
+          <span>
+            <a class="remove-risks icon icon-remove" data="{literal}${id}{/literal}">{l s='Отменить'}</a>
+          </span>
+        </div>
+        <div class="block"><input id="risk-name-{literal}${id}{/literal}" type="text" placeholder="{l s='Краткое название риска'}" /></div>
+        <div class="block"><textarea id="risk-description-{literal}${id}{/literal}" placeholder="{l s='Подробное описание риска'}" style="height: 150px"></textarea></div>
+        <div class="teammates-help">
+          <p>
+            {l s='Вам предлагается оценить начальную опасность предвиденного риска'}.
+          </p>
+          <a href="{$url}/corp/help/#">{l s='Подробнее об уровне опасности рисков'}</a>
+        </div>
+        <div class="block">
+          <select id="risk-points-{literal}${id}{/literal}">
+            <option value="0" disabled selected>{l s='Опасность предвиденного риска'}</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</section>
+{include file="CorpController/footer.html"}

@@ -1,0 +1,47 @@
+{include file="CorpController/header.html"}
+<section class="content">
+  <div class="left nomargin">
+    <div class="classes">
+      <h2>{l s='Сотрудники'}</h2>
+        <div class="teammates-help">
+          <p>{l s='Для авторизации нажмите на свою учетную запись и введите пароль'}.</p>
+          <a href="{$url}/corp/help/#password">{l s='Я не знаю свой пароль'}</a><br />
+          <a href="{$url}/corp/help/#list">{l s='Меня нет в списке'}</a>
+        </div>
+        <ul class="teammates-list">
+        {foreach from=$users item=some}
+          <li class="sign-in" data-id="{$some.id}">
+            <img src="{$url}/assets/img/corp/{if $some.avatar}{$some.avatar}{else}photo.jpg{/if}" class="avatar">
+            <div class="profile-name">{l s=$some.name} {l s=$some.surname}</div>
+            <div class="teammates-info">
+              <div class="profile-post">{l s=$some.post}</div>
+              <div class="profile-online">{if $some.status == 0}{l s='Now offline'}{else}<b>{l s='Online'}</b>{/if}</div>
+            </div>
+            <div class="teammates-password">
+              <input type="password" id="teammates-password-input-{$some.id}" name="password" value="" placeholder="{l s='Введите пароль'}" />
+            </div>
+            <div class="clearfix"></div>
+          </li>
+        {/foreach}
+      </ul>
+      <a class="button teammates-button">{l s='Войти в сервис'}</a>
+    </div>
+  </div>
+  <div class="right">
+    <h1 id="service">{l s='Корпоративный сервис'}</h1>
+    <h3 id="about">{l s='О сервисе'}</h3>
+    <p>{l s='Вы попали на страницы корпоративного сервиса компании'} <a href="http://www.tooflya.com/">Tooflya Inc.</a></p>
+    <p>
+      {l s='Данный сервис представляет собой сборник различных утилит и вспомогательный инструментов для слаженой работы команды'}.
+      {l s='Для работы с сервисом Вам необходимо авторизироваться в системе'}.
+    </p>
+    <div><img src="{$url}/assets/img/corp/graphs.png" alt="" /></div>
+    <h1 id="attenshion">{l s='Внимание'}</h1>
+    <p>
+      {l s='Данный сервис предназначен для использования сотрудниками компании'}.
+      {l s='Если Вы случайно попали на данную страницу и не являетесь сотрудником компании - пожалуйста покиньте ее'}.
+    </p>
+  </div>
+  <div class="clearfix"></div>
+</section>
+{include file="CorpController/footer.html"}

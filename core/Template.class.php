@@ -33,6 +33,9 @@ class Template extends Smarty {
 
     global $language, $language_iso;
 
+    $language = Session::read('language');
+    $language_iso = Session::read('language_iso');
+
     define('LANGUAGE', $language_iso);
 
     /**
@@ -79,7 +82,7 @@ class Template extends Smarty {
         if(isset($_LANGUAGES[Encode::code($params['s'])]))
           return $_LANGUAGES[Encode::code($params['s'])];
 
-        return /**Encode::code*/($params['s']);
+        return /*Encode::code*/($params['s']);
       }
     }
 
@@ -168,7 +171,7 @@ class Template extends Smarty {
       $results[] = $row;
     }
 
-    $this->assign($name, $results); 
+    $this->assign($name, $results);
   }
   
   /**
@@ -187,7 +190,24 @@ class Template extends Smarty {
     }
 
     $this->assign($name, $results); 
-  } 
+  }
+  
+  /**
+   *
+   * 
+   *
+   */
+   /*public function assign($key, $value)
+   {
+    if($this->tpl_vars[$key]) // TODO: Add merge values.
+    {
+      parent::assign($key, $value);
+    }
+    else
+    {
+      parent::assign($key, $value);
+    }
+   }*/
 }
 
 /**

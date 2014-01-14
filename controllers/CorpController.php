@@ -22,7 +22,6 @@ class CorpController extends BaseController
 {
 
   private $corpCommunityController;
-  private $corpEventsController;
 
   /**
    *
@@ -34,10 +33,6 @@ class CorpController extends BaseController
     parent::__construct();
 
     $this->corpCommunityController = new CorpCommunityController();
-    $this->corpCommunityController->assignUsersList();
-
-    $this->corpEventsController = new CorpEventsController();
-    $this->corpEventsController->getHistory();
   }
 
   /**
@@ -57,14 +52,44 @@ class CorpController extends BaseController
    */
   public function indexAction()
   {
-    if(Session::user())
+    $this->corpCommunityController->showProfile(Session::read('user')['id']);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function userAction($id = false)
+  {
+    $this->corpCommunityController->showProfile($id ? $id : Session::read('user')['id']);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function eventsAction($user = false)
+  {
+    if($user)
     {
-      $this->templates->display('CorpController/base/');
+      $this->corpCommunityController->showUserEvents();
     }
     else
     {
-      $this->templates->display($this->name);
+      $this->corpCommunityController->showEvents();
     }
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function helpAction()
+  {
+    $this->templates->display('CorpController', 'help');
   }
 }
 

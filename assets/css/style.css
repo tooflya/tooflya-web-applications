@@ -143,7 +143,6 @@ a:hover {
   border-radius: 2px;
   cursor: pointer;    height: 28px;
   line-height: 28px;
-  margin-right: 16px;
   font-weight: 400;
   min-width: 54px;
   outline: 0;
@@ -274,7 +273,7 @@ header div.content ul.menu li a:hover, header div.content ul.menu li a.active  {
   color: #33B5E5;
 }
 footer {
-  background: #FFF url(../img/stripes.png);
+  background: #ffffff;
   border-top: 1px #ccc solid;
   clear: both;
 }
@@ -651,7 +650,6 @@ div.classes div a {
   transition: all linear 0.2s;
 }
 div.classes div a:hover {
-  padding-left: 10px;
   text-decoration: none;
 }
 div.blog div.info {
@@ -803,7 +801,7 @@ border: 1px solid #CCC;
 -moz-border-radius: 3px;
 border-radius: 3px;
 }
-input[type=text].error, input[type=password].error
+input[type=text].error, input[type=password].error, select.error
 {
     color: #B94A48;
     border-color: #EE5F5B;
@@ -1016,4 +1014,413 @@ div.blog div.promo div.icon img {
 div.blog-promo-information {
   padding-top: 170px;
   padding-left: 80px;
+}
+
+div.events {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+div.event {
+  background-color: #FFFFFF;
+  border: 1px solid #EEE;
+  border-top: 1px solid #00AEEF;
+  padding: 9px 19px 9px 2px;
+  cursor: pointer;
+  display: none;
+  margin-top: 20px;
+  min-width: 250px;
+  line-height: 14px;
+}
+div.event div.profile-name {
+  margin-top: 5px;
+  color: #00AEEF;
+  font-size: 14px;
+  padding: 0;
+}
+div.event div.profile-post {
+  color: #ccc;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 10px;
+  font-weight: 400;
+}
+div.event div.profile {
+  margin-top: 10px;
+  color: #999;
+  padding: 0;
+}
+div.event img.avatar {
+  float: left;
+  margin: 5px;
+}
+
+div.teammates-inner {
+  position: relative;
+}
+div.teammates-inner div.info {
+  line-height: 19px;
+}
+div.teammates-inner div.menu {
+  font-size: 12px;
+  font-weight: 500;
+  position: absolute;
+  right: 10px;
+  top: 2px;
+}
+ul.teammates-list, ul.teammates-inner-list, ul.teammates-tasks-list {
+  list-style-type: none;
+  list-style-image: none;
+  line-height: 18px;
+}
+ul.teammates-list li, ul.teammates-inner-list li, ul.teammates-tasks-list li {
+  margin: 0px 0px 10px 0px;
+  padding: 3px;
+  cursor: pointer;
+}
+ul.teammates-inner-list li.my {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+ul.teammates-list li:hover, ul.teammates-inner-list li:hover, ul.teammates-tasks-list li:hover {
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+ul.teammates-list img.avatar, ul.teammates-inner-list img.avatar, ul.teammates-tasks-list img.avatar {
+  float: left;
+  margin: 0px 5px 0px 0px;
+  padding: 3px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+}
+ul.teammates-tasks-list img.avatar {
+  border-radius: 10px;
+}
+ul.teammates-list div.profile-name, ul.teammates-inner-list div.profile-name, div.teammates-inner div.profile-name, ul.teammates-tasks-list div.profile-name {
+  color: #197EAD;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 12px;
+  font-weight: 500;
+}
+ul.teammates-list div.profile-post, ul.teammates-inner-list div.profile-post, div.teammates-inner div.profile-post {
+  white-space: nowrap;
+}
+ul.teammates-list div.profile-post, ul.teammates-inner-list div.profile-post, div.teammates-inner div.profile-post, ul.teammates-tasks-list div.profile-post {
+  color: #ccc;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 12px;
+  font-weight: 400;
+}
+ul.teammates-list div.profile-online, ul.teammates-inner-list div.profile-online, div.teammates-inner div.profile-online, div.teammates-inner div.profile-status, ul.teammates-tasks-list div.profile-status {
+  color: #ccc;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 12px;
+  font-weight: 400;
+}
+ul.teammates-tasks-list li {
+  position: relative;
+}
+ul.teammates-tasks-list li a.icon {
+  color: #ccc;
+}
+ul.teammates-tasks-list div.profile-info {
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+ul.teammates-tasks-list li span.priority {
+}
+ul.teammates-tasks-list li span.priority span {
+  font-size: 10px;
+  padding: 0px 5px;
+  border-radius: 6px;
+  text-shadow: none;
+  font-weight: 900;
+  color: #fff;
+  text-align: center;
+}
+ul.teammates-tasks-list li span.priority span.hight {
+  background-color: red;
+}
+ul.teammates-tasks-list li span.priority span.middle {
+  background-color: yellow;
+  color: #aaa;
+}
+ul.teammates-tasks-list li span.priority span.low {
+  background-color: green;
+}
+div.teammates-help {
+  color: #ccc;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  margin-bottom: 15px;
+}
+div.teammates-help a {
+  text-shadow: #fff 0 2px 2px !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  line-height: 14px !important;
+}
+a.teammates-button {
+  display: block;
+  margin: 0 auto;
+  padding: 3px 0px 3px 0px;
+  margin-top: 30px;
+}
+.teammates-blur {
+  -webkit-filter: blur(1px);
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+div.teammates-info {
+  margin: 0 !important;
+}
+div.teammates-password {
+  display: none;
+}
+div.teammates-password input {
+  width: 110px;
+  height: 15px;
+  padding: 4px;
+  font-size: 13px;
+  line-height: 18px;
+  color: gray;
+  border: 1px solid #CCC;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 11px;
+}
+div.teammates-inner {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+div.teammates-inner img.avatar {
+  float: left;
+  margin: 0px 5px 0px 0px;
+  padding: 3px;
+  background-color: #ebf0f0;
+  border-radius: 5px;
+  width: 50px;
+  height: 50px;
+}
+div.line {
+  border-top: 1px #ccc solid;
+  padding: 5px;
+  margin: 0 auto;
+  margin-top: 10px;
+  width: 90%;
+}
+
+div.progress {
+  position: relative;
+  background-color: #1a1a1a;
+  height: 25px;
+  padding: 2px;
+  width: 80%;
+  margin: 0px auto;     
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+  -webkit-box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+  box-shadow: 0 1px 5px #000 inset, 0 1px 0 #444;
+}
+div.progress span {
+  display: inline-block;
+  height: 100%; 
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+  -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, .5) inset;
+  -webkit-transition: width .4s ease-in-out;
+  -moz-transition: width .4s ease-in-out;
+  -ms-transition: width .4s ease-in-out;
+  -o-transition: width .4s ease-in-out;
+  transition: width .4s ease-in-out;
+}
+div.progress div {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  text-shadow: none;
+  color: #fff;
+}
+.blue span {
+  background-color: #34c2e3;
+}
+.orange span {
+  background-color: #fecf23;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fecf23), to(#fd9215));
+  background-image: -webkit-linear-gradient(top, #fecf23, #fd9215);
+  background-image: -moz-linear-gradient(top, #fecf23, #fd9215);
+  background-image: -ms-linear-gradient(top, #fecf23, #fd9215);
+  background-image: -o-linear-gradient(top, #fecf23, #fd9215);
+  background-image: linear-gradient(top, #fecf23, #fd9215);  
+} 
+.green span {
+  background-color: #a5df41;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#a5df41), to(#4ca916));
+  background-image: -webkit-linear-gradient(top, #a5df41, #4ca916);
+  background-image: -moz-linear-gradient(top, #a5df41, #4ca916);
+  background-image: -ms-linear-gradient(top, #a5df41, #4ca916);
+  background-image: -o-linear-gradient(top, #a5df41, #4ca916);
+  background-image: linear-gradient(top, #a5df41, #4ca916);
+}
+.stripes span {
+  -webkit-background-size: 30px 30px;
+  -moz-background-size: 30px 30px;
+  background-size: 30px 30px;
+  background-image: -webkit-gradient(linear, left top, right bottom,
+  color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent),
+  color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)),
+  color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent),
+  to(transparent));
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+  transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+  transparent 75%, transparent);
+  background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+  transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+  transparent 75%, transparent);
+  background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+  transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+  transparent 75%, transparent);
+  background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+  transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+  transparent 75%, transparent);
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+  transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+  transparent 75%, transparent);
+  -webkit-animation: animate-stripes 3s linear infinite;
+  -moz-animation: animate-stripes 3s linear infinite;
+}
+@-webkit-keyframes animate-stripes {
+  0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+@-moz-keyframes animate-stripes {
+  0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+div.teammates-tasks-add-area {
+  display: none;
+}
+div.teammates-tasks-add-area div.block {
+  margin-bottom: 10px;
+}
+div.teammates-tasks-add-area input {
+  width: 80%;
+}
+div.teammates-tasks-add-area textarea {
+  width: 80%;
+  height: 300px;
+}
+
+.icon {
+  display: inline-block;
+  padding: 5px 10px 5px 20px;
+}
+.icon.icon-add {
+  background: transparent url('../img/add.png') left center no-repeat;
+}
+.icon.icon-remove {
+  background: transparent url('../img/remove.png') left center no-repeat;
+}
+.icon.icon-comments {
+  background: transparent url('../img/comments.png') left center no-repeat;
+}
+.icon.icon-task {
+  background: transparent url('../img/task.png') left center no-repeat;
+}
+.icon.icon-risk {
+  background: transparent url('../img/risk.png') left center no-repeat;
+}
+.icon.icon-time {
+  background: transparent url('../img/time.png') left center no-repeat;
+}
+.icon.icon-mark-green {
+  background: transparent url('../img/mark-green.png') left center no-repeat;
+}
+.icon.icon-mark-red {
+  background: transparent url('../img/mark-red.png') left center no-repeat;
+}
+
+ul.events-list {
+  list-style-type: none;
+  list-style-image: none;
+}
+ul.events-list li {
+  position: relative;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 19px;
+}
+ul.events-list li:hover {
+  background-color: #ffffff;
+}
+ul.events-list li img.avatar {
+  width: 32px;
+  float: left;
+  margin: 0px 5px 0px 0px;
+  padding: 3px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+ul.events-list li img.event {
+  margin: 0px 2px 0px 0px;
+  padding: 0px;
+  width: 38px;
+}
+ul.events-list li div.time {
+  position: absolute;
+  right: 5px;
+  color: #ccc;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: right;
+  background-position: left 5px !important;
+  min-width: 130px;
+}
+ul.events-list li div.name {
+  color: #197EAD;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-block
+}
+ul.events-list li div.avatar {
+  float: left;
+}
+ul.events-list li div.post {
+  color: #ccc;
+  text-shadow: #fff 0 2px 2px;
+  font-size: 12px;
+  font-weight: 400;
+}
+ul.events-list li div.block {
+}
+
+.template {
+  display: none;
+}
+.line .title span {
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+.line {
+  position: relative;
 }

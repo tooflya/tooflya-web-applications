@@ -26,6 +26,18 @@ class CorpEventsController extends BaseController
    *
    *
    */
+  public function __construct()
+  {
+    parent::__construct();
+
+    $this->assignCounts();
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function indexAction()
   {
   }
@@ -35,16 +47,37 @@ class CorpEventsController extends BaseController
    *
    *
    */
-  public function getHistory()
+  public function assignCounts()
   {
+    $id = Session::read('user')['id'];
+
     $eventsInformation = array();
-    $getSitesInformation = mysql_query("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) WHERE `events`.`sender` != '" . Session::read('id') . "' GROUP by `events`.`timestamp` ORDER by `events`.`id` DESC");
-    while ($data = mysql_fetch_assoc($getSitesInformation))
-    {
-      $eventsInformation[] = $data;
-    }
+    $eventsInformation['count']['total'] = mysql_num_rows(mysql_query("SELECT * FROM `events` GROUP by `events`.`timestamp`"));
+    $eventsInformation['count']['user'] = mysql_num_rows(mysql_query("SELECT * FROM `events` WHERE `sender` = '$id' GROUP by `events`.`timestamp`"));
 
     $this->templates->assign('events', $eventsInformation);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function assignEvents()
+  {
+    $this->templates->assign('yesterday', strtotime('-1 day'));
+    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function assignUserEvents()
+  {
+    $this->templates->assign('yesterday', strtotime('-1 day'));
+    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) WHERE `events`.`sender` = ".Session::read('user')['id']." GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
   }
 }
 

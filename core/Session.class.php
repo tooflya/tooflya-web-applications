@@ -27,7 +27,7 @@ class Session {
    */
   public static function user()
   {
-    if(self::read('id'))
+    if(self::read('user'))
     {
         return true;
     }

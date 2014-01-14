@@ -1,0 +1,56 @@
+{include file="CorpController/header.html"}
+<section class="content">
+  {include file="CorpController/include/left.html"}
+  <div class="right">
+    <h1>{l s='История событий'}</h1>
+    <div>
+      <ul class="events-list">
+        <li><h3><b>{l s='Сегодня'}</b> ({$smarty.now|date_format:"%e"} {l s=$smarty.now|date_format:"%b"})</h3></li>
+        {assign var="today" value="0"}
+        {foreach from=$eventslist item=some}
+        {if $today == 0}{if $yesterday|date_format:"%e" == $some.timestamp|date_format:"%e"}{assign var="today" value=$today + 1}{/if}{/if}
+        {if $today == 2}{if $smarty.now|date_format:"%e" != $some.timestamp|date_format:"%e"}{assign var="today" value=$today + 1}{/if}{/if}
+        {if $today == 1}
+        <li><h3><b>{l s='Вчера'}</b></h3></li>
+        {assign var="today" value=$today + 1}
+        {/if}
+        {if $today == 3}
+        <li><h3><b>{l s='Прошлые события'}</b></h3></li>
+        {assign var="today" value=$today + 1}
+        {/if}
+          <li>
+            {if $today > 0}
+            <div class="block time icon icon-time">
+              {l s=$some.timestamp|date_format:"%A"}, 
+              {$some.timestamp|date_format:"%e"} {l s=$some.timestamp|date_format:"%b"}<br />
+              {l s='at'} 
+              {$some.timestamp|date_format:'%H:%M'}
+            </div>
+            {else}
+            <div class="block time">
+              {$some.timestamp|date_format:'%H:%M'}
+            </div>
+            {/if}
+            <div class="block avatar">
+              <img src="{$url}/assets/img/event-{$some.type}.png" class="avatar event">
+            </div>
+            <div class="block avatar">
+              <img src="{$url}/assets/img/corp/{if $some.avatar}{$some.avatar}{else}photo.jpg{/if}" class="avatar">
+            </div>
+            <div class="block name" style="min-width: 200px">{l s=$some.name} {l s=$some.surname}</div>
+            <div class="block name">
+              <b>
+                {if $some.type == 1}{l s='Пользователь вошел в систему'}{/if}
+                {if $some.type == 2}{l s='Пользователь вышел из системы'}{/if}
+              </b>
+            </div>
+            <div class="block post">{l s=$some.post}</div>
+            <div class="clearfix"></div>
+          </li>
+        {/foreach}
+      </ul>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</section>
+{include file="CorpController/footer.html"}
