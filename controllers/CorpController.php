@@ -52,7 +52,9 @@ class CorpController extends BaseController
    */
   public function indexAction()
   {
-    $this->corpCommunityController->showProfile(Session::read('user')['id']);
+    $user = Session::read('user');
+
+    $this->corpCommunityController->showProfile($user['id']);
   }
 
   /**
