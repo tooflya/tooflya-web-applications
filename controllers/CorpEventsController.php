@@ -49,7 +49,9 @@ class CorpEventsController extends BaseController
    */
   public function assignCounts()
   {
-    $id = Session::read('user')['id'];
+    $user = Session::read('user');
+
+    $id = $user['id'];
 
     $eventsInformation = array();
     $eventsInformation['count']['total'] = mysql_num_rows(mysql_query("SELECT * FROM `events` GROUP by `events`.`timestamp`"));
@@ -76,8 +78,10 @@ class CorpEventsController extends BaseController
    */
   public function assignUserEvents()
   {
+    $user = Session::read('user');
+
     $this->templates->assign('yesterday', strtotime('-1 day'));
-    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) WHERE `events`.`sender` = ".Session::read('user')['id']." GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
+    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) WHERE `events`.`sender` = ".$user['id']." GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
   }
 }
 
