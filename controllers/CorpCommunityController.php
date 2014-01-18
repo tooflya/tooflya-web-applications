@@ -80,7 +80,8 @@ class CorpCommunityController extends BaseController
    */
   public function assignUserData()
   {
-    $id = Session::read('user')['id'];
+    $user = Session::read('user');
+    $id = $user['id'];
 
     $this->templates->assign_element("SELECT * FROM `corp_users` WHERE `id` = '$id'", 'user');
   }
@@ -188,7 +189,8 @@ class CorpCommunityController extends BaseController
   {
     if(EVENTS)
     {
-      $id = Session::read('user')['id'];
+      $user = Session::read('user');
+      $id = $user['id'];
 
       $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
       
@@ -255,7 +257,8 @@ class CorpCommunityController extends BaseController
       {
         if(Ajax::isResponse())
         {
-          $this->showProfile(Session::read('user')['id']);
+          $user = Session::read('user');
+          $this->showProfile($user['id']);
         }
         else
         {
@@ -404,7 +407,8 @@ class CorpCommunityController extends BaseController
 
           if(EVENTS)
           {
-            $id = Session::read('user')['id'];
+            $user = Session::read('user');
+            $id = $user['id'];
 
             $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
             
@@ -439,7 +443,9 @@ class CorpCommunityController extends BaseController
     {
       if(Ajax::isResponse())
       {
-        $sender = Session::read('user')['id'];
+        $user = Session::read('user');
+
+        $sender = $user['id'];
         $receiver = Validate::post('id');
 
         $title = Validate::post('name');
@@ -506,7 +512,8 @@ class CorpCommunityController extends BaseController
         {
           if(EVENTS)
           {
-            $id = Session::read('user')['id'];
+            $user = Session::read('user');
+            $id = $user['id'];
 
             $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
             
@@ -523,7 +530,8 @@ class CorpCommunityController extends BaseController
         {
           if(EVENTS)
           {
-            $id = Session::read('user')['id'];
+            $user = Session::read('user');
+            $id = $user['id'];
 
             $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
             
@@ -554,7 +562,9 @@ class CorpCommunityController extends BaseController
         $sender = mysql_result(mysql_query("SELECT `sender` FROM `corp_tasks` WHERE `id` = '$id'"), 0);
         $receiver = mysql_result(mysql_query("SELECT `receiver` FROM `corp_tasks` WHERE `id` = '$id'"), 0);
 
-        if($sender == Session::read('user')['id'])
+        $user = Session::read('user');
+
+        if($sender == $user['id'])
         {
           mysql_query("DELETE FROM `corp_tasks` WHERE `id` = '$id'");
           mysql_query("DELETE FROM `corp_tasks_requirements` WHERE `tid` = '$id'");
@@ -563,7 +573,7 @@ class CorpCommunityController extends BaseController
           if(!$edit)
           if(EVENTS)
           {
-            $id = Session::read('user')['id'];
+            $id = $user['id'];
 
             $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
             

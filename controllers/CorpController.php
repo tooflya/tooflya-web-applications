@@ -64,7 +64,9 @@ class CorpController extends BaseController
    */
   public function userAction($id = false)
   {
-    $this->corpCommunityController->showProfile($id ? $id : Session::read('user')['id']);
+    $user = Session::read('user');
+
+    $this->corpCommunityController->showProfile($id ? $id : $user['id']);
   }
 
   /**
