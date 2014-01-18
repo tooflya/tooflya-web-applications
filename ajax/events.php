@@ -32,7 +32,7 @@
  * 5 - SOME SITE WAS UPDATED
  *
  */
-sleep(3);
+
 require('../config.php');
 
 if(Ajax::isResponse())
@@ -40,18 +40,18 @@ if(Ajax::isResponse())
   if(Session::user())
   {
     $eventStatus = false;
-    $eventLoopCount = 0;
+    $eventLoopCount = 1;
 
-    while(/**!$eventStatus or **/$eventLoopCount < 1)
+    while(!$eventStatus and $eventLoopCount > 0)
     {
       $response = array();
       $response['online'] = array();
       $response['offline'] = array();
-      $response['newsite'] = array();
-      $response['delsite'] = array();
-      $response['updsite'] = array();
+      $response['add-task'] = array();
+      $response['edit-task'] = array();
+      $response['delete-task'] = array();
 
-      $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".Session::read('user')['id']."' AND `timestamp` > NOW() - 5 AND `received` = '0'");
+      $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".Session::read('user')['id']."' AND `timestamp` > NOW() - 5 AND `received` = '0' GROUP by `timestamp`");
             
       while($data = mysql_fetch_assoc($selectEventsData))
       {
@@ -62,7 +62,7 @@ if(Ajax::isResponse())
 
             $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
             
-            while ($sd = mysql_fetch_assoc($senderData))
+            while($sd = mysql_fetch_assoc($senderData))
             {
               $response['online'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
             }
@@ -74,9 +74,93 @@ if(Ajax::isResponse())
 
             $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
             
-            while ($sd = mysql_fetch_assoc($senderData))
+            while($sd = mysql_fetch_assoc($senderData))
             {
               $response['offline'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is added task
+          case 3:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['add-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is remove task
+          case 4:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['remove-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is edit task
+          case 5:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['edit-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is start do check task
+          case 6:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['start-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is send to check task
+          case 7:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['check-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is cancel cechking task
+          case 8:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['cancel-checking-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
+            }
+
+          break;
+
+          // User is complete task
+          case 10:
+
+            $senderData = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '".$data['sender']."'");
+            
+            while($sd = mysql_fetch_assoc($senderData))
+            {
+              $response['complete-task'][] = array('eventID' => $data['id'], 'id' => $sd['id'], 'name' => $sd['name'], 'surname' => $sd['surname'], 'post' => $sd['post'], 'avatar' => $sd['avatar'], 'sex' => $sd['sex']);
             }
 
           break;
@@ -94,10 +178,10 @@ if(Ajax::isResponse())
       }
       else
       {
-        // sleep(1);
-      }
+        //sleep(1);
       
-      $eventLoopCount++;
+        $eventLoopCount--;
+      }
     }
 
     if(!$eventStatus)

@@ -174,6 +174,87 @@ p.button-link {
 p.button-link a {
   font-size: 14px;
 }
+.button.important {
+  background-color: #e80000;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f37777), to(#e80000));
+  background-image: -webkit-linear-gradient(top, #f37777, #e80000);
+  background-image: -moz-linear-gradient(top, #f37777, #e80000);
+  background-image: -ms-linear-gradient(top, #f37777, #e80000);
+  background-image: -o-linear-gradient(top, #f37777, #e80000);
+  background-image: linear-gradient(top, #f37777, #e80000);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f37777', EndColorStr='#e80000',GradientType=0);
+  border: 1px #ff4800 solid;
+}
+.button.important:hover {
+  background-color: #ec4f4f;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ff5555), to(#ec4f4f));
+  background-image: -webkit-linear-gradient(top, #ff5555, #ec4f4f);
+  background-image: -moz-linear-gradient(top, #ff5555, #ec4f4f);
+  background-image: -ms-linear-gradient(top, #ff5555, #ec4f4f);
+  background-image: -o-linear-gradient(top, #ff5555, #ec4f4f);
+  background-image: linear-gradient(top, #ff5555, #ec4f4f);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ff5555', EndColorStr='#ec4f4f',GradientType=0);
+  border: 1px #ff4800 solid;
+}
+.button.important:active {
+  background-color: #a70c0c;
+  background-image: none;
+  border-color: #ff2323;
+}
+.button.success {
+  background-color: #349662;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#00c45c), to(#349662));
+  background-image: -webkit-linear-gradient(top, #00c45c, #349662);
+  background-image: -moz-linear-gradient(top, #00c45c, #349662);
+  background-image: -ms-linear-gradient(top, #00c45c, #349662);
+  background-image: -o-linear-gradient(top, #00c45c, #349662);
+  background-image: linear-gradient(top, #00c45c, #349662);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#00c45c', EndColorStr='#349662',GradientType=0);
+  border: 1px #349662 solid;
+}
+.button.success:hover {
+  background-color: #41b578;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#41b578), to(#41b578));
+  background-image: -webkit-linear-gradient(top, #41b578, #41b578);
+  background-image: -moz-linear-gradient(top, #41b578, #41b578);
+  background-image: -ms-linear-gradient(top, #41b578, #41b578);
+  background-image: -o-linear-gradient(top, #41b578, #41b578);
+  background-image: linear-gradient(top, #41b578, #41b578);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#41b578', EndColorStr='#41b578',GradientType=0);
+  border: 1px #349662 solid;
+}
+.button.success:active {
+  background-color: #147e46;
+  background-image: none;
+  border-color: #147e46;
+}
+.button.warning {
+  background-color: #f1c415;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f1e415), to(#f1c415));
+  background-image: -webkit-linear-gradient(top, #f1e415, #f1c415);
+  background-image: -moz-linear-gradient(top, #f1e415, #f1c415);
+  background-image: -ms-linear-gradient(top, #f1e415, #f1c415);
+  background-image: -o-linear-gradient(top, #f1e415, #f1c415);
+  background-image: linear-gradient(top, #f1e415, #f1c415);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1e415', EndColorStr='#f1c415',GradientType=0);
+  border: 1px #f1bf00 solid;
+}
+.button.warning:hover {
+  background-color: #f1dc25;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f1dc25), to(#f1dc25));
+  background-image: -webkit-linear-gradient(top, #f1dc25, #f1dc25);
+  background-image: -moz-linear-gradient(top, #f1dc25, #f1dc25);
+  background-image: -ms-linear-gradient(top, #f1dc25, #f1dc25);
+  background-image: -o-linear-gradient(top, #f1dc25, #f1dc25);
+  background-image: linear-gradient(top, #f1dc25, #f1dc25);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1dc25', EndColorStr='#f1dc25',GradientType=0);
+  border: 1px #f1bf00 solid;
+}
+.button.warning:active {
+  background-color: #f1c93e;
+  background-image: none;
+  border-color: #f1bf00;
+}
 .presentation {
   width: 400px;
   margin-left: 20px;
@@ -186,7 +267,7 @@ header {
 header div.logo {
   width: 160px;
   height: 56px;
-  margin-top: -5px;
+  padding-top: 5px;
   position: absolute;
 }
 header div.logo div.logo-text {
@@ -247,9 +328,13 @@ header div.logo a {
 header div.logo:active {
   margin-top: -4px;
 }
+header {
+  border-top: 1px solid #00AEEF;
+  background: #fff;
+  border-bottom: 1px #ccc solid;
+}
 header div.content {
   position: relative;
-  padding: 10px 0;
 }
 header div.content ul.menu {
   float: right;
@@ -257,7 +342,7 @@ header div.content ul.menu {
 }
 header div.content ul.menu li {
   display: inline-block;
-  padding: 10px 10px;
+  padding: 20px 10px;
 }
 header div.content ul.menu li a {
   text-decoration: none;
@@ -1020,6 +1105,7 @@ div.events {
   position: fixed;
   bottom: 20px;
   left: 20px;
+  z-index: 5000;
 }
 div.event {
   background-color: #FFFFFF;
@@ -1054,18 +1140,39 @@ div.event img.avatar {
   margin: 5px;
 }
 
+div.teammates-inner div.sprints ul {
+  list-style-type: none;
+  list-style-image: none;
+  white-space: nowrap;
+}
+div.teammates-inner div.sprints ul li {
+  display: block;
+  height: 13px;
+  padding: 0;
+  margin: 0;
+  float: left;
+  position: relative;
+  cursor: pointer;
+}
+div.teammates-inner div.sprints ul li span {
+  display: block;
+  width: 100%;
+  height: 13px !important;
+}
+div.teammates-inner div.sprints ul li.success {
+  background-color: #a5df41;
+}
+div.teammates-inner div.sprints ul li.normal {
+  background-color: #fecf23;
+}
+div.teammates-inner div.sprints ul li.failed {
+  background-color: #ffaaaa;
+}
 div.teammates-inner {
   position: relative;
 }
 div.teammates-inner div.info {
   line-height: 19px;
-}
-div.teammates-inner div.menu {
-  font-size: 12px;
-  font-weight: 500;
-  position: absolute;
-  right: 10px;
-  top: 2px;
 }
 ul.teammates-list, ul.teammates-inner-list, ul.teammates-tasks-list {
   list-style-type: none;
@@ -1076,14 +1183,15 @@ ul.teammates-list li, ul.teammates-inner-list li, ul.teammates-tasks-list li {
   margin: 0px 0px 10px 0px;
   padding: 3px;
   cursor: pointer;
+  border-top: 1px solid transparent;
 }
 ul.teammates-inner-list li.my {
   background-color: #ffffff;
-  border-radius: 5px;
+  border-top: 1px solid #00AEEF;
 }
 ul.teammates-list li:hover, ul.teammates-inner-list li:hover, ul.teammates-tasks-list li:hover {
   background-color: #ffffff;
-  border-radius: 5px;
+  border-top: 1px solid #00AEEF;
 }
 ul.teammates-list img.avatar, ul.teammates-inner-list img.avatar, ul.teammates-tasks-list img.avatar {
   float: left;
@@ -1131,9 +1239,9 @@ ul.teammates-tasks-list div.profile-info {
   font-weight: 600;
   margin-bottom: 10px;
 }
-ul.teammates-tasks-list li span.priority {
+span.priority {
 }
-ul.teammates-tasks-list li span.priority span {
+span.priority span {
   font-size: 10px;
   padding: 0px 5px;
   border-radius: 6px;
@@ -1142,14 +1250,14 @@ ul.teammates-tasks-list li span.priority span {
   color: #fff;
   text-align: center;
 }
-ul.teammates-tasks-list li span.priority span.hight {
+span.priority span.hight {
   background-color: red;
 }
-ul.teammates-tasks-list li span.priority span.middle {
+span.priority span.middle {
   background-color: yellow;
   color: #aaa;
 }
-ul.teammates-tasks-list li span.priority span.low {
+span.priority span.low {
   background-color: green;
 }
 div.teammates-help {
@@ -1201,7 +1309,7 @@ div.teammates-password input {
 }
 div.teammates-inner {
   background-color: #ffffff;
-  border-radius: 5px;
+  border-top: 1px solid #00AEEF;
   padding: 5px;
   margin-bottom: 20px;
 }
@@ -1312,16 +1420,16 @@ div.progress div {
 @-moz-keyframes animate-stripes {
   0% {background-position: 0 0;} 100% {background-position: 60px 0;}
 }
-div.teammates-tasks-add-area {
+div.teammates-tasks-add-area, div.teammates-tasks-edit-area {
   display: none;
 }
-div.teammates-tasks-add-area div.block {
+div.teammates-tasks-add-area div.block, div.teammates-tasks-edit-area div.block {
   margin-bottom: 10px;
 }
-div.teammates-tasks-add-area input {
+div.teammates-tasks-add-area input, div.teammates-tasks-edit-area input {
   width: 80%;
 }
-div.teammates-tasks-add-area textarea {
+div.teammates-tasks-add-area textarea, div.teammates-tasks-edit-area textarea {
   width: 80%;
   height: 300px;
 }
@@ -1361,13 +1469,14 @@ ul.events-list {
 }
 ul.events-list li {
   position: relative;
+  border-top: 1px solid transparent;
   padding: 5px;
-  border-radius: 5px;
   cursor: pointer;
   line-height: 19px;
 }
 ul.events-list li:hover {
   background-color: #ffffff;
+  border-top: 1px solid #00AEEF;
 }
 ul.events-list li img.avatar {
   width: 32px;
@@ -1423,4 +1532,56 @@ ul.events-list li div.block {
 }
 .line {
   position: relative;
+}
+div.teammates-inner div.menu ul {
+  float: right;
+}
+div.teammates-inner div.menu ul li {
+  display: inline-block;
+}
+div.teammates-inner div.menu ul li:hover {
+  background-color: #ebf0f0;
+}
+div.teammates-inner div.menu ul li a {
+  padding: 0 10px;
+}
+p.status {
+  font-weight: 800;
+}
+div.task-status div {
+  margin: 0 auto;
+}
+p.status .warning {
+  color: #eabc1e;
+}
+p.status .success {
+  color: #41b578;
+}
+p.status .important {
+  color: red;
+}
+div.task > div.info {
+  padding-bottom: 10px;
+}
+div.task div.info, div.task div.info a {
+  font-size: 12px;
+}
+div.task div.info b {
+  color: #ccc;
+}
+div.task div.info p {
+  margin: 0;
+}
+ul.events-list li div.points {
+  font-size: 22px;
+  font-weight: 800;
+  position: absolute;
+  right: 5px;
+  top: 13px;
+}
+ul.events-list li div.points.important {
+  color: red;
+}
+ul.events-list li div.points.success {
+  color: #a5df41;
 }

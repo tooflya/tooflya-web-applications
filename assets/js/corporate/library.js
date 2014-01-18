@@ -33,6 +33,12 @@ $('#sign-out').click(function(e) {
       url: '/ajax/permissions.php',
       data: 'type=logout',
       preload: true,
+      history: {
+        url: '/corp/',
+        state: {
+          name: 'corp'
+        }
+      },
       success: function(e) {
       if(e.response) {
         $('#body').html(e.body);
@@ -44,6 +50,12 @@ $('#add-task').click(function(e) {
   e.preventDefault();
   $('div[class*=teammates-tasks-add]').hide();
   $('div[class*=teammates-tasks-add-area]').show();
+});
+$('#edit-task').click(function(e) {
+  checkCounts();
+  e.preventDefault();
+  $('div[class*=teammates-tasks-edit]').hide();
+  $('div[class*=teammates-tasks-edit-area]').show();
 });
 
 $(document).on('keypress', 'input, textarea', function(e) {
@@ -81,6 +93,25 @@ $('li.teammates-user').click(function() {
     id: $(this).attr('data')
   });
 });
+$('#show-profile').click(function() {
+  update('user', {
+    id: 0
+  });
+});
+$('.teammates-task').click(function() {
+  update('task', {
+    id: $(this).attr('data')
+  });
+});
+$('[class*=task-change-status]').click(function() {
+  update('task-change-status', {
+    id: $(this).attr('data'),
+    status: $(this).attr('status')
+  });
+  update('task', {
+    id: $(this).attr('data')
+  });
+});
 $('#show-total-events').click(function() {
   update('events', {
     user: false
@@ -89,6 +120,15 @@ $('#show-total-events').click(function() {
 $('#show-user-events').click(function() {
   update('events', {
     user: true
+  });
+});
+$('#show-settings').click(function() {
+  update('settings', {
+  });
+});
+$('[class*=delete-task]').click(function() {
+  update('delete-task', {
+    id: $(this).attr('data')
   });
 });
 
@@ -184,11 +224,13 @@ $('#save-task').click(function() {
   var description = $('#task-description').val();
   var type = $('#task-type').val();
   var priority = $('#task-priority').val();
+  var number = $('#task-number').val();
 
   post += '&name=' + name;
   post += '&description=' + description;
   post += '&task_type=' + type;
   post += '&priority=' + priority;
+  if(number) post += '&number=' + number;
 
   if(!name) { $('#task-name').addClass('error').focus(); return; }
   if(!description) { $('#task-description').addClass('error').focus(); return; }
@@ -235,13 +277,17 @@ $('#save-task').click(function() {
     data: "type=add-task&id="+id+""+post,
     preload: true,
     button: $('#save-task'),
-    text: "Wait a while...",
+    text: "Wait for a while...",
     success: function(e) {
       if(e.response) {
         $('#body').html(e.body);
 
         $('div[class*=teammates-tasks-add]').show();
         $('div[class*=teammates-tasks-add-area]').hide();
+
+        update('user', {
+          id: id
+        });
       }
     }
   });
@@ -276,7 +322,7 @@ function update(id, params) {
       ajaxRequest.send({
           url: '/ajax/corporate.php',
             history: {
-              url: '/corp/user/'+params.id+'/',
+              url: params.id ? '/corp/user/'+params.id+'/' : '/corp/',
               state: {
                 name: 'user',
                 params: params
@@ -287,6 +333,72 @@ function update(id, params) {
           success: function(e) {
           if(e.response) {
             $('#body').html(e.body);
+          }
+        }
+      });
+    break;
+    case 'task':
+      ajaxRequest.send({
+          url: '/ajax/corporate.php',
+            history: {
+              url: params.id ? '/corp/task/'+params.id+'/' : '/corp/',
+              state: {
+                name: 'task',
+                params: params
+              }
+            },
+          data: 'id='+params.id+'&type=task',
+          preload: true,
+          success: function(e) {
+          if(e.response) {
+            $('#body').html(e.body);
+          }
+        }
+      });
+    break;
+    case 'settings':
+      ajaxRequest.send({
+          url: '/ajax/corporate.php',
+            history: {
+              url: '/corp/settings/',
+              state: {
+                name: 'settings',
+                params: params
+              }
+            },
+          data: 'type=settings',
+          preload: true,
+          success: function(e) {
+          if(e.response) {
+            $('#body').html(e.body);
+          }
+        }
+      });
+    break;
+    case 'delete-task':
+      ajaxRequest.send({
+        url: '/ajax/corporate.php',
+        data: 'type=delete-task&id='+params.id,
+        preload: true,
+        success: function(e) {
+          if(e.response) {
+            update('user', {
+              id: e.receiver
+            });
+          }
+        }
+      });
+    break;
+    case 'task-change-status':
+      ajaxRequest.send({
+        url: '/ajax/corporate.php',
+        data: 'type=task-change-status&id='+params.id+'&status='+params.status,
+        preload: true,
+        success: function(e) {
+          if(e.response) {
+            update('task', {
+              id: params.id
+            });
           }
         }
       });

@@ -10,11 +10,12 @@
         {foreach from=$eventslist item=some}
         {if $today == 0}{if $yesterday|date_format:"%e" == $some.timestamp|date_format:"%e"}{assign var="today" value=$today + 1}{/if}{/if}
         {if $today == 2}{if $smarty.now|date_format:"%e" != $some.timestamp|date_format:"%e"}{assign var="today" value=$today + 1}{/if}{/if}
+        {if $today == 3}{if $yesterday|date_format:"%e" != $some.timestamp|date_format:"%e"}{assign var="today" value=$today + 1}{/if}{/if}
         {if $today == 1}
         <li><h3><b>{l s='Вчера'}</b></h3></li>
         {assign var="today" value=$today + 1}
         {/if}
-        {if $today == 3}
+        {if $today == 4}
         <li><h3><b>{l s='Прошлые события'}</b></h3></li>
         {assign var="today" value=$today + 1}
         {/if}
@@ -42,6 +43,13 @@
               <b>
                 {if $some.type == 1}{l s='Пользователь вошел в систему'}{/if}
                 {if $some.type == 2}{l s='Пользователь вышел из системы'}{/if}
+                {if $some.type == 3}{l s='Добавил задачу на спринт'}{/if}
+                {if $some.type == 4}{l s='Удалил поставленную задачу со спринта'}{/if}
+                {if $some.type == 5}{l s='Отредактировал поставленную задачу'}{/if}
+                {if $some.type == 6}{l s='Начал выполнение следующего задания'}{/if}
+                {if $some.type == 7}{l s='Отправил задание на проверку'}{/if}
+                {if $some.type == 8}{l s='Приостановил проверку задания'}{/if}
+                {if $some.type == 10}{l s='Успешно выполнил задание'}{/if}
               </b>
             </div>
             <div class="block post">{l s=$some.post}</div>

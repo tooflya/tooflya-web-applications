@@ -1,0 +1,44 @@
+{include file="CorpController/header.html"}
+<section class="content">
+  {include file="CorpController/include/left.html"}
+  <div class="right">
+    <h1>{l s='Корпоративный сервис'}</h1>
+    {include file="CorpController/include/menu.html"}
+    <h3><b>{l s='Настройки'}</b></h3>
+    <div>
+      <div><a>{l s='Изменить пароль'}</a></div>
+      <div><a>{l s='Изменить адрес электронной почты'}</a></div>
+    </div><br />
+    <h3><b>{l s='Интерфейс'}</b></h3>
+    <div>
+      <div>
+        <a>{l s='Показывать уведомление о загрузке'}</a>
+      </div>
+    </div>
+    <br />
+    <h3><b>{l s='Уведомления'}</b></h3>
+    <div>
+      <div>
+        <a>{l s='Уведомлять о новых задачах'}</a>
+      </div>
+      <div>
+        <a>{l s='Уведомлять о новых комментариях'}</a>
+      </div>
+    </div>
+    <br />
+    <h3><b>{l s='Удалить аккаунт'}</b></h3>
+    <div>
+      <div class="teammates-help">
+        <p>
+          {l s='Внимание! Аккаунт удаляется полностью и без возможности восстановления!'}.
+        </p>
+        <a href="{$url}/corp/help/#">{l s='Зачем мне может понадобится удалять свой аккаунт'}?</a><br />
+      </div>
+      <div>
+        <a class="button important">{l s='Удалить аккаунт'}</a>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</section>
+{include file="CorpController/footer.html"}

@@ -25,8 +25,6 @@ require('../languages.php');
 
 if(Ajax::isResponse())
 {
-  sleep(rand(0, 3));
-
   $controller = new CorpCommunityController();
 
   switch(Validate::post('type'))
@@ -53,6 +51,30 @@ if(Ajax::isResponse())
     case "add-task":
 
       $controller->addTask();
+
+    break;
+
+    case 'task-change-status':
+
+      $controller->changeTaskStatus(Validate::post('id'), Validate::post('status'));
+
+    break;
+
+    case "delete-task":
+
+      $controller->deleteTask(Validate::post('id'));
+
+    break;
+
+    case "task":
+
+      $controller->showTask(Validate::post('id'));
+
+    break;
+
+    case "settings":
+
+      $controller->showSettings();
 
     break;
   }

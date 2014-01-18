@@ -78,6 +78,38 @@ class CorpCommunityController extends BaseController
    *
    *
    */
+  public function assignUserData()
+  {
+    $id = Session::read('user')['id'];
+
+    $this->templates->assign_element("SELECT * FROM `corp_users` WHERE `id` = '$id'", 'user');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function assignTaskRequirements($id)
+  {
+    $this->templates->assign_array("SELECT * FROM `corp_tasks_requirements` WHERE `tid` = '$id'", 'requirements');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function assignTaskRisks($id)
+  {
+    $this->templates->assign_array("SELECT * FROM `corp_tasks_risks` WHERE `tid` = '$id'", 'risks');
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function assignUsersTasks($id)
   {
     $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' ORDER by `priority`, `title`");
@@ -124,8 +156,6 @@ class CorpCommunityController extends BaseController
         $this->templates->assign('user', $data);
 
         Ajax::generate()->value("response", 1);
-
-        $this->showProfile($data['id']);
       }
 
       if(EVENTS)
@@ -140,6 +170,8 @@ class CorpCommunityController extends BaseController
           }
         }
       }
+
+      $this->showProfile($data['id']);
     }
     else
     {
@@ -185,6 +217,7 @@ class CorpCommunityController extends BaseController
   public function showProfile($id)
   {
     $this->assignUsersList();
+    $this->corpEventsController->assignCounts();
 
     if(Session::user())
     {
@@ -222,7 +255,7 @@ class CorpCommunityController extends BaseController
       {
         if(Ajax::isResponse())
         {
-          Ajax::generate()->value("response", 2);
+          $this->showProfile(Session::read('user')['id']);
         }
         else
         {
@@ -234,6 +267,75 @@ class CorpCommunityController extends BaseController
     else
     {
       $this->templates->display('CorpController');
+    }
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function showTask($id)
+  {
+    $this->assignUsersList();
+    $this->assignUserData();
+    $this->corpEventsController->assignCounts();
+
+    if(Session::user())
+    {
+      $selectUsersDada = mysql_query("SELECT `corp_tasks`.*, `corp_users`.`name` AS `sender_name`, `corp_users`.`surname` AS `sender_surname`, `corp_users`.`id` AS `sender_id` FROM `corp_tasks` LEFT JOIN `corp_users` ON(`corp_tasks`.`sender` = `corp_users`.`id`) WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
+
+      if(mysql_num_rows($selectUsersDada) > 0)
+      {
+        while($data = mysql_fetch_assoc($selectUsersDada))
+        {
+          Ajax::generate()->value("response", 1);
+
+          $this->templates->assign('task', $data);
+          $this->assignTaskRequirements($id);
+          $this->assignTaskRisks($id);
+
+          if(Ajax::isResponse())
+          {
+            $this->showLayout('CorpController/task.html', true);
+          }
+          else
+          {
+            $this->templates->display('CorpController', 'task');
+          }
+        }
+      }
+      else
+      {
+        $controller = new ErrorController();
+        $controller->notFound();
+      }
+    }
+    else
+    {
+      $this->templates->display('CorpController');
+    }
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function showSettings()
+  {
+    $this->assignUsersList();
+    $this->corpEventsController->assignCounts();
+
+    if(Ajax::isResponse())
+    {
+      Ajax::generate()->value("response", 1);
+
+      $this->showLayout('CorpController/settings.html', true);
+    }
+    else
+    {
+      $this->templates->display('CorpController', 'settings');
     }
   }
 
@@ -288,6 +390,46 @@ class CorpCommunityController extends BaseController
    *
    *
    */
+  public function changeTaskStatus($id, $status)
+  {
+    if(Session::user())
+    {
+      if(Ajax::isResponse())
+      {
+        if(mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks` WHERE `id` = '$id'")) > 0)
+        {
+          mysql_query("UPDATE `corp_tasks` SET `status` = '$status' WHERE `id` = '$id'");print $id;
+        
+          Ajax::generate()->value("response", 1);
+
+          if(EVENTS)
+          {
+            $id = Session::read('user')['id'];
+
+            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            
+            while($data = mysql_fetch_assoc($selectUsersDada))
+            {
+              if($id != $data['id'])
+              {
+                mysql_query("INSERT INTO `events` SET `sender` = '$id', `receiver` = '".$data['id']."', `type` = '".($status + 4)."'");
+              }
+            }
+          }
+        }
+        else
+        {
+          Ajax::generate()->value("response", 2);
+        }
+      }
+    }
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function addTask()
   {
     // TODO: Full refactoring.
@@ -304,8 +446,19 @@ class CorpCommunityController extends BaseController
         $description = Validate::post('description');
         $type = Validate::post('task_type');
         $priority = Validate::post('priority');
+        $number = Validate::post('number') ? Validate::post('number') : mysql_result(mysql_query("SELECT MAX(`id`) FROM `corp_tasks`"), 0) + 1000;
+        $new = true;
 
-        mysql_query("INSERT INTO `corp_tasks` SET `receiver` = '$receiver', `sender` = '$sender', `title` = '$title', `description` = '$description', `type` = '$type', `priority` = '$priority'") or die
+        if(mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks` WHERE `number` = '$number'")) > 0)
+        {
+          $id = mysql_result(mysql_query("SELECT `id` FROM `corp_tasks` WHERE `number` = '$number'"), 0);
+
+          $this->deleteTask($id, true);
+
+          $new = false;
+        }
+
+        mysql_query("INSERT INTO `corp_tasks` SET `number` = '$number', `receiver` = '$receiver', `sender` = '$sender', `title` = '$title', `description` = '$description', `type` = '$type', `priority` = '$priority'") or die
         (
           Ajax::generate()->value("response", mysql_error())
         );
@@ -348,6 +501,88 @@ class CorpCommunityController extends BaseController
         }
         
         Ajax::generate()->value("response", 1);
+
+        if($new)
+        {
+          if(EVENTS)
+          {
+            $id = Session::read('user')['id'];
+
+            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            
+            while($data = mysql_fetch_assoc($selectUsersDada))
+            {
+              if($id != $data['id'])
+              {
+                mysql_query("INSERT INTO `events` SET `sender` = '$id', `receiver` = '".$data['id']."', `type` = '3'");
+              }
+            }
+          }
+        }
+        else
+        {
+          if(EVENTS)
+          {
+            $id = Session::read('user')['id'];
+
+            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            
+            while($data = mysql_fetch_assoc($selectUsersDada))
+            {
+              if($id != $data['id'])
+              {
+                mysql_query("INSERT INTO `events` SET `sender` = '$id', `receiver` = '".$data['id']."', `type` = '5'");
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function deleteTask($id, $edit = false)
+  {
+    if(Session::user())
+    {
+      if(Ajax::isResponse())
+      {
+        $sender = mysql_result(mysql_query("SELECT `sender` FROM `corp_tasks` WHERE `id` = '$id'"), 0);
+        $receiver = mysql_result(mysql_query("SELECT `receiver` FROM `corp_tasks` WHERE `id` = '$id'"), 0);
+
+        if($sender == Session::read('user')['id'])
+        {
+          mysql_query("DELETE FROM `corp_tasks` WHERE `id` = '$id'");
+          mysql_query("DELETE FROM `corp_tasks_requirements` WHERE `tid` = '$id'");
+          mysql_query("DELETE FROM `corp_tasks_risks` WHERE `tid` = '$id'");
+
+          if(!$edit)
+          if(EVENTS)
+          {
+            $id = Session::read('user')['id'];
+
+            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            
+            while($data = mysql_fetch_assoc($selectUsersDada))
+            {
+              if($id != $data['id'])
+              {
+                mysql_query("INSERT INTO `events` SET `sender` = '$id', `receiver` = '".$data['id']."', `type` = '4'");
+              }
+            }
+          }
+
+          Ajax::generate()->value("response", 1);
+          Ajax::generate()->value("receiver", $receiver);
+        }
+        else
+        {
+          Ajax::generate()->value("response", 2);
+        }
       }
     }
   }
