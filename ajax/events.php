@@ -51,7 +51,7 @@ if(Ajax::isResponse())
       $response['edit-task'] = array();
       $response['delete-task'] = array();
 
-      $user = Session:read('user');
+      $user = Session::read('user');
 
       $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".$user['id']."' AND `timestamp` > NOW() - 5 AND `received` = '0' GROUP by `timestamp`");
             
