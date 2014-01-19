@@ -38,28 +38,24 @@ if(Validate::isPost())
 else
 {
   if(
-  $params['path'][1] != 'ru' ||
-  $params['path'][1] != 'en'
-  )
-  {
-    /*if(Session::read('language'))
-    {
-      $language = Session::read('language');
-    }
-    else*/
-    {
-     $language = $params['path'][1];
-    }
-
-if(
   $params['path'][1] != 'ru' &&
   $params['path'][1] != 'en' &&
   $params['path'][1] != 'ajax'
   ) {
-     $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
-    header('Location: /'.$language.''.$origin);
-    exit;
-  }
+    if(Session::read('language'))
+    {
+        $language = Session::read('language');
+    
+        header('Location: /'.$language.''.$origin);
+        exit;
+    }
+    else
+    {
+      $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    
+      header('Location: /'.$language.''.$origin);
+      exit;
+    }
   }
   else
   {
@@ -67,7 +63,8 @@ if(
     {
       if(Session::read('language') != $params['path'][1])
       {
-        //Session::write('language', $params['path'][1]);
+        if($params['path'][1] != 'ajax') Session::write('language', $params['path'][1]);
+
         $language = Session::read('language');
       }
       else
@@ -78,6 +75,8 @@ if(
     else
     {
       $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+
+      Session::write('language', $language);
     }
   }
 }
