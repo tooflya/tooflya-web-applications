@@ -1,3 +1,4 @@
+{if !$ajax}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,6 +15,7 @@
     <script src="{$url}/assets/js/library.js"></script>
 
     <script type="text/javascript" src="{$url}/assets/js/jcarousellite.js"></script>
+    <script type="text/javascript" src="{$url}/assets/js/jquery.tmpl.min.js"></script>
 
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -31,8 +33,20 @@
     {/literal}
     {/if}
   </head>
-
   <body>
+    <div class="events">
+      <div class="event mask">
+        <img src="/assets/img/preloader.gif" width="50" height="50" class="avatar">
+        <div class="left">
+          <div class="profile-name">{l s='Выполняется загрузка'}...</div>
+          <div class="profile-post">{l s='Это может занять некоторое время'}</div>
+          <div class="profile"><a>{l s='Настройки'}</a></div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  {/if}
+  <div id="body">
     {if $language == 'en'}
     {literal}
     <div id="fb-root"></div>
