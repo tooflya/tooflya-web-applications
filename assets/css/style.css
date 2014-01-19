@@ -36,7 +36,7 @@
   font-weight: 100;
   src: local('Roboto Thin'), local('Roboto-Thin'), url(../fonts/vzIUHo9z-oJ4WgkpPOtg1_esZW2xOQ-xsNqO47m55DA.woff) format('woff');
 }
-html, body {
+body {
   color: #444;
   text-shadow: #fff 0 2px 2px;
   font: 14px/19px Roboto, sans-serif;
@@ -50,10 +50,12 @@ html, body {
   overflow-x: hidden;
   overflow-y: scroll;
   min-width: 980px;
+  background-color: #ebf0f0;
+}
+html, body {
   min-height: 100%;
   width: 100%;
   height: 100%;
-  background-color: #ebf0f0;
 }
 body.blank {
   background-color: #fff;
@@ -1620,4 +1622,17 @@ footer ul.links li {
 }
 footer ul.links li:first-child {
   padding-left: 0;
+}
+div.canvas {
+  background: #fff;
+  border: 1px #ccc solid;
+  border-top: 1px solid #00AEEF;
+  width: 980px;
+  height: 600px;
+}
+div.announcement {
+  background-color: #fff;
+  border: 1px #ccc solid;
+  border-top: 1px solid #00AEEF;
+  margin-bottom: 20px;
 }
