@@ -51,7 +51,9 @@ if(Ajax::isResponse())
       $response['edit-task'] = array();
       $response['delete-task'] = array();
 
-      $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".Session::read('user')['id']."' AND `timestamp` > NOW() - 5 AND `received` = '0' GROUP by `timestamp`");
+      $user = Session:read('user');
+
+      $selectEventsData = mysql_query("SELECT * FROM `events` WHERE `receiver` = '".$user['id']."' AND `timestamp` > NOW() - 5 AND `received` = '0' GROUP by `timestamp`");
             
       while($data = mysql_fetch_assoc($selectEventsData))
       {
