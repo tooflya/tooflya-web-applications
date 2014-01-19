@@ -33,9 +33,6 @@ class Template extends Smarty {
 
     global $language, $language_iso;
 
-    $language = Session::read('language');
-    $language_iso = Session::read('language_iso');
-
     define('LANGUAGE', $language_iso);
 
     /**

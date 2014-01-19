@@ -42,14 +42,13 @@ else
   $params['path'][1] != 'en'
   )
   {
-    if(Session::read('language'))
+    /*if(Session::read('language'))
     {
       $language = Session::read('language');
     }
-    else
+    else*/
     {
      $language = $params['path'][1];
-      //Session::write('language', $language);
     }
 
 if(
@@ -92,6 +91,17 @@ switch($language)
   case 'ru':
     $language_iso = 1;
   break;
+}
+
+if(Ajax::isResponse())
+{
+  $language = Session::read('last_language');
+  $language_iso = Session::read('last_language_iso');
+}
+else
+{
+  Session::write('last_language', $language);
+  Session::write('last_language_iso', $language_iso);
 }
 
 /**
