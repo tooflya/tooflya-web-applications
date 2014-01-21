@@ -26,7 +26,7 @@
         {if $some.priority == 3}<span class="low">{l s='Низкий приоритет'|lower}</span>{/if}
       </span>
     </div>
-    <div class="profile-post">{$some.description|nl2br|truncate:190}</div>
+    <div class="profile-post">{$some.description|truncate:190}</div>
     <div class="clearfix"></div>
   </li>
 {/foreach}

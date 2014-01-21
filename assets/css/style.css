@@ -1262,6 +1262,7 @@ ul.teammates-tasks-list div.profile-info {
   margin-bottom: 10px;
 }
 span.priority {
+  white-space: nowrap;
 }
 span.priority span {
   font-size: 10px;
