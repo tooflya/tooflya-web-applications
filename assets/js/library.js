@@ -222,3 +222,16 @@ function yy()
     if(i == y-1) $(item).addClass('active');
   });
 }
+
+$(document).on('click', '#launch-game', function(e) {
+  $('#launch').removeClass('active').addClass('disabled');
+  $(this).addClass('no-transitions').animate({
+    opacity: 0,
+    marginTop: "-=100"
+  }, 500, function() {
+    $('#launch').hide();
+    $('.canvas').show();
+
+    launchGame();
+  });
+});

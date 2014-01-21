@@ -2,26 +2,41 @@
 <section class="content">
     <style>
       @font-face {
-        font-family: '{$game.font}';
-        src: url('Resources/Fonts/{$game.font}.ttf');
-        font-weight: 400;
+          font-family: '{$game.font}';
+          src: url('Resources/Fonts/{$game.font}.ttf');
         }
         canvas {
           font-family: '{$game.font}';
-          -moz-user-select: none;
-          -webkit-user-select: none;
-          -ms-user-select: none;
-          -khtml-user-select: none;
-          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
         }
     </style>
   <h1>{$game.title} <sup>Beta</sup></h1>
+  <div id="no-support" style="display: none">
+    <h2>{l s='Your browser does not support HTML5 canvas'}!</h2>
+    <p>{l s='Google Chrome is a browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier.Click the logo to download'}.</p>
+    <a href="http://www.google.com/chrome" target="_blank"><img src="{$url}/assets/img/chrome-logo.png" /></a>
+  </div>
+  <div class="launch active" id="launch">
+    <div style="width: {$game.width}px; height: {$game.height}px; background: transparent url({$url}/assets/img/games/covers/{$game.alias}-cover.png) no-repeat;"></div>
+    <div class="shadow"></div>
+    <div class="inner" id="launch-game">
+      <img src="{$url}/assets/img/launch.png" />
+      <div class="title">{l s='Launch game now'}</div>
+      <div class="description">
+        <p>
+          {l s='Click here to run this game on the web page'}.
+          {l s='This action may have some time'}.
+        </p>
+        <p class="small">{l s='Version'}: {$game.version} {l s='Build'}: {$game.build}</p>
+      </div>
+    </div>
+  </div>
   <div class="canvas">
     <canvas id="canvas" width="{$game.width}" height="{$game.height}"></canvas>
   </div>
   <div class="line"></div>
-  <h3><b>{l s='Как играть?'}</b></h3>
-  <script src="application.js"></script>
+  <h3><b>{l s='How to play?'}</b></h3>
+  <script src="cocos2d.js"></script>
+  <script src="app.js"></script>
   <div class="clearfix"></div>
 </section>
 {include file="BaseViews/footer.html"}
