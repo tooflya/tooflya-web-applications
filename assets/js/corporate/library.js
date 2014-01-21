@@ -58,6 +58,11 @@ $('#edit-task').click(function(e) {
   $('div[class*=teammates-tasks-edit-area]').show();
 });
 
+var input;
+
+$(document).on('click', '[class*=teammates-button]', function(e) {
+  signin();
+});
 $(document).on('keypress', 'input, textarea', function(e) {
   $(this).removeClass('error');
 });
@@ -65,27 +70,8 @@ $(document).on('change', 'select', function(e) {
   $(this).removeClass('error');
 });
 $('input[id*=teammates-password-input]').keypress(function(e) {
-  var input = this;
   if(e.which == 13) {
-    e.preventDefault();
-    ajaxRequest.send({
-        url: '/ajax/permissions.php',
-        history: {
-          url: '/corp/',
-          state: {
-            name: 'user'
-          }
-        },
-        data: 'id='+signInID+'&password='+$(input).val()+"&type=login",
-        preload: true,
-        success: function(e) {
-        if(e.response) {
-          $('#body').html(e.body);
-        } else {
-          $(input).addClass('error');
-        }
-      }
-    });
+    signin();
   }
 });
 $('li.teammates-user').click(function() {
@@ -131,6 +117,28 @@ $('[class*=delete-task]').click(function() {
     id: $(this).attr('data')
   });
 });
+
+signin = function() {
+  var input = $('#teammates-password-input-'+signInID);
+  ajaxRequest.send({
+    url: '/ajax/permissions.php',
+    history: {
+      url: '/corp/',
+      state: {
+        name: 'user'
+      }
+    },
+    data: 'id='+signInID+'&password='+$(input).val()+"&type=login",
+    preload: true,
+    success: function(e) {
+      if(e.response) {
+        $('#body').html(e.body);
+      } else {
+        $(input).addClass('error');
+      }
+    }
+  });
+};
 
 var lastEventState;
 $(window).bind('popstate', function(e) {
