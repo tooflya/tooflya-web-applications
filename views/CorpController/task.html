@@ -98,7 +98,6 @@
       </div>
       <div>
         {if $user.id == $task.receiver}
-        <div>
           {if $task.status == 1}<a class="button success task-change-status" status="2" data="{$task.id}">{l s='Начать выполнение'}</a>{/if}
           {if $user.id == $task.receiver && $user.id == $task.sender}
           {if $task.status == 2 || $task.status == 4}<a class="button success task-change-status" status="6" data="{$task.id}">{l s='Завершить выполнение'}</a>{/if}
