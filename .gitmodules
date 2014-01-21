@@ -1,0 +1,3 @@
+[submodule "games/project-birds"]
+	path = games/project-birds
+	url = git@github.com:tooflya/project-birds-js-client.git
