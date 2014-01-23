@@ -70,7 +70,7 @@
 {/if}
 {assign var="count" value="0"}
 {foreach from=$tasks item=some}
-{if $some.status < 3}
+{if $some.status < 3 || $some.status == 4}
 {assign var="count" value=$count + 1}
 {/if}
 {/foreach}
@@ -78,7 +78,7 @@
 <h3><b>{l s='Текущие задачи'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
-  {if $some.status < 3}
+  {if $some.status < 3 || $some.status == 4}
   <li class="teammates-task" data="{$some.id}">
     <img src="{$url}/assets/img/corp/task-{$some.type}.png" class="avatar">
     <div class="profile-post profile-info">
