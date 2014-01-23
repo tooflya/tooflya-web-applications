@@ -27,6 +27,14 @@
  */
 error_reporting(0);
 
+
+/**
+ *
+ * Setting default timezone
+ *
+ */
+date_default_timezone_set('Europe/Kyiv');
+
 /**
  *
  * Starting session with custom session name
