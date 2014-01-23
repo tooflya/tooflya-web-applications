@@ -113,6 +113,8 @@ class CorpCommunityController extends BaseController
    */
   public function assignUsersTasks($id)
   {
+    $user = Session::read('user');
+
     $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' ORDER by `priority`, `title`");
 
     if(mysql_num_rows($selectUsersDada) > 0)
@@ -127,6 +129,9 @@ class CorpCommunityController extends BaseController
 
       $this->templates->assign('tasks', $selectUsersDadaGeneric);
     }
+
+    $this->templates->assign("confirm_id", $user['id']);
+    $this->templates->assign_array("SELECT * FROM `corp_tasks` WHERE `status` = '3' AND `sender` = '".$user['id']."'", "confirm_tasks");
   }
 
   /**
@@ -286,13 +291,27 @@ class CorpCommunityController extends BaseController
 
     if(Session::user())
     {
-      $selectUsersDada = mysql_query("SELECT `corp_tasks`.*, `corp_users`.`name` AS `sender_name`, `corp_users`.`surname` AS `sender_surname`, `corp_users`.`id` AS `sender_id` FROM `corp_tasks` LEFT JOIN `corp_users` ON(`corp_tasks`.`sender` = `corp_users`.`id`) WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
+      $selectUsersDada = mysql_query("SELECT `corp_tasks`.*,
+        `corp_users`.`name` AS `sender_name`, `corp_users`.`surname` AS `sender_surname`, `corp_users`.`id` AS `sender_id`
+        FROM `corp_tasks`
+        LEFT JOIN `corp_users` ON(`corp_tasks`.`sender` = `corp_users`.`id`)
+        WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
+
+      $selectUsersDada2 = mysql_query("SELECT `corp_tasks`.*,
+        `corp_users`.`name` AS `receiver_name`, `corp_users`.`surname` AS `receiver_surname`, `corp_users`.`id` AS `receiver_id`
+        FROM `corp_tasks`
+        LEFT JOIN `corp_users` ON(`corp_tasks`.`receiver` = `corp_users`.`id`)
+        WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
 
       if(mysql_num_rows($selectUsersDada) > 0)
       {
         while($data = mysql_fetch_assoc($selectUsersDada))
         {
           Ajax::generate()->value("response", 1);
+
+          $data2 = mysql_fetch_assoc($selectUsersDada2);
+
+          $data = array_merge($data, $data2);
 
           $this->templates->assign('task', $data);
           $this->assignTaskRequirements($id);
