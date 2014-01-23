@@ -154,7 +154,7 @@
       complete: function(e) {
         setTimeout(function() {
           poll();
-        }, 100);
+        }, 1000);
       }
     });
 })();
