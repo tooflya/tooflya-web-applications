@@ -346,18 +346,25 @@ class CorpCommunityController extends BaseController
    */
   public function showSettings()
   {
-    $this->assignUsersList();
-    $this->corpEventsController->assignCounts();
-
-    if(Ajax::isResponse())
+    if(Session::user())
     {
-      Ajax::generate()->value("response", 1);
+      $this->assignUsersList();
+      $this->corpEventsController->assignCounts();
 
-      $this->showLayout('CorpController/settings.html', true);
+      if(Ajax::isResponse())
+      {
+        Ajax::generate()->value("response", 1);
+
+        $this->showLayout('CorpController/settings.html', true);
+      }
+      else
+      {
+        $this->templates->display('CorpController', 'settings');
+      }
     }
     else
     {
-      $this->templates->display('CorpController', 'settings');
+      $this->templates->display('CorpController');
     }
   }
 
@@ -368,19 +375,26 @@ class CorpCommunityController extends BaseController
    */
   public function showEvents()
   {
-    $this->assignUsersList();
-    $this->corpEventsController->assignEvents();
-    $this->corpEventsController->assignCounts();
-
-    if(Ajax::isResponse())
+    if(Session::user())
     {
-      Ajax::generate()->value("response", 1);
+      $this->assignUsersList();
+      $this->corpEventsController->assignEvents();
+      $this->corpEventsController->assignCounts();
 
-      $this->showLayout('CorpController/events.html', true);
+      if(Ajax::isResponse())
+      {
+        Ajax::generate()->value("response", 1);
+
+        $this->showLayout('CorpController/events.html', true);
+      }
+      else
+      {
+        $this->templates->display('CorpController', 'events');
+      }
     }
     else
     {
-      $this->templates->display('CorpController', 'events');
+      $this->templates->display('CorpController');
     }
   }
 
@@ -391,19 +405,26 @@ class CorpCommunityController extends BaseController
    */
   public function showUserEvents()
   {
-    $this->assignUsersList();
-    $this->corpEventsController->assignUserEvents();
-    $this->corpEventsController->assignCounts();
-
-    if(Ajax::isResponse())
+    if(session::user())
     {
-      Ajax::generate()->value("response", 1);
+      $this->assignUsersList();
+      $this->corpEventsController->assignUserEvents();
+      $this->corpEventsController->assignCounts();
 
-      $this->showLayout('CorpController/events.html', true);
+      if(Ajax::isResponse())
+      {
+        Ajax::generate()->value("response", 1);
+
+        $this->showLayout('CorpController/events.html', true);
+      }
+      else
+      {
+        $this->templates->display('CorpController', 'events');
+      }
     }
     else
     {
-      $this->templates->display('CorpController', 'events');
+      $this->templates->display('CorpController');
     }
   }
 

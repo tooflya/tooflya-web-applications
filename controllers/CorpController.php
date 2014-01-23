@@ -76,7 +76,7 @@ class CorpController extends BaseController
    */
   public function taskAction($id = false)
   {
-    $this->corpCommunityController->showTask($id );
+    $this->corpCommunityController->showTask($id);
   }
 
   /**
