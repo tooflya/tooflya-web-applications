@@ -42,7 +42,7 @@
 {/if}
 {/foreach}
 {if $count > 0}
-<h3><b>{l s='Ожидающие подтверждения'} ({$tasks|count})</b></h3>
+<h3><b>{l s='Ожидающие подтверждения'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
   {if $some.status == 3}
@@ -75,7 +75,7 @@
 {/if}
 {/foreach}
 {if $count > 0}
-<h3><b>{l s='Текущие задачи'} ({$tasks|count})</b></h3>
+<h3><b>{l s='Текущие задачи'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
   {if $some.status < 3}
@@ -108,7 +108,7 @@
 {/if}
 {/foreach}
 {if $count > 0}
-<h3><b>{l s='Выполненные задачи'} ({$tasks|count})</b></h3>
+<h3><b>{l s='Выполненные задачи'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
   {if $some.status == 6}
