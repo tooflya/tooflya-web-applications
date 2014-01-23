@@ -33,12 +33,10 @@
               {if $task.status == 3}<span class="warning">{l s='Отправлено на проверку'}</span>{/if}
               {if $task.status == 6}<span class="success">{l s='Задание выполнено'}</span>{/if}
             </p>
-            <p>
-              <b>{l s='Назначено:'} <a>{l s=$task.sender_name} {l s=$task.sender_surname}</a></b>
-            </p>
-            <p>
-              <b>{l s='Дата назначения:'} {$task.timestamp|date_format:"%d"} {l s=$task.timestamp|date_format:"%b"}</b>
-            </p>
+            <p><b>{l s='Заказчик:'} <a>{l s=$task.sender_name} {l s=$task.sender_surname}</a></b></p>
+            <p><b>{l s='Исполнитель:'} <a>{l s=$task.receiver_name} {l s=$task.receiver_surname}</a></b></p>
+            <p><b>{l s='Дата назначения:'} {$task.timestamp|date_format:"%d"} {l s=$task.timestamp|date_format:"%b"}</b></p>
+            <p><b>{l s='Дата принятия:'} {$task.timestamp|date_format:"%d"} {l s=$task.timestamp|date_format:"%b"}, {l s='до'} 12:00</b></p>
           </div>
         </div>
       </div>
