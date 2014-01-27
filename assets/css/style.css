@@ -1204,7 +1204,11 @@ ul.teammates-inner-list li.my {
   border-top: 1px solid #00AEEF;
 }
 ul.teammates-list li:hover, ul.teammates-inner-list li:hover, ul.teammates-tasks-list li:hover {
-  background-color: #ffffff;
+  background-color: #ffffff !important;
+  border-top: 1px solid #00AEEF;
+}
+ul.teammates-list li:hover, ul.teammates-inner-list li:hover, ul.teammates-tasks-list li.running {
+  background-color: #f1f7f7;
   border-top: 1px solid #00AEEF;
 }
 ul.teammates-list img.avatar, ul.teammates-inner-list img.avatar, ul.teammates-tasks-list img.avatar {

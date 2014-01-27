@@ -79,7 +79,7 @@
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
   {if $some.status < 3 || $some.status == 4}
-  <li class="teammates-task" data="{$some.id}">
+  <li class="teammates-task {if $some.status == 2}running{/if}" data="{$some.id}">
     <img src="{$url}/assets/img/corp/task-{$some.type}.png" class="avatar">
     <div class="profile-post profile-info">
       {if $some.comments.count > 0}<a class="icon icon-comments" title="{l s='Количество комментариев к данной задаче'}">{$some.comments.count}</a>{/if}

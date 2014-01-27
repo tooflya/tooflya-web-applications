@@ -8,7 +8,7 @@
       success: function(e) {
         if(e.response == 2) return;
         e = $.parseJSON(e.response);
-        $.each(e, function(i, item) {console.log(e);
+        $.each(e, function(i, item) {
           var eventMessage;
           switch(i) {
             case 'online':
