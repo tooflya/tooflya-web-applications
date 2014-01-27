@@ -115,7 +115,9 @@ class CorpCommunityController extends BaseController
   {
     $user = Session::read('user');
 
-    $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' ORDER by `priority`, `title`");
+    $sprintId = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
+
+    $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` <= '$sprintId' ORDER by `priority`, `title`");
 
     if(mysql_num_rows($selectUsersDada) > 0)
     {
@@ -292,9 +294,10 @@ class CorpCommunityController extends BaseController
     if(Session::user())
     {
       $selectUsersDada = mysql_query("SELECT `corp_tasks`.*,
-        `corp_users`.`name` AS `sender_name`, `corp_users`.`surname` AS `sender_surname`, `corp_users`.`id` AS `sender_id`
+        `corp_users`.`name` AS `sender_name`, `corp_users`.`surname` AS `sender_surname`, `corp_users`.`id` AS `sender_id`, `corp_sprints`.`end` AS `end_timestamp`
         FROM `corp_tasks`
         LEFT JOIN `corp_users` ON(`corp_tasks`.`sender` = `corp_users`.`id`)
+        LEFT JOIN `corp_sprints` ON(`corp_tasks`.`sprint` = `corp_sprints`.`id`)
         WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
 
       $selectUsersDada2 = mysql_query("SELECT `corp_tasks`.*,
