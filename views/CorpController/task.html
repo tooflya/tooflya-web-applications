@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <p><b>{l s='Описание'}:</b> {$task.description|nl2br}</p>
+    <p><b>{l s='Описание'}:</b> {i s=$task.description|nl2br}</p>
     {if $requirements|count > 0}
     <p><b>{l s='Список требований'}:</b></p>
     <p>
