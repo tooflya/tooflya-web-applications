@@ -398,9 +398,11 @@ function update(id, params) {
       });
     break;
     case 'task-change-status':
+      var comment = $('#task-review-comment').val();
+
       ajaxRequest.send({
         url: '/ajax/corporate.php',
-        data: 'type=task-change-status&id='+params.id+'&status='+params.status,
+        data: 'type=task-change-status&id='+params.id+'&status='+params.status+'&comment='+comment,
         preload: true,
         success: function(e) {
           if(e.response) {

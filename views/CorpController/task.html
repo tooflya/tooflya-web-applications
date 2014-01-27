@@ -101,7 +101,12 @@
           {if $task.status == 2 || $task.status == 4}<a class="button success task-change-status" status="6" data="{$task.id}">{l s='Завершить выполнение'}</a>{/if}
           {if $task.status == 6}<a class="button important task-change-status" status="4" data="{$task.id}">{l s='Отменить выполнение'}</a>{/if}
           {else}
-          {if $task.status == 2 || $task.status == 4}<a class="button success task-change-status" status="3" data="{$task.id}">{l s='Отправить на проверку'}</a>{/if}
+          {if $task.status == 2 || $task.status == 4}
+            <div class="task-review">
+              <textarea id="task-review-comment" placeholder="{l s='Комментарий к проверке выполнения задания. Вы можете указать путь к файлам проекта, либо другую вспомогательную для ривьювера информацию.'}"></textarea>
+            </div>
+            <div><a class="button success task-change-status" status="3" data="{$task.id}">{l s='Отправить на проверку'}</a></div>
+          {/if}
           {/if}
           {if $task.status == 3}<a class="button important task-change-status" status="4" data="{$task.id}">{l s='Отменить проверку'}</a>{/if}
         {/if}
@@ -109,6 +114,18 @@
           {if $task.status == 1}<a class="button" id="edit-task" data="{$task.id}">{l s='Редактировать'}</a>{/if}
           {if $task.status == 1}<a class="button important delete-task" data="{$task.id}">{l s='Удалить задачу'}</a>{/if}
           {if $task.status == 3}
+          {if $task.comment}
+          <div class="teammates-inner">
+            <div class="inner">
+              <div class="info">
+                <div class="info">
+                <h3><b>{l s='Комментарий исполнителя'}</b></h3>
+                <p>{i s=$task.comment|nl2br}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/if}
           <a class="button success task-change-status" status="6" data="{$task.id}">{l s='Принять'}</a>
           <a class="button important task-change-status" status="4" data="{$task.id}">{l s='Отклонить'}</a>
           {/if}

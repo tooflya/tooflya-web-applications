@@ -441,7 +441,9 @@ class CorpCommunityController extends BaseController
       {
         if(mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks` WHERE `id` = '$id'")) > 0)
         {
-          mysql_query("UPDATE `corp_tasks` SET `status` = '$status' WHERE `id` = '$id'");print $id;
+          $comment = Validate::post('comment');
+
+          mysql_query("UPDATE `corp_tasks` SET `status` = '$status', `comment` = '$comment' WHERE `id` = '$id'");
         
           Ajax::generate()->value("response", 1);
 

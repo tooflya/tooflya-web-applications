@@ -1441,6 +1441,10 @@ div.teammates-tasks-add-area textarea, div.teammates-tasks-edit-area textarea {
   width: 80%;
   height: 300px;
 }
+div.task-review textarea {
+  width: 100%;
+  height: 100px;
+}
 
 .icon {
   display: inline-block;
