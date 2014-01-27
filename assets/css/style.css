@@ -38,7 +38,6 @@
 }
 body {
   color: #444;
-  text-shadow: #fff 0 2px 2px;
   font: 14px/19px Roboto, sans-serif;
   font-family: 'Roboto',arial,sans-serif;
   font-weight: 400;
@@ -90,13 +89,11 @@ ul {
 }
 h1 {
   color: #197EAD;
-  text-shadow: #fff 0 2px 2px;
   font-weight: 400;
   margin: 20px 0 20px;
 }
 h2 {
   color: #197EAD;
-  text-shadow: #fff 0 2px 2px;
   font-size: 22px;
   margin: 20px 0 20px;
   padding: 0 0 10px;
@@ -154,7 +151,6 @@ a:hover {
   padding: 8px 15px;
   text-align: center;
   text-decoration: none;
-  text-shadow: none;
 }
 .button:hover, a.button:hover {
   border-color: #09c;
@@ -383,7 +379,6 @@ footer div.content {
 }
 footer h3 {
   color: #197EAD;
-  text-shadow: #fff 0 2px 2px;
   padding: 10px 0;
   font-size: 20px;
   font-weight: 500;
@@ -391,7 +386,6 @@ footer h3 {
 }
 footer h4 {
   color: #197EAD;
-  text-shadow: #fff 0 2px 2px;
   padding: 15px 0;
   font-size: 16px;
   font-weight: 500;
@@ -579,7 +573,6 @@ section.content div.right.promo {
 section.content div.right.promo h1 {
   position: relative;
   z-index: 500;
-  text-shadow: none;
   font-weight: bold;
   font-size: 28px;
   background-color: #FFF;
@@ -1147,8 +1140,7 @@ div.event div.profile-name {
   padding: 0;
 }
 div.event div.profile-post {
-  color: #ccc;
-  text-shadow: #fff 0 2px 2px;
+  color: #b8b8b8;
   font-size: 10px;
   font-weight: 400;
 }
@@ -1229,7 +1221,6 @@ ul.teammates-tasks-list img.avatar {
 }
 ul.teammates-list div.profile-name, ul.teammates-inner-list div.profile-name, div.teammates-inner div.profile-name, ul.teammates-tasks-list div.profile-name {
   color: #197EAD;
-  text-shadow: #fff 0 2px 2px;
   font-size: 12px;
   font-weight: 500;
 }
@@ -1237,14 +1228,12 @@ ul.teammates-list div.profile-post, ul.teammates-inner-list div.profile-post, di
   white-space: nowrap;
 }
 ul.teammates-list div.profile-post, ul.teammates-inner-list div.profile-post, div.teammates-inner div.profile-post, ul.teammates-tasks-list div.profile-post {
-  color: #ccc;
-  text-shadow: #fff 0 2px 2px;
+  color: #b8b8b8;
   font-size: 12px;
   font-weight: 400;
 }
 ul.teammates-list div.profile-online, ul.teammates-inner-list div.profile-online, div.teammates-inner div.profile-online, div.teammates-inner div.profile-status, ul.teammates-tasks-list div.profile-status {
-  color: #ccc;
-  text-shadow: #fff 0 2px 2px;
+  color: #b8b8b8;
   font-size: 12px;
   font-weight: 400;
 }
@@ -1252,7 +1241,7 @@ ul.teammates-tasks-list li {
   position: relative;
 }
 ul.teammates-tasks-list li a.icon {
-  color: #ccc;
+  color: #b8b8b8;
 }
 ul.teammates-tasks-list div.profile-info {
   position: absolute;
@@ -1268,7 +1257,6 @@ span.priority span {
   font-size: 10px;
   padding: 0px 5px;
   border-radius: 6px;
-  text-shadow: none;
   font-weight: 900;
   color: #fff;
   text-align: center;
@@ -1284,15 +1272,13 @@ span.priority span.low {
   background-color: green;
 }
 div.teammates-help {
-  color: #ccc;
-  text-shadow: #fff 0 2px 2px;
+  color: #b8b8b8;
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
   margin-bottom: 15px;
 }
 div.teammates-help a {
-  text-shadow: #fff 0 2px 2px !important;
   font-size: 11px !important;
   font-weight: 400 !important;
   line-height: 14px !important;
@@ -1324,7 +1310,7 @@ div.teammates-password input {
   font-size: 13px;
   line-height: 18px;
   color: gray;
-  border: 1px solid #CCC;
+  border: 1px solid #b8b8b8;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -1346,7 +1332,7 @@ div.teammates-inner img.avatar {
   height: 50px;
 }
 div.line {
-  border-top: 1px #ccc solid;
+  border-top: 1px #b8b8b8 solid;
   padding: 5px;
   margin: 0 auto;
   margin-top: 10px;
@@ -1386,7 +1372,6 @@ div.progress div {
   position: absolute;
   text-align: center;
   width: 100%;
-  text-shadow: none;
   color: #fff;
 }
 .blue span {
@@ -1517,8 +1502,7 @@ ul.events-list li img.event {
 ul.events-list li div.time {
   position: absolute;
   right: 5px;
-  color: #ccc;
-  text-shadow: #fff 0 2px 2px;
+  color: #b8b8b8;
   font-size: 11px;
   font-weight: 400;
   line-height: 15px;
@@ -1528,7 +1512,6 @@ ul.events-list li div.time {
 }
 ul.events-list li div.name {
   color: #197EAD;
-  text-shadow: #fff 0 2px 2px;
   font-size: 12px;
   font-weight: 500;
   display: inline-block
@@ -1537,8 +1520,7 @@ ul.events-list li div.avatar {
   float: left;
 }
 ul.events-list li div.post {
-  color: #ccc;
-  text-shadow: #fff 0 2px 2px;
+  color: #b8b8b8;
   font-size: 12px;
   font-weight: 400;
 }
@@ -1590,7 +1572,7 @@ div.task div.info, div.task div.info a {
   font-size: 12px;
 }
 div.task div.info b {
-  color: #ccc;
+  color: #b8b8b8;
 }
 div.task div.info p {
   margin: 0;
@@ -1627,11 +1609,11 @@ footer ul.links li:first-child {
 div.canvas {
   display: none;
   background: #fff;
-  border: 1px #ccc solid;
+  border: 1px #b8b8b8 solid;
 }
 div.announcement {
   background-color: #fff;
-  border: 1px #ccc solid;
+  border: 1px #b8b8b8 solid;
   border-top: 1px solid #00AEEF;
   margin-bottom: 20px;
 }
