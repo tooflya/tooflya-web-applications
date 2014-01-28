@@ -1237,6 +1237,7 @@ ul.teammates-list div.profile-post, ul.teammates-inner-list div.profile-post, di
   color: #b8b8b8;
   font-size: 12px;
   font-weight: 400;
+  padding-right: 70px;
 }
 ul.teammates-list div.profile-online, ul.teammates-inner-list div.profile-online, div.teammates-inner div.profile-online, div.teammates-inner div.profile-status, ul.teammates-tasks-list div.profile-status {
   color: #b8b8b8;
