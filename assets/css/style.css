@@ -1527,7 +1527,8 @@ ul.events-list li div.name {
   color: #197EAD;
   font-size: 12px;
   font-weight: 500;
-  display: inline-block
+  display: inline-block;
+  padding-right: 70px;
 }
 ul.events-list li div.avatar {
   float: left;
@@ -1536,6 +1537,7 @@ ul.events-list li div.post {
   color: #b8b8b8;
   font-size: 12px;
   font-weight: 400;
+  padding-right: 70px;
 }
 ul.events-list li div.block {
 }

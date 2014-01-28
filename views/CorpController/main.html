@@ -26,8 +26,20 @@
         </p>
       </div>
       <div class="block">
-        <div class="block"><b>{l s='Первичная информация по задаче'}</b></div>
+        <div class="block"><b>{l s='К какому спринту относится данная задача?'}</b></div>
         <input type="hidden" id="task-receiver" value="{$user.id}" />
+        <div class="block">
+          <select id="task-sprint" style="width: 81%">
+            <option value="0" disabled selected>{l s='Выберите спринт'}</option>
+            {foreach from=$sprints item=some}
+            <option value="{$some.id}">
+            {l s='С'} {$some.start|date_format:"%d"} {l s=$some.start|date_format:"%b"} {l s='по'} 
+            {$some.end|date_format:"%d"} {l s=$some.end|date_format:"%b"}, {$some.end|date_format:"%Y"}
+            </option>
+            {/foreach}
+          </select>
+        </div>
+        <div class="block"><b>{l s='Первичная информация по задаче'}</b></div>
         <div class="block"><input type="text" id="task-name" placeholder="{l s='Краткое название задачи'}" /></div>
         <div class="block"><textarea id="task-description" placeholder="{l s='Подробное описание задачи'}"></textarea></div>
         <div class="block"><b>{l s='Требования по задаче'}</b></div>

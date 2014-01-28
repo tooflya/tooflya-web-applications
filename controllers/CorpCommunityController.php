@@ -134,6 +134,7 @@ class CorpCommunityController extends BaseController
 
     $this->templates->assign("confirm_id", $user['id']);
     $this->templates->assign_array("SELECT * FROM `corp_tasks` WHERE `status` = '3' AND `sender` = '".$user['id']."'", "confirm_tasks");
+    $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `start` > NOW()", 'sprints');
   }
 
   /**
@@ -320,6 +321,8 @@ class CorpCommunityController extends BaseController
           $this->assignTaskRequirements($id);
           $this->assignTaskRisks($id);
 
+          $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `start` > NOW()", 'sprints');
+
           if(Ajax::isResponse())
           {
             $this->showLayout('CorpController/task.html', true);
@@ -488,8 +491,6 @@ class CorpCommunityController extends BaseController
     {
       if(Ajax::isResponse())
       {
-        $sprintId = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
-
         $user = Session::read('user');
 
         $sender = $user['id'];
@@ -500,6 +501,7 @@ class CorpCommunityController extends BaseController
         $type = Validate::post('task_type');
         $priority = Validate::post('priority');
         $number = Validate::post('number') ? Validate::post('number') : mysql_result(mysql_query("SELECT MAX(`id`) FROM `corp_tasks`"), 0) + 1000;
+        $sprintId = Validate::post('sprint');
         $new = true;
 
         if(mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks` WHERE `number` = '$number'")) > 0)

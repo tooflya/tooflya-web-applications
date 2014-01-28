@@ -233,13 +233,16 @@ $('#save-task').click(function() {
   var type = $('#task-type').val();
   var priority = $('#task-priority').val();
   var number = $('#task-number').val();
+  var sprint = $('#task-sprint').val();
 
   post += '&name=' + name;
   post += '&description=' + description;
   post += '&task_type=' + type;
   post += '&priority=' + priority;
+  post += '&sprint=' + sprint;
   if(number) post += '&number=' + number;
 
+  if(!sprint) { $('#task-sprint').addClass('error').focus(); return; }
   if(!name) { $('#task-name').addClass('error').focus(); return; }
   if(!description) { $('#task-description').addClass('error').focus(); return; }
   if(type < 1 || type > 5) { $('#task-type').addClass('error').focus(); return; }
