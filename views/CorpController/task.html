@@ -147,7 +147,7 @@
         <div class="block"><b>{l s='К какому спринту относится данная задача?'}</b></div>
         <div class="block">
           <select id="task-sprint" style="width: 81%">
-            <option value="0" disabled selected>{l s='Выберите спринт'}</option>
+            <option value="0" disabled>{l s='Выберите спринт'}</option>
             {foreach from=$sprints item=some}
             <option value="{$some.id}" {if $some.id == $task.sprint}selected{/if}>
             {l s='С'} {$some.start|date_format:"%d"} {l s=$some.start|date_format:"%b"} {l s='по'} 
