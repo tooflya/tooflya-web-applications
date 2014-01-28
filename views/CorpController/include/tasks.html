@@ -37,7 +37,7 @@
 
 {assign var="count" value="0"}
 {foreach from=$tasks item=some}
-{if $some.status == 3}
+{if $some.status == 3 and $some.sprint == $sprint}
 {assign var="count" value=$count + 1}
 {/if}
 {/foreach}
@@ -45,7 +45,7 @@
 <h3><b>{l s='Ожидающие подтверждения'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
-  {if $some.status == 3}
+  {if $some.status == 3 and $some.sprint == $sprint}
   <li class="teammates-task" data="{$some.id}">
     <img src="{$url}/assets/img/corp/task-{$some.type}.png" class="avatar">
     <div class="profile-info">
@@ -70,7 +70,7 @@
 {/if}
 {assign var="count" value="0"}
 {foreach from=$tasks item=some}
-{if $some.status < 3 || $some.status == 4}
+{if ($some.status < 3 || $some.status == 4) and $some.sprint == $sprint}
 {assign var="count" value=$count + 1}
 {/if}
 {/foreach}
@@ -78,7 +78,7 @@
 <h3><b>{l s='Текущие задачи'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
-  {if $some.status < 3 || $some.status == 4}
+  {if ($some.status < 3 || $some.status == 4) and $some.sprint == $sprint}
   <li class="teammates-task {if $some.status == 2}running{/if}" data="{$some.id}">
     <img src="{$url}/assets/img/corp/task-{$some.type}.png" class="avatar">
     <div class="profile-info">
@@ -103,7 +103,7 @@
 {/if}
 {assign var="count" value="0"}
 {foreach from=$tasks item=some}
-{if $some.status == 6}
+{if $some.status == 6 and $some.sprint == $sprint}
 {assign var="count" value=$count + 1}
 {/if}
 {/foreach}
@@ -111,7 +111,7 @@
 <h3><b>{l s='Выполненные задачи'} ({$count})</b></h3>
 <ul class="teammates-tasks-list">
 {foreach from=$tasks item=some}
-  {if $some.status == 6}
+  {if $some.status == 6 and $some.sprint == $sprint}
   <li class="teammates-task" data="{$some.id}">
     <img src="{$url}/assets/img/corp/task-{$some.type}.png" class="avatar">
     <div class="profile-info">
@@ -128,6 +128,32 @@
       </span>
     </div>
     <div class="profile-post">{i s=$some.description|truncate:170}</div>
+    <div class="clearfix"></div>
+  </li>
+  {/if}
+{/foreach}
+</ul>
+{/if}
+{assign var="count" value="0"}
+{foreach from=$tasks item=some}
+{if $some.sprint > $sprint}
+{assign var="count" value=$count + 1}
+{/if}
+{/foreach}
+{if $count > 0}
+<h5><b>{l s='Задачи, поставленные на последующие спринты'} ({$count})</b></h5>
+<ul class="teammates-tasks-list">
+{foreach from=$tasks item=some}
+  {if $some.sprint > $sprint}
+  <li class="teammates-task" data="{$some.id}">
+    <div class="profile-info">
+      {if $some.comments.count > 0}<a class="icon icon-comments" title="{l s='Количество комментариев к данной задаче'}">{$some.comments.count}</a>{/if}
+      {if $some.requirements.count > 0}<a class="icon icon-task" title="{l s='Количество указанных требований'}">{$some.requirements.count}</a>{/if}
+      {if $some.risks.count > 0}<a class="icon icon-risk" title="{l s='Количество предвиденных рисков'}">{$some.risks.count}</a>{/if}
+    </div>
+    <div class="profile-name">
+      {$some.title}
+    </div>
     <div class="clearfix"></div>
   </li>
   {/if}

@@ -117,7 +117,7 @@ class CorpCommunityController extends BaseController
 
     $sprintId = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
 
-    $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` <= '$sprintId' ORDER by `priority`, `title`");
+    $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' ORDER by `priority`, `title`");
 
     if(mysql_num_rows($selectUsersDada) > 0)
     {
@@ -133,6 +133,7 @@ class CorpCommunityController extends BaseController
     }
 
     $this->templates->assign("confirm_id", $user['id']);
+    $this->templates->assign("sprint", $sprintId);
     $this->templates->assign_array("SELECT * FROM `corp_tasks` WHERE `status` = '3' AND `sender` = '".$user['id']."'", "confirm_tasks");
     $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `end` > NOW()", 'sprints');
   }
