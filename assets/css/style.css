@@ -1227,6 +1227,8 @@ ul.teammates-list div.profile-name, ul.teammates-inner-list div.profile-name, di
   color: #197EAD;
   font-size: 12px;
   font-weight: 500;
+}
+ul.teammates-tasks-list div.profile-name {
   padding-right: 70px;
 }
 ul.teammates-list div.profile-post, ul.teammates-inner-list div.profile-post, div.teammates-inner div.profile-post {
