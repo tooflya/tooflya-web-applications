@@ -28,11 +28,29 @@ while($data = mysql_fetch_assoc($users))
 {
   $uid = $data['id'];
 
-  if(mysql_num_rows(mysql_query("SELECT * FROM `corp_sprints_fixes` WHERE `uid` = '$uid' AND `sid` = '$sid'")) <= 0)
+  if(mysql_num_rows(mysql_query("SELECT * FROM `corp_sprints_results` WHERE `uid` = '$uid' AND `sid` = '$sid'")) <= 0)
   {
-    mysql_query("INSERT INTO `corp_sprints_fixes` SET
+    $totalPointsOnTheSprint = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$uid' AND `sprint` = '$sid')"), 0);
+    $totalEarnedPoints = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$uid' AND `sprint` = '$sid' AND `status` = '6')"), 0);
+
+    $progress = round($totalEarnedPoints / $totalPointsOnTheSprint * 100);
+
+    if(!$totalEarnedPoints || $totalEarnedPoints < 0) $totalEarnedPoints = 0;
+
+    mysql_query("INSERT INTO `corp_sprints_results` SET
       `uid` = '$uid',
       `sid` = '$sid',
+      `value` = '$progress',
+      `points` = '$totalEarnedPoints'") or die(mysql_error());
+
+    $nsid = $sid + 1;
+
+    mysql_query("UPDATE `corp_tasks` SET `status` = '7' WHERE `status` = '6' AND `receiver` = '$uid'");
+    mysql_query("UPDATE `corp_tasks` SET `sprint` = '$nsid' WHERE `status` < '6' AND `receiver` = '$uid'");
+
+    mysql_query("INSERT INTO `corp_sprints_fixes` SET
+      `uid` = '$uid',
+      `sid` = '$nsid',
       `value` = (SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$uid' AND `sprint` = '$sid'))");
   }
 }
