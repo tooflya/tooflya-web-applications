@@ -251,7 +251,7 @@ class CorpCommunityController extends BaseController
           $totalPointsOnTheSprint = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid')"), 0);
           $totalEarnedPoints = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid' AND `status` = '6')"), 0);
 
-          $this->templates->assign('progress', $totalPointsOnTheSprint / $totalEarnedPoints * 100);
+          $this->templates->assign('progress', round($totalEarnedPoints / $totalPointsOnTheSprint * 100));
 
           Ajax::generate()->value("response", 1);
 
