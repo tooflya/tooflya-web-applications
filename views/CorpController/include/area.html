@@ -7,10 +7,9 @@
       <div class="profile-status">{if $user.status == 0}{l s='Now offline'}{else}<b>{l s='Online'}</b>{/if}</div>
     </div>
     <div class="line"></div>
-      {$temp = 0|rand:100}
-    <div class="progress stripes {if $temp < 75}orange{else}green{/if}">
-      <div>{l s='Прогресс на спринте'}: {$temp}%</div>
-      <span class="bar" style="width: {$temp}%"></span>
+    <div class="progress stripes {if $progress < 75}orange{else}green{/if}">
+      <div>{l s='Прогресс на спринте'}: {$progress}%</div>
+      <span class="bar" style="width: {$progress}%"></span>
     </div>
   </div>
 </div>

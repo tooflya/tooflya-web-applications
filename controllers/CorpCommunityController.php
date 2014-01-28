@@ -246,6 +246,13 @@ class CorpCommunityController extends BaseController
             exit;
           }
 
+          $sid = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
+
+          $totalPointsOnTheSprint = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid')"), 0);
+          $totalEarnedPoints = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid' AND `status` = '6')"), 0);
+
+          $this->templates->assign('progress', $totalPointsOnTheSprint / $totalEarnedPoints * 100);
+
           Ajax::generate()->value("response", 1);
 
           $this->templates->assign('user', $data);
