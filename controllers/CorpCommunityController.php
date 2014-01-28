@@ -134,7 +134,7 @@ class CorpCommunityController extends BaseController
 
     $this->templates->assign("confirm_id", $user['id']);
     $this->templates->assign_array("SELECT * FROM `corp_tasks` WHERE `status` = '3' AND `sender` = '".$user['id']."'", "confirm_tasks");
-    $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `start` > NOW()", 'sprints');
+    $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `end` > NOW()", 'sprints');
   }
 
   /**
@@ -321,7 +321,7 @@ class CorpCommunityController extends BaseController
           $this->assignTaskRequirements($id);
           $this->assignTaskRisks($id);
 
-          $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `start` > NOW()", 'sprints');
+          $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `end` > NOW()", 'sprints');
 
           if(Ajax::isResponse())
           {
