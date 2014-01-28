@@ -488,6 +488,8 @@ class CorpCommunityController extends BaseController
     {
       if(Ajax::isResponse())
       {
+        $sprintId = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
+
         $user = Session::read('user');
 
         $sender = $user['id'];
@@ -509,7 +511,7 @@ class CorpCommunityController extends BaseController
           $new = false;
         }
 
-        mysql_query("INSERT INTO `corp_tasks` SET `number` = '$number', `receiver` = '$receiver', `sender` = '$sender', `title` = '$title', `description` = '$description', `type` = '$type', `priority` = '$priority'") or die
+        mysql_query("INSERT INTO `corp_tasks` SET `sprint` = '$sprintId', `number` = '$number', `receiver` = '$receiver', `sender` = '$sender', `title` = '$title', `description` = '$description', `type` = '$type', `priority` = '$priority'") or die
         (
           Ajax::generate()->value("response", mysql_error())
         );
