@@ -99,7 +99,9 @@ class Template extends Smarty {
 
         $params['s'] = str_replace('=#', '=%23', $params['s']);
 
-        return $params['s'];
+        $handler = new BBCode($params['s']);
+
+        return $handler->get_html();
       }
     }
 
