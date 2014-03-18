@@ -25,16 +25,23 @@ class GamesController extends BaseController {
    *
    *
    */
-  public function indexAction($id = false)
+  public function indexAction($id = false, $api = false)
   {
     if($id)
     {
       if($this->isGameAvailable($id))
       {
-        $this->assignGame($id);
+        if($api)
+        {
+          // Do nothing;
+        }
+        else
+        {
+          $this->assignGame($id);
 
-        $this->templates->assign(TITLE, 'Our Games'); // TODO: Change page title.
-        $this->templates->display($this->name, 'game');
+          $this->templates->assign(TITLE, 'Our Games'); // TODO: Change page title.
+          $this->templates->display($this->name, 'game');
+        }
       }
       else
       {

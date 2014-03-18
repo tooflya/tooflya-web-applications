@@ -4,3 +4,6 @@
 [submodule "games/signs"]
 	path = games/signs
 	url = git@github.com:tooflya/project-signs-js-client.git
+[submodule "tools/vk"]
+	path = tools/vk
+	url = git@github.com:mordehaigerman/VKontakte-PHP-SDK.git
