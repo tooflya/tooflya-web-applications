@@ -7,3 +7,6 @@
 [submodule "tools/vk"]
 	path = tools/vk
 	url = git@github.com:mordehaigerman/VKontakte-PHP-SDK.git
+[submodule "games/flappy-bird"]
+	path = games/flappy-bird
+	url = git@github.com:IgorMats/flappy-bird-js-client.git
