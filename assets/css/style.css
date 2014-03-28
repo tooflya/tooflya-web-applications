@@ -1710,3 +1710,6 @@ div.launch div.inner div.description p.small {
         -o-transition: none !important;
            transition: none !important;
 }
+#launch-game {
+  display: none;  
+}
