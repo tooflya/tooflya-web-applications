@@ -223,6 +223,10 @@ function yy()
   });
 }
 
+$('#launch-game').hide();
+$(document).ready(function() {
+  $('#launch-game').show();
+});
 $(document).on('click', '#launch-game', function(e) {
   $('#launch').removeClass('active').addClass('disabled');
   $(this).addClass('no-transitions').animate({
