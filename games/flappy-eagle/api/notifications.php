@@ -62,7 +62,7 @@ switch(Validate::get('platform'))
       }
       else
       {
-        mysql_query("UPDATE `notifications` SET `login` = '$login', `version` = '$version', `date` = NOW() WHERE `key` = '$id`");
+        mysql_query("UPDATE `notifications` SET `login` = '$login', `version` = '$version', `date` = NOW() WHERE `key` = '$id'");
 
         print
         "
