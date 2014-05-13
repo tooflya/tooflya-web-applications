@@ -225,8 +225,22 @@ class CorpCommunityController extends BaseController
    *
    *
    */
+  public function showProject($id)
+  {
+    $corpProjectsController = new CorpProjectsController();
+    $corpProjectsController->showProject($id);
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function showProfile($id)
   {
+    $corpProjectsController = new CorpProjectsController();
+    $corpProjectsController->assignProjectsList();
+
     $this->assignUsersList();
     $this->corpEventsController->assignCounts();
 
@@ -652,6 +666,17 @@ class CorpCommunityController extends BaseController
         }
       }
     }
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function sendNotification()
+  {
+    $corpProjectsController = new CorpProjectsController();
+    $corpProjectsController->sendNotification($id);
   }
 }
 

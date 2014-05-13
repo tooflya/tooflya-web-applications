@@ -1,0 +1,123 @@
+{if $project.push}
+<h3><b>{l s='Push уведомления'}</b></h3>
+<div>
+  <div class="teammates-help">
+    <div class="icon icon-task">
+      <span style="display: inline-block; min-width: 400px">{l s='Последнее уведомление было отправлено'}:</span>
+      <span>
+        {if $notifications}
+        {l s=$last.time|date_format:"%A"}, 
+        {$last.time|date_format:"%e"} {l s=$last.time|date_format:"%b"}
+        {l s='at'} 
+        {$last.time|date_format:'%H:%M'}
+        {else}
+        {l s='Уведомлений не было отправлено'}.
+        {/if}</span>
+    </div>
+    <div class="icon icon-task">
+      <span style="display: inline-block; min-width: 400px">{l s='За последний час зарегистрировалось'}:</span>
+      <span>{$lastregistrations.count} {l s='пользователей'}</span>
+    </div>
+    <div class="icon icon-task">
+      <span style="display: inline-block; min-width: 400px">{l s='Всего для уведомлений доступно'}:</span>
+      <span>{$totalregistrations.count} {l s='пользователей'}</span>
+    </div>
+  </div>
+  <a class="button" id="send-notification">{l s='Отправить уведомление'}</a>
+</div>
+
+<div class="send-notification-area">
+  <h3><b>{l s='Отправление уведомления'}</b></h3>
+    <div class="teammates-help">
+      <p>
+        {l s='Не рекомендуется отправлять уведомления чаще, чем раз в сутки. Перед отправлением проверьте историю отправленных уведомлений. Раздел "Push уведомления" отображает время послденего отправленного уведомления'}.
+      </p>
+    </div>
+    <div class="block">
+      <div class="block"><b>{l s='Основные параметры уведомления'}</b></div>
+      <input type="hidden" id="project-id" value="{$project.id}" />
+      <div class="block"><input type="text" id="notification-name" placeholder="{l s='Заголовок уведомления'}" /></div>
+      <div class="block"><a id="add-requirements" class="icon icon-add">{l s='Добавить краткое содержание уведомления'}</a></div>
+      <!--<div class="block"><textarea id="task-description" placeholder="{l s='Краткое содержание уведомления'}" style="height: 100px"></textarea></div>-->
+      <div class="block"><textarea id="notification-description" placeholder="{l s='Подробное содержание уведомления'}" style="height: 200px"></textarea></div>
+      <div class="block"><b>{l s='Графические материалы'}</b></div>
+      <div class="teammates-help"><p>{l s='Добавьте измененную иконку если не хотите использовать стандартную иконку приложения'}.</p></div>
+      <div class="block"><a id="add-requirements" class="icon icon-add">{l s='Добавить измененную иконку уведомления'}</a></div>
+      <div class="teammates-help"><p>{l s='Графический баннер используется для привлечения внимания'}.</p></div>
+      <div class="block"><a id="add-requirements" class="icon icon-add">{l s='Добавить графический баннер'}</a></div>
+      <div class="block"><b>{l s='Платформы'}</b></div>
+      <div class="teammates-help">
+        <p>{l s='Выберите платформы, пользователям которых будет отправлено push уведомление'}:</p>
+        <div class="block"><label><input type="checkbox" name="os-android" value="os-android" /> <b>Android</b></label></div>
+        <div class="block"><label><input type="checkbox" name="os-ios" value="os-ios" /> <b>iOS</b></label></div>
+        <div class="block"><label><input type="checkbox" name="os-windows-phone" value="os-windows-phone" /> <b>Windows Phone</b></label></div>
+      </div>
+      <div class="block"><b>{l s='Настройки поведения'}</b></div>
+      <div class="block">
+        <select id="notification-action">
+          <option value="0" disabled selected>{l s='Действие по нажатию'}</option>
+          <option value="1">Отмена уведомления</option>
+          <option value="2">Запустить приложение</option>
+          <option value="3">Открыть страницу в магазине</option>
+        </select>
+      </div>
+      <div class="block"><b>{l s='Системные настройки'}</b></div>
+      <div class="teammates-help">
+        <div class="block"><label><input type="checkbox" name="delete-registrations" value="delete-registrations" /> {l s='Удалить регистрации, которые были неуспешными'}.</label></div>
+        <div class="block"><label><input type="checkbox" name="translate-data" value="translate-data" /> {l s='Перевести текст уведомления с помощью Google Translate'}.</label></div>
+      </div>
+    </div><br />
+    <a class="button" id="continue-notification">{l s='Отправить уведомление'}</a>
+  </div>
+
+  <div class="continue-notification-area teammates-inner">
+    <div class="inner">
+      <div class="info teammates-help">
+        <img src="/assets/img/preloader.gif" width="50" height="50" class="avatar">
+        <h3 style="margin: 0;"><b>{l s='Происходит отправление уведомления...'}</b></h3>
+        <h3 style="display: inline-block; margin: 0;"><b>{l s='Важно'}:</b></h3>
+        <span>
+          {l s='Пожалуйста не закрывайте ваш браузер или текущую вкладку браузера во время отправки уведомлений'}.
+          {l s='Также рекомендуется воздержаться от перехода по ссылкам в текущей вкладке'}.
+        </span>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="line"></div>
+  <div class="teammates-help"></div>
+  <div>
+    <h3><b>{l s='История отправленных уведомлений'}</b></h3>
+    {if $notifications}
+    <ul class="events-list">
+    {foreach from=$notifications item=some}
+    <li>
+      <div class="block time icon icon-time">
+        {l s=$some.date|date_format:"%A"}, 
+        {$some.date|date_format:"%e"} {l s=$some.date|date_format:"%b"}
+      </div>
+      <div class="block avatar">
+        <img src="{$url}/assets/img/event-1.png" class="avatar event">
+      </div>
+      <div class="block avatar">
+        <img src="{$url}/assets/img/corp/{if $some.avatar}{$some.avatar}{else}photo.jpg{/if}" class="avatar">
+      </div>
+      <div class="block name" style="min-width: 200px">{l s=$some.name} {l s=$some.surname}</div>
+      <div class="block name">{$some.title}</div>
+      <div class="block post">{l s=$some.post}</div>
+      <div class="clearfix"></div>
+    </li>
+    {/foreach}
+    </ul>
+    {else}
+    <div class="teammates-help">{l s='Похоже ни одного уведомления не было отправлено'}.</div>
+    {/if}
+  </div>
+  {else}
+  <div>
+    <div class="teammates-help">{l s='Push уведомления для выбранного проекта недоступны'}.</div>
+  </div>
+  {/if}
+</div>
+<div class="clearfix"></div>

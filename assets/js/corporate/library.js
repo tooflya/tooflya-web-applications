@@ -46,14 +46,48 @@ $('#sign-out').click(function(e) {
     }
   });
 });
+$('#send-notification').click(function(e) {
+  $('#send-notification').hide();
+  $('div[class*=send-notification]').show();
+});
+$('#continue-notification').click(function(e) {
+  var id = $('#project-id').val();
+  var name = $('#notification-name').val();
+  var description = $('#notification-description').val();
+  var action = $('#notification-action').val();
+
+  if(!name) { $('#notification-name').addClass('error').focus(); return; }
+  if(!description) { $('#notification-description').addClass('error').focus(); return; }
+  if(!action) { $('#notification-action').addClass('error').focus(); return; }
+
+  $('div[class*=send-notification]').hide();
+  $('div[class*=notification-sending]').show();
+
+  ajaxRequest.send({
+    url: '/ajax/corporate.php',
+    data: "type=send-notification&id="+id+"&title="+name+"&description="+description+"&action="+action,
+    preload: false,
+    success: function(e) {
+      $('div[class*=notification-sending]').fadeOut(700, function() {
+        $('div[class*=notification-result]').fadeIn(700);
+        $('#notification-result-success').html(e.success);
+        $('#notification-result-failure').html(e.failure);
+        setTimeout(function() {
+          $('div[class*=notification-result]').fadeOut(700);
+        }, 30000);
+      });
+    }
+  });
+  update('project', {
+    id: id
+  });
+});
 $('#add-task').click(function(e) {
-  e.preventDefault();
   $('div[class*=teammates-tasks-add]').hide();
   $('div[class*=teammates-tasks-add-area]').show();
 });
 $('#edit-task').click(function(e) {
   checkCounts();
-  e.preventDefault();
   $('div[class*=teammates-tasks-edit]').hide();
   $('div[class*=teammates-tasks-edit-area]').show();
 });
@@ -76,6 +110,11 @@ $('input[id*=teammates-password-input]').keypress(function(e) {
 });
 $('li.teammates-user').click(function() {
   update('user', {
+    id: $(this).attr('data')
+  });
+});
+$('li.teammates-project').click(function() {
+  update('project', {
     id: $(this).attr('data')
   });
 });
@@ -340,6 +379,25 @@ function update(id, params) {
               }
             },
           data: 'id='+params.id+'&type=profile',
+          preload: true,
+          success: function(e) {
+          if(e.response) {
+            $('#body').html(e.body);
+          }
+        }
+      });
+    break;
+    case 'project':
+      ajaxRequest.send({
+          url: '/ajax/corporate.php',
+            history: {
+              url: params.id ? '/corp/project/'+params.id+'/' : '/corp/',
+              state: {
+                name: 'project',
+                params: params
+              }
+            },
+          data: 'id='+params.id+'&type=project',
           preload: true,
           success: function(e) {
           if(e.response) {

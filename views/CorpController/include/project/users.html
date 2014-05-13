@@ -1,0 +1,77 @@
+<h3><b>{l s='Пользователи приложения'}</b></h3>
+{if $project.users}
+<div class="teammates-inner project-users">
+  <div class="inner">
+    <div class="row">
+      <div class="field number">{l s='ID'}</div>
+      <div class="field platform">{l s='Platform'}</div>
+      <div class="field version">{l s='Version'}</div>
+      <div class="field login">{l s='Login'}</div>
+      <div class="field language">{l s='Language'}</div>
+      <div class="field gmt">{l s='GMT'}</div>
+      <div class="field currency">{l s='Currency'}</div>
+      <div class="field score">{l s='Score'}</div>
+      <div class="field date">{l s='Last Visit'}</div>
+    </div>
+    <div class="project-users-area">
+    {foreach from=$project.users item=some}
+    <div class="row">
+      <div class="field number">{$some.id}</div>
+      <div class="field platform">
+        {if $some.platform == 1}Android{/if}
+        {if $some.platform == 2}iOS{/if}
+      </div>
+      <div class="field version">
+      {if $some.version}
+      {$some.version}
+      {else}
+      <span>{l s='Нет данных'}</span>
+      {/if}
+      </div>
+      <div class="field login">
+      {if $some.login}
+      {$some.login}
+      {else}
+      <span>{l s='Нет данных'}</span>
+      {/if}
+      </div>
+      <div class="field language">
+      {if $some.language}
+      {$some.language}
+      {else}
+      <span>{l s='Нет данных'}</span>
+      {/if}
+      </div>
+      <div class="field gmt">
+      {if $some.gmt}
+      {$some.gmt}
+      {else}
+      <span>{l s='Нет данных'}</span>
+      {/if}
+      </div>
+      <div class="field currency">
+      {if $some.currency}
+      {$some.currency}
+      {else}
+      <span>{l s='Нет данных'}</span>
+      {/if}
+      </div>
+      <div class="field score">
+      {if $some.score}
+      {$some.score}
+      {else}
+      <span>{l s='Нет данных'}</span>
+      {/if}
+      </div>
+      <div class="field date">{$some.date}</div>
+    </div>
+    {/foreach}
+    </div>
+    <div class="clearfix"></div>
+  </div>
+</div>
+{else}
+<div>
+  <div class="teammates-help">{l s='Нет данных'}.</div>
+</div>
+{/if}

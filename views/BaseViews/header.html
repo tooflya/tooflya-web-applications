@@ -35,6 +35,33 @@
   </head>
   <body>
     <div class="events">
+      <div class="event notification-result">
+        <div>
+          <img src="/assets/img/sended.png" width="50" height="50" class="avatar">
+          <div class="left">
+            <div class="profile-name">{l s='Уведомления были отправлены'}</div>
+            <div class="profile-post">
+              <div>Было доставлено <b id="notification-result-success"></b> сообщений. <b id="notification-result-failure"></b> попыток были неудачными.</div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+      <div class="event notification-sending">
+        <div>
+          <img src="/assets/img/preloader.gif" width="50" height="50" class="avatar">
+          <div class="left">
+            <div class="profile-name">{l s='Отправление уведомлений...'}</div>
+            <div class="profile-post">
+              <div>
+                <b>{l s='Важно'}:</b>
+                {l s='Пожалуйста не закрывайте ваш браузер во время отправки'}.
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
       <div class="event mask">
         <img src="/assets/img/preloader.gif" width="50" height="50" class="avatar">
         <div class="left">

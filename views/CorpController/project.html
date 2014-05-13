@@ -1,0 +1,12 @@
+{include file="BaseViews/header.html"}
+<section class="content">
+  {include file="CorpController/include/left.html"}
+  <div class="right">
+  <h1>{l s='Корпоративный сервис'} <sup>Beta</sup></h1>
+  {include file="CorpController/include/menu.html"}
+  <h2>{$project.name}</h2>
+  {include file="CorpController/include/project/users.html"}
+  {include file="CorpController/include/project/data.html"}
+  {include file="CorpController/include/project/push.html"}
+</section>
+{include file="BaseViews/footer.html"}

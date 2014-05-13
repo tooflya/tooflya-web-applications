@@ -166,6 +166,9 @@ if(Ajax::isResponse())
             }
 
           break;
+
+          case 11:
+          break;
         }
 
         // DELETE EVENT

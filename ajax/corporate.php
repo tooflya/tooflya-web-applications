@@ -35,6 +35,12 @@ if(Ajax::isResponse())
 
     break;
 
+    case "project":
+
+      $controller->showProject(Validate::post('id'));
+
+    break;
+
     case "events":
 
       if(Validate::post('user'))
@@ -75,6 +81,12 @@ if(Ajax::isResponse())
     case "settings":
 
       $controller->showSettings();
+
+    break;
+
+    case "send-notification":
+
+      $controller->sendNotification();
 
     break;
   }

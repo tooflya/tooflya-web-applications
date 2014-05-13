@@ -43,10 +43,12 @@ switch(Validate::get('platform'))
     {
       case 'store':
       $id = Validate::get('id');
+      $login = Validate::get('login');
+      $version = Validate::get('version');
 
       if(mysql_num_rows(mysql_query("SELECT * FROM `notifications` WHERE `platform` = '1' AND `key` = '$id'")) <= 0)
       {
-        mysql_query("INSERT INTO `notifications` SET `platform` = '1', `key` = '$id'");
+        mysql_query("INSERT INTO `notifications` SET `platform` = '1', `key` = '$id', `login` = '$login', `version` = '$version'");
 
         print
         "
@@ -60,12 +62,14 @@ switch(Validate::get('platform'))
       }
       else
       {
+        mysql_query("UPDATE `notifications` SET `login` = '$login', `version` = '$version', `date` = NOW() WHERE `key` = '$id`");
+
         print
         "
         {
           response: {
             code: 2,
-            message: 'Device with Google Cloud Messaging key #$id already registered.'
+            message: 'Device with Google Cloud Messaging key #$id already registered. Updated.'
           }
         }
         ";

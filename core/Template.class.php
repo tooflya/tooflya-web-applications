@@ -160,7 +160,7 @@ class Template extends Smarty {
    * 
    *
    */
-   public function assign_array($query, $name)
+   public function assign_array($query, $name, $subname = false)
    {
     $data = mysql_query($query) or die(mysql_error());
 
@@ -170,7 +170,7 @@ class Template extends Smarty {
       $results[] = $row;
     }
 
-    $this->assign($name, $results);
+    $this->assign($name, $results, $subname);
   }
   
   /**
@@ -178,7 +178,7 @@ class Template extends Smarty {
    * 
    *
    */
-   public function assign_element($query, $name)
+   public function assign_element($query, $name, $subname = false)
    {
     $data = mysql_query($query) or die(mysql_error());
 
@@ -188,7 +188,7 @@ class Template extends Smarty {
       $results = $row;
     }
 
-    $this->assign($name, $results); 
+    $this->assign($name, $results, $subname); 
   }
   
   /**
@@ -196,17 +196,24 @@ class Template extends Smarty {
    * 
    *
    */
-   /*public function assign($key, $value)
+   public function assign($key, $value, $subname = false)
    {
-    if($this->tpl_vars[$key]) // TODO: Add merge values.
+    if($this->tpl_vars[$key])
     {
-      parent::assign($key, $value);
+      if($subname)
+      {
+        $this->tpl_vars[$key]->value['users'] = $value;
+      }
+      else
+      {
+        parent::assign($key, $value);
+      }
     }
     else
     {
       parent::assign($key, $value);
     }
-   }*/
+   }
 }
 
 /**

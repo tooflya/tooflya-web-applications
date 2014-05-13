@@ -146,6 +146,8 @@
                 }, 5000);
               });
             break;
+            case 'notification-sending':
+            break;
           }
         });
       },
@@ -154,7 +156,7 @@
       complete: function(e) {
         setTimeout(function() {
           poll();
-        }, 1000);
+        }, 5000);
       }
     });
 })();

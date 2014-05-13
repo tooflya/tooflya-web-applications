@@ -22,6 +22,7 @@ class CorpController extends BaseController
 {
 
   private $corpCommunityController;
+  private $corpProjectsController;
 
   /**
    *
@@ -33,6 +34,7 @@ class CorpController extends BaseController
     parent::__construct();
 
     $this->corpCommunityController = new CorpCommunityController();
+    $this->corpProjectsController = new CorpProjectsController();
   }
 
   /**
@@ -67,6 +69,17 @@ class CorpController extends BaseController
     $user = Session::read('user');
 
     $this->corpCommunityController->showProfile($id ? $id : $user['id']);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function projectAction($id = false)
+  {
+    $this->corpCommunityController->assignUsersList();
+    $this->corpProjectsController->showProject($id);
   }
 
   /**
