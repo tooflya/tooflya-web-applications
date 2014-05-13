@@ -182,7 +182,7 @@ class CorpProjectsController extends BaseController
 
           $result = $this->pushNotification(new Push($project, array(
             'id' => 1, // TODO: Add message ID.
-            'type' = > 1, // TODO: Add message type.
+            'type' => 1, // TODO: Add message type.
             'title' => Validate::post('title'),
             'preview' => Validate::post('preview'),
             'message' => Validate::post('description'),
