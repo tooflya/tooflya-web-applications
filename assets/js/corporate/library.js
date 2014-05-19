@@ -52,6 +52,7 @@ $('#send-notification').click(function(e) {
 });
 $('#continue-notification').click(function(e) {
   var id = $('#project-id').val();
+  var packages = $('#project-package').val();
   var name = $('#notification-name').val();
   var description = $('#notification-description').val();
   var action = $('#notification-action').val();
@@ -65,13 +66,13 @@ $('#continue-notification').click(function(e) {
 
   ajaxRequest.send({
     url: '/ajax/corporate.php',
-    data: "type=send-notification&id="+id+"&title="+name+"&description="+description+"&action="+action,
+    data: "type=send-notification&id="+id+"&title="+name+"&preview=" + "Preview" + "&description="+description+"&action="+action+"&package="+packages+"&icon=&banner=http://www.tooflya.com/ru/assets/img/Bubble-Fun-Big-Banner.jpg",
     preload: false,
     success: function(e) {
       $('div[class*=notification-sending]').fadeOut(700, function() {
         $('div[class*=notification-result]').fadeIn(700);
-        $('#notification-result-success').html(e.success);
-        $('#notification-result-failure').html(e.failure);
+        $('#notification-result-success').html(e.success || 0);
+        $('#notification-result-failure').html(e.failure || 0);
         setTimeout(function() {
           $('div[class*=notification-result]').fadeOut(700);
         }, 30000);

@@ -1788,12 +1788,27 @@ div.project-users div.row {
 div.project-users-area div.row {
   border-bottom: none;
 }
+div.project-users div.row div.field {
+  font-size: 12px;
+  color: #b8b8b8;
+  text-align: center;
+}
+div.project-users div.row div.field {
+  width: 20px;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: bold;
+}
 div.project-users-area div.row div.field {
   display: inline-block;
   border: none;
+  font-size: 12px;
+  font-weight: normal;
+  color: #a8a8a8;
+  text-transform: none;
 }
 div.project-users div.row div.field.number {
-  width: 20px;
+  width: 50px;
 }
 div.project-users div.row div.field.platform {
   width: 70px;
@@ -1817,5 +1832,5 @@ div.project-users div.row div.field.score {
   width: 70px;
 }
 div.project-users div.row div.field.date {
-  width: 170px;
+  width: 100px;
 }

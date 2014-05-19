@@ -164,7 +164,7 @@ class CorpProjectsController extends BaseController
         $success = 0;
         $failure = 0;
 
-        $count = mysql_result(mysql_query("SELECT COUNT(*) AS `count` FROM `notifications` WHERE `project` = '$id'"), 0);
+        $count = 1;//mysql_result(mysql_query("SELECT COUNT(*) AS `count` FROM `notifications` WHERE `project` = '$id'"), 0);
         $project = mysql_fetch_assoc(mysql_query("SELECT * FROM `projects` WHERE `id` = '$id'"));
 
         $part = 1000;
@@ -177,20 +177,22 @@ class CorpProjectsController extends BaseController
 
           while(false !== ($data = mysql_fetch_assoc($registrations)))
           {
-            $registrationsIds[] = $data['key'];
+            $registrationsIds[] = "APA91bFhdVVzSWQJu0fHb8opUru_yET9-zfJ4PUrwo0Tthgcd3oS8PaToMpLaP5xsR56O6sMVXyaF6CFtCeB503YbVL46nuR8guv94JyCkvWG-qB66XwCpUPvjYC8M9xu74FCxljapnwdXD4v_Kp2H0T8tkiR0CgmtmApObsdDUCnoeURqS94lI";//$data['key'];
           }
 
           $result = $this->pushNotification(new Push($project, array(
             'id' => 1, // TODO: Add message ID.
-            'type' => 1, // TODO: Add message type.
             'title' => Validate::post('title'),
             'preview' => Validate::post('preview'),
             'message' => Validate::post('description'),
-            'action' => Validate::post('action')
+            'action' => Validate::post('action'),
+            'package' => Validate::post('package'),
+            'icon' => Validate::post('icon'),
+            'banner' => Validate::post('banner')
           ), $registrationsIds));
 
-          $success += $result['success'];
-          $failure += $result['failure'];
+          $success += intval($result['success']);
+          $failure += intval($result['failure']);
 
           if($count - $i >= $part)
           {
@@ -203,9 +205,9 @@ class CorpProjectsController extends BaseController
         }
 
         Ajax::generate()->value("response", 1);
-        Ajax::generate()->value("count", $count);
-        Ajax::generate()->value("success", $success);
-        Ajax::generate()->value("failure", $failure);
+        if($count > 0) Ajax::generate()->value("count", $count);
+        if($success > 0) Ajax::generate()->value("success", $success);
+        if($failure > 0) Ajax::generate()->value("failure", $failure);
 
         /** History */
 
@@ -247,7 +249,7 @@ class CorpProjectsController extends BaseController
  
     $response = curl_exec($ch);
     curl_close($ch);
- 
+
     return json_decode($response, true);
   }
 }

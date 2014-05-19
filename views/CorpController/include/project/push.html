@@ -36,6 +36,7 @@
     <div class="block">
       <div class="block"><b>{l s='Основные параметры уведомления'}</b></div>
       <input type="hidden" id="project-id" value="{$project.id}" />
+      <input type="hidden" id="project-package" value="{$project.package}" />
       <div class="block"><input type="text" id="notification-name" placeholder="{l s='Заголовок уведомления'}" /></div>
       <div class="block"><a id="add-requirements" class="icon icon-add">{l s='Добавить краткое содержание уведомления'}</a></div>
       <!--<div class="block"><textarea id="task-description" placeholder="{l s='Краткое содержание уведомления'}" style="height: 100px"></textarea></div>-->
@@ -55,10 +56,10 @@
       <div class="block"><b>{l s='Настройки поведения'}</b></div>
       <div class="block">
         <select id="notification-action">
-          <option value="0" disabled selected>{l s='Действие по нажатию'}</option>
-          <option value="1">Отмена уведомления</option>
-          <option value="2">Запустить приложение</option>
-          <option value="3">Открыть страницу в магазине</option>
+          <option value="-1" disabled selected>{l s='Действие по нажатию'}</option>
+          <option value="0">Отмена уведомления</option>
+          <option value="1">Запустить приложение</option>
+          <option value="2">Открыть страницу в магазине</option>
         </select>
       </div>
       <div class="block"><b>{l s='Системные настройки'}</b></div>
