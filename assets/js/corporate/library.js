@@ -66,7 +66,7 @@ $('#continue-notification').click(function(e) {
 
   ajaxRequest.send({
     url: '/ajax/corporate.php',
-    data: "type=send-notification&id="+id+"&title="+name+"&preview=" + "Preview" + "&description="+description+"&action="+action+"&package="+packages+"&icon=&banner=http://www.tooflya.com/ru/assets/img/Bubble-Fun-Big-Banner.jpg",
+    data: "type=send-notification&id="+id+"&title="+name+"&preview=" + "Preview" + "&description="+description+"&action="+action+"&package="+packages+"&icon=&banner=",
     preload: false,
     success: function(e) {
       $('div[class*=notification-sending]').fadeOut(700, function() {
