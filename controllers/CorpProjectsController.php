@@ -164,7 +164,7 @@ class CorpProjectsController extends BaseController
         $success = 0;
         $failure = 0;
 
-        $count = 1;//mysql_result(mysql_query("SELECT COUNT(*) AS `count` FROM `notifications` WHERE `project` = '$id'"), 0);
+        $count = mysql_result(mysql_query("SELECT COUNT(*) AS `count` FROM `notifications` WHERE `project` = '$id'"), 0);
         $project = mysql_fetch_assoc(mysql_query("SELECT * FROM `projects` WHERE `id` = '$id'"));
 
         $part = 1000;
@@ -177,7 +177,7 @@ class CorpProjectsController extends BaseController
 
           while(false !== ($data = mysql_fetch_assoc($registrations)))
           {
-            $registrationsIds[] = "APA91bFhdVVzSWQJu0fHb8opUru_yET9-zfJ4PUrwo0Tthgcd3oS8PaToMpLaP5xsR56O6sMVXyaF6CFtCeB503YbVL46nuR8guv94JyCkvWG-qB66XwCpUPvjYC8M9xu74FCxljapnwdXD4v_Kp2H0T8tkiR0CgmtmApObsdDUCnoeURqS94lI";//$data['key'];
+            $registrationsIds[] = $data['key'];
           }
 
           $result = $this->pushNotification(new Push($project, array(
