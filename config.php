@@ -64,7 +64,7 @@ mysql_query("SET NAMES UTF8");
 define('PATH', 'D:/Server/tooflya.com/www/');
 define('DEBUG', true);
 define('EVENTS', true);
-define('URL', 'http://www.tooflya.com');
+define('URL', (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').'www.tooflya.com');
 define('SUBSCRIBERS_COUNT', 10043);
 
 require('autoload.php');
