@@ -19,7 +19,7 @@
  */
 
 require('../../config.php');
-
+print 1;
 $sid = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
 
 $users = mysql_query("SELECT * FROM `corp_users`");
