@@ -1,0 +1,94 @@
+<div class="description">
+  <div class="class">
+    <div class="title">Info</div>
+    <ul>
+      <li>
+        <div>Server domain: <b>{$server.main.domain}</b></div>
+        <div>Server ip: <b>{$server.main.ip}</b></div>
+      </li>
+      <li>
+        <div>Operation system: <b>{$server.main.system}</b></div>
+        <div>Total Server Storage: <b>{($server.main.disk.total / 1024 / 1024 / 1024)|round:2} GB</b></div>
+        <div>&nbsp;Free Server Storage: <b>{($server.main.disk.free / 1024 / 1024 / 1024)|round:2} GB</b></div>
+      </li>
+      <li>
+        <div>Total Server Memory: <b>{($server.main.memory.total / 1024 / 1024)|round:2} GB</b></div>
+        <div>&nbsp;Free Server Memory: <b>{($server.main.memory.free / 1024 / 1024)|round:2} GB</b></div>
+        <div>Server Memory Available for PHP: <b>{$server.main.memory.available}</b></div>
+      </li>
+    </ul>
+    <div>
+      Uptime: <b>{$server.main.uptime.days} days, {$server.main.uptime.hours} hours, {$server.main.uptime.minutes} min, {$server.main.uptime.seconds} sec,
+      <span class="uptime {if $server.main.uptime.percent < 90}critical{elseif $server.main.uptime.percent < 99}warning{else}success{/if}">{$server.main.uptime.percent}%</span> by last week</b>
+    </div>
+    <div>
+      <canvas id="uptime" width="800px" height="100px"></canvas>
+    </div>
+    <div>Load Average: <b>0.01, 0.03, 0.00 by last week</b></div>
+    <div>
+      <canvas id="la" width="800px" height="100px"></canvas>
+    </div>
+  </div>
+  <div class="class">
+   <div class="title">Software</div>
+    <div>Apache status: Fine</div>
+    <div>Nginx status: Fine</div>
+  </div>
+  <div class="class">
+   <div class="title">Bandwidth</div>
+    <div>Average bandwidth: <b>{$server.main.bandwidth} MiB/s</b></div>
+    <div>
+      <canvas id="bandwidth" width="800px" height="100px"></canvas>
+    </div>
+    <div>Average ping: <b>{$server.main.ping} ms</b></div>
+    <div>
+      <canvas id="ping" width="800px" height="100px"></canvas>
+    </div>
+  </div>
+</div>
+<script>
+var labels = [];
+var data = [];
+{foreach from=$bandwidth item=some}
+
+data.push({$some.speed});
+{/foreach}
+
+    var lineChartData = {
+      labels : labels,
+      datasets : [
+        {
+          label: "My First dataset",
+          fillColor : "rgba(174, 218, 235, 0.5)",
+          strokeColor : "rgba(122, 161, 176, 1.0)",
+          pointColor : "rgba(255, 255, 255, 1.0)",
+          pointStrokeColor : "rgba(122, 161, 176, 1.0)",
+          pointHighlightFill : "rgba(255, 255, 255, 1.0)",
+          pointHighlightStroke : "rgba(255, 255, 255, 1.0)",
+          data : data
+        }
+      ]
+
+    }
+
+  
+    window.myLine = new Chart(document.getElementById("uptime").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+    window.myLine = new Chart(document.getElementById("la").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+    window.myLine = new Chart(document.getElementById("bandwidth").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+    window.myLine = new Chart(document.getElementById("ping").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+  
+
+
+  </script>

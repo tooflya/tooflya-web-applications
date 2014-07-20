@@ -34,9 +34,9 @@ $('#sign-out').click(function(e) {
       data: 'type=logout',
       preload: true,
       history: {
-        url: '/corp/',
+        url: '/',
         state: {
-          name: 'corp'
+          name: ''
         }
       },
       success: function(e) {
@@ -65,7 +65,7 @@ $('#continue-notification').click(function(e) {
   $('div[class*=notification-sending]').show();
 
   ajaxRequest.send({
-    url: '/ajax/corporate.php',
+    url: '/ajax/company.php',
     data: "type=send-notification&id="+id+"&title="+name+"&preview=" + "Preview" + "&description="+description+"&action="+action+"&package="+packages+"&icon=&banner=",
     preload: false,
     success: function(e) {
@@ -163,9 +163,9 @@ signin = function() {
   ajaxRequest.send({
     url: '/ajax/permissions.php',
     history: {
-      url: '/corp/',
+      url: '/',
       state: {
-        name: 'user'
+        name: ''
       }
     },
     data: 'id='+signInID+'&password='+$(input).val()+"&type=login",
@@ -324,7 +324,7 @@ $('#save-task').click(function() {
   }
 
   ajaxRequest.send({
-    url: '/ajax/corporate.php',
+    url: '/ajax/company.php',
     data: "type=add-task&id="+id+""+post,
     preload: true,
     button: $('#save-task'),
@@ -352,9 +352,9 @@ function update(id, params) {
   switch(id) {
     case 'events':
       ajaxRequest.send({
-        url: '/ajax/corporate.php',
+        url: '/ajax/company.php',
         history: {
-          url: params.user ? '/corp/events/user/' : '/corp/events/',
+          url: params.user ? '/events/user/' : '/events/',
           state: {
             name: 'events',
             params: params
@@ -371,9 +371,9 @@ function update(id, params) {
     break;
     case 'user':
       ajaxRequest.send({
-          url: '/ajax/corporate.php',
+          url: '/ajax/company.php',
             history: {
-              url: params.id ? '/corp/user/'+params.id+'/' : '/corp/',
+              url: params.id ? '/user/'+params.id+'/' : '/',
               state: {
                 name: 'user',
                 params: params
@@ -390,9 +390,9 @@ function update(id, params) {
     break;
     case 'project':
       ajaxRequest.send({
-          url: '/ajax/corporate.php',
+          url: '/ajax/company.php',
             history: {
-              url: params.id ? '/corp/project/'+params.id+'/' : '/corp/',
+              url: params.id ? '/project/'+params.id+'/' : '/',
               state: {
                 name: 'project',
                 params: params
@@ -409,9 +409,9 @@ function update(id, params) {
     break;
     case 'task':
       ajaxRequest.send({
-          url: '/ajax/corporate.php',
+          url: '/ajax/company.php',
             history: {
-              url: params.id ? '/corp/task/'+params.id+'/' : '/corp/',
+              url: params.id ? '/task/'+params.id+'/' : '/',
               state: {
                 name: 'task',
                 params: params
@@ -428,9 +428,9 @@ function update(id, params) {
     break;
     case 'settings':
       ajaxRequest.send({
-          url: '/ajax/corporate.php',
+          url: '/ajax/company.php',
             history: {
-              url: '/corp/settings/',
+              url: '/settings/',
               state: {
                 name: 'settings',
                 params: params
@@ -447,7 +447,7 @@ function update(id, params) {
     break;
     case 'delete-task':
       ajaxRequest.send({
-        url: '/ajax/corporate.php',
+        url: '/ajax/company.php',
         data: 'type=delete-task&id='+params.id,
         preload: true,
         success: function(e) {
@@ -463,7 +463,7 @@ function update(id, params) {
       var comment = $('#task-review-comment').val();
 
       ajaxRequest.send({
-        url: '/ajax/corporate.php',
+        url: '/ajax/company.php',
         data: 'type=task-change-status&id='+params.id+'&status='+params.status+'&comment='+comment,
         preload: true,
         success: function(e) {

@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file CorpCommunityController.php
+ * @file CompanyCommunityController.php
  * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
@@ -39,10 +39,10 @@ class Push
   }
 }
 
-class CorpProjectsController extends BaseController
+class CompanyProjectsController extends BaseController
 {
 
-  private $corpEventsController;
+  private $companyEventsController;
 
   /**
    *
@@ -53,7 +53,7 @@ class CorpProjectsController extends BaseController
   {
     parent::__construct();
 
-    $this->corpEventsController = new CorpEventsController();
+    $this->companyEventsController = new CompanyEventsController();
   }
 
   /**
@@ -103,8 +103,8 @@ class CorpProjectsController extends BaseController
   {
     if(Session::user())
     {
-      $corpCommunityController = new CorpCommunityController();
-      $corpCommunityController->assignUsersList();
+      $companyCommunityController = new CompanyCommunityController();
+      $companyCommunityController->assignUsersList();
 
       $this->assignProjectsList();
 
@@ -116,18 +116,18 @@ class CorpProjectsController extends BaseController
         $this->templates->assign_element("SELECT COUNT(*) AS `count` FROM `notifications` WHERE `project` = '$id'", 'totalregistrations');
         $this->templates->assign_element("SELECT COUNT(*) AS `count` FROM `notifications` WHERE `project` = '$id' AND `date` BETWEEN NOW() - INTERVAL 1 HOUR AND NOW()", 'lastregistrations');
         $this->templates->assign_element("SELECT `date` AS `time` FROM `notifications.history` WHERE `project` = '$id' ORDER by `id` DESC LIMIT 1", 'last');
-        $this->templates->assign_array("SELECT * FROM `notifications.history` LEFT JOIN `corp_users` ON(`notifications.history`.`user` = `corp_users`.`id`) WHERE `project` = '$id' ORDER by `notifications.history`.`id` DESC", 'notifications');
+        $this->templates->assign_array("SELECT * FROM `notifications.history` LEFT JOIN `company.users` ON(`notifications.history`.`user` = `company.users`.`id`) WHERE `project` = '$id' ORDER by `notifications.history`.`id` DESC", 'notifications');
         $this->templates->assign_array("SELECT * FROM `notifications` WHERE `project` = '$id' ORDER by `date` DESC LIMIT 100", 'project', 'users');
 
         if(Ajax::isResponse())
         {
-          $this->showLayout('CorpController/project.html', true);
+          $this->showLayout('CompanyController/project.html', true);
 
           Ajax::generate()->value("response", 1);
         }
         else
         {
-          $this->templates->display('CorpController', 'project');
+          $this->templates->display('CompanyController', 'project');
         }
       }
       else
@@ -144,7 +144,7 @@ class CorpProjectsController extends BaseController
     }
     else
     {
-      $this->templates->display('CorpController');
+      $this->templates->display('CompanyController');
     }
   }
 

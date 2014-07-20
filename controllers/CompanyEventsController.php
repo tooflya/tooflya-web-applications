@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file CorpEventsController.php
+ * @file CompanyEventsController.php
  * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
@@ -18,7 +18,7 @@
  *
  */
 
-class CorpEventsController extends BaseController
+class CompanyEventsController extends BaseController
 {
 
   /**
@@ -68,7 +68,7 @@ class CorpEventsController extends BaseController
   public function assignEvents()
   {
     $this->templates->assign('yesterday', strtotime('-1 day'));
-    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
+    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `company.users` ON(`events`.`sender` = `company.users`.`id`) GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
   }
 
   /**
@@ -81,7 +81,7 @@ class CorpEventsController extends BaseController
     $user = Session::read('user');
 
     $this->templates->assign('yesterday', strtotime('-1 day'));
-    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `corp_users` ON(`events`.`sender` = `corp_users`.`id`) WHERE `events`.`sender` = ".$user['id']." GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
+    $this->templates->assign_array("SELECT * FROM `events` LEFT JOIN `company.users` ON(`events`.`sender` = `company.users`.`id`) WHERE `events`.`sender` = ".$user['id']." GROUP by `events`.`timestamp` ORDER by `events`.`timestamp` DESC, `events`.`id` DESC", 'eventslist');
   }
 }
 

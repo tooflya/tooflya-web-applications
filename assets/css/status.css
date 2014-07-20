@@ -1,0 +1,101 @@
+b {
+  font-weight: 500;
+}
+img.preloader {
+  margin: 0 auto;
+  margin-top: 50px;
+  display: block;
+}
+header div.title {
+  float: left;
+}
+header div.status {
+  float: right;
+}
+header div.status h2 {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  letter-spacing: -2px;
+}
+header div.status h2.success {
+  color: #99ccb2;
+}
+header div.status h2.warning {
+  color: #FFC883;
+}
+header div.status h2.critical {
+  color: #d01040;
+}
+header a:hover {
+  text-decoration: none;
+}
+canvas {
+  margin-top: 10px;
+}
+h1.status {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  letter-spacing: -2px;
+  color: #000;
+}
+h1.status:active {
+  padding-top: 1px;
+}
+h1.status span {
+  font-weight: 400;
+  color: #99ccb2;
+}
+h1.status span sup {
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+div.intro {
+  padding-bottom: 40px;
+}
+div.content {
+}
+div.content div.block {
+  padding-bottom: 40px;
+}
+div.content div.block div.title {
+  border-bottom: 1px solid #ccc;
+}
+div.content div.block div.title h3 {
+  margin-bottom: 5px;
+  color: #99ccb2;
+  font-weight: 500;
+}
+div.content div.block div.description {
+}
+div.content div.block div.description div.class {
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+div.content div.block div.description div.class ul {
+  list-style: none;
+}
+div.content div.block div.description div.class ul li {
+  display: inline-block;
+  padding-right: 20px;
+  vertical-align: top;
+}
+div.content div.block div.description div.class div.title {
+  color: #99ccb2;
+  border: none;
+  padding-bottom: 10px;
+  text-decoration: underline;
+}
+span.uptime {
+  font-size: 20px;
+}
+span.uptime.success {
+  color: #99ccb2;
+}
+span.uptime.warning {
+  color: #FFC883;
+}
+span.uptime.critical {
+  color: #d01040;
+}

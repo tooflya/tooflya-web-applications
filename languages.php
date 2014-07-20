@@ -30,8 +30,11 @@ if(Validate::isPost())
       $origin = str_replace('/ru', '', $origin);
       $origin = str_replace('/en', '', $origin);
 
-      header('Location: /'.$language.''.$origin);
-      exit;
+      if(DISPLAY_LANGUAGE)
+      {
+        header('Location: /'.$language.''.$origin);
+        exit;
+      }
     }
   }
 }
@@ -44,17 +47,23 @@ else
   ) {
     if(Session::read('language'))
     {
-        $language = Session::read('language');
-    
-        header('Location: /'.$language.''.$origin);
-        exit;
+        if(DISPLAY_LANGUAGE)
+        {
+          $language = Session::read('language');
+
+          header('Location: /'.$language.''.$origin);
+          exit;
+        }
     }
     else
     {
       $language = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
     
-      header('Location: /'.$language.''.$origin);
-      exit;
+      if(DISPLAY_LANGUAGE)
+      {
+        header('Location: /'.$language.''.$origin);
+        exit;
+      }
     }
   }
   else
@@ -79,6 +88,11 @@ else
       Session::write('language', $language);
     }
   }
+}
+
+if(!DISPLAY_LANGUAGE)
+{
+  $language = Session::read('language');
 }
 
 switch($language)

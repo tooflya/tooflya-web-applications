@@ -24,7 +24,7 @@ require('../config.php');
 
 if(Ajax::isResponse())
 {
-  $controller = new CorpCommunityController();
+  $controller = new CompanyCommunityController();
 
   switch(Validate::post('type'))
   {

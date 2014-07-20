@@ -132,10 +132,10 @@ var ajaxRequest = {
         if(Params.history) {
           if(Params.history.state.params) {
             if(!Params.history.state.params.pop) {
-              history.pushState(Params.history.state, null, '/' + location.href.split('/')[3] + Params.history.url);
+              history.pushState(Params.history.state, null, location.origin + Params.history.url);
             }
           } else {
-            history.pushState(Params.history.state, null, '/' + location.href.split('/')[3] + Params.history.url);
+            history.pushState(Params.history.state, null, location.origin + Params.history.url);
           }
         }
 
@@ -181,7 +181,7 @@ $(function() {
       });
       $(this).addClass('active');
     });
-    $(".center-slider").jCarouselLite({
+    /*$(".center-slider").jCarouselLite({
       btnNext: "#center-slider-right",
       btnPrev: "#center-slider-left",
       visible: 1,
@@ -211,7 +211,7 @@ $(function() {
       if(y > y2) y = 1;
 
       yy();
-    });
+    });*/
 });
 
 function yy()

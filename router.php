@@ -23,11 +23,29 @@
  * Check client query params, detect and parse query string
  *
  */
-$params = parse_url( str_replace('/'.str_replace('/var/www', '', PATH), '', preg_replace('/\/{1,}/', '/',$_SERVER['REQUEST_URI'])));
+$host = array_filter(explode('.', $_SERVER['HTTP_HOST']));
+$params = parse_url(str_replace('/'.str_replace('/var/www', '', PATH), '', preg_replace('/\/{1,}/', '/', $_SERVER['REQUEST_URI'])));
 $origin = preg_replace('/\/{1,}/', '/', $_SERVER['REQUEST_URI']);
 $params['path'] = array_filter(explode('/', $params['path']));
 
-require('languages.php');
+if($params['path'][1] != 'ajax')
+{
+  if($host[0] != "www" && $host[0] != "tooflya")
+  {
+    array_splice($params['path'], 0, 0, $host[0]);
+  }
+
+  if(!DISPLAY_LANGUAGE)
+  {
+    if($params['path'][1] != 'ru' && $params['path'][1] != 'en')
+    {
+      array_unshift($params['path'], Session::read('language'));
+      array_unshift($params['path'], Session::read('language'));
+    }
+  }
+
+  require('languages.php');
+}
 
 /**
  *

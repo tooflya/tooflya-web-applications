@@ -7,10 +7,10 @@ RewriteEngine on
 RewriteCond %{HTTP_HOST} ^tooflya\.com$ [NC]
 RewriteRule ^(.*)$ http://www.tooflya.com/$1 [R=301,L]
 
-RewriteCond %{HTTP_HOST} ^company\.tooflya\.com$ [NC]
-RewriteRule ^(.*)$ http://www.tooflya.com/corp/ [R=301,L]
+RewriteCond %{REQUEST_URI}  !\.(woff|ttf|map|jpg|jpeg|gif|png|ico|css|bmp|swf|js|apk|ipa|exe|rar|zip|html|php)$
+RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
 
-RewriteRule ^(en|ru|fr|ua|ch|de)(.*)$ $2 [L]
+RewriteRule ^(en|ru)(.*)$ $2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -20,7 +20,7 @@ RewriteCond %{REQUEST_URI} !^/ajax
 RewriteRule . index.php
 
 <Files "config.php">
-    Deny from all
+  Deny from all
 </Files>
 
 php_value session.cookie_lifetime 360000

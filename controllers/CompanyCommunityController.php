@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file CorpCommunityController.php
+ * @file CompanyCommunityController.php
  * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
@@ -18,10 +18,10 @@
  *
  */
 
-class CorpCommunityController extends BaseController
+class CompanyCommunityController extends BaseController
 {
 
-  private $corpEventsController;
+  private $companyEventsController;
 
   /**
    *
@@ -32,7 +32,7 @@ class CorpCommunityController extends BaseController
   {
     parent::__construct();
 
-    $this->corpEventsController = new CorpEventsController();
+    $this->companyEventsController = new CompanyEventsController();
   }
 
   /**
@@ -70,7 +70,7 @@ class CorpCommunityController extends BaseController
    */
   public function assignUsersList()
   {
-    $this->templates->assign_array("SELECT * FROM `corp_users` WHERE `available` = '1' ORDER by `name`", 'users');
+    $this->templates->assign_array("SELECT * FROM `company.users` WHERE `available` = '1' ORDER by `name`", 'users');
   }
 
   /**
@@ -83,7 +83,7 @@ class CorpCommunityController extends BaseController
     $user = Session::read('user');
     $id = $user['id'];
 
-    $this->templates->assign_element("SELECT * FROM `corp_users` WHERE `id` = '$id'", 'user');
+    $this->templates->assign_element("SELECT * FROM `company.users` WHERE `id` = '$id'", 'user');
   }
 
   /**
@@ -93,7 +93,7 @@ class CorpCommunityController extends BaseController
    */
   public function assignTaskRequirements($id)
   {
-    $this->templates->assign_array("SELECT * FROM `corp_tasks_requirements` WHERE `tid` = '$id'", 'requirements');
+    $this->templates->assign_array("SELECT * FROM `company.tasks.requirements` WHERE `tid` = '$id'", 'requirements');
   }
 
   /**
@@ -103,7 +103,7 @@ class CorpCommunityController extends BaseController
    */
   public function assignTaskRisks($id)
   {
-    $this->templates->assign_array("SELECT * FROM `corp_tasks_risks` WHERE `tid` = '$id'", 'risks');
+    $this->templates->assign_array("SELECT * FROM `company.tasks.risks` WHERE `tid` = '$id'", 'risks');
   }
 
   /**
@@ -115,9 +115,9 @@ class CorpCommunityController extends BaseController
   {
     $user = Session::read('user');
 
-    $sprintId = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
+    $sprintId = mysql_result(mysql_query("SELECT `id` FROM `company.sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
 
-    $selectUsersDada = mysql_query("SELECT * FROM `corp_tasks` WHERE `receiver` = '$id' ORDER by `priority`, `title`");
+    $selectUsersDada = mysql_query("SELECT * FROM `company.tasks` WHERE `receiver` = '$id' ORDER by `priority`, `title`");
 
     if(mysql_num_rows($selectUsersDada) > 0)
     {
@@ -125,8 +125,8 @@ class CorpCommunityController extends BaseController
       {
         $selectUsersDadaGeneric[] = $data;
         $selectUsersDadaGeneric[count($selectUsersDadaGeneric) - 1]['comments']['count'] = 0;//mysql_num_rows()
-        $selectUsersDadaGeneric[count($selectUsersDadaGeneric) - 1]['requirements']['count'] = mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks_requirements` WHERE `tid` = ".$data['id']));
-        $selectUsersDadaGeneric[count($selectUsersDadaGeneric) - 1]['risks']['count'] = mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks_risks` WHERE `tid` = ".$data['id']));
+        $selectUsersDadaGeneric[count($selectUsersDadaGeneric) - 1]['requirements']['count'] = mysql_num_rows(mysql_query("SELECT * FROM `company.tasks_requirements` WHERE `tid` = ".$data['id']));
+        $selectUsersDadaGeneric[count($selectUsersDadaGeneric) - 1]['risks']['count'] = mysql_num_rows(mysql_query("SELECT * FROM `company.tasks_risks` WHERE `tid` = ".$data['id']));
       }
 
       $this->templates->assign('tasks', $selectUsersDadaGeneric);
@@ -134,8 +134,8 @@ class CorpCommunityController extends BaseController
 
     $this->templates->assign("confirm_id", $user['id']);
     $this->templates->assign("sprint", $sprintId);
-    $this->templates->assign_array("SELECT * FROM `corp_tasks` WHERE `status` = '3' AND `sender` = '".$user['id']."'", "confirm_tasks");
-    $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `end` > NOW()", 'sprints');
+    $this->templates->assign_array("SELECT * FROM `company.tasks` WHERE `status` = '3' AND `sender` = '".$user['id']."'", "confirm_tasks");
+    $this->templates->assign_array("SELECT * FROM `company.sprints` WHERE `end` > NOW()", 'sprints');
   }
 
   /**
@@ -155,7 +155,7 @@ class CorpCommunityController extends BaseController
    */
   public function signIn($id, $password)
   {
-    $selectUsersDada = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '$id' AND `password` = '$password' LIMIT 1");
+    $selectUsersDada = mysql_query("SELECT * FROM `company.users` WHERE `id` = '$id' AND `password` = '$password' LIMIT 1");
 
     if(mysql_num_rows($selectUsersDada) > 0)
     {
@@ -170,7 +170,7 @@ class CorpCommunityController extends BaseController
 
       if(EVENTS)
       {
-        $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+        $selectUsersDada = mysql_query("SELECT * FROM `company.users`");
         
         while ($data = mysql_fetch_assoc($selectUsersDada))
         {
@@ -201,7 +201,7 @@ class CorpCommunityController extends BaseController
       $user = Session::read('user');
       $id = $user['id'];
 
-      $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+      $selectUsersDada = mysql_query("SELECT * FROM `company.users`");
       
       while ($data = mysql_fetch_assoc($selectUsersDada))
       {
@@ -217,7 +217,7 @@ class CorpCommunityController extends BaseController
     Ajax::generate()->value("response", 1);
 
     $this->assignUsersList();
-    $this->showLayout('CorpController/index.html', true);
+    $this->showLayout('CompanyController/index.html', true);
   }
 
   /**
@@ -227,8 +227,8 @@ class CorpCommunityController extends BaseController
    */
   public function showProject($id)
   {
-    $corpProjectsController = new CorpProjectsController();
-    $corpProjectsController->showProject($id);
+    $companyProjectsController = new CompanyProjectsController();
+    $companyProjectsController->showProject($id);
   }
 
   /**
@@ -238,15 +238,15 @@ class CorpCommunityController extends BaseController
    */
   public function showProfile($id)
   {
-    $corpProjectsController = new CorpProjectsController();
-    $corpProjectsController->assignProjectsList();
+    $companyProjectsController = new CompanyProjectsController();
+    $companyProjectsController->assignProjectsList();
 
     $this->assignUsersList();
-    $this->corpEventsController->assignCounts();
+    $this->companyEventsController->assignCounts();
 
     if(Session::user())
     {
-      $selectUsersDada = mysql_query("SELECT * FROM `corp_users` WHERE `id` = '$id' LIMIT 1");
+      $selectUsersDada = mysql_query("SELECT * FROM `company.users` WHERE `id` = '$id' LIMIT 1");
 
       if(mysql_num_rows($selectUsersDada) > 0)
       {
@@ -260,10 +260,10 @@ class CorpCommunityController extends BaseController
             exit;
           }
 
-          $sid = mysql_result(mysql_query("SELECT `id` FROM `corp_sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
+          $sid = mysql_result(mysql_query("SELECT `id` FROM `company.sprints` WHERE NOW() BETWEEN `start` AND `end` LIMIT 1"), 0);
 
-          $totalPointsOnTheSprint = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid')"), 0);
-          $totalEarnedPoints = mysql_result(mysql_query("SELECT SUM(`points`) FROM `corp_tasks_requirements` WHERE `tid` IN (SELECT `id` FROM `corp_tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid' AND `status` = '6')"), 0);
+          $totalPointsOnTheSprint = mysql_result(mysql_query("SELECT SUM(`points`) FROM `company.tasks.requirements` WHERE `tid` IN (SELECT `id` FROM `company.tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid')"), 0);
+          $totalEarnedPoints = mysql_result(mysql_query("SELECT SUM(`points`) FROM `company.tasks.requirements` WHERE `tid` IN (SELECT `id` FROM `company.tasks` WHERE `receiver` = '$id' AND `sprint` = '$sid' AND `status` = '6')"), 0);
 
           $this->templates->assign('progress', round($totalEarnedPoints / $totalPointsOnTheSprint * 100));
 
@@ -275,11 +275,11 @@ class CorpCommunityController extends BaseController
 
           if(Ajax::isResponse())
           {
-            $this->showLayout('CorpController/main.html', true);
+            $this->showLayout('CompanyController/main.html', true);
           }
           else
           {
-            $this->templates->display('CorpController', 'main');
+            $this->templates->display('CompanyController', 'main');
           }
         }
       }
@@ -299,7 +299,7 @@ class CorpCommunityController extends BaseController
     }
     else
     {
-      $this->templates->display('CorpController');
+      $this->templates->display('CompanyController');
     }
   }
 
@@ -312,22 +312,22 @@ class CorpCommunityController extends BaseController
   {
     $this->assignUsersList();
     $this->assignUserData();
-    $this->corpEventsController->assignCounts();
+    $this->companyEventsController->assignCounts();
 
     if(Session::user())
     {
-      $selectUsersDada = mysql_query("SELECT `corp_tasks`.*,
-        `corp_users`.`name` AS `sender_name`, `corp_users`.`surname` AS `sender_surname`, `corp_users`.`id` AS `sender_id`, `corp_sprints`.`end` AS `end_timestamp`
-        FROM `corp_tasks`
-        LEFT JOIN `corp_users` ON(`corp_tasks`.`sender` = `corp_users`.`id`)
-        LEFT JOIN `corp_sprints` ON(`corp_tasks`.`sprint` = `corp_sprints`.`id`)
-        WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
+      $selectUsersDada = mysql_query("SELECT `company.tasks`.*,
+        `company.users`.`name` AS `sender_name`, `company.users`.`surname` AS `sender_surname`, `company.users`.`id` AS `sender_id`, `company.sprints`.`end` AS `end_timestamp`
+        FROM `company.tasks`
+        LEFT JOIN `company.users` ON(`company.tasks`.`sender` = `company.users`.`id`)
+        LEFT JOIN `company.sprints` ON(`company.tasks`.`sprint` = `company.sprints`.`id`)
+        WHERE `company.tasks`.`id` = '$id' LIMIT 1");
 
-      $selectUsersDada2 = mysql_query("SELECT `corp_tasks`.*,
-        `corp_users`.`name` AS `receiver_name`, `corp_users`.`surname` AS `receiver_surname`, `corp_users`.`id` AS `receiver_id`
-        FROM `corp_tasks`
-        LEFT JOIN `corp_users` ON(`corp_tasks`.`receiver` = `corp_users`.`id`)
-        WHERE `corp_tasks`.`id` = '$id' LIMIT 1");
+      $selectUsersDada2 = mysql_query("SELECT `company.tasks`.*,
+        `company.users`.`name` AS `receiver_name`, `company.users`.`surname` AS `receiver_surname`, `company.users`.`id` AS `receiver_id`
+        FROM `company.tasks`
+        LEFT JOIN `company.users` ON(`company.tasks`.`receiver` = `company.users`.`id`)
+        WHERE `company.tasks`.`id` = '$id' LIMIT 1");
 
       if(mysql_num_rows($selectUsersDada) > 0)
       {
@@ -343,15 +343,15 @@ class CorpCommunityController extends BaseController
           $this->assignTaskRequirements($id);
           $this->assignTaskRisks($id);
 
-          $this->templates->assign_array("SELECT * FROM `corp_sprints` WHERE `end` > NOW()", 'sprints');
+          $this->templates->assign_array("SELECT * FROM `company.sprints` WHERE `end` > NOW()", 'sprints');
 
           if(Ajax::isResponse())
           {
-            $this->showLayout('CorpController/task.html', true);
+            $this->showLayout('CompanyController/task.html', true);
           }
           else
           {
-            $this->templates->display('CorpController', 'task');
+            $this->templates->display('CompanyController', 'task');
           }
         }
       }
@@ -363,7 +363,7 @@ class CorpCommunityController extends BaseController
     }
     else
     {
-      $this->templates->display('CorpController');
+      $this->templates->display('CompanyController');
     }
   }
 
@@ -377,22 +377,22 @@ class CorpCommunityController extends BaseController
     if(Session::user())
     {
       $this->assignUsersList();
-      $this->corpEventsController->assignCounts();
+      $this->companyEventsController->assignCounts();
 
       if(Ajax::isResponse())
       {
         Ajax::generate()->value("response", 1);
 
-        $this->showLayout('CorpController/settings.html', true);
+        $this->showLayout('CompanyController/settings.html', true);
       }
       else
       {
-        $this->templates->display('CorpController', 'settings');
+        $this->templates->display('CompanyController', 'settings');
       }
     }
     else
     {
-      $this->templates->display('CorpController');
+      $this->templates->display('CompanyController');
     }
   }
 
@@ -406,23 +406,23 @@ class CorpCommunityController extends BaseController
     if(Session::user())
     {
       $this->assignUsersList();
-      $this->corpEventsController->assignEvents();
-      $this->corpEventsController->assignCounts();
+      $this->companyEventsController->assignEvents();
+      $this->companyEventsController->assignCounts();
 
       if(Ajax::isResponse())
       {
         Ajax::generate()->value("response", 1);
 
-        $this->showLayout('CorpController/events.html', true);
+        $this->showLayout('CompanyController/events.html', true);
       }
       else
       {
-        $this->templates->display('CorpController', 'events');
+        $this->templates->display('CompanyController', 'events');
       }
     }
     else
     {
-      $this->templates->display('CorpController');
+      $this->templates->display('CompanyController');
     }
   }
 
@@ -436,23 +436,23 @@ class CorpCommunityController extends BaseController
     if(session::user())
     {
       $this->assignUsersList();
-      $this->corpEventsController->assignUserEvents();
-      $this->corpEventsController->assignCounts();
+      $this->companyEventsController->assignUserEvents();
+      $this->companyEventsController->assignCounts();
 
       if(Ajax::isResponse())
       {
         Ajax::generate()->value("response", 1);
 
-        $this->showLayout('CorpController/events.html', true);
+        $this->showLayout('CompanyController/events.html', true);
       }
       else
       {
-        $this->templates->display('CorpController', 'events');
+        $this->templates->display('CompanyController', 'events');
       }
     }
     else
     {
-      $this->templates->display('CorpController');
+      $this->templates->display('CompanyController');
     }
   }
 
@@ -467,11 +467,11 @@ class CorpCommunityController extends BaseController
     {
       if(Ajax::isResponse())
       {
-        if(mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks` WHERE `id` = '$id'")) > 0)
+        if(mysql_num_rows(mysql_query("SELECT * FROM `company.tasks` WHERE `id` = '$id'")) > 0)
         {
           $comment = Validate::post('comment');
 
-          mysql_query("UPDATE `corp_tasks` SET `status` = '$status', `comment` = '$comment' WHERE `id` = '$id'");
+          mysql_query("UPDATE `company.tasks` SET `status` = '$status', `comment` = '$comment' WHERE `id` = '$id'");
         
           Ajax::generate()->value("response", 1);
 
@@ -480,7 +480,7 @@ class CorpCommunityController extends BaseController
             $user = Session::read('user');
             $id = $user['id'];
 
-            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            $selectUsersDada = mysql_query("SELECT * FROM `company.users`");
             
             while($data = mysql_fetch_assoc($selectUsersDada))
             {
@@ -522,20 +522,20 @@ class CorpCommunityController extends BaseController
         $description = Validate::post('description');
         $type = Validate::post('task_type');
         $priority = Validate::post('priority');
-        $number = Validate::post('number') ? Validate::post('number') : mysql_result(mysql_query("SELECT MAX(`id`) FROM `corp_tasks`"), 0) + 1000;
+        $number = Validate::post('number') ? Validate::post('number') : mysql_result(mysql_query("SELECT MAX(`id`) FROM `company.tasks`"), 0) + 1000;
         $sprintId = Validate::post('sprint');
         $new = true;
 
-        if(mysql_num_rows(mysql_query("SELECT * FROM `corp_tasks` WHERE `number` = '$number'")) > 0)
+        if(mysql_num_rows(mysql_query("SELECT * FROM `company.tasks` WHERE `number` = '$number'")) > 0)
         {
-          $id = mysql_result(mysql_query("SELECT `id` FROM `corp_tasks` WHERE `number` = '$number'"), 0);
+          $id = mysql_result(mysql_query("SELECT `id` FROM `company.tasks` WHERE `number` = '$number'"), 0);
 
           $this->deleteTask($id, true);
 
           $new = false;
         }
 
-        mysql_query("INSERT INTO `corp_tasks` SET `sprint` = '$sprintId', `number` = '$number', `receiver` = '$receiver', `sender` = '$sender', `title` = '$title', `description` = '$description', `type` = '$type', `priority` = '$priority'") or die
+        mysql_query("INSERT INTO `company.tasks` SET `sprint` = '$sprintId', `number` = '$number', `receiver` = '$receiver', `sender` = '$sender', `title` = '$title', `description` = '$description', `type` = '$type', `priority` = '$priority'") or die
         (
           Ajax::generate()->value("response", mysql_error())
         );
@@ -554,7 +554,7 @@ class CorpCommunityController extends BaseController
 
           if(!$title) continue;
 
-          mysql_query("INSERT INTO `corp_tasks_requirements` SET `tid` = '$id', `title` = '$title', `description` = '$description', `points` = '$points', `priority`= '$priority'") or die
+          mysql_query("INSERT INTO `company.tasks_requirements` SET `tid` = '$id', `title` = '$title', `description` = '$description', `points` = '$points', `priority`= '$priority'") or die
           (
             Ajax::generate()->value("response", mysql_error())
           );
@@ -571,7 +571,7 @@ class CorpCommunityController extends BaseController
 
           if(!$title) continue;
 
-          mysql_query("INSERT INTO `corp_tasks_risks` SET `tid` = '$id', `title` = '$title', `description` = '$description', `points` = '$points'") or die
+          mysql_query("INSERT INTO `company.tasks_risks` SET `tid` = '$id', `title` = '$title', `description` = '$description', `points` = '$points'") or die
           (
             Ajax::generate()->value("response", mysql_error())
           );
@@ -586,7 +586,7 @@ class CorpCommunityController extends BaseController
             $user = Session::read('user');
             $id = $user['id'];
 
-            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            $selectUsersDada = mysql_query("SELECT * FROM `company.users`");
             
             while($data = mysql_fetch_assoc($selectUsersDada))
             {
@@ -604,7 +604,7 @@ class CorpCommunityController extends BaseController
             $user = Session::read('user');
             $id = $user['id'];
 
-            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            $selectUsersDada = mysql_query("SELECT * FROM `company.users`");
             
             while($data = mysql_fetch_assoc($selectUsersDada))
             {
@@ -630,23 +630,23 @@ class CorpCommunityController extends BaseController
     {
       if(Ajax::isResponse())
       {
-        $sender = mysql_result(mysql_query("SELECT `sender` FROM `corp_tasks` WHERE `id` = '$id'"), 0);
-        $receiver = mysql_result(mysql_query("SELECT `receiver` FROM `corp_tasks` WHERE `id` = '$id'"), 0);
+        $sender = mysql_result(mysql_query("SELECT `sender` FROM `company.tasks` WHERE `id` = '$id'"), 0);
+        $receiver = mysql_result(mysql_query("SELECT `receiver` FROM `company.tasks` WHERE `id` = '$id'"), 0);
 
         $user = Session::read('user');
 
         if($sender == $user['id'])
         {
-          mysql_query("DELETE FROM `corp_tasks` WHERE `id` = '$id'");
-          mysql_query("DELETE FROM `corp_tasks_requirements` WHERE `tid` = '$id'");
-          mysql_query("DELETE FROM `corp_tasks_risks` WHERE `tid` = '$id'");
+          mysql_query("DELETE FROM `company.tasks` WHERE `id` = '$id'");
+          mysql_query("DELETE FROM `company.tasks_requirements` WHERE `tid` = '$id'");
+          mysql_query("DELETE FROM `company.tasks_risks` WHERE `tid` = '$id'");
 
           if(!$edit)
           if(EVENTS)
           {
             $id = $user['id'];
 
-            $selectUsersDada = mysql_query("SELECT * FROM `corp_users`");
+            $selectUsersDada = mysql_query("SELECT * FROM `company.users`");
             
             while($data = mysql_fetch_assoc($selectUsersDada))
             {
@@ -675,8 +675,8 @@ class CorpCommunityController extends BaseController
    */
   public function sendNotification()
   {
-    $corpProjectsController = new CorpProjectsController();
-    $corpProjectsController->sendNotification($id);
+    $companyProjectsController = new CompanyProjectsController();
+    $companyProjectsController->sendNotification($id);
   }
 }
 

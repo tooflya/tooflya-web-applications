@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file CorpController.php
+ * @file CompanyController.php
  * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
@@ -18,11 +18,11 @@
  *
  */
 
-class CorpController extends BaseController
+class CompanyController extends BaseController
 {
 
-  private $corpCommunityController;
-  private $corpProjectsController;
+  private $companyCommunityController;
+  private $companyProjectsController;
 
   /**
    *
@@ -33,8 +33,8 @@ class CorpController extends BaseController
   {
     parent::__construct();
 
-    $this->corpCommunityController = new CorpCommunityController();
-    $this->corpProjectsController = new CorpProjectsController();
+    $this->companyCommunityController = new CompanyCommunityController();
+    $this->companyProjectsController = new CompanyProjectsController();
   }
 
   /**
@@ -56,7 +56,7 @@ class CorpController extends BaseController
   {
     $user = Session::read('user');
 
-    $this->corpCommunityController->showProfile($user['id']);
+    $this->companyCommunityController->showProfile($user['id']);
   }
 
   /**
@@ -68,7 +68,7 @@ class CorpController extends BaseController
   {
     $user = Session::read('user');
 
-    $this->corpCommunityController->showProfile($id ? $id : $user['id']);
+    $this->companyCommunityController->showProfile($id ? $id : $user['id']);
   }
 
   /**
@@ -78,8 +78,8 @@ class CorpController extends BaseController
    */
   public function projectAction($id = false)
   {
-    $this->corpCommunityController->assignUsersList();
-    $this->corpProjectsController->showProject($id);
+    $this->companyCommunityController->assignUsersList();
+    $this->companyProjectsController->showProject($id);
   }
 
   /**
@@ -89,7 +89,7 @@ class CorpController extends BaseController
    */
   public function taskAction($id = false)
   {
-    $this->corpCommunityController->showTask($id);
+    $this->companyCommunityController->showTask($id);
   }
 
   /**
@@ -99,7 +99,7 @@ class CorpController extends BaseController
    */
   public function settingsAction()
   {
-    $this->corpCommunityController->showSettings();
+    $this->companyCommunityController->showSettings();
   }
 
   /**
@@ -111,11 +111,11 @@ class CorpController extends BaseController
   {
     if($user)
     {
-      $this->corpCommunityController->showUserEvents();
+      $this->companyCommunityController->showUserEvents();
     }
     else
     {
-      $this->corpCommunityController->showEvents();
+      $this->companyCommunityController->showEvents();
     }
   }
 
@@ -126,7 +126,7 @@ class CorpController extends BaseController
    */
   public function helpAction()
   {
-    $this->templates->display('CorpController', 'help');
+    $this->templates->display('CompanyController', 'help');
   }
 }
 

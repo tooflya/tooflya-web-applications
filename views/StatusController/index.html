@@ -1,0 +1,103 @@
+{include file="StatusController/include/header.html"}
+<section class="content">
+  <div class="intro">
+    <p>
+      {l s='We continuously monitor the status of'}
+      <a href="http://www.tooflya.com">www.tooflya.com</a>
+      {l s='and all its related services. If there are any interruptions in service, a note will be posted here. If you are experiencing problems connecting to'}
+      <a href="//services.tooflya.com">Tooflya Network</a>
+      {l s='and do not see a notice posted, please email'} <a href="mailto:support@tooflya.com">support@tooflya.com</a>
+    </p>
+  </div>
+  <div class="content">
+    <div class="block">
+      <div class="title">
+        <h3>Main Server Status</h3>
+      </div>
+      <div id="server1-server-status">
+        <img class="preloader" src="{$url}/assets/img/status-preloader.gif" />
+      </div>
+    </div>
+    <div class="block">
+      <div class="title">
+        <h3>Statistics Server Status</h3>
+      </div>
+      <div id="server2-server-status">
+        <img class="preloader" src="{$url}/assets/img/status-preloader.gif" />
+      </div>
+    </div>
+    <div class="block">
+      <div class="title">
+        <h3>Web Services Status</h3>
+      </div>
+      <div class="description">
+      </div>
+    </div>
+    <div class="block">
+      <div class="title">
+        <h3>Social Networks API`s Status</h3>
+      </div>
+      <div class="description">
+        <div class="class">
+         <div class="title">www.vk.com</div>
+        </div>
+        <div class="class">
+         <div class="title">www.ok.ru</div>
+        </div>
+        <div class="class">
+         <div class="title">www.facebook.com</div>
+        </div>
+        <div class="class">
+         <div class="title">plus.google.com</div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="title">
+        <h3>Games Status</h3>
+      </div>
+      <div class="description"></div>
+    </div>
+  </div>
+</section>
+<!--<script>
+    var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+    var lineChartData = {
+      labels : ["","","","April","May","June","July"],
+      datasets : [
+        {
+          label: "My First dataset",
+          fillColor : "rgba(174, 218, 235, 0.5)",
+          strokeColor : "rgba(122, 161, 176, 1.0)",
+          pointColor : "rgba(255, 255, 255, 1.0)",
+          pointStrokeColor : "rgba(122, 161, 176, 1.0)",
+          pointHighlightFill : "rgba(255, 255, 255, 1.0)",
+          pointHighlightStroke : "rgba(255, 255, 255, 1.0)",
+          data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+        }
+      ]
+
+    }
+
+  window.onload = function(){
+    window.myLine = new Chart(document.getElementById("uptime").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+    window.myLine = new Chart(document.getElementById("la").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+    window.myLine = new Chart(document.getElementById("brandwith").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+    window.myLine = new Chart(document.getElementById("ping").getContext("2d")).Line(lineChartData, {
+      responsive: true,
+      scaleGridLineColor: "rgba(204, 204, 204, 1)"
+    });
+  }
+
+
+  </script>-->
+{include file="StatusController/include/footer.html"}
