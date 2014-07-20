@@ -36,6 +36,19 @@ class StatusController extends BaseController
    *
    *
    */
+  private function getServerAddress()
+  {
+    $ifconfig = shell_exec('/sbin/ifconfig eth0');
+    preg_match('/addr:([\d\.]+)/', $ifconfig, $match);
+
+    return $match[1];
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function getServerBaseInfo()
   {
     mysql_select_db("status.tooflya.com") or die("Could not select database");
@@ -54,7 +67,7 @@ class StatusController extends BaseController
       'hours' => $data / 60 / 60 % 24,
       'minutes' => $data / 60 % 60,
       'seconds' => $data % 60,
-      'percent' => '93.8'
+      'percent' => 100.0 - (((10080 - mysql_result(mysql_query("SELECT COUNT(*) FROM `uptime` WHERE date_sub(curdate(), INTERVAL 7 DAY) <= `time` ORDER by `id` DESC"), 0)) / 10080) * 100),
     );
 
     $fh = fopen('/proc/meminfo','r');
@@ -74,7 +87,8 @@ class StatusController extends BaseController
 
     $this->templates->assign('server', array(
       'main' => array(
-        'ip' => gethostbyname(gethostname()),
+        'ip' => $this->getServerAddress(),
+        'id' => preg_replace('[\D]', '', php_uname('n')),
         'domain' => php_uname('n'),
         'system' => php_uname('s').' '.php_uname('r'),
         'memory' => array(
@@ -87,11 +101,18 @@ class StatusController extends BaseController
           'free' => disk_free_space('/')
         ),
         'uptime' => $uptime,
-        'bandwidth' => mysql_result(mysql_query("SELECT AVG(`speed`) FROM `bandwidth`"), 0),
-        'ping' => mysql_result(mysql_query("SELECT AVG(`speed`) FROM `bandwidth`"), 0)
+        'bandwidth' => mysql_result(mysql_query("SELECT AVG(`speed`) FROM `bandwidth` ORDER by `id` DESC LIMIT 7"), 0),
+        'ping' => mysql_result(mysql_query("SELECT AVG(`ping`) FROM `bandwidth` ORDER by `id` DESC LIMIT 7"), 0),
+        'la' => array(
+          'one' => mysql_result(mysql_query("SELECT AVG(`one`) FROM `la` ORDER by `id` DESC LIMIT 7"), 0),
+          'five' => mysql_result(mysql_query("SELECT AVG(`five`) FROM `la` ORDER by `id` DESC LIMIT 7"), 0),
+          'fifteen' => mysql_result(mysql_query("SELECT AVG(`fifteen`) FROM `la` ORDER by `id` DESC LIMIT 7"), 0)
+        )
       )
     ));
-    $this->templates->assign_array("SELECT * FROM `bandwidth`", 'bandwidth');
+    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM `bandwidth` GROUP BY `day` LIMIT 7", 'bandwidth');
+    $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM `uptime` GROUP BY `day` LIMIT 7", 'uptime');
+    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM `la` GROUP BY `day` LIMIT 7", 'la');
 
     $this->templates->display($this->name, 'base');
   }

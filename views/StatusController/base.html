@@ -19,76 +19,115 @@
     </ul>
     <div>
       Uptime: <b>{$server.main.uptime.days} days, {$server.main.uptime.hours} hours, {$server.main.uptime.minutes} min, {$server.main.uptime.seconds} sec,
-      <span class="uptime {if $server.main.uptime.percent < 90}critical{elseif $server.main.uptime.percent < 99}warning{else}success{/if}">{$server.main.uptime.percent}%</span> by last week</b>
+      <span class="uptime {if $server.main.uptime.percent < 90}critical{elseif $server.main.uptime.percent < 99}warning{else}success{/if}">{$server.main.uptime.percent|round:2}%</span> by last week</b>
     </div>
     <div>
-      <canvas id="uptime" width="800px" height="100px"></canvas>
+      <canvas id="server-{$server.main.id}-uptime" width="960px" height="150px"></canvas>
     </div>
-    <div>Load Average: <b>0.01, 0.03, 0.00 by last week</b></div>
+    <div>Load Average: <b>{$server.main.la.one|round:2}, {$server.main.la.five|round:2}, {$server.main.la.fifteen|round:2} by last week</b></div>
     <div>
-      <canvas id="la" width="800px" height="100px"></canvas>
+      <canvas id="server-{$server.main.id}-la" width="960px" height="150px"></canvas>
     </div>
   </div>
   <div class="class">
    <div class="title">Software</div>
-    <div>Apache status: Fine</div>
-    <div>Nginx status: Fine</div>
+    <div>Apache status: <b>Fine</b></div>
+    <div>Nginx status: <b>Fine</b></div>
   </div>
   <div class="class">
    <div class="title">Bandwidth</div>
-    <div>Average bandwidth: <b>{$server.main.bandwidth} MiB/s</b></div>
+    <div>Average bandwidth: <b>{$server.main.bandwidth|round:2} MiB/s by last week</b></div>
     <div>
-      <canvas id="bandwidth" width="800px" height="100px"></canvas>
+      <canvas id="server-{$server.main.id}-bandwidth" width="960px" height="150px"></canvas>
     </div>
-    <div>Average ping: <b>{$server.main.ping} ms</b></div>
+    <div>Average ping: <b>{$server.main.ping|round:2} ms</b></div>
     <div>
-      <canvas id="ping" width="800px" height="100px"></canvas>
+      <canvas id="server-{$server.main.id}-ping" width="960px" height="150px"></canvas>
     </div>
   </div>
 </div>
+
 <script>
-var labels = [];
-var data = [];
-{foreach from=$bandwidth item=some}
-
-data.push({$some.speed});
-{/foreach}
-
-    var lineChartData = {
-      labels : labels,
-      datasets : [
-        {
-          label: "My First dataset",
-          fillColor : "rgba(174, 218, 235, 0.5)",
-          strokeColor : "rgba(122, 161, 176, 1.0)",
-          pointColor : "rgba(255, 255, 255, 1.0)",
-          pointStrokeColor : "rgba(122, 161, 176, 1.0)",
-          pointHighlightFill : "rgba(255, 255, 255, 1.0)",
-          pointHighlightStroke : "rgba(255, 255, 255, 1.0)",
-          data : data
-        }
-      ]
-
+  var structure = {
+    labels: {
+      bandwidth: [],
+      ping: [],
+      uptime: [],
+      la: []
+    },
+    data: {
+      bandwidth: [],
+      ping: [],
+      uptime: [],
+      la: [[], [], []]
     }
+  };
 
-  
-    window.myLine = new Chart(document.getElementById("uptime").getContext("2d")).Line(lineChartData, {
-      responsive: true,
-      scaleGridLineColor: "rgba(204, 204, 204, 1)"
-    });
-    window.myLine = new Chart(document.getElementById("la").getContext("2d")).Line(lineChartData, {
-      responsive: true,
-      scaleGridLineColor: "rgba(204, 204, 204, 1)"
-    });
-    window.myLine = new Chart(document.getElementById("bandwidth").getContext("2d")).Line(lineChartData, {
-      responsive: true,
-      scaleGridLineColor: "rgba(204, 204, 204, 1)"
-    });
-    window.myLine = new Chart(document.getElementById("ping").getContext("2d")).Line(lineChartData, {
-      responsive: true,
-      scaleGridLineColor: "rgba(204, 204, 204, 1)"
-    });
-  
+  {foreach from=$bandwidth item=some}
+  structure.labels.bandwidth.push('{$some.time|date_format:"%d %B"}');
+  structure.data.bandwidth.push({$some.speed});
+  {/foreach}
 
+  {foreach from=$bandwidth item=some}
+  structure.labels.ping.push('{$some.time|date_format:"%d %B"}');
+  structure.data.ping.push({$some.ping});
+  {/foreach}
 
-  </script>
+  {foreach from=$uptime item=some}
+  structure.labels.uptime.push('{$some.time|date_format:"%d %B"}');
+  structure.data.uptime.push({(100 - (((10080 - $some.count) / 10080) * 100)|round:2)});
+  {/foreach}
+
+  {foreach from=$la item=some}
+  structure.labels.la.push('{$some.time|date_format:"%d %B"}');
+  structure.data.la[0].push({$some.one|round:2});
+  structure.data.la[1].push({$some.five|round:2});
+  structure.data.la[2].push({$some.fifteen|round:2});
+  {/foreach}
+
+  function dataset(data) {
+    return [{
+      fillColor: "rgba(174, 218, 235, 0.5)",
+      strokeColor: "rgba(122, 161, 176, 1.0)",
+      pointColor: "rgba(255, 255, 255, 1.0)",
+      pointStrokeColor: "rgba(122, 161, 176, 1.0)",
+      pointHighlightFill: "rgba(255, 255, 255, 1.0)",
+      pointHighlightStroke: "rgba(255, 255, 255, 1.0)",
+      data: data
+    }];
+  };
+
+  var uptimeChartData = {
+    labels: structure.labels.uptime,
+    datasets: dataset(structure.data.uptime)
+  };
+
+  var bandwidthChartData = {
+    labels: structure.labels.bandwidth,
+    datasets: dataset(structure.data.bandwidth)
+  };
+
+  var pingChartData = {
+    labels: structure.labels.ping,
+    datasets: dataset(structure.data.ping)
+  };
+
+  var laChartData = {
+    labels: structure.labels.la,
+    datasets: [
+      dataset(structure.data.la[0])[0],
+      dataset(structure.data.la[1])[0],
+      dataset(structure.data.la[2])[0]
+    ]
+  };
+
+  var options = {
+    scaleGridLineColor: "rgba(204, 204, 204, 1)",
+    responsive: true,
+    animationSteps: 240
+  };
+  new Chart(document.getElementById("server-{$server.main.id}-uptime").getContext("2d")).Line(uptimeChartData, options);
+  new Chart(document.getElementById("server-{$server.main.id}-bandwidth").getContext("2d")).Line(bandwidthChartData, options);
+  new Chart(document.getElementById("server-{$server.main.id}-ping").getContext("2d")).Line(pingChartData, options);
+  new Chart(document.getElementById("server-{$server.main.id}-la").getContext("2d")).Line(laChartData, options);
+</script>
