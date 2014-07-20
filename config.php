@@ -27,19 +27,13 @@
  */
 error_reporting(0);
 
-/**
- *
- *
- *
- */
-ini_set('max_execution_time', 360000);
 
 /**
  *
  * Setting default timezone
  *
  */
-date_default_timezone_set('Europe/Kiev');
+date_default_timezone_set('Europe/Kyiv');
 
 /**
  *
@@ -58,7 +52,7 @@ session_start();
  * TODO: Think about own controller 
  *
  */
-mysql_connect("127.0.0.1", "root", "RivaleCompany80632450512") or die("Could not connect to mysql server");
+mysql_connect("127.0.0.1", "root", "password") or die("Could not connect to mysql server");
 mysql_select_db("www.tooflya.com") or die("Could not select database");
 mysql_query("SET NAMES UTF8");
 
@@ -67,7 +61,7 @@ mysql_query("SET NAMES UTF8");
  * Define some constants
  *
  */
-define('PATH', '/var/www/www.tooflya.com/');
+define('PATH', 'D:/Server/tooflya.com/www/');
 define('DEBUG', true);
 define('EVENTS', true);
 define('URL', (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').'www.tooflya.com');
