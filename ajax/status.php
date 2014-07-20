@@ -27,22 +27,34 @@ if(true)
   switch(Validate::get('action'))
   {
     default:
-    if(Ajax::isResponse())
+    switch(Validate::get('action'))
     {
-      $server1 = file_get_contents('http://www.tooflya.com/ajax/status.php?action=cross-origin');
-      $server2 = file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin');
+      default:
+      if(Ajax::isResponse())
+      {
+        $server1 = file_get_contents('http://www.tooflya.com/ajax/status.php?action=cross-origin');
+        $server2 = file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin');
 
-      print json_encode(array(
-        'response' => 1,
-        'server1' => $server1,
-        'server2' => $server2
-      ));
+        print json_encode(array(
+          'response' => 1,
+          'server1' => $server1,
+          'server2' => $server2
+        ));
+      }
+      break;
+      case 'cross-origin':
+      $controller = new StatusController();
+
+      $controller->getServerBaseInfo();
+      break;
     }
     break;
-    case 'cross-origin':
+    case 'update':
     $controller = new StatusController();
 
-    $controller->getServerBaseInfo();
+    $controller->setServerBaseInfo();
+
+    print "Update was successful.";
     break;
   }
 }

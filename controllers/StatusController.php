@@ -116,6 +116,83 @@ class StatusController extends BaseController
 
     $this->templates->display($this->name, 'base');
   }
+
+  /**
+   *
+   *
+   *
+   */
+  public function setServerBaseInfo()
+  {
+    mysql_select_db("status.tooflya.com") or die("Could not select database");
+
+    $la_one = sys_getloadavg()[0];
+    $la_five = sys_getloadavg()[1];
+    $la_fifteen = sys_getloadavg()[2];
+
+    $ping = $this->ping('www.google.com');
+    $speed = $this->bandwidth();
+
+    mysql_query("INSERT INTO `uptime` SET `time` = NOW()");
+    mysql_query("INSERT INTO `bandwidth` SET `ping` = '$ping', `speed` = '$speed'");
+    mysql_query("INSERT INTO `la` SET `one` = '$la_one', `five` = '$la_five', `fifteen` = '$la_fifteen'");
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  private function bandwidth()
+  {
+    $output = array();
+    $com = 'vnstat -tr 60';
+    
+    $exitcode = 0;
+    exec($com, $output, $exitcode);
+    
+    if($exitcode == 0 || $exitcode == 1)
+    { 
+      foreach($output as $cline)
+      {
+        if(strpos($cline, 'kbit/s') !== false)
+        {
+          $out = floatval(substr($cline, strpos($cline, 'rx ') + 5));
+          return $out;
+        }
+      }
+    }
+    
+    return false;
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  private function ping($host, $timeout = 10)
+  {
+    $output = array();
+    $com = 'ping -n -w ' . $timeout . ' -c 1 ' . escapeshellarg($host);
+    
+    $exitcode = 0;
+    exec($com, $output, $exitcode);
+    
+    if($exitcode == 0 || $exitcode == 1)
+    { 
+      foreach($output as $cline)
+      {
+        if(strpos($cline, ' bytes from ') !== false)
+        {
+          $out = (int)ceil(floatval(substr($cline, strpos($cline, 'time=') + 5)));
+          return $out;
+        }
+      }
+    }
+    
+    return false;
+  }
 }
 
 /**
