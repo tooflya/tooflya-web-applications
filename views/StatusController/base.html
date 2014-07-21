@@ -73,9 +73,14 @@
   structure.data.ping.push({$some.ping});
   {/foreach}
 
-  {foreach from=$uptime item=some}
+  {foreach from=$uptime item=some name=uptime}
+  {if $smarty.foreach.uptime.last}
+  {assign var="minutes" value=$time}
+  {else}
+  {assign var="minutes" value=1440}
+  {/if}
   structure.labels.uptime.push('{$some.time|date_format:"%d %B"}');
-  structure.data.uptime.push({(100 - (((10080 - $some.count) / 10080) * 100)|round:2)});
+  structure.data.uptime.push({(100 - ((($minutes - $some.count) / $minutes) * 100)|round:2)});
   {/foreach}
 
   {foreach from=$la item=some}

@@ -32,20 +32,48 @@ if(true)
       default:
       if(Ajax::isResponse())
       {
-        $server1 = file_get_contents('http://www.tooflya.com/ajax/status.php?action=cross-origin');
-        $server2 = file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin');
-
-        print json_encode(array(
-          'response' => 1,
-          'server1' => $server1,
-          'server2' => $server2
-        ));
+        switch (Validate::get('server')) {
+          case 'server1':
+          print json_encode(array(
+            'response' => 1,
+            'server1' => file_get_contents('http://www.tooflya.com/ajax/status.php?action=cross-origin')
+          ));
+          break;
+          case 'server2':
+          print json_encode(array(
+            'response' => 1,
+            'server2' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin')
+          ));
+          break;
+          case 'games':
+          print json_encode(array(
+            'response' => 1,
+            'games' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin&type=games')
+          ));
+          break;
+          case 'game':
+          print json_encode(array(
+            'response' => 1,
+            'game' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin&type=game&id='.Validate::get('id'))
+          ));
+          break;
+        }
       }
       break;
       case 'cross-origin':
       $controller = new StatusController();
 
-      $controller->getServerBaseInfo();
+      switch(Validate::get('type')) {
+        default:
+        $controller->getServerBaseInfo();
+        break;
+        case 'games':
+        $controller->getGamesServersBaseInfo();
+        break;
+        case 'game':
+        $controller->getGameServerInfo(Validate::get('id'));
+        break;
+      }
       break;
     }
     break;

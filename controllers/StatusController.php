@@ -28,6 +28,8 @@ class StatusController extends BaseController
    */
   public function indexAction()
   {
+    $this->getBaseInfo();
+
     $this->templates->display($this->name);
   }
 
@@ -49,9 +51,27 @@ class StatusController extends BaseController
    *
    *
    */
+  public function getBaseInfo()
+  {
+    mysql_select_db("games.tooflya.com") or die("Could not select database");
+
+    $this->templates->assign_array("SELECT * FROM `games`", 'games');
+  }
+
+  /**
+   *
+   *
+   *
+   */
   public function getServerBaseInfo()
   {
     mysql_select_db("status.tooflya.com") or die("Could not select database");
+
+    $time = new DateTime();
+    $time->setTime(0, 0, 0);
+    $time->getTimestamp();
+
+    $time = (new DateTime())->diff($time)->i;
 
     $memory = array(
       'total' => 0,
@@ -67,7 +87,7 @@ class StatusController extends BaseController
       'hours' => $data / 60 / 60 % 24,
       'minutes' => $data / 60 % 60,
       'seconds' => $data % 60,
-      'percent' => 100.0 - (((10080 - mysql_result(mysql_query("SELECT COUNT(*) FROM `uptime` WHERE date_sub(curdate(), INTERVAL 7 DAY) <= `time` ORDER by `id` DESC"), 0)) / 10080) * 100),
+      'percent' => 100.0 - ((((8640 + $time) - mysql_result(mysql_query("SELECT COUNT(*) FROM `uptime` WHERE date_sub(curdate(), INTERVAL 7 DAY) <= `time` ORDER by `id` DESC"), 0)) / (8640 + $time)) * 100),
     );
 
     $fh = fopen('/proc/meminfo','r');
@@ -110,11 +130,73 @@ class StatusController extends BaseController
         )
       )
     ));
-    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM `bandwidth` GROUP BY `day` LIMIT 7", 'bandwidth');
-    $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM `uptime` GROUP BY `day` LIMIT 7", 'uptime');
-    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM `la` GROUP BY `day` LIMIT 7", 'la');
+    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'bandwidth');
+    $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `uptime` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'uptime');
+    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'la');
+
+    $this->templates->assign('time', $time);
 
     $this->templates->display($this->name, 'base');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getGamesServersBaseInfo()
+  {
+    $this->getBaseInfo();
+
+    $this->templates->assign_array("SELECT * FROM `games`", 'gamesinfo');
+
+    $this->templates->display($this->name, 'games');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getGameServerInfo($id)
+  {
+    $this->getBaseInfo();
+
+    if(mysql_num_rows($info = mysql_query("SELECT * FROM `games` WHERE `id` = '$id'")))
+    {
+      $info = mysql_result($info, 0);
+
+      $this->templates->assign_element("SELECT * FROM `games` WHERE `id` = '$id'", 'info');
+      $this->templates->assign('more', array(
+        'users' => array(
+          'total' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id'"), 0),
+          'online' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 5 MINUTE)"), 0),
+          'new' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `join` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0),
+          'active' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0)
+        ),
+        'levels' => array(
+          'average' => mysql_result(mysql_query("SELECT ROUND(AVG(`level`)) FROM `users` WHERE `game` = '$id'"), 0),
+          'hard' => mysql_result(mysql_query("SELECT `level`, COUNT(`level`) AS `count` FROM `users` GROUP by `level` ORDER by `count` DESC LIMIT 1"), 0),
+        )
+      ));
+      $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`join`) AS `day`, `join` FROM `users` WHERE `game` = '$id' GROUP BY `day` LIMIT 7", 'users');
+      $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM `visits` WHERE `game` = '$id' GROUP BY `day` LIMIT 7", 'visits');
+
+      $levels = array_fill(0, mysql_result(mysql_query("SELECT `levels` FROM `games` WHERE `id` = '$id'"), 0), 0);
+      $data = mysql_query("SELECT * FROM `users` WHERE `game` = '$id'");
+      while(false !==($result = mysql_fetch_assoc($data)))
+      {
+        $levels[$result['level'] - 1]++;
+      }
+
+      $this->templates->assign('levels', $levels);
+
+      $this->templates->display($this->name, 'games-more');
+    }
+    else
+    {
+      exit;
+    }
   }
 
   /**
@@ -136,6 +218,10 @@ class StatusController extends BaseController
     mysql_query("INSERT INTO `uptime` SET `time` = NOW()");
     mysql_query("INSERT INTO `bandwidth` SET `ping` = '$ping', `speed` = '$speed'");
     mysql_query("INSERT INTO `la` SET `one` = '$la_one', `five` = '$la_five', `fifteen` = '$la_fifteen'");
+
+    $this->fixMissingDates('uptime');
+    $this->fixMissingDates('bandwidth');
+    $this->fixMissingDates('la');
   }
 
   /**
@@ -196,6 +282,26 @@ class StatusController extends BaseController
     }
     
     return false;
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  private function fixMissingDates($action, $limit = 7, $counter = 0)
+  {
+    if($limit < 0)
+    {
+      return true;
+    }
+
+    if(mysql_num_rows(mysql_query("SELECT * FROM `$action` WHERE DAY(`time`) = NOW() - INTERVAL $counter DAY")) < 1)
+    {
+      mysql_query("INSERT INTO `$action` SET `time` = NOW() - INTERVAL $counter DAY");
+    }
+
+    return $this->fixMissingDates($action, $limit - 1, $counter + 1);
   }
 }
 
