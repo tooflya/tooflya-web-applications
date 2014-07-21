@@ -143,16 +143,16 @@ class StatusController extends BaseController
    *
    *
    */
-  private function bandwidth()
+  private function bandwidth($interface = 'eth0')
   {
     $output = array();
-    $com = 'vnstat -tr 60';
+    $com = 'vnstat -tr 60 -i '.$interface;
     
     $exitcode = 0;
     exec($com, $output, $exitcode);
     
-    if($exitcode == 0 || $exitcode == 1)
-    { 
+    if(($exitcode == 0 || $exitcode == 1) && false === strpos($output[0], 'Error'))
+    {
       foreach($output as $cline)
       {
         if(strpos($cline, 'kbit/s') !== false)
@@ -161,6 +161,10 @@ class StatusController extends BaseController
           return $out;
         }
       }
+    }
+    else
+    {print 'false';
+      return $this->bandwidth('venet0');
     }
     
     return false;
