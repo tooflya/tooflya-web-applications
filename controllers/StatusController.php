@@ -53,6 +53,7 @@ class StatusController extends BaseController
    */
   public function getBaseInfo()
   {
+    mysql_connect("www.tooflya.com", "root", SECURE) or die("Could not connect to mysql server"); // TODO: Remove this.
     mysql_select_db("games.tooflya.com") or die("Could not select database");
 
     $this->templates->assign_array("SELECT * FROM `games`", 'games');
