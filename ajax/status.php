@@ -48,13 +48,13 @@ if(true)
           case 'games':
           print json_encode(array(
             'response' => 1,
-            'games' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin&type=games')
+            'games' => file_get_contents('https://www.tooflya.com/ajax/status.php?action=cross-origin&type=games')
           ));
           break;
           case 'game':
           print json_encode(array(
             'response' => 1,
-            'game' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin&type=game&id='.Validate::get('id'))
+            'game' => file_get_contents('https://www.tooflya.com/ajax/status.php?action=cross-origin&type=game&id='.Validate::get('id'))
           ));
           break;
         }
