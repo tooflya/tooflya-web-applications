@@ -17,6 +17,7 @@ header div.status h2 {
   padding: 0;
   font-weight: 500;
   letter-spacing: -2px;
+  padding-top: 5px;
 }
 header div.status h2.success {
   color: #99ccb2;
@@ -165,4 +166,38 @@ div.game div.name sup {
 div.game div.description {
   color: #AFAFAF;
   font-size: 13px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+  body {
+    max-width: 100%;
+    min-width: 100px;
+    overflow-x: hidden;
+  }
+  header, footer div.footer, footer div.links {
+    padding: 0 15px;
+  }
+  section.content {
+    padding: 0 15px;
+    padding-top: 40px;
+  }
+  p {
+    text-align: justify;
+  }
+  div.content, section.content {
+    width: auto;
+    margin: 0 auto;
+  }
+  ul.links li.update {
+    display: none !important;
+  }
+  div.copyright {
+    font-size: 12px;
+  }
+  template {
+    display: none !important;
+  }
 }

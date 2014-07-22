@@ -612,7 +612,6 @@ div.footer div.content {
 }
 div.copyright {
   float: left;
-  width: 400px;
 }
 div.footer div.language {
   float: right;
@@ -1833,4 +1832,38 @@ div.project-users div.row div.field.score {
 }
 div.project-users div.row div.field.date {
   width: 100px;
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+  body {
+    max-width: 100%;
+    min-width: 100px;
+    overflow-x: hidden;
+  }
+  header, footer div.footer, footer div.links {
+    padding: 0 15px;
+  }
+  section.content {
+    padding: 0 15px;
+    padding-top: 40px;
+  }
+  p {
+    text-align: justify;
+  }
+  div.content, section.content {
+    width: auto;
+    margin: 0 auto;
+  }
+  ul.links li.update {
+    display: none !important;
+  }
+  div.copyright {
+    font-size: 12px;
+  }
+  template {
+    display: none !important;
+  }
 }
