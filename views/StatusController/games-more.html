@@ -30,8 +30,8 @@
   {/if}
   {if $info.payments}
   <div class="title">Finance</div>
-  <div>Retention: <b>0 %</b></div>
-  <div>In-app's: <b>0 by last week</b></div>
+  <div>Retention: <b>{$more.finance.retention.free / $more.finance.retention.pay} %</b> <sup>It's mean that only {$more.finance.retention.pay} users from {$more.finance.retention.free + $more.finance.retention.pay} is pay for this app.</sup></div>
+  <div>In-app's: <b>{$more.finance.count} by last week</b></div>
   <div>
   </div>
   {/if}

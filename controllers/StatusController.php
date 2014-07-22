@@ -72,7 +72,7 @@ class StatusController extends BaseController
     $time->setTime(0, 0, 0);
     $time->getTimestamp();
 
-    $time = (new DateTime())->diff($time)->i;
+    $time = (new DateTime())->diff($time)->h * 60 + (new DateTime())->diff($time)->i;
 
     $memory = array(
       'total' => 0,
@@ -132,7 +132,7 @@ class StatusController extends BaseController
       )
     ));
     $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'bandwidth');
-    $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `uptime` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'uptime');
+    $this->templates->assign_array("SELECT * FROM (SELECT *, COUNT(*) AS `count`, DAY(`time`) AS `day` FROM `uptime` GROUP by `day` ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `table`.`day`", 'uptime');
     $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'la');
 
     $this->templates->assign('time', $time);
@@ -178,7 +178,14 @@ class StatusController extends BaseController
         'levels' => array(
           'average' => mysql_result(mysql_query("SELECT ROUND(AVG(`level`)) FROM `users` WHERE `game` = '$id'"), 0),
           'hard' => mysql_result(mysql_query("SELECT `level`, COUNT(`level`) AS `count` FROM `users` GROUP by `level` ORDER by `count` DESC LIMIT 1"), 0),
-        )
+        ),
+        'finance' => array(
+          'retention' => array(
+            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `inapps` = '0'"), 0),
+            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `inapps` > '0'"), 0)
+          ),
+          'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `game` = '$id' AND `success` = TRUE"), 0)
+        ),
       ));
       $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`join`) AS `day`, `join` FROM `users` WHERE `game` = '$id' GROUP BY `day` LIMIT 7", 'users');
       $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM `visits` WHERE `game` = '$id' GROUP BY `day` LIMIT 7", 'visits');
@@ -290,14 +297,14 @@ class StatusController extends BaseController
    *
    *
    */
-  private function fixMissingDates($action, $limit = 7, $counter = 0)
+  private function fixMissingDates($action, $limit = 7, $counter = 1)
   {
     if($limit < 0)
     {
       return true;
     }
 
-    if(mysql_num_rows(mysql_query("SELECT * FROM `$action` WHERE DAY(`time`) = NOW() - INTERVAL $counter DAY")) < 1)
+    if(mysql_num_rows(mysql_query("SELECT * FROM `$action` WHERE `time` >= (CURDATE() - $counter) AND `time` < (CURDATE() - $counter + 1)")) < 1)
     {
       mysql_query("INSERT INTO `$action` SET `time` = NOW() - INTERVAL $counter DAY");
     }
