@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Tooflya Status Page</title>
-    <meta name="viewport" content="width=device-width, maximum-scale=0.5, minimum-scale=0.5, initial-scale=0.5, user-scalable=no" id="viewport" />
+    <meta name="viewport" id="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no" id="viewport" />
     <meta name="description" content="Tooflya Inc. - {l s='a unique combination of knowledge, experience and skills required for a successful IT business'}.">
     <meta name="keywords" content="Tooflya, tooflya, games, android, Android OS, free games, mobile, buy game, new games.">
     <meta name="author" content="Tooflya Inc.">
@@ -25,6 +25,16 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <script>
+    (function(doc) {
+        var viewport = document.getElementById('viewport');
+        if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) {
+          viewport.setAttribute("content", "initial-scale=0.5");
+        } else if ( navigator.userAgent.match(/iPad/i) ) {
+          viewport.setAttribute("content", "initial-scale=1.0");
+        }
+    }(document));
+    </script>
   </head>
   <body>
   <div id="body">

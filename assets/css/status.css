@@ -171,7 +171,7 @@ div.game div.description {
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
 and (min-device-width : 320px) 
-and (max-device-width : 480px) {
+and (max-device-width : 1024px) {
   body {
     max-width: 100%;
     min-width: 100px;
