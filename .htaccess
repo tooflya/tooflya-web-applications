@@ -7,9 +7,6 @@ RewriteEngine on
 RewriteCond %{HTTP_HOST} ^tooflya\.com$ [NC]
 RewriteRule ^(.*)$ http://www.tooflya.com/$1 [R=301,L]
 
-RewriteCond %{REQUEST_URI}  !\.(woff|ttf|map|jpg|jpeg|gif|png|ico|css|bmp|swf|js|apk|ipa|exe|rar|zip|html|php)$
-RewriteRule ^(.*)([^/])$ http://%{HTTP_HOST}/$1$2/ [L,R=301]
-
 RewriteRule ^(en|ru)(.*)$ $2 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f
