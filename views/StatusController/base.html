@@ -65,12 +65,12 @@
 
   {foreach from=$bandwidth item=some}
   structure.labels.bandwidth.push('{$some.time|date_format:"%d %B"}');
-  structure.data.bandwidth.push({$some.speed});
+  structure.data.bandwidth.push({$some.speed|round:2});
   {/foreach}
 
   {foreach from=$bandwidth item=some}
   structure.labels.ping.push('{$some.time|date_format:"%d %B"}');
-  structure.data.ping.push({$some.ping});
+  structure.data.ping.push({$some.ping|round:2});
   {/foreach}
 
   {foreach from=$uptime item=some name=uptime}
@@ -80,7 +80,7 @@
   {assign var="minutes" value=1440}
   {/if}
   structure.labels.uptime.push('{$some.time|date_format:"%d %B"}');
-  structure.data.uptime.push({(100 - ((($minutes - $some.count) / $minutes) * 100)|round:2)});
+  structure.data.uptime.push({(100 - ((($minutes - $some.count) / $minutes) * 100))|round:2});
   {/foreach}
 
   {foreach from=$la item=some}
