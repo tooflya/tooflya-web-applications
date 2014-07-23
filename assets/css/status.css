@@ -155,6 +155,12 @@ div.game {
 div.game div.icon {
   float: left;
   padding-right: 10px;
+  width: 64px;
+  height: 64px;
+}
+div.game div.icon img {
+  width: 64px;
+  height: 64px;
 }
 div.game div.name {
   color: #99ccb2;
@@ -166,6 +172,9 @@ div.game div.name sup {
 div.game div.description {
   color: #AFAFAF;
   font-size: 13px;
+}
+div.game div.error {
+  padding-left: 20px;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

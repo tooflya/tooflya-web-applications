@@ -13,6 +13,9 @@
       <div>Total Users: <b>{$more.users.total}</b></div>
       <div>Online Users: <b>{$more.users.online}</b></div>
     </li>
+    <li>
+      <div>Google Analitycs: <a href="#">Show Analitycs</a></b></div>
+    </li>
   </ul>
   <div class="title">Users</div>
   <div>New Users: <b>{$more.users.new} by last week</b></div>
@@ -22,17 +25,18 @@
   </div>
   {if $levels|count > 1}
   <div class="title">Levels</div>
-  <div>Average level: <b>{$more.levels.average}</b></div>
-  <div>Most hard level: <b>{$more.levels.hard}</b></div>
+  <div>Average level: <b>{if $more.levels.average}{$more.levels.average}{else}0{/if}</b></div>
+  <div>Most hard level: <b>{if $more.levels.hard}{$more.levels.hard}{else}0{/if}</b></div>
   <div>
     <canvas id="game-{$info.id}-levels" width="960px" height="150px"></canvas>
   </div>
   {/if}
   {if $info.payments}
   <div class="title">Finance</div>
-  <div>Retention: <b>{$more.finance.retention.free / $more.finance.retention.pay} %</b> <sup>It's mean that only {$more.finance.retention.pay} users from {$more.finance.retention.free + $more.finance.retention.pay} is pay for this app.</sup></div>
+  <div>Retention: <b>{if $more.levels.average}{$more.finance.retention.free / $more.finance.retention.pay}{else}0{/if} %</b> <sup>It's mean that only {$more.finance.retention.pay} users from {$more.finance.retention.free + $more.finance.retention.pay} is pay for this app.</sup></div>
   <div>In-app's: <b>{$more.finance.count} by last week</b></div>
   <div>
+    <canvas id="game-{$info.id}-payments" width="960px" height="150px"></canvas>
   </div>
   {/if}
 </div>{$more.users.graphics.active.count}
@@ -42,10 +46,12 @@
     labels: {
       users: [],
       levels: [],
+      payments: []
     },
     data: {
       users: [[], []],
-      levels: []
+      levels: [],
+      payments: [[], []]
     }
   };
 
@@ -65,41 +71,77 @@
   level++;
   {/foreach}
 
-  function dataset(data) {
-    return [{
-      fillColor: "rgba(174, 218, 235, 0.5)",
-      strokeColor: "rgba(122, 161, 176, 1.0)",
-      pointColor: "rgba(255, 255, 255, 1.0)",
-      pointStrokeColor: "rgba(122, 161, 176, 1.0)",
-      pointHighlightFill: "rgba(255, 255, 255, 1.0)",
-      pointHighlightStroke: "rgba(255, 255, 255, 1.0)",
-      data: data
-    }];
+  {foreach from=$payments item=some}
+  structure.labels.payments.push('{$some.success.time|date_format:"%d %B"}');
+  structure.data.payments[0].push({$some.success.count});
+  structure.data.payments[1].push({$some.failure.count});
+  {/foreach}
+
+  function dataset(data, color, label) {
+    switch(color) {
+      default:
+      return [{
+        label: label,
+        fillColor: "rgba(174, 218, 235, 0.5)",
+        strokeColor: "rgba(122, 161, 176, 1.0)",
+        pointColor: "rgba(255, 255, 255, 1.0)",
+        pointStrokeColor: "rgba(122, 161, 176, 1.0)",
+        pointHighlightFill: "rgba(255, 255, 255, 1.0)",
+        pointHighlightStroke: "rgba(255, 255, 255, 1.0)",
+        data: data
+      }];
+      break;
+      case 1:
+      return [{
+        label: label,
+        fillColor: "rgba(220, 220, 220, 0.2)",
+        strokeColor: "rgba(220, 220, 220, 1)",
+        pointColor: "rgba(220, 220, 220, 1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220, 220, 220, 1)",
+        data: data
+      }];
+      break;
+    }
   };
 
   var usersChartData = {
     labels: structure.labels.users,
     datasets: [
-      dataset(structure.data.users[0])[0],
-      dataset(structure.data.users[1])[0]
+      dataset(structure.data.users[1], 1, 'Active users')[0],
+      dataset(structure.data.users[0], 0, 'New users')[0]
+    ]
+  };
+
+  var paymentsChartData = {
+    labels: structure.labels.payments,
+    datasets: [
+      dataset(structure.data.payments[1], 1, 'Refusings')[0],
+      dataset(structure.data.payments[0], 0, 'Completes')[0]
     ]
   };
 
   {if $levels|count > 1}
   var levelsChartData = {
     labels: structure.labels.levels,
-    datasets: dataset(structure.data.levels)
+    datasets: dataset(structure.data.levels, 0, 'Users on this level')
   };
   {/if}
 
   var options = {
     scaleGridLineColor: "rgba(204, 204, 204, 1)",
     responsive: true,
-    animationSteps: 240
+    tooltipTemplate: "<%= datasetLabel %>: <%= value %>",
+    multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
   };
   new Chart(document.getElementById("game-{$info.id}-users").getContext("2d")).Line(usersChartData, options);
 
   {if $levels|count > 1}
   new Chart(document.getElementById("game-{$info.id}-levels").getContext("2d")).Line(levelsChartData, options);
+  {/if}
+
+  {if $info.payments}
+  new Chart(document.getElementById("game-{$info.id}-payments").getContext("2d")).Line(paymentsChartData, options);
   {/if}
 </script>

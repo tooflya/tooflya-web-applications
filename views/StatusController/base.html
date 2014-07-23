@@ -36,7 +36,7 @@
   </div>
   <div class="class">
    <div class="title">Bandwidth</div>
-    <div>Average bandwidth per minute: <b>{$server.main.bandwidth|round:2} kbit/s by last week</b></div>
+    <div>Average bandwidth per minute: <b>{$server.main.bandwidth|round:2} KBit/s by last week</b></div>
     <div>
       <canvas id="server-{$server.main.id}-bandwidth" width="960px" height="150px"></canvas>
     </div>
@@ -90,46 +90,64 @@
   structure.data.la[2].push({$some.fifteen|round:2});
   {/foreach}
 
-  function dataset(data) {
-    return [{
-      fillColor: "rgba(174, 218, 235, 0.5)",
-      strokeColor: "rgba(122, 161, 176, 1.0)",
-      pointColor: "rgba(255, 255, 255, 1.0)",
-      pointStrokeColor: "rgba(122, 161, 176, 1.0)",
-      pointHighlightFill: "rgba(255, 255, 255, 1.0)",
-      pointHighlightStroke: "rgba(255, 255, 255, 1.0)",
-      data: data
-    }];
+  function dataset(data, color, label) {
+    switch(color) {
+      default:
+      return [{
+        label: label,
+        fillColor: "rgba(174, 218, 235, 0.5)",
+        strokeColor: "rgba(122, 161, 176, 1.0)",
+        pointColor: "rgba(255, 255, 255, 1.0)",
+        pointStrokeColor: "rgba(122, 161, 176, 1.0)",
+        pointHighlightFill: "rgba(255, 255, 255, 1.0)",
+        pointHighlightStroke: "rgba(255, 255, 255, 1.0)",
+        data: data
+      }];
+      break;
+      case 1:
+      return [{
+        label: label,
+        fillColor: "rgba(220, 220, 220, 0.2)",
+        strokeColor: "rgba(220, 220, 220, 1)",
+        pointColor: "rgba(220, 220, 220, 1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220, 220, 220, 1)",
+        data: data
+      }];
+      break;
+    }
   };
 
   var uptimeChartData = {
     labels: structure.labels.uptime,
-    datasets: dataset(structure.data.uptime)
+    datasets: dataset(structure.data.uptime, 0, '%')
   };
 
   var bandwidthChartData = {
     labels: structure.labels.bandwidth,
-    datasets: dataset(structure.data.bandwidth)
+    datasets: dataset(structure.data.bandwidth, 0, 'KBit/s')
   };
 
   var pingChartData = {
     labels: structure.labels.ping,
-    datasets: dataset(structure.data.ping)
+    datasets: dataset(structure.data.ping, 0, 'ms')
   };
 
   var laChartData = {
     labels: structure.labels.la,
     datasets: [
-      dataset(structure.data.la[0])[0],
-      dataset(structure.data.la[1])[0],
-      dataset(structure.data.la[2])[0]
+      dataset(structure.data.la[0], 0, '1 minute')[0],
+      dataset(structure.data.la[1], 0, '5 minutes')[0],
+      dataset(structure.data.la[2], 0, '15 minutes')[0]
     ]
   };
 
   var options = {
     scaleGridLineColor: "rgba(204, 204, 204, 1)",
     responsive: true,
-    animationSteps: 240
+    tooltipTemplate: "<%= value %> <%= datasetLabel %>",
+    multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
   };
   new Chart(document.getElementById("server-{$server.main.id}-uptime").getContext("2d")).Line(uptimeChartData, options);
   new Chart(document.getElementById("server-{$server.main.id}-bandwidth").getContext("2d")).Line(bandwidthChartData, options);

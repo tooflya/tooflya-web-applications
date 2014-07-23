@@ -131,9 +131,9 @@ class StatusController extends BaseController
         )
       )
     ));
-    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'bandwidth');
     $this->templates->assign_array("SELECT * FROM (SELECT *, COUNT(*) AS `count`, DAY(`time`) AS `day` FROM `uptime` GROUP by `day` ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `table`.`day`", 'uptime');
-    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `id` ASC LIMIT 7) AS `table` GROUP BY `day` LIMIT 7", 'la');
+    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day`", 'bandwidth');
+    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day`", 'la');
 
     $this->templates->assign('time', $time);
 
@@ -187,12 +187,25 @@ class StatusController extends BaseController
           'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `game` = '$id' AND `success` = TRUE"), 0)
         ),
       ));
-      $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`join`) AS `day`, `join` FROM `users` WHERE `game` = '$id' GROUP BY `day` LIMIT 7", 'users');
-      $this->templates->assign_array("SELECT COUNT(*) AS `count`, DAY(`time`) AS `day`, `time` FROM `visits` WHERE `game` = '$id' GROUP BY `day` LIMIT 7", 'visits');
+
+      $users = array();
+      $visits = array();
+      $payments = array();
+      for($i = 7; $i >= 0; $i--) {
+        $users[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `join` FROM `users` WHERE `game` = '$id' AND `join` >= (CURDATE() - $i) AND `join` < (CURDATE() - $i + 1)"), 0);
+        $visits[$i - 1] = mysql_result(mysql_query("SELECT COUNT(*) AS `count`, DAY((CURDATE() - $i)) AS `day`, `time` FROM `visits` WHERE `game` = '$id' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+      }
+      for($i = 7; $i >= 0; $i--) {
+        $payments[$i - 1]['success'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `game` = '$id' AND `success` = TRUE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+        $payments[$i - 1]['failure'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `game` = '$id' AND `success` = FALSE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+      }
+      $this->templates->assign('users', $users);
+      $this->templates->assign('visits', $visits);
+      $this->templates->assign('payments', $payments);
 
       $levels = array_fill(0, mysql_result(mysql_query("SELECT `levels` FROM `games` WHERE `id` = '$id'"), 0), 0);
       $data = mysql_query("SELECT * FROM `users` WHERE `game` = '$id'");
-      while(false !==($result = mysql_fetch_assoc($data)))
+      while(false !== ($result = mysql_fetch_assoc($data)))
       {
         $levels[$result['level'] - 1]++;
       }
