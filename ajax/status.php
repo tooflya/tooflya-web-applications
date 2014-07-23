@@ -4,7 +4,7 @@
  * @file status.php
  * @category Ajax files
  *
- * @author Igor Mats from Gloryon Kharkov
+ * @author Igor Mats from Tooflya Inc.
  * @copyright (c) 2014 by Igor Mats
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License v3
@@ -42,20 +42,9 @@ if(true)
           case 'server2':
           print json_encode(array(
             'response' => 1,
-            'server2' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin')
+            'server2' => file_get_contents('http://status.tooflya.com/ajax/status.php?action=cross-origin')
           ));
           break;
-          case 'games':
-          print json_encode(array(
-            'response' => 1,
-            'games' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin&type=games')
-          ));
-          break;
-          case 'game':
-          print json_encode(array(
-            'response' => 1,
-            'game' => file_get_contents('https://status.tooflya.com/ajax/status.php?action=cross-origin&type=game&id=' . Validate::get('id'))
-          ));
           break;
         }
       }
@@ -89,10 +78,10 @@ if(true)
 
 /**
  *
- * Designed specifically for using this code in projects of Gloryon Kharkov
+ * Designed specifically for using this code in projects of Tooflya Inc.
  * Gloryon Kharkov, 2012
  *
- * @author Igor Mats from Gloryon Kharkov
- * @copyright (c) 2012 by Igor Mats
+ * @author Igor Mats from Tooflya Inc.
+ * @copyright (c) 2014 by Igor Mats
  *
  */

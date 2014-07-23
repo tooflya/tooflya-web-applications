@@ -13,25 +13,6 @@
         <li><a href="#plus.google.com"><b>plus.google.com</b></a></li>
       </ul>
     </li>
-    <li class="tip">
-      <a href="#games-servers-status"><b>{l s='Games Status'}</b></a>
-      <ul>
-      {foreach from=$games item=some}
-        <li>
-          <a href="#game-{$some.id}"><b>{$some.name} {$some.version}</b></a>
-          <sup>
-          {if $some.platform == 0}www.tooflya.com{/if}
-          {if $some.platform == 1}www.vk.com{/if}
-          {if $some.platform == 2}www.ok.ru{/if}
-          {if $some.platform == 3}www.facebook.com{/if}
-          {if $some.platform == 4}plus.google.com{/if}
-          {if $some.platform == 5}Google Play{/if}
-          {if $some.platform == 6}App Store{/if}
-          </sup>
-        </li>
-      {/foreach}
-      </ul>
-    </li>
     <li></li>
     <li class="update"><a href="#"><b>{l s='Update Now'}</b></a></li>
   </ul>

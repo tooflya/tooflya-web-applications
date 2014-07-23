@@ -22,7 +22,7 @@
   $(document).ready(function() {
     window.setTimeout(function() {
       ajaxRequest.send({
-        url: 'https://status.tooflya.com/ajax/status.php?server=game&id={$some.id}',
+        url: 'http://status.tooflya.com/ajax/status.php?server=game&id={$some.id}',
         success: function(e) {
           $('#game-{$some.id}-more').html(e.game);
         },

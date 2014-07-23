@@ -28,8 +28,6 @@ class StatusController extends BaseController
    */
   public function indexAction()
   {
-    $this->getBaseInfo();
-
     $this->templates->display($this->name);
   }
 
@@ -44,19 +42,6 @@ class StatusController extends BaseController
     preg_match('/addr:([\d\.]+)/', $ifconfig, $match);
 
     return $match[1];
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function getBaseInfo()
-  {
-    mysql_connect("www.tooflya.com", "root", SECURE) or die("Could not connect to mysql server"); // TODO: Remove this.
-    mysql_select_db("games.tooflya.com") or die("Could not select database");
-
-    $this->templates->assign_array("SELECT * FROM `games`", 'games');
   }
 
   /**
@@ -138,86 +123,6 @@ class StatusController extends BaseController
     $this->templates->assign('time', $time);
 
     $this->templates->display($this->name, 'base');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function getGamesServersBaseInfo()
-  {
-    $this->getBaseInfo();
-
-    $this->templates->assign_array("SELECT * FROM `games`", 'gamesinfo');
-
-    $this->templates->display($this->name, 'games');
-  }
-
-  /**
-   *
-   *
-   *
-   */
-  public function getGameServerInfo($id)
-  {
-    $this->getBaseInfo();
-
-    if(mysql_num_rows($info = mysql_query("SELECT * FROM `games` WHERE `id` = '$id'")))
-    {
-      $info = mysql_result($info, 0);
-
-      $this->templates->assign_element("SELECT * FROM `games` WHERE `id` = '$id'", 'info');
-      $this->templates->assign('more', array(
-        'users' => array(
-          'total' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id'"), 0),
-          'online' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 5 MINUTE)"), 0),
-          'new' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `join` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0),
-          'active' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0)
-        ),
-        'levels' => array(
-          'average' => mysql_result(mysql_query("SELECT ROUND(AVG(`level`)) FROM `users` WHERE `game` = '$id'"), 0),
-          'hard' => mysql_result(mysql_query("SELECT `level`, COUNT(`level`) AS `count` FROM `users` GROUP by `level` ORDER by `count` DESC LIMIT 1"), 0),
-        ),
-        'finance' => array(
-          'retention' => array(
-            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `inapps` = '0'"), 0),
-            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `inapps` > '0'"), 0)
-          ),
-          'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `game` = '$id' AND `success` = TRUE"), 0)
-        ),
-      ));
-
-      $users = array();
-      $visits = array();
-      $payments = array();
-      for($i = 7; $i >= 0; $i--) {
-        $users[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `join` FROM `users` WHERE `game` = '$id' AND `join` >= (CURDATE() - $i) AND `join` < (CURDATE() - $i + 1)"), 0);
-        $visits[$i - 1] = mysql_result(mysql_query("SELECT COUNT(*) AS `count`, DAY((CURDATE() - $i)) AS `day`, `time` FROM `visits` WHERE `game` = '$id' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
-      }
-      for($i = 7; $i >= 0; $i--) {
-        $payments[$i - 1]['success'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `game` = '$id' AND `success` = TRUE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
-        $payments[$i - 1]['failure'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `game` = '$id' AND `success` = FALSE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
-      }
-      $this->templates->assign('users', $users);
-      $this->templates->assign('visits', $visits);
-      $this->templates->assign('payments', $payments);
-
-      $levels = array_fill(0, mysql_result(mysql_query("SELECT `levels` FROM `games` WHERE `id` = '$id'"), 0), 0);
-      $data = mysql_query("SELECT * FROM `users` WHERE `game` = '$id'");
-      while(false !== ($result = mysql_fetch_assoc($data)))
-      {
-        $levels[$result['level'] - 1]++;
-      }
-
-      $this->templates->assign('levels', $levels);
-
-      $this->templates->display($this->name, 'games-more');
-    }
-    else
-    {
-      exit;
-    }
   }
 
   /**
