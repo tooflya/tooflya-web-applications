@@ -36,7 +36,7 @@ abstract class BaseController implements IBaseController
     $this->name = get_class($this);
     $this->templates = Template::Instance();
 
-    if(PRENAMENT_CONTROLLERS)
+    if(PERNAMENT_CONTROLLERS)
     {
       PermanentController::Instance($this->templates);
     }

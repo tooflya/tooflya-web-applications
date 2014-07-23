@@ -27,6 +27,10 @@ class GamesController extends BaseController {
    */
   public function indexAction($id = false, $api = false)
   {
+    mysql_select_db("games.tooflya.com") or die("Could not select database");
+
+    $this->templates->assign('url', (isset($_SERVER['HTTPS']) ? 'https://' : 'http://').'games.tooflya.com');
+
     if($id)
     {
       if($this->isGameAvailable($id))
@@ -51,8 +55,18 @@ class GamesController extends BaseController {
     }
     else
     {
-      $this->templates->assign(TITLE, 'Our Games');
-      $this->templates->display($this->name);
+      if(Ajax::isResponse())
+      {
+        $this->getExtendedInfo();
+
+        $this->templates->display($this->name, 'games');
+      }
+      else
+      {
+        $this->getBaseInfo();
+
+        $this->templates->display($this->name);
+      }
     }
   }
 
@@ -74,6 +88,98 @@ class GamesController extends BaseController {
   public function assignGame($id)
   {
     $this->templates->assign_element("SELECT * FROM `games` WHERE `alias` = '$id' LIMIT 1", 'game');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getBaseInfo()
+  {
+    $this->templates->assign_array("SELECT * FROM `games`", 'games');
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getExtendedInfo()
+  {
+    $data = mysql_query("SELECT * FROM `games`") or die(mysql_error());
+
+    $results = array();
+    while($row = mysql_fetch_assoc($data))
+    {
+      $row['data'] = $this->getGameExtendedInfo($row['id']);
+
+      $results[] = $row;
+    }
+
+    $this->templates->assign('games', $results);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function getGameExtendedInfo($id)
+  {
+    if(mysql_num_rows(mysql_query("SELECT * FROM `games` WHERE `id` = '$id'")))
+    {
+      $data = array();
+      $data['more'] = array(
+        'users' => array(
+          'total' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id'"), 0),
+          'online' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 5 MINUTE)"), 0),
+          'new' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `join` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0),
+          'active' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0)
+        ),
+        'levels' => array(
+          'average' => mysql_result(mysql_query("SELECT ROUND(AVG(`level`)) FROM `users` WHERE `game` = '$id'"), 0),
+          'hard' => mysql_result(mysql_query("SELECT `level`, COUNT(`level`) AS `count` FROM `users` GROUP by `level` ORDER by `count` DESC LIMIT 1"), 0),
+        ),
+        'finance' => array(
+          'retention' => array(
+            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `inapps` = '0'"), 0),
+            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `game` = '$id' AND `inapps` > '0'"), 0)
+          ),
+          'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `game` = '$id' AND `success` = TRUE"), 0)
+        ),
+      );
+
+      $users = array();
+      $visits = array();
+      $payments = array();
+      for($i = 7; $i >= 0; $i--) {
+        $users[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `join` FROM `users` WHERE `game` = '$id' AND `join` >= (CURDATE() - $i) AND `join` < (CURDATE() - $i + 1)"), 0);
+        $visits[$i - 1] = mysql_result(mysql_query("SELECT COUNT(*) AS `count`, DAY((CURDATE() - $i)) AS `day`, `time` FROM `visits` WHERE `game` = '$id' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+      }
+      for($i = 7; $i >= 0; $i--) {
+        $payments[$i - 1]['success'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `game` = '$id' AND `success` = TRUE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+        $payments[$i - 1]['failure'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `game` = '$id' AND `success` = FALSE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+      }
+      $data['users'] = $users;
+      $data['visits'] = $visits;
+      $data['payments'] = $payments;
+
+      $levels = array_fill(0, mysql_result(mysql_query("SELECT `levels` FROM `games` WHERE `id` = '$id'"), 0), 0);
+      $query = mysql_query("SELECT * FROM `users` WHERE `game` = '$id'");
+      while(false !== ($result = mysql_fetch_assoc($query)))
+      {
+        $levels[$result['level'] - 1]++;
+      }
+
+      $data['levels'] = $levels;
+
+      return $data;
+    }
+    else
+    {
+      return false;
+    }
   }
 }
 

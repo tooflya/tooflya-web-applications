@@ -46,7 +46,7 @@ h1.status:active {
 }
 h1.status span {
   font-weight: 400;
-  color: #99ccb2;
+  color: #FFAB4F;
 }
 h1.status span sup {
   font-size: 13px;
@@ -65,7 +65,7 @@ div.content div.block div.title {
 }
 div.content div.block div.title h3 {
   margin-bottom: 5px;
-  color: #99ccb2;
+  color: #FFAB4F;
   font-weight: 500;
 }
 div.content div.block div.description {
@@ -83,22 +83,10 @@ div.content div.block div.description div.class ul li {
   vertical-align: top;
 }
 div.content div.block div.description div.class div.title {
-  color: #99ccb2;
+  color: #FFAB4F;
   border: none;
   padding-bottom: 10px;
   text-decoration: underline;
-}
-span.uptime {
-  font-size: 20px;
-}
-span.uptime.success {
-  color: #99ccb2;
-}
-span.uptime.warning {
-  color: #FFC883;
-}
-span.uptime.critical {
-  color: #d01040;
 }
 div.header {
   margin-bottom: 10px;
@@ -134,21 +122,48 @@ ul.links li.tip:hover > ul {
   display: block;
 }
 footer ul.links li.tip ul {
-  top: -100px;
+  top: -190px;
   min-height: 100px;
 }
 ul.links li.update a {
-  color: #99ccb2;
+  color: #FFAB4F;
 }
 .error .update {
-  color: #99ccb2;
+  color: #FFAB4F;
 }
 .error p {
   color: #d01040;
   font-weight: 500;
   padding: 0px;
   margin: 0;
-}+
+}
+div.game {
+  margin-bottom: 20px;
+}
+div.game div.icon {
+  float: left;
+  padding-right: 10px;
+  width: 64px;
+  height: 64px;
+}
+div.game div.icon img {
+  width: 64px;
+  height: 64px;
+}
+div.game div.name {
+  color: #FFAB4F;
+  font-weight: 500;
+}
+div.game div.name sup {
+  color: #B6B6B6;
+}
+div.game div.description {
+  color: #AFAFAF;
+  font-size: 13px;
+}
+div.game div.error {
+  padding-left: 20px;
+}
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 

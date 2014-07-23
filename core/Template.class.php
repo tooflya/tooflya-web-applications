@@ -141,8 +141,15 @@ class Template extends Smarty {
    public function display($controller, $template = 'index')
    {
     $this->assign('tab', $controller.'/'.$template);
-    
-    parent::display($controller.'/'.$template.'.html');
+
+    if(Ajax::isResponse())
+    {
+      Ajax::generate()->value("response", parent::fetch($controller.'/'.$template.'.html'));
+    }
+    else
+    {
+      parent::display($controller.'/'.$template.'.html');
+    }
    }
   
   /**

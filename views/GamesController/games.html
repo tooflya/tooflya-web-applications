@@ -1,0 +1,176 @@
+<div class="description">
+  {foreach from=$games item=some}
+  <div class="game" id="game-{$some.id}">
+    <div class="icon"><img src="{$some.icon}" alt="" /></div>
+    <div class="name">
+      {$some.name} {$some.version}
+      <sup>
+      {if $some.platform == 0}www.tooflya.com{/if}
+      {if $some.platform == 1}www.vk.com{/if}
+      {if $some.platform == 2}www.ok.ru{/if}
+      {if $some.platform == 3}www.facebook.com{/if}
+      {if $some.platform == 4}plus.google.com{/if}
+      {if $some.platform == 5}Google Play{/if}
+      {if $some.platform == 6}App Store{/if}
+      </sup>
+    </div>
+    <div class="description">{$some.description}</div>
+    <div class="clearfix"></div>
+    <div id="game-{$some.id}-more">
+      <div class="class">
+        <div class="title">Info</div>
+        <ul>
+          <li>
+            <div>Server: <b>games.tooflya.com</b></div>
+            <div>Server Port: <b>{$some.port}</b></div>
+          </li>
+          <li>
+            <div>Destination: <b><a href="//{$some.url}" target="_blank">{$some.url}</a></b></div>
+            <div>Version: <b>{$some.version}</b></div>
+          </li>
+          <li>
+            <div>Total Users: <b>{$some.data.more.users.total}</b></div>
+            <div>Online Users: <b>{$some.data.more.users.online}</b></div>
+          </li>
+          <li>
+            <div>Google Analitycs: <a href="#">Show Analitycs</a></b></div>
+          </li>
+        </ul>
+
+
+  <div class="title">Users</div>
+  <div>New Users: <b>{$some.data.more.users.new} by last week</b></div>
+  <div>Active Users: <b>{$some.data.more.users.active} by last week</b></div>
+  <div>
+    <canvas id="game-{$some.id}-users" width="960px" height="150px"></canvas>
+  </div>
+  {if $some.levels > 1}
+  <div class="title">Levels</div>
+  <div>Average level: <b>{if $some.data.more.levels.average}{$some.data.more.levels.average}{else}0{/if}</b></div>
+  <div>Most hard level: <b>{if $some.data.more.levels.hard}{$some.data.more.levels.hard}{else}0{/if}</b></div>
+  <div>
+    <canvas id="game-{$some.id}-levels" width="960px" height="150px"></canvas>
+  </div>
+  {/if}
+  {if $some.payments}
+  <div class="title">Finance</div>
+  <div>Retention: <b>{if $some.data.more.levels.average}{$some.data.more.finance.retention.free / $some.data.more.finance.retention.pay}{else}0{/if} %</b> <sup>It's mean that only {$some.data.more.finance.retention.pay} users from {$some.data.more.finance.retention.free + $some.data.more.finance.retention.pay} is pay for this app.</sup></div>
+  <div>In-app's: <b>{$some.data.more.finance.count} by last week</b></div>
+  <div>
+    <canvas id="game-{$some.id}-payments" width="960px" height="150px"></canvas>
+  </div>
+  {/if}
+</div>
+
+<script>
+  var structure = {
+    labels: {
+      users: [],
+      levels: [],
+      payments: []
+    },
+    data: {
+      users: [[], []],
+      levels: [],
+      payments: [[], []]
+    }
+  };
+
+  {foreach from=$some.data.users item=value}
+  structure.labels.users.push('{$value.join|date_format:"%d %B"}');
+  structure.data.users[0].push({$value.count});
+  {/foreach}
+
+  {foreach from=$some.data.visits item=value}
+  structure.data.users[1].push({$value.count});
+  {/foreach}
+
+  var level = 1;
+  {foreach from=$some.data.levels item=value}
+  structure.labels.levels.push(level.toString());
+  structure.data.levels.push({$value});
+  level++;
+  {/foreach}
+
+  {foreach from=$some.data.payments item=value}
+  structure.labels.payments.push('{$value.success.time|date_format:"%d %B"}');
+  structure.data.payments[0].push({$value.success.count});
+  structure.data.payments[1].push({$value.failure.count});
+  {/foreach}
+
+  function dataset(data, color, label) {
+    switch(color) {
+      default:
+      return [{
+        label: label,
+        fillColor: "rgba(174, 218, 235, 0.5)",
+        strokeColor: "rgba(122, 161, 176, 1.0)",
+        pointColor: "rgba(255, 255, 255, 1.0)",
+        pointStrokeColor: "rgba(122, 161, 176, 1.0)",
+        pointHighlightFill: "rgba(255, 255, 255, 1.0)",
+        pointHighlightStroke: "rgba(255, 255, 255, 1.0)",
+        data: data
+      }];
+      break;
+      case 1:
+      return [{
+        label: label,
+        fillColor: "rgba(220, 220, 220, 0.2)",
+        strokeColor: "rgba(220, 220, 220, 1)",
+        pointColor: "rgba(220, 220, 220, 1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220, 220, 220, 1)",
+        data: data
+      }];
+      break;
+    }
+  };
+
+  var usersChartData = {
+    labels: structure.labels.users,
+    datasets: [
+      dataset(structure.data.users[1], 1, 'Active users')[0],
+      dataset(structure.data.users[0], 0, 'New users')[0]
+    ]
+  };
+
+  var paymentsChartData = {
+    labels: structure.labels.payments,
+    datasets: [
+      dataset(structure.data.payments[1], 1, 'Refusings')[0],
+      dataset(structure.data.payments[0], 0, 'Completes')[0]
+    ]
+  };
+
+  {if $some.levels > 1}
+  var levelsChartData = {
+    labels: structure.labels.levels,
+    datasets: dataset(structure.data.levels, 0, 'Users on this level')
+  };
+  {/if}
+
+  var options = {
+    scaleGridLineColor: "rgba(204, 204, 204, 1)",
+    responsive: true,
+    tooltipTemplate: "<%= datasetLabel %>: <%= value %>",
+    multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
+  };
+  new Chart(document.getElementById("game-{$some.id}-users").getContext("2d")).Line(usersChartData, options);
+
+  {if $some.levels > 1}
+  new Chart(document.getElementById("game-{$some.id}-levels").getContext("2d")).Line(levelsChartData, options);
+  {/if}
+
+  {if $some.payments}
+  new Chart(document.getElementById("game-{$some.id}-payments").getContext("2d")).Line(paymentsChartData, options);
+  {/if}
+</script>
+
+
+
+
+    </div>
+  </div>
+  {/foreach}
+</div>

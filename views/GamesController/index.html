@@ -1,5 +1,36 @@
-{include file="BaseViews/header.html"}
+{include file="GamesController/include/header.html"}
 <section class="content">
-  <div class="clearfix"></div>
+  <div class="header">
+  {include file="GamesController/include/links.html"}
+  </div>
+  <div class="intro">
+    <p>
+      {l s='We continuously monitor the status of'}
+      <a href="http://www.tooflya.com">www.tooflya.com</a>
+      {l s='and all its related services. If there are any interruptions in service, a note will be posted here. If you are experiencing problems connecting to'}
+      <a href="//services.tooflya.com">Tooflya Network</a>
+      {l s='and do not see a notice posted, please email'} <a href="mailto:support@tooflya.com">support@tooflya.com</a>
+    </p>
+  </div>
+  <div class="content">
+    <div class="block" id="games-servers-status">
+      <div class="title">
+        <h3>Games Status</h3>
+      </div>
+      <div id="games-status">
+        <img class="preloader" src="{$url}/assets/img/status-preloader.gif" />
+      </div>
+    </div>
+  </div>
 </section>
-{include file="BaseViews/footer.html"}
+<template id="loading-template">
+<img class="preloader" src="{$url}/assets/img/status-preloader.gif" />
+</template>
+<template id="error-template">
+<div class="error">
+  <p>Server that is responsible for this operation is not responsible or when performing critical error has occurred requiring administrator intervention.</p>
+  <p>You could try to contact the server again.</p>
+  <p><a class="update" href="#"><b>Update now.</b></a></p>
+</div>
+</template>
+{include file="GamesController/include/footer.html"}
