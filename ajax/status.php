@@ -79,7 +79,7 @@ if(true)
 /**
  *
  * Designed specifically for using this code in projects of Tooflya Inc.
- * Gloryon Kharkov, 2012
+ * Tooflya Inc., 2014
  *
  * @author Igor Mats from Tooflya Inc.
  * @copyright (c) 2014 by Igor Mats

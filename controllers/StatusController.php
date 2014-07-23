@@ -57,7 +57,7 @@ class StatusController extends BaseController
     $time->setTime(0, 0, 0);
     $time->getTimestamp();
 
-    $time = (new DateTime())->diff($time)->h * 60 + (new DateTime())->diff($time)->i;
+    $time = (new DateTime())->diff($time)->h * 60 + (new DateTime())->diff($time)->i + 1;
 
     $memory = array(
       'total' => 0,
@@ -175,7 +175,7 @@ class StatusController extends BaseController
       }
     }
     else
-    {print 'false';
+    {
       return $this->bandwidth('venet0');
     }
     
