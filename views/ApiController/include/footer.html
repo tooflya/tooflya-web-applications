@@ -1,0 +1,29 @@
+    <footer id="footer">
+      <div class="content">
+        {include file="ApiController/include/links.html"}
+        <div class="footer">
+          <div class="content">
+            <div class="copyright">
+              <div>&copy; Tooflya Inc. 2012 - 2014 | {l s='Applications Development'}</div>
+            </div>
+            <div class="language">
+              <form id="languages" action="" method="post">
+                <select name="language" id="languages-select">
+                  {if $language == 'en'}
+                  <option value="en">English</option>
+                  <option value="ru">Русский</option>
+                  {else}
+                  <option value="ru">Русский</option>
+                  <option value="en">English</option>
+                  {/if}
+                </select>
+              </form>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  </body>
+</html>

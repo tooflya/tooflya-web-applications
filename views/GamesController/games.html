@@ -42,6 +42,10 @@
         <div>
           <canvas id="game-{$some.id}-users" width="960px" height="150px"></canvas>
         </div>
+        <div>Plays: <b>{$some.data.more.users.plays} by last week</b></div>
+        <div>
+          <canvas id="game-{$some.id}-plays" width="960px" height="150px"></canvas>
+        </div>
         {if $some.levels > 1}
         <div class="title">Levels</div>
         <div>Average level: <b>{if $some.data.more.levels.average}{$some.data.more.levels.average}{else}0{/if}</b></div>
@@ -63,11 +67,13 @@
         var structure = {
           labels: {
             users: [],
+            plays: [],
             levels: [],
             payments: []
           },
           data: {
             users: [[], []],
+            plays: [],
             levels: [],
             payments: [[], []]
           }
@@ -76,10 +82,12 @@
         {foreach from=$some.data.users item=value}
         structure.labels.users.push('{$value.join|date_format:"%d %B"}');
         structure.data.users[0].push({$value.count});
+        structure.data.users[1].push({$value.visits});
         {/foreach}
 
-        {foreach from=$some.data.visits item=value}
-        structure.data.users[1].push({$value.count});
+        {foreach from=$some.data.plays item=value}
+        structure.labels.plays.push('{$value.time|date_format:"%d %B"}');
+        structure.data.plays.push({$value.count});
         {/foreach}
 
         var level = 1;
@@ -132,6 +140,11 @@
           ]
         };
 
+        var playsChartData = {
+          labels: structure.labels.plays,
+          datasets: dataset(structure.data.plays, 1, 'Plays count')
+        };
+
         var paymentsChartData = {
           labels: structure.labels.payments,
           datasets: [
@@ -154,6 +167,7 @@
           multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
         };
         new Chart(document.getElementById("game-{$some.id}-users").getContext("2d")).Line(usersChartData, options);
+        new Chart(document.getElementById("game-{$some.id}-plays").getContext("2d")).Line(playsChartData, options);
 
         {if $some.levels > 1}
         new Chart(document.getElementById("game-{$some.id}-levels").getContext("2d")).Line(levelsChartData, options);

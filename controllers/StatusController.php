@@ -73,7 +73,7 @@ class StatusController extends BaseController
       'hours' => $data / 60 / 60 % 24,
       'minutes' => $data / 60 % 60,
       'seconds' => $data % 60,
-      'percent' => 100.0 - ((((8640 + $time) - mysql_result(mysql_query("SELECT COUNT(*) FROM `uptime` WHERE date_sub(curdate(), INTERVAL 7 DAY) <= `time` ORDER by `id` DESC"), 0)) / (8640 + $time)) * 100),
+      'percent' => 100.0 - ((((10080 + $time) - mysql_result(mysql_query("SELECT COUNT(*) FROM `uptime` WHERE date_sub(curdate(), INTERVAL 7 DAY) <= `time` ORDER by `id` DESC"), 0)) / (10080 + $time)) * 100),
     );
 
     $fh = fopen('/proc/meminfo','r');
