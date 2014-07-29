@@ -1,16 +1,13 @@
 {include file="BaseViews/header.html"}
 <section class="content">
   <base href="//games.tooflya.com/games/{$game.alias}/">
-  <style>
-    @font-face {
-        font-family: '{$game.font}';
-        src: url('Resources/Fonts/{$game.font}.ttf');
-      }
-      canvas {
-        font-family: '{$game.font}';
-      }
-  </style>
-  <h1>{$game.name} <sup>Beta</sup></h1>
+  <link href="//games.tooflya.com/games/{$game.alias}/Resources/Styles/tooflya.css" rel="stylesheet">
+  <div class="game-description">
+    <div class="icon"><img src="{$game.icon}" alt="" /></div>
+    <div class="name">{$game.name} <sup>{$game.version}</sup></div>
+    <div class="description">{$game.description}</div>
+    <div class="clearfix"></div>
+  </div>
   <div id="no-support" style="display: none">
     <h2>{l s='Your browser does not support HTML5 canvas'}!</h2>
     <p>{l s='Google Chrome is a browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier.Click the logo to download'}.</p>
@@ -37,8 +34,6 @@
   <div class="canvas">
     <canvas id="canvas" width="{$game.width}" height="{$game.height}"></canvas>
   </div>
-  <div class="line"></div>
-  <h3><b>{l s='How to play?'}</b></h3>
   <script src="cocos2dx-tooflya-sdk-html5/framework.js"></script>
   <script src="app.js"></script>
   <div class="clearfix"></div>

@@ -1838,6 +1838,32 @@ div.loader {
   height: 43px;
   margin: 300px auto;
 }
+div.game-description {
+  padding-bottom: 10px;
+}
+div.game-description div.name {
+  color: #7aa1b0;
+  font-weight: 500;
+}
+div.game-description div.description {
+  color: #AFAFAF;
+  font-size: 13px;
+}
+div.game-description sup {
+  font-size: 13px;
+  color: #B6B6B6;
+}
+div.game-description div.icon {
+  padding-left: 0;
+  padding-right: 10px;
+  float: left;
+  width: 64px;
+  height: 64px;
+}
+div.game-description div.icon img {
+  width: 64px;
+  height: 64px;
+}
 
 /* Smartphones (portrait and landscape) ----------- */
 @media only screen 
