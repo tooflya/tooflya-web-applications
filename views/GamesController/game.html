@@ -16,6 +16,9 @@
     <p>{l s='Google Chrome is a browser that combines a minimal design with sophisticated technology to make the web faster, safer, and easier.Click the logo to download'}.</p>
     <a href="http://www.google.com/chrome" target="_blank"><img src="{$url}/assets/img/chrome-logo.png" /></a>
   </div>
+  <div class="loader">
+    <img class="preloader" src="{$url}/assets/img/status-preloader.gif" />
+  </div>
   <div class="launch active" id="launch">
     <div style="width: {$game.width}px; height: {$game.height}px; background: transparent url({$url}/assets/img/games/covers/{$game.alias}-cover.png) no-repeat;"></div>
     <div class="shadow"></div>
@@ -36,7 +39,7 @@
   </div>
   <div class="line"></div>
   <h3><b>{l s='How to play?'}</b></h3>
-  <script src="cocos2dx-tooflya-sdk-html5/cocos2d.js"></script>
+  <script src="cocos2dx-tooflya-sdk-html5/framework.js"></script>
   <script src="app.js"></script>
   <div class="clearfix"></div>
 </section>
