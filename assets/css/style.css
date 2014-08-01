@@ -1705,7 +1705,7 @@ div.launch div.inner {
   top: 50%;
   left: 50%;
   margin-left: -250px;
-  margin-top: 0;
+  margin-top: -32px;
   background-color: #fff;
   width: 500px;
   height: 128px;
@@ -1759,9 +1759,6 @@ div.launch div.inner div.description p.small {
        -ms-transition: none !important;
         -o-transition: none !important;
            transition: none !important;
-}
-#launch-game {
-  display: none;  
 }
 div.project-users {
   padding: 0;
@@ -1832,6 +1829,40 @@ div.project-users div.row div.field.score {
 }
 div.project-users div.row div.field.date {
   width: 100px;
+}
+div.launch {
+  display: none;
+}
+div.loader {
+  width: 34px;
+  height: 43px;
+  margin: 300px auto;
+}
+div.game-description {
+  padding-bottom: 10px;
+}
+div.game-description div.name {
+  color: #7aa1b0;
+  font-weight: 500;
+}
+div.game-description div.description {
+  color: #AFAFAF;
+  font-size: 13px;
+}
+div.game-description sup {
+  font-size: 13px;
+  color: #B6B6B6;
+}
+div.game-description div.icon {
+  padding-left: 0;
+  padding-right: 10px;
+  float: left;
+  width: 64px;
+  height: 64px;
+}
+div.game-description div.icon img {
+  width: 64px;
+  height: 64px;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

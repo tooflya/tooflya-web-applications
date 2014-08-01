@@ -116,9 +116,9 @@ class StatusController extends BaseController
         )
       )
     ));
-    $this->templates->assign_array("SELECT * FROM (SELECT *, COUNT(*) AS `count`, DAY(`time`) AS `day` FROM `uptime` GROUP by `day` ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `table`.`day`", 'uptime');
-    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day`", 'bandwidth');
-    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day`", 'la');
+    $this->templates->assign_array("SELECT * FROM (SELECT *, COUNT(*) AS `count`, DAY(`time`) AS `day` FROM `uptime` GROUP by `day` ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `table`.`day` ORDER by `id` DESC", 'uptime');
+    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day` ORDER by `id` DESC", 'bandwidth');
+    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day` ORDER by `id` DESC", 'la');
 
     $this->templates->assign('time', $time);
 
@@ -159,7 +159,7 @@ class StatusController extends BaseController
   {
     $output = array();
     $com = 'vnstat -tr 60 -i '.$interface;
-    
+
     $exitcode = 0;
     exec($com, $output, $exitcode);
     
@@ -222,7 +222,7 @@ class StatusController extends BaseController
       return true;
     }
 
-    if(mysql_num_rows(mysql_query("SELECT * FROM `$action` WHERE `time` >= (CURDATE() - $counter) AND `time` < (CURDATE() - $counter + 1)")) < 1)
+    if(mysql_num_rows(mysql_query("SELECT * FROM `$action` WHERE DAY(`time`) = DAY(DATE_SUB(NOW(), INTERVAL $counter DAY))")) < 1)
     {
       mysql_query("INSERT INTO `$action` SET `time` = NOW() - INTERVAL $counter DAY");
     }

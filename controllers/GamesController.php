@@ -87,7 +87,7 @@ class GamesController extends BaseController {
    */
   public function startAction()
   {
-    $query = mysql_query("SELECT * FROM `games` WHERE `server` IS NOT NULL") or die("Could not select database");
+    $query = mysql_query("SELECT * FROM `games` WHERE `server` IS NOT NULL GROUP by `server`") or die("Could not select database");
 
     while(false !== ($data = mysql_fetch_assoc($query)))
     {

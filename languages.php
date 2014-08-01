@@ -41,9 +41,9 @@ if(Validate::isPost())
 else
 {
   if(
-  $params['path'][1] != 'ru' &&
-  $params['path'][1] != 'en' &&
-  $params['path'][1] != 'ajax'
+  $params[1] != 'ru' &&
+  $params[1] != 'en' &&
+  $params[1] != 'ajax'
   ) {
     if(Session::read('language'))
     {
@@ -70,9 +70,9 @@ else
   {
     if(Session::read('language'))
     {
-      if(Session::read('language') != $params['path'][1])
+      if(Session::read('language') != $params[1])
       {
-        if($params['path'][1] != 'ajax') Session::write('language', $params['path'][1]);
+        if($params[1] != 'ajax') Session::write('language', $params[1]);
 
         $language = Session::read('language');
       }

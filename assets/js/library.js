@@ -223,9 +223,9 @@ function yy()
   });
 }
 
-$('#launch-game').hide();
-$(document).ready(function() {
-  $('#launch-game').show();
+window.addEventListener("load", function() {
+  $('.loader').hide();
+  $('.launch').show();
 });
 $(document).on('click', '#launch-game', function(e) {
   $('#launch').removeClass('active').addClass('disabled');
@@ -236,6 +236,6 @@ $(document).on('click', '#launch-game', function(e) {
     $('#launch').hide();
     $('.canvas').show();
 
-    launchGame();
+    App.launch();
   });
 });

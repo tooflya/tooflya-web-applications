@@ -26,22 +26,38 @@
 $host = array_filter(explode('.', $_SERVER['HTTP_HOST']));
 $params = parse_url(str_replace('/'.str_replace('/var/www', '', PATH), '', preg_replace('/\/{1,}/', '/', $_SERVER['REQUEST_URI'])));
 $origin = preg_replace('/\/{1,}/', '/', $_SERVER['REQUEST_URI']);
-$params['path'] = array_filter(explode('/', $params['path']));
+$params = array_filter(explode('/', $params['path']));
 
-if($params['path'][1] != 'ajax')
+if($params[1] != 'ajax')
 {
-  if($host[0] != "www" && $host[0] != "tooflya")
+  $param = $host[0];
+
+  $host[0] = ucfirst(strtolower($host[0]));
+  $host[0] .= 'Controller';
+
+  $controller = file_exists(PATH.'/controllers/'.$host[0].'.php');
+
+  if($controller)
   {
-    array_splice($params['path'], 0, 0, $host[0]);
+    array_unshift($params, $param);
   }
 
-  if(!DISPLAY_LANGUAGE)
+  if($params[1] != 'ru' && $params[1] != 'en')
   {
-    if($params['path'][1] != 'ru' && $params['path'][1] != 'en')
-    {
-      array_unshift($params['path'], Session::read('language'));
-      array_unshift($params['path'], Session::read('language'));
-    }
+    array_unshift($params, Session::read('language'));
+    array_unshift($params, Session::read('language'));
+  }
+  else if($controller)
+  {
+    $l = $params[1];
+
+    array_shift($params);
+    array_shift($params);
+
+    array_unshift($params, $param);
+
+    array_unshift($params, $l);
+    array_unshift($params, $l);
   }
 
   require('languages.php');
@@ -53,29 +69,29 @@ if($params['path'][1] != 'ajax')
  *
  */
 
-if(empty($params['path'][2]))
+if(empty($params[2]))
 {
   $controller = new WebController();
   $controller->indexAction();
 }
 else
 {
-  $params['path'][2] = ucfirst(strtolower($params['path'][2]));
-  $params['path'][2] .= 'Controller';
+  $params[2] = ucfirst(strtolower($params[2]));
+  $params[2] .= 'Controller';
 
-  if(file_exists(PATH.'/controllers/'.$params['path'][2].'.php')) {
+  if(file_exists(PATH.'/controllers/'.$params[2].'.php'))
+  {
+    $controller = new $params[2];
 
-    $controller = new $params['path'][2];
-
-    if(isset($params['path'][3]))
+    if(isset($params[3]))
     {
-      $action = $params['path'][3].'Action';
+      $action = $params[3].'Action';
 
       if(method_exists($controller, $action))
       {
-        if(isset($params['path'][4]))
+        if(isset($params[4]))
         {
-          $controller->$action(Validate::sql($params['path'][4]));
+          $controller->$action(Validate::sql($params[4]));
         }
         else
         {
@@ -84,13 +100,13 @@ else
       }
       else
       {
-        if(isset($params['path'][4]))
+        if(isset($params[4]))
         {
-          $controller->indexAction(Validate::sql($params['path'][3]), Validate::sql($params['path'][4]));
+          $controller->indexAction(Validate::sql($params[3]), Validate::sql($params[4]));
         }
         else
         {
-          $controller->indexAction(Validate::sql($params['path'][3]));
+          $controller->indexAction(Validate::sql($params[3]));
         }
       }
     }
@@ -101,7 +117,7 @@ else
   }
   else
   {
-    if($params['path'][1] != 'ajax')
+    if($params[1] != 'ajax')
     {
       $controller = new ErrorController();
       $controller->notFound();
