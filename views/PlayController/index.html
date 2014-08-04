@@ -1,0 +1,42 @@
+{include file="PlayController/include/header.html"}
+<div class="popup" id="vk">
+  <div class="logo"><img src="http://icons.iconarchive.com/icons/limav/flat-gradient-social/512/Vk-icon.png" /></div>
+  <p>{l s='For the effective conduct of tests we need some non personal information that\'s why we ask you to sign in using a'} <a href="//vk.com" target="_blank">VK.com</a> {l s='social network.'}</p>
+  <a class="button" id="vk-login">Sign in</a>
+</div>
+<section class="content">
+  <div class="header">
+  {include file="PlayController/include/links.html"}
+  </div>
+  <div class="content">
+    {if $available}
+    <div class="canvas">
+      <canvas id="canvas" width="980" height="551"></canvas>
+    </div>
+    <script src="cocos2dx-tooflya-sdk-html5/framework.js"></script>
+    <script src="app.playtest.js"></script>
+    {else}
+    <div class="popup" id="time">
+      <p>До начала осталось:</p>
+      <div class="counter">
+        <script>
+        clock = $('.counter').FlipClock({$play.time} - {$play.now}, {
+          clockFace: 'DailyCounter',
+          countdown: true,
+          callbacks: {
+            stop: function() {
+              location.reload(true);
+            }
+          }
+        });
+        </script>
+      </div>
+      <div class="play-icon">
+        <img src="{$play.icon}"></div>
+      </div>
+    </div>
+    {/if}
+    <div class="clearfix"></div>
+  </div>
+</section>
+{include file="PlayController/include/footer.html"}

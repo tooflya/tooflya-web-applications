@@ -224,8 +224,10 @@ function yy()
 }
 
 window.addEventListener("load", function() {
-  $('.loader').hide();
-  $('.launch').show();
+  if(typeof playtest === 'undefined') {
+    $('.loader').hide();
+    $('.launch').show();
+  }
 });
 $(document).on('click', '#launch-game', function(e) {
   $('#launch').removeClass('active').addClass('disabled');

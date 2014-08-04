@@ -1,11 +1,11 @@
 <?
 
 /**
- * @file PressController.php
+ * @file GamesController.php
  * @category Controller
  *
  * @author Igor Mats from Tooflya Inc.
- * @copyright (c) 2012 by Igor Mats
+ * @copyright (c) 2014 by Igor Mats
  *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License v3
  * @all rights granted under this License are granted for the term of
@@ -206,7 +206,7 @@ class GamesController extends BaseController {
       $query = mysql_query("SELECT * FROM `users` WHERE `application` = '$id'");
       while(false !== ($result = mysql_fetch_assoc($query)))
       {
-        $levels[$result['level'] - 1]++;
+        $levels[$result['level']]++;
       }
 
       $data['levels'] = $levels;
@@ -223,9 +223,9 @@ class GamesController extends BaseController {
 /**
  *
  * Designed specifically for using this code in projects of Tooflya Inc.
- * Tooflya Inc., 2012
+ * Tooflya Inc., 2014
  *
  * @author Igor Mats from Tooflya Inc.
- * @copyright (c) 2012 by Igor Mats
+ * @copyright (c) 2014 by Igor Mats
  *
  */

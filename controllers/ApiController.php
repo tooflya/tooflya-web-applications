@@ -50,8 +50,6 @@ class ApiController extends BaseController
    */
   public function indexAction($call = false)
   {
-    header("Access-Control-Allow-Origin: *");
-
     if($call)
     {
       $this->call($call);

@@ -116,9 +116,9 @@ class StatusController extends BaseController
         )
       )
     ));
-    $this->templates->assign_array("SELECT * FROM (SELECT *, COUNT(*) AS `count`, DAY(`time`) AS `day` FROM `uptime` GROUP by `day` ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `table`.`day` ORDER by `id` DESC", 'uptime');
-    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day` ORDER by `id` DESC", 'bandwidth');
-    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day` ORDER by `id` DESC", 'la');
+    $this->templates->assign_array("SELECT * FROM (SELECT *, COUNT(*) AS `count`, DAY(`time`) AS `day` FROM `uptime` GROUP by `day` ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `table`.`day` ORDER by `table`.`time` ASC", 'uptime');
+    $this->templates->assign_array("SELECT AVG(`speed`) AS `speed`, AVG(`ping`) AS `ping`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `bandwidth` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day` ORDER by `table`.`time` ASC", 'bandwidth');
+    $this->templates->assign_array("SELECT AVG(`one`) AS `one`, AVG(`five`) AS `five`, AVG(`fifteen`) AS `fifteen`, DAY(`time`) AS `day`, `time` FROM (SELECT * FROM `la` GROUP by DAY(`time`) ORDER by `time` DESC LIMIT 7) AS `table` GROUP BY `day` ORDER by `table`.`time` ASC", 'la');
 
     $this->templates->assign('time', $time);
 

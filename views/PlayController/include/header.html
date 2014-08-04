@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Tooflya Playtest</title>
+    <meta name="viewport" id="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no" id="viewport" />
+    <meta name="description" content="Tooflya Inc. - {l s='a unique combination of knowledge, experience and skills required for a successful IT business'}.">
+    <meta name="keywords" content="Tooflya, tooflya, games, android, Android OS, free games, mobile, buy game, new games.">
+    <meta name="author" content="Tooflya Inc.">
+
+    {if $available}
+    <base href="//games.tooflya.com/games/{$play.alias}/">
+    {/if}
+
+    <link href="{$url}/assets/css/style.css" rel="stylesheet">
+    <link href="{$url}/assets/css/play.css" rel="stylesheet">
+    {if $available}<link href="//games.tooflya.com/games/{$play.alias}/Resources/Styles/tooflya.css" rel="stylesheet">{/if}
+
+    <script src="{$url}/assets/js/jquery.js"></script>
+    <script src="{$url}/assets/js/library.js"></script>
+    {if $available}
+    <script src="{$url}/assets/js/play.js"></script>
+    {else}
+    <script src="{$url}/assets/js/countdown.js"></script>
+    {/if}
+    <script src="{$url}/assets/js/chart.js"></script>
+
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="{$url}/assets/ico/play.favicon.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <script>
+    (function(doc) {
+        var viewport = document.getElementById('viewport');
+        if(navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPod/i)) {
+          viewport.setAttribute("content", "initial-scale=0.5");
+        } else if ( navigator.userAgent.match(/iPad/i) ) {
+          viewport.setAttribute("content", "initial-scale=1.0");
+        }
+    }(document));
+    </script>
+  </head>
+  <body>
+  <div id="body">
+    <div id="vk_api_transport"></div>
+    <div class="mask"></div>
+    <div class="mask time"></div>
+    <header>
+      <div class="content">
+        <div class="title">
+          <a href="//play.tooflya.com">
+            <h1 class="status">Tooflya<span>Playtest <sup>Beta</sup></span></h1>
+          </a>
+        </div>
+        {if $available}
+        <div class="status">
+          <h2 class="success">{l s='Online users'}: <span>0</span></h2>
+        </div>
+        {/if}
+        <div class="clearfix"></div>
+      </div>
+    </header>
