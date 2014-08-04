@@ -1888,9 +1888,6 @@ and (max-device-width : 480px) {
     width: auto;
     margin: 0 auto;
   }
-  ul.links li.update {
-    display: none !important;
-  }
   div.copyright {
     font-size: 12px;
   }
