@@ -54,9 +54,19 @@ class PlayController extends BaseController {
   public function getBaseInfo()
   {
     $available = mysql_num_rows(mysql_query("SELECT * FROM `playtest` WHERE UNIX_TIMESTAMP(`start`) <= UNIX_TIMESTAMP(NOW()) AND UNIX_TIMESTAMP(`end`) >= UNIX_TIMESTAMP(NOW())")) > 0;
+    $play = mysql_fetch_assoc(mysql_query("SELECT *, UNIX_TIMESTAMP(`start`) AS `time`, UNIX_TIMESTAMP(NOW()) AS `now` FROM `playtest` WHERE UNIX_TIMESTAMP(`end`) >= UNIX_TIMESTAMP(NOW()) ORDER by `start` LIMIT 1"));
 
     $this->templates->assign('available', $available);
-    $this->templates->assign_element("SELECT *, UNIX_TIMESTAMP(`start`) AS `time`, UNIX_TIMESTAMP(NOW()) AS `now` FROM `playtest` ORDER by `start` LIMIT 1", 'play');
+    $this->templates->assign('play', $play);
+
+    if(!$play)
+    {
+      $play = mysql_fetch_assoc(mysql_query("SELECT * FROM `playtest` ORDER by `end` DESC LIMIT 1"));
+    }
+
+    mysql_select_db("games.tooflya.com") or die("Could not select database");
+
+    $this->templates->assign_array("SELECT * FROM `users` WHERE `application` = '$play[application]'", 'users');
   }
 }
 

@@ -280,6 +280,7 @@ Tooflya.api.call('users.visit',
   uid: 12807,
   name: 'Alex',
   surname: 'Smith',
+  photo: 'http://www.example.com/photo.png',
   language: 1,
   time: -2,
   application: 7,
@@ -344,13 +345,400 @@ Tooflya.api.call('users.visit',
               </div>
             </div>
           </p>
+          <p>
+            <a class="show-example" data-call="users-leaders"><b>users.leaders</b></a> <i>Method is designed to .</i>
+            <div id="users-leaders" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('users.leaders',
+{
+  limit: 100,
+  type: 1,
+  level: 1
+},
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    users: [
+      {
+        name: 'Alex',
+        surname: 'Smith',
+        photo: 'http://www.example.com/photo.png',
+        rating: 55
+      }
+    ],
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <div>
+            <p>&nbsp;</p>
+            <p>Total Users tool API calls count: <b>{$statistics.usersCount} by last week</b></p>
+          </div>
+          <div>
+            <canvas id="users-api-calls" width="960" height="150"></canvas>
+          </div>
         </div>
-        <div>
-          <p>&nbsp;</p>
-          <p>Total Users tool API calls count: <b>{$statistics.usersCount} by last week</b></p>
+        <div class="class">
+          <div class="title"><span>Payments</span> <i>?</i></div>
+          <p>
+            <a class="show-example" data-call="payments-show"><b>payments.show</b></a> <i>Method is designed to show payment box.</i>
+            <div id="payments-show" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('payments.show',
+{
+  item: params.id,
+  code: 1
+},
+{
+  cancel: function() {
+  },
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    layout: '%html_layout',
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <p>
+            <a class="show-example" data-call="payments-visit"><b>payments.visit</b></a> <i>Method is designed to remember proposal to buy some virtual good.</i>
+            <div id="payments-visit" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('payments.visit', false,
+{
+  success: function() {
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <div>
+            <p>&nbsp;</p>
+            <p>Total Payments tool API calls count: <b>{$statistics.paymentsCount} by last week</b></p>
+          </div>
+          <div>
+            <canvas id="payments-api-calls" width="960" height="150"></canvas>
+          </div>
         </div>
-        <div>
-          <canvas id="users-api-calls" width="960" height="150"></canvas>
+        <div class="class">
+          <div class="title"><span>Promo</span> <i>a set of methods which allow to use a free promo codes for the buying some virtual goods.</i></div>
+          <p>
+            <a class="show-example" data-call="promo-get"><b>promo.get</b></a> <i>Method is designed for checking availablity of some promo code.</i>
+            <div id="promo-get" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('promo.get',
+{
+  purchase: 0,
+  promo: '?'
+},
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <div>
+            <p>&nbsp;</p>
+            <p>Total Promo tool API calls count: <b>{$statistics.promoCount} by last week</b></p>
+          </div>
+          <div>
+            <canvas id="promo-api-calls" width="960" height="150"></canvas>
+          </div>
+        </div>
+        <div class="class">
+          <div class="title"><span>Level</span> <i>a set of methods which allow check and set current level of user.</i></div>
+          <p>
+            <a class="show-example" data-call="level-get"><b>level.get</b></a> <i>Method is designed for getting current level of user.</i>
+            <div id="level-get" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('level.get', false,
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    level: 17,
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <p>
+            <a class="show-example" data-call="level-set"><b>level.set</b></a> <i>Method is designed for setting current level of user.</i>
+            <div id="level-set" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('level.set',
+{
+  level: 17,
+
+  /** An optional parameter for disable smart updater. If you set force to true level will be overridden even if it smaller than current. **/
+  force: true
+},
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <p>
+            <a class="show-example" data-call="level-update"><b>level.update</b></a> <i>Method is designed for setting score and stars of specific level.</i>
+            <div id="level-update" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('level.update',
+{
+  level: 17,
+  stars: 3,
+  score: 17710
+},
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <div>
+            <p>&nbsp;</p>
+            <p>Total Level tool API calls count: <b>{$statistics.levelCount} by last week</b></p>
+          </div>
+          <div>
+            <canvas id="level-api-calls" width="960" height="150"></canvas>
+          </div>
         </div>
         <div class="class">
           <div class="title"><span>Score</span> <i>tool for the storing values of the game scores.</i></div>
@@ -407,14 +795,15 @@ Tooflya.api.call('score.set',
                   </code>
                 </pre>
               </div>
-            </div></p>
-        </div>
-        <div>
-          <p>&nbsp;</p>
-          <p>Total Score tool API calls count: <b>{$statistics.scoreCount} by last week</b></p>
-        </div>
-        <div>
-          <canvas id="score-api-calls" width="960" height="150"></canvas>
+            </div>
+          </p>
+          <div>
+            <p>&nbsp;</p>
+            <p>Total Score tool API calls count: <b>{$statistics.scoreCount} by last week</b></p>
+          </div>
+          <div>
+            <canvas id="score-api-calls" width="960" height="150"></canvas>
+          </div>
         </div>
         <div class="class">
           <div class="title"><span>Coins</span> <i>tool for the storing values of the game coins.</i></div>
@@ -544,6 +933,33 @@ structure.data.push('{$value.count}');
 new Chart(document.getElementById("users-api-calls").getContext("2d")).Line({
   labels: structure.labels,
   datasets: dataset(structure.data, 'Users tool calls count')
+}, options);
+structure.clear();
+{foreach from=$statistics.payments item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("payments-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Payments tool calls count')
+}, options);
+structure.clear();
+{foreach from=$statistics.promo item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("promo-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Payments tool calls count')
+}, options);
+structure.clear();
+{foreach from=$statistics.level item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("level-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Payments tool calls count')
 }, options);
 structure.clear();
 {foreach from=$statistics.score item=value}

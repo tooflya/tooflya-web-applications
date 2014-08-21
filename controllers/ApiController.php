@@ -25,6 +25,9 @@
  */
 require(PATH.'/api/storage.php');
 require(PATH.'/api/users.php');
+require(PATH.'/api/payments.php');
+require(PATH.'/api/promo.php');
+require(PATH.'/api/level.php');
 
 /**
  * Response codes:
@@ -87,6 +90,9 @@ class ApiController extends BaseController
       default:
       $this->abort(0);
       break;
+      case 'users.leaders':
+      $this->users()->leaders();
+      break;
       case 'storage.get':
       $this->storage()->get();
       break;
@@ -95,6 +101,24 @@ class ApiController extends BaseController
       break;
       case 'storage.view':
       $this->storage()->view();
+      break;
+      case 'payments.show':
+      $this->payments()->show();
+      break;
+      case 'payments.visit':
+      $this->payments()->visit();
+      break;
+      case 'promo.get':
+      $this->promo()->get();
+      break;
+      case 'level.get':
+      $this->level()->get();
+      break;
+      case 'level.set':
+      $this->level()->set();
+      break;
+      case 'level.update':
+      $this->level()->update();
       break;
     }
   }
@@ -149,6 +173,12 @@ class ApiController extends BaseController
       case 2:
       $reason = 'Invalid secret.';
       break;
+      case 3:
+      $reason = 'IAP item is not found.';
+      break;
+      case 4:
+      $reason = 'Promo code is not found.';
+      break;
     }
 
     print json_encode(array(
@@ -181,6 +211,36 @@ class ApiController extends BaseController
    *
    *
    */
+  public function fetch($template)
+  {
+    return $this->templates->fetch($template);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function assign($key, $value)
+  {
+    $this->templates->assign($key, $value);
+  }
+
+  /**
+   *
+   *
+   *
+   */
+  public function assign_element($key, $value)
+  {
+    $this->templates->assign_element($key, $value);
+  }
+
+  /**
+   *
+   *
+   *
+   */
   private function assignStatistic()
   {
     mysql_select_db('api.tooflya.com');
@@ -190,6 +250,9 @@ class ApiController extends BaseController
       $this->assignGroupStatistic(false, $i);
       $this->assignGroupStatistic('storage', $i);
       $this->assignGroupStatistic('users', $i);
+      $this->assignGroupStatistic('payments', $i);
+      $this->assignGroupStatistic('promo', $i);
+      $this->assignGroupStatistic('level', $i);
       $this->assignGroupStatistic('score', $i);
       $this->assignGroupStatistic('coins', $i);
     }
@@ -219,8 +282,11 @@ class ApiController extends BaseController
     $this->statistics[$key . 'Count'] += $this->statistics[$key][$i - 1]['count'];
   }
 
-  private function users() {return new API\users($this);}
-  private function storage() {return new API\storage($this);}
+  public function users() {return new API\users($this);}
+  public function storage() {return new API\storage($this);}
+  public function payments() {return new API\payments($this);}
+  public function promo() {return new API\promo($this);}
+  public function level() {return new API\level($this);}
 }
 
 /**

@@ -56,7 +56,7 @@
         {/if}
         {if $some.payments}
         <div class="title">Finance</div>
-        <div>Retention: <b>{if $some.data.more.levels.average}{$some.data.more.finance.retention.free / $some.data.more.finance.retention.pay}{else}0{/if} %</b> <sup>It's mean that only {$some.data.more.finance.retention.pay} users from {$some.data.more.finance.retention.free + $some.data.more.finance.retention.pay} is pay for this app.</sup></div>
+        <div>Retention: <b>{($some.data.more.finance.retention.pay * 100 / ($some.data.more.finance.retention.free + $some.data.more.finance.retention.pay))|round:2} %</b> <sup>It's mean that only {$some.data.more.finance.retention.pay} users from {$some.data.more.finance.retention.free + $some.data.more.finance.retention.pay} is pay for this app.</sup></div>
         <div>In-app's: <b>{$some.data.more.finance.count} by last week</b></div>
         <div>
           <canvas id="game-{$some.id}-payments" width="960px" height="150px"></canvas>

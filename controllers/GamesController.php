@@ -179,8 +179,8 @@ class GamesController extends BaseController {
         ),
         'finance' => array(
           'retention' => array(
-            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `inapps` = '0'"), 0),
-            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `inapps` > '0'"), 0)
+            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `purchases` = 0"), 0),
+            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `purchases` > 0"), 0)
           ),
           'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `application` = '$id' AND `success` = TRUE"), 0)
         ),
@@ -206,7 +206,7 @@ class GamesController extends BaseController {
       $query = mysql_query("SELECT * FROM `users` WHERE `application` = '$id'");
       while(false !== ($result = mysql_fetch_assoc($query)))
       {
-        $levels[$result['level']]++;
+        $levels[$result['level'] - 1]++;
       }
 
       $data['levels'] = $levels;

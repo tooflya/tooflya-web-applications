@@ -1,0 +1,98 @@
+<div class="payments">
+  <style type="text/css">
+  div.payments-mask {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 600;
+  }
+  div.payments-layout {
+    position: absolute;
+    width: 600px;
+    height: 300px;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -150px;
+    background-color: #fff;
+    border: 1px #ccc solid;
+    z-index: 600;
+    font-family: Tahoma !important;
+  }
+  div.payments-title {
+    width: 100%;
+    height: 90px;
+    background-color: #F0F1F2;
+  }
+  div.payments-description {
+    padding: 10px;
+  }
+  div.payments-description h3 {
+    padding: 0;
+    margin: 0;
+  }
+  div.payments-description h3 sup {
+    font-size: 12px;
+  }
+  div.payments-description p {
+    font-size: 12px;
+  }
+  div.payments-description p.buttons {
+    margin-top: 20px;
+  }
+  div.payments-title div.payments-close {
+    float: right;
+    margin: 5px 10px;
+  }
+  div.payments-title div.payments-close a {
+    color: #333;
+  }
+  div.payments-title div.payments-info {
+    float: left;
+    margin: 10px;
+    width: 450px;
+  }
+  div.payments-title div.payments-info div.left {
+    float: left;
+  }
+  div.payments-info-fields {
+    float: left;
+    margin-left: 10px;
+  }
+  div.pre-small {
+    font-size: 12px;
+  }
+  div.payments-info-fields div.title {
+    margin-top: -6px;
+    padding-bottom: 6px;
+  }
+  </style>
+  <script type="text/javascript">var p = {$item.purchase};</script>
+  <script type="text/javascript" src="//games.tooflya.com/assets/js/playments.js"></script>
+  <div class="payments-mask"></div>
+  <div class="payments-layout">
+    <div class="payments-title">
+      <div class="payments-info">
+        <div class="left">
+          <img src="Resources/Icons/vk-purchase-{$item.purchase}.png" />
+        </div>
+        <div class="payments-info-fields">
+          <div class="title"><strong>{$item.title}</strong></div>
+          <div class="pre-small">{l s='Стоимость'}: <strong>{$item.price} USD</strong></div>
+          {if $promo}<div class="pre-small">{l s='Промо-кодов осталось'}: <strong>{$codes}</strong></div>{/if}
+        </div>
+      </div>
+      <div class="payments-close"><a class="close">{l s='Закрыть'}</a></div>
+    </div>
+    <div class="payments-description">
+      {if $promo}
+      <h3>{l s='У вас есть промо-код'}? <sup>{l s='В тестовом режиме вы можете покупать игровые балага только с помощью промо-кодов.'}</sup></h3>
+      <p>{l s='Если у вас есть промо-код вы можете ввести его в форму ниже и получить выбранную покупку совершенно бесплатно'}.</p>
+      <p><input id="promo-code" type="text" placeholder="{l s='Введите промо-код'}" /></p>
+      {/if}
+      <p class="buttons"><a class="payment button">{l s='Оплатить'}</a> <a class="close">{l s='Вернуться в приложение'}</a></p>
+    </div>
+  </div>
+</div>

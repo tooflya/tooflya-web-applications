@@ -9,7 +9,7 @@ window.addEventListener("load", function() {
     });
 
     VK.Auth.launch = function(id) {
-      VK.Api.call('users.get', {id: id}, function(e) {
+      VK.Api.call('users.get', {id: id, fields: 'photo_medium'}, function(e) {
         playtest.information = e.response[0];
         App.launch();
 

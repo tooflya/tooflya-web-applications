@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file users.php
+ * @file payments.php
  * @category api
  *
  * @author Igor Mats from Tooflya Inc.
@@ -33,7 +33,7 @@ namespace API
    */
   require_once('component.php');
 
-  class users extends component
+  class payments extends component
   {
 
     /**
@@ -41,25 +41,25 @@ namespace API
      *
      *
      */
-    public function visit()
+    public function show()
     {
-      $this->secret = $this->controller->secret(true);
-
-      $new = $this->user();
-
-      if($new)
+      if($this->available())
       {
-        $this->update();
+        $promo = $this->validate('promo');
+        $item = $this->validate('item');
+
+        $this->controller->assign('promo', $promo);
+        $this->controller->assign('codes', $this->queries('payments.promo.codes'));
+        $this->controller->assign_element($this->get(), 'item');
+        $this->response('payments', array(
+          'layout' => $this->controller->fetch('ApiController/paymentsbox.html'),
+          'secret' => $this->secret
+        ));
       }
       else
       {
-        $this->create();
+        $this->controller->abort(3);
       }
-
-      $this->response('users', array(
-        'new' => !$new,
-        'secret' => $this->secret
-      ));
     }
 
     /**
@@ -67,59 +67,36 @@ namespace API
      *
      *
      */
-    public function leaders()
+    public function available()
     {
-      if($this->validate('level')) {
-        $this->response('users', array(
-          'users' => $this->queries('users.leaders.level'),
+      return $this->queries('payments.available');
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function get()
+    {
+      return $this->queries('payments.get');
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function visit($success = false)
+    {
+      $this->queries($success ? 'payments.visit.true' : 'payments.visit.false');
+
+      if(!$success)
+      {
+        $this->response('payments', array(
           'secret' => $this->secret
         ));
-      } else {
-        switch($this->type) {
-          default:
-          $this->response('users', array(
-            'users' => $this->queries('users.leaders.1'),
-            'secret' => $this->secret
-          ));
-          break;
-          case 2:
-          $this->response('users', array(
-            'place' => $this->queries('users.leaders.2'),
-            'secret' => $this->secret
-          ));
-          break;
-        }
       }
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    private function user()
-    {
-      return $this->queries('users.user');
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    private function create()
-    {
-      $this->queries('users.create');
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    private function update()
-    {
-      $this->queries('users.update');
     }
   }
 }

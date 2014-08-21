@@ -1,23 +1,27 @@
 {include file="PlayController/include/header.html"}
-<div class="popup" id="vk">
-  <div class="logo"><img src="http://icons.iconarchive.com/icons/limav/flat-gradient-social/512/Vk-icon.png" /></div>
-  <p>{l s='For the effective conduct of tests we need some non personal information that\'s why we ask you to sign in using a'} <a href="//vk.com" target="_blank">VK.com</a> {l s='social network.'}</p>
-  <a class="button" id="vk-login">Sign in</a>
-</div>
 <section class="content">
   <div class="header">
   {include file="PlayController/include/links.html"}
   </div>
   <div class="content">
     {if $available}
+    <div class="popup popup-vk block" id="vk">
+      <p>
+        {l s='Для того чтобы эффективно провести тестирование нам необходима некая персональная информация вроде вашей фамилии и имени'}.
+        {l s='Пожалуйста авторизируйтесь через социальную сеть'}
+        <a href="//vk.com" target="_blank">VK</a>.
+        {l s='Это не займет много времени'}.
+      </p>
+      <a class="button" id="vk-login">{l s='Авторизироваться'}</a>
+    </div>
     <div class="canvas">
       <canvas id="canvas" width="980" height="551"></canvas>
     </div>
     <script src="cocos2dx-tooflya-sdk-html5/framework.js"></script>
     <script src="app.playtest.js"></script>
-    {else}
-    <div class="popup" id="time">
-      <p>До начала осталось:</p>
+    {else if $play}
+    <div class="popup popup-time" id="time">
+      <p>{l s='До начала осталось'}:</p>
       <div class="counter">
         <script>
         clock = $('.counter').FlipClock({$play.time} - {$play.now}, {
@@ -31,9 +35,84 @@
         });
         </script>
       </div>
-      <div class="play-icon">
-        <img src="{$play.icon}"></div>
+    </div>
+
+    <div class="popup popup-time-description block" id="time-description">
+      <div class="title">
+        <h3>{l s='Для кого эта страница?'}</h3>
       </div>
+      <p>
+        {l s='Мы всегда приглашаем игроков принять участие в тестировании новых игр и нововведений'}.
+        {l s='Это очень важно с точки зрения лаконичности продукта'}.
+        {l s='Вы в силах помочь нам и сделать наши игры приятнее и интереснее'}.
+        {l s='Тестирование - это способ не только весело провести время за игрой, в которую еще никто не играл, но и помочь разработчикам в этом не легком труде'}.
+      </p>
+      <div class="title">
+        <h3>{l s='Когда проходит тестирование?'}</h3>
+      </div>
+      <p>
+        {l s='Обычно тестирование запускается когда разработка подходит к финишной черте'}.
+        {l s='Мы приглашаем всех неравнодушных на страницах наших социальных сетей'}.
+      </p>
+      <div class="title">
+        <h3>{l s='Как проходит тестирование?'}</h3>
+      </div>
+      <p>
+        {l s='В назначенное время, тестируемый проект появляется на данной стрице'}.
+        {l s='Это знак, что к тестированию можно приступить'}.
+        {l s='Кроме самой игры на экране вы увидите специально разработаную панельку, которая включает в себя чат и средства для фиксирования ошибок'}.
+      </p>
+      <div class="title">
+        <h3>{l s='Что необходимо от меня чтобы быть тестировщиком?'}</h3>
+      </div>
+      <p>
+        {l s='Немного вашего времени, желания и авторизация через социальную сеть <a href="http://vk.com" target="_blank">VK</a>'}.
+      </p>
+    </div>
+
+    <div class="popup popup-time-description block" id="time-description">
+      <div class="title">
+        <h3>{l s='В тестировании участвовали'}</h3>
+      </div>
+      <ul>
+      {foreach from=$users item=some}
+        <li><a href="http://vk.com/id{$some.uid}" target="_blank"><img src="{$some.photo}" alt="{$some.name} {$some.surname}" /></a></li>
+      {foreachelse}
+        <li class="b">{l s='Нет участников...'}</li>
+      {/foreach}
+      </ul>
+    </div>
+    {else}
+    <div class="popup popup-time-description block" id="time-description">
+      <h1 class="thanks">{l s='Спасибо'},</h1>
+      <div class="title">
+        <h3>{l s='Большое спасибо'}</h3>
+      </div>
+      <p>
+        {l s='Большое спасибо вам, дорогие игроки'}.
+        {l s='Спасибо за отзывы, найденные ошибки и приятную игру'}!
+      </p>
+      <div class="title">
+        <h3>{l s='Анализ'}</h3>
+      </div>
+      <p>
+        {l s='В скором времени мы проанализируем все ваши замечания и пожелания чтобы сделать игру лучше и постараемся проинформировать вас о проделанной работе'}.
+        {l s='Также, в скором времени мы опубликуем общую статистику по прошедшему тестированию'}.
+      </p>
+      <h2 class="thanks">Оставайтесь с нами!</h2>
+    </div>
+
+    <div class="popup popup-time-description block" id="time-description">
+      <div class="title">
+        <h3>{l s='В тестировании участвовали'}</h3>
+      </div>
+      <ul>
+      {foreach from=$users item=some}
+        <li title="{$some.name} {$some.surname}"><a href="//vk.com/id{$some.uid}" target="_blank"><img src="{$some.photo}" alt="{$some.name} {$some.surname}" /></a></li>
+      {foreachelse}
+        <li class="b">{l s='Нет участников...'}</li>
+      {/foreach}
+      </ul>
     </div>
     {/if}
     <div class="clearfix"></div>

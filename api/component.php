@@ -39,13 +39,24 @@ namespace API
     {
       $this->controller = $controller;
 
+      $this->id           = $this->param('id');
       $this->uid          = $this->param('uid');
       $this->name         = $this->param('name');
       $this->surname      = $this->param('surname');
+      $this->photo        = $this->param('photo');
       $this->application  = $this->param('application');
       $this->platform     = $this->param('platform');
       $this->language     = $this->param('language');
       $this->time         = $this->param('time');
+      $this->item         = $this->param('item');
+      $this->purchase     = $this->param('purchase');
+      $this->code         = $this->param('code');
+      $this->limit        = $this->param('limit');
+      $this->type         = $this->param('type');
+      $this->level        = $this->param('level');
+      $this->score        = $this->param('score');
+      $this->stars        = $this->param('stars');
+      $this->force        = $this->param('force');
 
       $this->key          = $this->param('key');
       $this->value        = $this->param('value');
@@ -53,9 +64,12 @@ namespace API
       $this->keys         = $this->param('keys');
       $this->values       = $this->param('values');
 
+      $this->language     = $this->param('language');
+      $this->language     = $this->language ? $this->language : 0;
+
       $this->ip           = $_SERVER['REMOTE_ADDR'];
 
-      $this->secret       = $this->controller->secret(true);
+      $this->secret       = $this->param('secret');
 
       if($this->keys || $this->keys)
       {
@@ -73,6 +87,9 @@ namespace API
         case 'tooflya':
         $this->platform = 0;
         break;
+        case 'vk':
+        $this->platform = 1;
+        break;
         // TODO: Add platforms.
       }
     }
@@ -84,12 +101,12 @@ namespace API
      */
     protected function param($key)
     {
-      if($this->controller->information[$key])
+      if($this->validate($key) || $this->validate($key) === 0 || $this->validate($key) === '0')
       {
-        return $this->controller->information[$key];
+        return $this->validate($key);
       }
 
-      return $this->validate($key);
+      return $this->controller->information[$key];
     }
 
     /**
@@ -172,7 +189,6 @@ namespace API
     {
       switch($query)
       {
-
         case 'statistic':
         return mysql_query("INSERT INTO `calls` SET `group` = '$group', `application` = '$this->application'");
         break;
@@ -182,16 +198,51 @@ namespace API
          *
          */
         case 'users.create':
-        return mysql_query("INSERT INTO `users` SET `uid` = '$this->uid', `platform` = '$this->platform', `secret` = '$this->secret', `application` = '$this->application', `name` = '$this->name', `surname` = '$this->surname', `language` = '$this->language', `ip` = '$this->ip', `time` = '$this->time', `join` = NOW()");
+        return mysql_query("INSERT INTO `users` SET `uid` = '$this->uid', `platform` = '$this->platform', `secret` = '$this->secret', `application` = '$this->application', `name` = '$this->name', `surname` = '$this->surname', `photo` = '$this->photo', `language` = '$this->language', `ip` = '$this->ip', `time` = '$this->time', `join` = NOW()");
         break;
         case 'users.update':
         return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `platform` = '$this->platform'");
         break;
         case 'users.user':
-        return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `platform` = '$platform' LIMIT 1")) > 0;
+        return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `platform` = '$this->platform' LIMIT 1")) > 0;
         break;
         case 'users.using':
         return mysql_query("INSERT INTO `visits` SET `uid` = '$this->uid', `application` = '$this->application'");
+        break;
+        case 'users.leaders.1':
+        $data = Array();
+        $query = mysql_query("SELECT `users`.*, SUM(`levels`.`score`) AS `rating` FROM `users` JOIN `levels` ON (`users`.`id` = `levels`.`uid`) WHERE `levels`.`application` = '$this->application' GROUP by `users`.`id` ORDER by `rating` DESC LIMIT 0, $this->limit");
+        while(false !== ($result = mysql_fetch_assoc($query)))
+        {
+          $data[] = $result;
+        }
+
+        return $data;
+        break;
+        case 'users.leaders.2':
+        $data = Array();
+        $place = 1;
+        $query = mysql_query("SELECT `users`.*, SUM(`levels`.`score`) AS `rating` FROM `users` JOIN `levels` ON (`users`.`id` = `levels`.`uid`) WHERE `levels`.`application` = '$this->application' GROUP by `users`.`id` ORDER by `rating` DESC LIMIT 0, $this->limit");
+        while(false !== ($result = mysql_fetch_assoc($query)))
+        {
+          if($result['secret'] == $this->secret) {
+            return $place;
+          }
+
+          $place++;
+        }
+
+        return -1;
+        break;
+        case 'users.leaders.level':
+        $data = Array();
+        $query = mysql_query("SELECT `users`.*, SUM(`levels`.`score`) AS `rating` FROM `users` JOIN `levels` ON (`users`.`id` = `levels`.`uid`) WHERE `levels`.`application` = '$this->application' AND `levels`.`level` = '$this->level' GROUP by `users`.`id` ORDER by `rating` DESC LIMIT 0, $this->limit");
+        while(false !== ($result = mysql_fetch_assoc($query)))
+        {
+          $data[] = $result;
+        }
+
+        return $data;
         break;
 
         /**
@@ -221,6 +272,79 @@ namespace API
         }
 
         return $data;
+        break;
+
+        case 'payments.get':
+        return "SELECT * FROM `purchases` WHERE `purchase` = '$this->item' AND `language` = '$this->language'";
+        break;
+        case 'payments.available':
+        return mysql_num_rows(mysql_query("SELECT * FROM `purchases` WHERE `purchase` = '$this->item' AND `language` = '$this->language'")) > 0;
+        break;
+        case 'payments.promo.codes':
+        return mysql_num_rows(mysql_query("SELECT * FROM `promo` WHERE `application` = '$this->application' AND `purchase` = '$this->item'"));
+        break;
+        case 'payments.visit.true':
+        mysql_query("UPDATE `payments` SET `success` = '1' WHERE `uid` = '$this->id' AND `application` = '$this->application' ORDER by `id` DESC LIMIT 1");
+        mysql_query("UPDATE `users` SET `purchases` = purchases + 1 WHERE `secret` = '$this->secret' LIMIT 1");
+        break;
+        case 'payments.visit.false':
+        mysql_query("INSERT INTO `payments` SET `uid` = '$this->id', `application` = '$this->application'");
+        break;
+
+        case 'promo.get':
+        return mysql_num_rows(mysql_query("SELECT * FROM `promo` WHERE `application` = '$this->application' AND `purchase` = '$this->purchase' AND `code` = '$this->code'")) > 0;
+        break;
+        case 'promo.remove':
+        return mysql_query("DELETE FROM `promo` WHERE `application` = '$this->application' AND `purchase` = '$this->purchase' AND `code` = '$this->code'");
+        break;
+
+        case 'level.get':
+        return mysql_result(mysql_query("SELECT `level` FROM `users` WHERE `secret` = '$this->secret'"), 0);
+        break;
+        case 'level.set':
+        if($this->force) {
+          mysql_query("UPDATE `users` SET `level` = '$this->level' WHERE `secret` = '$this->secret'");
+        } else {
+          if($this->level > $this->queries('level.get')) {
+            mysql_query("UPDATE `users` SET `level` = '$this->level' WHERE `secret` = '$this->secret'");
+          }
+        }
+        break;
+        case 'level.update':
+        if($this->level == -1)
+        {
+          if(mysql_num_rows(mysql_query("SELECT * FROM `levels` WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '-1'")) > 0)
+          {
+            mysql_query("UPDATE `levels` SET `score` = score + $this->score WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '-1'");
+          }
+          else
+          {
+            mysql_query("INSERT INTO `levels` SET `stars` = '3', `score` = '$this->score', `application` = '$this->application', `uid` = '$this->id', `level` = '-1'");
+          }
+        }
+        else
+        {
+          if(mysql_num_rows(mysql_query("SELECT * FROM `levels` WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '$this->level'")) > 0)
+          {
+            if($this->force)
+            {
+              mysql_query("UPDATE `levels` SET `stars` = '$this->stars', `score` = '$this->score' WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '$this->level'");
+            }
+            else
+            {
+              $data = mysql_fetch_assoc(mysql_query("SELECT * FROM `levels` WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '$this->level' LIMIT 1"));
+
+              $this->stars = max($this->stars, $data[0]['stars']);
+              $this->score = max($this->score, $data[0]['score']);
+
+              mysql_query("UPDATE `levels` SET `stars` = '$this->stars', `score` = '$this->score' WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '$this->level'");
+            }
+          }
+          else
+          {
+            mysql_query("INSERT INTO `levels` SET `application` = '$this->application', `uid` = '$this->id', `level` = '$this->level', `stars` = '$this->stars', `score` = '$this->score'");
+          }
+        }
         break;
 
         /**
