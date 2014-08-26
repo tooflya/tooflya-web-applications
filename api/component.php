@@ -334,8 +334,8 @@ namespace API
             {
               $data = mysql_fetch_assoc(mysql_query("SELECT * FROM `levels` WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '$this->level' LIMIT 1"));
 
-              $this->stars = max($this->stars, $data[0]['stars']);
-              $this->score = max($this->score, $data[0]['score']);
+              $this->stars = max($this->stars, $data['stars']);
+              $this->score = max($this->score, $data['score']);
 
               mysql_query("UPDATE `levels` SET `stars` = '$this->stars', `score` = '$this->score' WHERE `application` = '$this->application' AND `uid` = '$this->id' AND `level` = '$this->level'");
             }

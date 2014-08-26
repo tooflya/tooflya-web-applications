@@ -21,7 +21,7 @@
     <script src="app.playtest.js"></script>
     {else if $play}
     <div class="popup popup-time" id="time">
-      <p>{l s='До начала осталось'}:</p>
+      <p>{l s='Time until the event'}:</p>
       <div class="counter">
         <script>
         clock = $('.counter').FlipClock({$play.time} - {$play.now}, {
@@ -39,40 +39,40 @@
 
     <div class="popup popup-time-description block" id="time-description">
       <div class="title">
-        <h3>{l s='Для кого эта страница?'}</h3>
+        <h3>{l s='Who should read this page?'}</h3>
       </div>
       <p>
-        {l s='Мы всегда приглашаем игроков принять участие в тестировании новых игр и нововведений'}.
-        {l s='Это очень важно с точки зрения лаконичности продукта'}.
-        {l s='Вы в силах помочь нам и сделать наши игры приятнее и интереснее'}.
-        {l s='Тестирование - это способ не только весело провести время за игрой, в которую еще никто не играл, но и помочь разработчикам в этом не легком труде'}.
+        {l s='We always invite players to participate in the testing of new games and innovations'}.
+        {l s='This is very important from the standpoint of brevity product'}.
+        {l s='You have the power to help us and make our game more enjoyable and interesting'}.
+        {l s='Testing - a way to not only have fun in a game that no one has ever played, but also help the developers this is not easy work'}.
       </p>
       <div class="title">
-        <h3>{l s='Когда проходит тестирование?'}</h3>
+        <h3>{l s='When is testing begins?'}</h3>
       </div>
       <p>
-        {l s='Обычно тестирование запускается когда разработка подходит к финишной черте'}.
-        {l s='Мы приглашаем всех неравнодушных на страницах наших социальных сетей'}.
+        {l s='Usually testing starts when the development is coming to the finish line'}.
+        {l s='We invite all concerned in the pages of our social networks'}.
       </p>
       <div class="title">
-        <h3>{l s='Как проходит тестирование?'}</h3>
+        <h3>{l s='How is the testing works?'}</h3>
       </div>
       <p>
-        {l s='В назначенное время, тестируемый проект появляется на данной стрице'}.
-        {l s='Это знак, что к тестированию можно приступить'}.
-        {l s='Кроме самой игры на экране вы увидите специально разработаную панельку, которая включает в себя чат и средства для фиксирования ошибок'}.
+        {l s='At the appointed time, the test design appears on this page'}.
+        {l s='It is a sign that you are ready for testing'}.
+        {l s='In addition to the game on the screen you will see a specially designed socket which includes chat and means for fixing errors'}.
       </p>
       <div class="title">
-        <h3>{l s='Что необходимо от меня чтобы быть тестировщиком?'}</h3>
+        <h3>{l s='What is required of me to be a tester?'}</h3>
       </div>
       <p>
-        {l s='Немного вашего времени, желания и авторизация через социальную сеть <a href="http://vk.com" target="_blank">VK</a>'}.
+        {l s='A little of your time, desire, and authorization through a social network'} <a href="http://vk.com" target="_blank">VK</a>.
       </p>
     </div>
 
     <div class="popup popup-time-description block" id="time-description">
       <div class="title">
-        <h3>{l s='В тестировании участвовали'}</h3>
+        <h3>{l s='In testing involved'}</h3>
       </div>
       <ul>
       {foreach from=$users item=some}

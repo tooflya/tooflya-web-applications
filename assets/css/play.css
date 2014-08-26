@@ -214,8 +214,6 @@ h2.thanks {
 div.online-users-list div.list {
   position: absolute;
   background-color: #fff;
-  margin-top: 10px;
-  margin-left: -50px;
   width: 200px;
   height: 200px;
   z-index: 10;
