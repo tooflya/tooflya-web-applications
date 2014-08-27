@@ -184,7 +184,7 @@ namespace API
         return true;
         break;
         case 1:
-        $signature = $POST['sig'];
+        $signature = $_POST['sig'];
 
         unset($_POST['sig']);
         ksort($_POST);
