@@ -278,13 +278,13 @@ namespace API
         return "SELECT * FROM `purchases` WHERE `purchase` = '$this->item' AND `language` = '$this->language'";
         break;
         case 'payments.item':
-        return mysql_fetch_assoc((mysql_query("SELECT * FROM `purchases` WHERE `purchase` = '$group' AND `language` = '$this->language' LIMIT 1"));
+        return mysql_fetch_assoc(mysql_query("SELECT * FROM `purchases` WHERE `purchase` = '$group' AND `language` = '$this->language' LIMIT 1"));
         break;
         case 'payments.available':
         return mysql_num_rows(mysql_query("SELECT * FROM `purchases` WHERE `purchase` = '$this->item' AND `language` = '$this->language'")) > 0;
         break;
         case 'payments.proceed':
-        $query = mysql_query("SELECT * FROM `games` WHERE `id` = '$this->id' LIMIT 1");
+        $query = mysql_query("SELECT * FROM `games` WHERE `id` = ".\Validate::get('id')." LIMIT 1");
 
         if(mysql_num_rows($query) > 0)
         {

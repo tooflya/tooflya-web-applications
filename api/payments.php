@@ -106,7 +106,7 @@ namespace API
      */
     public function proceed()
     {
-      require_once '../tools/vk/library/vkontakte.php';
+      require_once './tools/vk/library/vkontakte.php';
 
       $info = $this->queries('payments.proceed');
 
