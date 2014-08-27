@@ -165,6 +165,7 @@ namespace API
       }
 
       echo json_encode($response);
+      exit;
     }
 
     /**
@@ -173,7 +174,7 @@ namespace API
      *
      */
     private function proceedSignature($info)
-    {return true;
+    {
       $platform = $info['platform'];
       $secret = $info['secret'];
 
@@ -183,7 +184,7 @@ namespace API
         return true;
         break;
         case 1:
-        $signature = \Validate::post('sig');
+        $signature = $POST['sig'];
 
         unset($_POST['sig']);
         ksort($_POST);
@@ -194,7 +195,7 @@ namespace API
           $str .= $k.'='.$v;
         }
 
-        return $sig == md5($str.$secret);
+        return $signature == md5($str.$secret);
         break;
       }
 
