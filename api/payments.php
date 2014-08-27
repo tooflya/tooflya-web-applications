@@ -123,7 +123,7 @@ namespace API
               'item_id' => $item['purchase'],
               'title' => $item['title'],
               'photo_url' => 'http://www.tooflya.com/games/'.$info['alias'].'/Resources/Icons/vk-purchase-'.$item['purchase'].'.png',
-              'price' => $item['price']
+              'price' => $item['price_vk']
             );
             break;
             case 'order_status_change_test':
