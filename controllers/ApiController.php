@@ -81,6 +81,9 @@ class ApiController extends BaseController
       case 'users.visit':
       $this->users()->visit();
       break;
+      case 'payments.proceed':
+      $this->payments()->proceed();
+      break;
     }
 
     $this->secret();

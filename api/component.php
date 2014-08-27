@@ -277,11 +277,23 @@ namespace API
         case 'payments.get':
         return "SELECT * FROM `purchases` WHERE `purchase` = '$this->item' AND `language` = '$this->language'";
         break;
+        case 'payments.item':
+        return mysql_fetch_assoc((mysql_query("SELECT * FROM `purchases` WHERE `purchase` = '$group' AND `language` = '$this->language' LIMIT 1"));
+        break;
         case 'payments.available':
         return mysql_num_rows(mysql_query("SELECT * FROM `purchases` WHERE `purchase` = '$this->item' AND `language` = '$this->language'")) > 0;
         break;
-        case 'payments.promo.codes':
-        return mysql_num_rows(mysql_query("SELECT * FROM `promo` WHERE `application` = '$this->application' AND `purchase` = '$this->item'"));
+        case 'payments.proceed':
+        $query = mysql_query("SELECT * FROM `games` WHERE `id` = '$this->id' LIMIT 1");
+
+        if(mysql_num_rows($query) > 0)
+        {
+          return mysql_fetch_assoc($query);
+        }
+        else
+        {
+          return false;
+        }
         break;
         case 'payments.visit.true':
         mysql_query("UPDATE `payments` SET `success` = '1' WHERE `uid` = '$this->id' AND `application` = '$this->application' ORDER by `id` DESC LIMIT 1");

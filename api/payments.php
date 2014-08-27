@@ -98,6 +98,106 @@ namespace API
         ));
       }
     }
+
+    /**
+     *
+     *
+     *
+     */
+    public function proceed()
+    {
+      require_once '../tools/vk/library/vkontakte.php';
+
+      $info = $this->queries('payments.proceed');
+
+      if($info)
+      {
+        if($this->proceedSignature($info))
+        {
+          switch(Validate::post('notification_type'))
+          {
+            case 'get_item_test':
+            $item = $this->queries('payments.item', Validate::post('item'));
+
+            $this->response('response', array(
+              'item_id' => $item['purchase'],
+              'title' => $item['title'],
+              'photo_url' => 'http://www.tooflya.com/games/'.$info['alias'].'/Resources/Icons/vk-purchase-'.$item['purchase'].'.png',
+              'price' => $item['price']
+            );
+            break;
+            case 'order_status_change_test':
+            if(Validate::post('status') == 'chargeable')
+            {
+              $id = Validate::post('order_id');
+
+              $this->response('response', array(
+                'order_id' => $id
+              ));
+            }
+            else
+            {
+              $this->response('error', array(
+                'error_code' => 100,
+                'error_msg' => 'Incorrect chargeable',
+                'critical' => true
+              ));
+            }
+            break;
+          }
+        }
+        else
+        {
+          $this->response('error', array(
+            'error_code' => 10,
+            'error_msg' => 'Calculated and passed signatures are not the same',
+            'critical' => true
+          ));
+        }
+      }
+      else
+      {
+        $this->response('error', array(
+          'error_code' => 1,
+          'error_msg' => 'Requested game is not found',
+          'critical' => true
+        ));
+      }
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    private function proceedSignature($info)
+    {
+      $platform = $info['platform'];
+      $secret = $info['secret'];
+
+      switch($platform)
+      {
+        default:
+        return true;
+        break;
+        case 1:
+        $signature = Validate::post('sig');
+
+        unset($_POST['sig']);
+        ksort($_POST);
+
+        $str = ''; 
+        foreach ($_POST as $k => $v)
+        {
+          $str .= $k.'='.$v;
+        }
+
+        return $sig == md5($str.$secret);
+        break;
+      }
+
+      return true;
+    }
   }
 }
 
