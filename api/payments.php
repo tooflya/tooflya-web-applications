@@ -117,7 +117,7 @@ namespace API
           switch(\Validate::post('notification_type'))
           {
             case 'get_item_test':
-            $item = $this->queries('payments.item', Validate::post('item'));
+            $item = $this->queries('payments.item', \Validate::post('item'));
 
             $response['response'] = array(
               'item_id' => $item['purchase'],
@@ -129,7 +129,7 @@ namespace API
             case 'order_status_change_test':
             if(\Validate::post('status') == 'chargeable')
             {
-              $id = Validate::post('order_id');
+              $id = \Validate::post('order_id');
 
               $response['response'] = array(
                 'order_id' => $id
