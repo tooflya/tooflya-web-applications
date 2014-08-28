@@ -377,7 +377,7 @@ namespace API
                 AND
               `storage`.`key` =  '$this->key'
                 AND
-              `storage`.`key` < 5
+              `storage`.`value` < 5
                 AND
               `users`.`application` = '$this->application'
                 AND
