@@ -359,6 +359,37 @@ namespace API
           }
         }
         break;
+        case 'energy.get':
+        $friends = implode(', ', $this->friends);
+        $users = array();
+
+        $query = mysql_query(
+          "SELECT
+            `users`.`name`,
+            `users`.`surname`,
+            `users`.`photo`,
+            `storage`.`value` AS `energy`
+              FROM `users`, `storage`
+            WHERE
+              `users`.`uid` IN ($friends)
+                AND
+              `storage`.`uid` IN ($friends)
+                AND
+              `storage`.`key` =  '$this->key'
+                AND
+              `storage`.`key` < 5
+                AND
+              `users`.`application` = '$this->application'
+                AND
+              `storage`.`application` = '$this->application'
+          ");
+        while(false !== ($result = mysql_fetch_assoc($query)))
+        {
+          $data[] = $result;
+        }
+
+        return $data;
+        break;
 
         /**
          *

@@ -45,7 +45,7 @@ namespace API
       if($this->friends)
       {
         $this->response('energy', array(
-          'friends' => array(),
+          'friends' => $this->queries('energy.get'),
           'secret' => $this->secret
         ));
       }
