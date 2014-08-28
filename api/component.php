@@ -359,9 +359,8 @@ namespace API
           }
         }
         break;
-        case 'energy.get':print $this->friends;
+        case 'energy.get':
         $data = array();
-        $friends = '13527563';//implode(', ', $this->friends);
 
         $query = mysql_query(
           "SELECT
@@ -371,9 +370,9 @@ namespace API
             `storage`.`value` AS `energy`
               FROM `users`, `storage`
             WHERE
-              `users`.`uid` IN ($friends)
+              `users`.`uid` IN ($this->friends)
                 AND
-              `storage`.`uid` IN ($friends)
+              `storage`.`uid` IN ($this->friends)
                 AND
               `storage`.`key` =  '$this->key'
                 AND
