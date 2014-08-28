@@ -124,6 +124,12 @@ class ApiController extends BaseController
       case 'level.update':
       $this->level()->update();
       break;
+      case 'energy.get':
+      $this->energy()->get();
+      break;
+      case 'energy.set':
+      $this->energy()->set();
+      break;
     }
   }
 

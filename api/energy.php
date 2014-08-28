@@ -42,6 +42,19 @@ namespace API
      */
     public function get()
     {
+      if($this->friends)
+      {
+        $this->response('energy', array(
+          'friends' => array(),
+          'secret' => $this->secret
+        ));
+      }
+      else
+      {
+        // TODO: Implement own energy getting.
+
+        $this->abort(-1);
+      }
     }
   }
 }

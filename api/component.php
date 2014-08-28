@@ -57,6 +57,7 @@ namespace API
       $this->score        = $this->param('score');
       $this->stars        = $this->param('stars');
       $this->force        = $this->param('force');
+      $this->friends      = $this->param('friends');
 
       $this->key          = $this->param('key');
       $this->value        = $this->param('value');
