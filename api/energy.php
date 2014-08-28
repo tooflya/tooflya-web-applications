@@ -53,7 +53,7 @@ namespace API
       {
         // TODO: Implement own energy getting.
 
-        $this->abort(-1);
+        $this->controller->abort(-1);
       }
     }
   }
