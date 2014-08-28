@@ -204,6 +204,9 @@ namespace API
         case 'users.update':
         return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `platform` = '$this->platform'");
         break;
+        case 'users.online':
+        return mysql_query("UPDATE `users` SET `visit` = 'NOW()' WHERE `uid` = '$this->uid' AND `platform` = '$this->platform'");
+        break;
         case 'users.user':
         return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `platform` = '$this->platform' LIMIT 1")) > 0;
         break;
@@ -364,6 +367,7 @@ namespace API
 
         $query = mysql_query(
           "SELECT
+            `users`.`uid`,
             `users`.`name`,
             `users`.`surname`,
             `users`.`photo`,
@@ -381,6 +385,7 @@ namespace API
               `users`.`application` = '$this->application'
                 AND
               `storage`.`application` = '$this->application'
+              GROUP by `users`.`uid`
           ");
         while(false !== ($result = mysql_fetch_assoc($query)))
         {
@@ -388,6 +393,9 @@ namespace API
         }
 
         return $data;
+        break;
+        case 'energy.set':
+        mysql_query("INSERT INTO `energy` SET `uid1` = '1', `uid2` = '2'");
         break;
 
         /**

@@ -56,6 +56,20 @@ namespace API
         $this->controller->abort(-1);
       }
     }
+
+    /**
+     *
+     *
+     *
+     */
+    public function set()
+    {
+      $this->queries('energy.set');
+
+      $this->response('energy', array(
+        'secret' => $this->secret
+      ));
+    }
   }
 }
 

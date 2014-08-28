@@ -131,6 +131,8 @@ class ApiController extends BaseController
       $this->energy()->set();
       break;
     }
+
+    $this->users()->online();
   }
 
   /**

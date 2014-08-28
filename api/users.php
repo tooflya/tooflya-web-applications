@@ -97,6 +97,16 @@ namespace API
      *
      *
      */
+    public function online()
+    {
+      $this->queries('users.online');
+    }
+
+    /**
+     *
+     *
+     *
+     */
     private function user()
     {
       return $this->queries('users.user');
