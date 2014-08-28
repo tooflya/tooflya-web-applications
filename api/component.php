@@ -359,7 +359,7 @@ namespace API
           }
         }
         break;
-        case 'energy.get':print implode(', ', $this->friends);print $this->key;
+        case 'energy.get':print $this->friends;
         $data = array();
         $friends = '13527563';//implode(', ', $this->friends);
 
