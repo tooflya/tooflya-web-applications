@@ -43,6 +43,7 @@ namespace API
     public function get()
     {
     }
+  }
 }
 
 /**
