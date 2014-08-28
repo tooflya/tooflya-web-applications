@@ -28,6 +28,7 @@ require(PATH.'/api/users.php');
 require(PATH.'/api/payments.php');
 require(PATH.'/api/promo.php');
 require(PATH.'/api/level.php');
+require(PATH.'/api/energy.php');
 
 /**
  * Response codes:
@@ -258,6 +259,7 @@ class ApiController extends BaseController
       $this->assignGroupStatistic('level', $i);
       $this->assignGroupStatistic('score', $i);
       $this->assignGroupStatistic('coins', $i);
+      $this->assignGroupStatistic('energy', $i);
     }
 
     $this->templates->assign('statistics', $this->statistics);
@@ -290,6 +292,7 @@ class ApiController extends BaseController
   public function payments() {return new API\payments($this);}
   public function promo() {return new API\promo($this);}
   public function level() {return new API\level($this);}
+  public function energy() {return new API\energy($this);}
 }
 
 /**

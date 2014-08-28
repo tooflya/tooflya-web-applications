@@ -869,8 +869,69 @@ Tooflya.api.call('coins.set',
           <canvas id="coins-api-calls" width="960" height="150"></canvas>
         </div>
       </div>
-      <div>
-      </div>
+        <div class="class">
+          <div class="title"><span>Energy</span> <i>tool for .</i></div>
+          <p>
+            <a class="show-example" data-call="energy-friends-get"><b>energy.friends.get</b></a>
+            <i>Method for</i>
+            <div id="energy-set" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('energy.friends.get',
+{
+  data: {
+    friends: [1083, 105567, 10998]
+  },
+  secret: 'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(e) {
+    console.log(e);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    values: [5, 0, -1],
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </p>
+        </div>
+        <div>
+          <p>&nbsp;</p>
+          <p>Total Energy tool API calls count: <b>{$statistics.energyCount} by last week</b></p>
+        </div>
+        <div>
+          <canvas id="energy-api-calls" width="960" height="150"></canvas>
+        </div>
     </div>
     <div class="block" id="examples">
       <div class="title">
@@ -978,6 +1039,16 @@ structure.data.push('{$value.count}');
 new Chart(document.getElementById("coins-api-calls").getContext("2d")).Line({
   labels: structure.labels,
   datasets: dataset(structure.data, 'Coins tool calls count')
+}, options);
+
+structure.clear();
+{foreach from=$statistics.energy item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("energy-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Energy tool calls count')
 }, options);
 </script>
 {include file="ApiController/include/footer.html"}
