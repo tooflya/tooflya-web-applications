@@ -360,8 +360,7 @@ namespace API
         }
         break;
         case 'energy.get':
-        $friends = implode(', ', $this->friends);
-        $users = array();
+        $friends = '13527563';//implode(', ', $this->friends);
 
         $query = mysql_query(
           "SELECT
