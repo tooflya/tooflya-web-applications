@@ -89,6 +89,8 @@ class ApiController extends BaseController
 
     $this->secret();
 
+    $this->users()->online();
+
     switch($call)
     {
       default:
@@ -131,8 +133,6 @@ class ApiController extends BaseController
       $this->energy()->set();
       break;
     }
-
-    $this->users()->online();
   }
 
   /**
