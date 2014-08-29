@@ -57,6 +57,7 @@ namespace API
       $this->score        = $this->param('score');
       $this->stars        = $this->param('stars');
       $this->force        = $this->param('force');
+      $this->friend       = $this->param('friend');
       $this->friends      = $this->param('friends');
 
       $this->key          = $this->param('key');
@@ -202,13 +203,13 @@ namespace API
         return mysql_query("INSERT INTO `users` SET `uid` = '$this->uid', `platform` = '$this->platform', `secret` = '$this->secret', `application` = '$this->application', `name` = '$this->name', `surname` = '$this->surname', `photo` = '$this->photo', `language` = '$this->language', `ip` = '$this->ip', `time` = '$this->time', `join` = NOW()");
         break;
         case 'users.update':
-        return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `platform` = '$this->platform'");
+        return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
         case 'users.online':
-        return mysql_query("UPDATE `users` SET `visit` = 'NOW()' WHERE `uid` = '$this->uid' AND `platform` = '$this->platform'");
+        return mysql_query("UPDATE `users` SET `visit` = 'NOW()' WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
         case 'users.user':
-        return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `platform` = '$this->platform' LIMIT 1")) > 0;
+        return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `application` = '$this->application' LIMIT 1")) > 0;
         break;
         case 'users.using':
         return mysql_query("INSERT INTO `visits` SET `uid` = '$this->uid', `application` = '$this->application'");
@@ -395,7 +396,13 @@ namespace API
         return $data;
         break;
         case 'energy.set':
-        mysql_query("INSERT INTO `energy` SET `uid1` = '1', `uid2` = '2'");
+        mysql_query("INSERT INTO `energy` SET `application` = '$this->application', `uid1` = '$this->uid', `uid2` = '$this->friend'");
+
+        $friend = mysql_fetch_assoc(mysql_query("SELECT * FROM `users` WHERE `application` = '$this->application' AND `uid` = '$this->friend' LIMIT 1"));
+        if(false/*not online*/)
+        {
+          // TODO: Send notification about this present.
+        }
         break;
 
         /**

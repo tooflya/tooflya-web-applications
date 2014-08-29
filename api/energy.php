@@ -64,11 +64,20 @@ namespace API
      */
     public function set()
     {
-      $this->queries('energy.set');
+      if($this->friend)
+      {
+        $this->queries('energy.set');
 
-      $this->response('energy', array(
-        'secret' => $this->secret
-      ));
+        $this->response('energy', array(
+          'secret' => $this->secret
+        ));
+      }
+      else
+      {
+        // TODO: Implement own energy setting.
+
+        $this->controller->abort(-1);
+      }
     }
   }
 }
