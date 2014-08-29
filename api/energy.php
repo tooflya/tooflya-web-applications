@@ -79,6 +79,19 @@ namespace API
         $this->controller->abort(-1);
       }
     }
+
+    /**
+     *
+     *
+     *
+     */
+    public function find()
+    {
+      $this->response('energy', array(
+        'restore' => $this->queries('energy.find'),
+        'secret' => $this->secret
+      ));
+    }
   }
 }
 

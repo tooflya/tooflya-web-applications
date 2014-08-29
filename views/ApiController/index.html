@@ -994,6 +994,71 @@ Tooflya.api.call('energy.set',
                 </pre>
               </div>
             </p>
+          <p>
+            <a class="show-example" data-call="energy-find"><b>energy.find</b></a>
+            <i>Method for</i>
+            <div id="energy-find" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('energy.find',
+{
+  secret: 'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(e) {
+    console.log(e);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    restore: {
+      [
+        {
+          uid: 12807,
+          name: 'Alex',
+          surname: 'Smith',
+          photo: 'http://www.example.com/photo.png'
+        },
+        {
+          uid: 12808,
+          name: 'Alex',
+          surname: 'Smith',
+          photo: 'http://www.example.com/photo.png'
+        }
+      ]
+    },
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </p>
         </div>
         <div>
           <p>&nbsp;</p>
