@@ -132,6 +132,9 @@ class ApiController extends BaseController
       case 'energy.set':
       $this->energy()->set();
       break;
+      case 'energy.find':
+      $this->energy()->find();
+      break;
     }
   }
 
