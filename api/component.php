@@ -404,7 +404,7 @@ namespace API
           // TODO: Send notification about this present.
         }
         break;
-        case 'energy.find':
+        case 'energy.find':print 1;
         $data = array();
 
         $query1 = mysql_query("SELECT `users`.*, `energy`.`time` FROM `users`, `energy` WHERE `application` = '$this->application' AND `energy`.`uid2` = '$this->uid' AND `energy`.`received` = '0' AND `users`.`uid` = `energy`.`uid1`");
