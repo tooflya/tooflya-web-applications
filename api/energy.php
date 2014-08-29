@@ -86,11 +86,11 @@ namespace API
      *
      */
     public function find()
-    {print 123123;
-      /*$this->response('energy', array(
+    {
+      $this->response('energy', array(
         'restore' => $this->queries('energy.find'),
         'secret' => $this->secret
-      ));*/
+      ));
     }
   }
 }
