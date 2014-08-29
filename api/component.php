@@ -407,8 +407,8 @@ namespace API
         case 'energy.find':
         $data = array();
 
-        $query1 = mysql_query("SELECT `users`.*, `energy`.`time` FROM `users`, `energy` WHERE `energy`.`application` = '$this->application' AND `energy`.`uid2` = '$this->uid' AND `energy`.`received` = '0' AND `users`.`uid` = `energy`.`uid1`");
-        //$query2 = mysql_query("UPDATE `energy` WHERE `application` = '$this->application' AND `uid2` = '$this->uid' SET `received` = '1'");
+        $query1 = mysql_query("SELECT `users`.`uid`, `users`.`name`, `users`.`surname`, `users`.`photo`, `energy`.`time` FROM `users`, `energy` WHERE `energy`.`application` = '$this->application' AND `energy`.`uid2` = '$this->uid' AND `energy`.`received` = '0' AND `users`.`uid` = `energy`.`uid1`");
+        $query2 = mysql_query("UPDATE `energy` WHERE `application` = '$this->application' AND `uid2` = '$this->uid' SET `received` = '1'");
 
         while(false !== ($result = mysql_fetch_assoc($query1)))
         {
