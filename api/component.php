@@ -206,7 +206,7 @@ namespace API
         return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
         case 'users.online':
-        return mysql_query("UPDATE `users` SET `visit` = 'NOW()' WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
+        return mysql_query("UPDATE `users` SET `visit` = NOW() WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
         case 'users.user':
         return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `application` = '$this->application' LIMIT 1")) > 0;
