@@ -4,8 +4,8 @@ require('../../config.php');
 ini_set('max_execution_time', 100);
 error_reporting(E_ALL);
 
-$query = mysql_query("SELECT * FROM `subscriptions`");
-while(false!==($row = mysql_fetch_assoc($query)))
+//$query = mysql_query("SELECT * FROM `subscriptions`");
+//while(false!==($row = mysql_fetch_assoc($query)))
 {
     //change this to your email. 
     $to = $_GET['mail'];//$row['mail'];
@@ -320,7 +320,7 @@ EOF;
     //$headers .= "Bcc: [email]email@maaking.cXom[/email]"; 
      
     // now lets send the email. 
-    mail($to, $subject, $message, $headers);
+    if($_GET['real']) mail($to, $subject, $message, $headers);
 
     exit;
   }
