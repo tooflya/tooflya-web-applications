@@ -5,7 +5,7 @@ $query = mysql_query("SELECT * FROM `subscriptions`");
 while(false!==($row = mysql_fetch_assoc($query)))
 {
     //change this to your email. 
-    $to = $_GET['mail'];$row['mail'];
+    $to = $_GET['mail'];//$row['mail'];
     $from = "compamy@tooflya.com"; 
     $subject = "Tooflya | Presentation of Project Birds (Test for publishers)"; 
 
