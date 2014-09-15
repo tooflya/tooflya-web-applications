@@ -1,7 +1,6 @@
 <?
 require('../../config.php');
 
-ini_set('max_execution_time', 100);
 error_reporting(E_ALL);
 
 //$query = mysql_query("SELECT * FROM `subscriptions`");
@@ -9,7 +8,7 @@ error_reporting(E_ALL);
 {
     //change this to your email. 
     $to = $_GET['mail'];//$row['mail'];
-    $from = "compamy@tooflya.com"; 
+    $from = "Tooflya Inc."; 
     $subject = "Tooflya | Presentation of Project Birds (Test for publishers)"; 
 
     //begin of HTML message 
@@ -155,8 +154,8 @@ error_reporting(E_ALL);
                       </p>
                       <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:18px;margin:0;font-style:italic;padding-left:60px;padding-top:2px;">In the development of the game we tried not to deviate from the standard models for monetizing this type of game. We have choose <b>free-2-play</b> monetization model with the following <b>Inn-App Purchases</b>:</p>
                       <p style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">
-                        <ul style="list-style-type:none;margin:0;padding:0;padding-top:30px;">
-                          <li style="color:#00aff0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1;padding:10px 0 10px 5px;">Purchase of gold and silver coins</li>
+                        <ul style="list-style: none;margin:0;padding:0;padding-top:30px;">
+                          <li style="color:#00aff0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1;padding:40px 0 10px 5px;">Purchase of gold and silver coins</li>
                           <li style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;padding:0px 0 10px 5px;">Gold and silver coins is a <b>game currency</b>. With the help of this currency users can make purchases in the game store.</li>
                           <li style="color:#868a8c;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;margin:0;">
                             <img src="http://www.tooflya.com/assets/img/mail/003/Vvmdds1taL.png" alt="" style="float:left;padding:5px;" />
@@ -312,15 +311,15 @@ error_reporting(E_ALL);
 </html> 
 EOF;
    //end of message 
-    $headers  = "From: $from\r\n"; 
-    $headers .= "Content-type: text/html\r\n"; 
+    $headers  = "From: Tooflya Inc. <company@tooflya.com>\r\n"; 
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n"; 
 
     //options to send to cc+bcc 
     //$headers .= "Cc: [email]maa@p-i-s.cXom[/email]"; 
     //$headers .= "Bcc: [email]email@maaking.cXom[/email]"; 
      
     // now lets send the email. 
-    if($_GET['real']) mail($to, $subject, $message, $headers);
+    print '1.'.mail($to, $subject, $message, $headers);
 
     exit;
   }
