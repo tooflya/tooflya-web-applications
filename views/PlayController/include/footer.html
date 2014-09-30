@@ -1,5 +1,13 @@
     <footer id="footer">
       <div class="content">
+        <div class="social" style="margin-bottom:10px;">
+          {if $language == 'ru'}
+          <div id="vk-like"></div>
+          {else}
+          <div class="fb-like" data-href="http://play.tooflya.com" data-width="85" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+          {/if}
+          <div id="twitter-share"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://play.tooflya.com" data-via="tooflya" data-related="tooflya" data-hashtags="Tooflya"></a></div>
+        </div>
         {include file="PlayController/include/links.html"}
         <div class="footer">
           <div class="content">

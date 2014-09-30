@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file level.php
+ * @file notifications.php
  * @category api
  *
  * @author Igor Mats from Tooflya Inc.
@@ -33,7 +33,7 @@ namespace API
    */
   require_once('component.php');
 
-  class level extends component
+  class notifications extends component
   {
 
     /**
@@ -41,56 +41,12 @@ namespace API
      *
      *
      */
-    public function get()
+    public function send()
     {
-      $this->response('level', array(
-        'level' => $this->queries('level.get'),
-        'secret' => $this->secret
-      ));
-    }
+      $secure = $this->proceedSignature('notifications.send');
 
-    /**
-     *
-     *
-     *
-     */
-    public function set()
-    {
-      $secure = array();
-
-      if($this->queries('level.set')) {
-        $secure = json_decode($this->proceedSignature('level.set'), true);
-      }
-
-      $this->response('level', array(
+      $this->response('notifications', array(
         'secure' => $secure,
-        'secret' => $this->secret
-      ));
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function update()
-    {
-      $this->queries('level.update');
-
-      $this->response('level', array(
-        'secret' => $this->secret
-      ));
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function stars()
-    {
-      $this->response('level', array(
-        'count' => $this->queries('level.stars'),
         'secret' => $this->secret
       ));
     }
@@ -114,14 +70,14 @@ namespace API
         break;
         case 1:
         switch($method) {
-          case 'level.set':
+          case 'notifications.send':
           $arguments = array(
             'api_id' => $sid,
-            'method' => 'secure.setUserLevel',
+            'method' => 'secure.sendNotification',
             'random' => rand(10000, 99999),
             'timestamp' => round(microtime(true) * 1000),
-            'uid' => $this->uid,
-            'level' => $this->level,
+            'uids' => $this->uids,
+            'message' => $this->message,
             'format' => 'json'
           );
           break;
@@ -129,6 +85,7 @@ namespace API
 
         $request = 'http://api.vkontakte.ru/api.php' . '?sig=' . $this->calculateSignature($arguments, $info);
 
+        $arguments['message'] = urlencode($arguments['message']);
         foreach($arguments as $key => $value)
         {
           $request .= "&$key=$value";

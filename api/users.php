@@ -49,7 +49,7 @@ namespace API
 
       if($new)
       {
-        $this->update();
+        $this->upgrade();
       }
       else
       {
@@ -99,7 +99,20 @@ namespace API
      */
     public function online()
     {
-      $this->queries('users.online');
+      $this->response('users', array(
+        'uids' => $this->queries('users.online'),
+        'secret' => $this->secret
+      ));
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    public function update()
+    {
+      $this->queries('users.update');
     }
 
     /**
@@ -127,9 +140,9 @@ namespace API
      *
      *
      */
-    private function update()
+    private function upgrade()
     {
-      $this->queries('users.update');
+      $this->queries('users.upgrade');
     }
   }
 }

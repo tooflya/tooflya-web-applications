@@ -5,14 +5,38 @@
   </div>
   <div class="content">
     {if $available}
+    <div class="online-users-list">
+      <div class="popup users-online-block block" id="users-online-block">
+        <div class="title">
+          <h3>{l s='Online users'}</h3>
+        </div>
+        <div class="list">
+          <ul id="online-users-list">
+          </ul>
+        </div>
+      </div>
+      {literal}
+      <template id="online-users-list-field-template">
+        <li id="online-users-list-field-${id}">
+          {{if platform == "vk"}}
+          <div class="image"><a target="_blank" href="//vk.com/id${id}" title="${name} ${surname}"><img src="${photo}" /></a></div>
+          {{else}}
+          <div class="image"><a target="_blank" href="//fb.com/${id}" title="${name} ${surname}"><img src="${photo}" /></a></div>
+          {{/if}}
+        </li>
+      </template>
+      {/literal}
+    </div>
+    {/if}
+    {if $available}
     <div class="popup popup-vk block" id="vk">
       <p>
         {l s='Для того чтобы эффективно провести тестирование нам необходима некая персональная информация вроде вашей фамилии и имени'}.
-        {l s='Пожалуйста авторизируйтесь через социальную сеть'}
-        <a href="//vk.com" target="_blank">VK</a>.
+        {l s='Пожалуйста авторизируйтесь через одну из доступных социальных сетей'}.
         {l s='Это не займет много времени'}.
       </p>
-      <a class="button" id="vk-login">{l s='Авторизироваться'}</a>
+      <a id="vk-login"><img src="{$url}/assets/img/vk-login.png" alt="" /></a>
+      <a id="fb-login"><img src="{$url}/assets/img/fb-login.png" alt="" /></a>
     </div>
     <div class="canvas">
       <canvas id="canvas" width="980" height="551"></canvas>
@@ -76,7 +100,11 @@
       </div>
       <ul>
       {foreach from=$users item=some}
-        <li><a href="http://vk.com/id{$some.uid}" target="_blank"><img src="{$some.photo}" alt="{$some.name} {$some.surname}" /></a></li>
+        {if $some.photo}
+        <li><a href="//{if $some.platform == 1}vk.com/id{else}fb.com/{/if}{$some.uid}" title="{$some.name} {$some.surname}" target="_blank"><img src="{$some.photo}" alt="{$some.name} {$some.surname}" /></a></li>
+        {else}
+        <li><img src="{$url}/assets/img/avatar.jpg" alt="{$some.name} {$some.surname}" title="{$some.name} {$some.surname}" /></li>
+        {/if}
       {foreachelse}
         <li class="b">{l s='Нет участников...'}</li>
       {/foreach}
@@ -108,7 +136,12 @@
       </div>
       <ul>
       {foreach from=$users item=some}
-        <li title="{$some.name} {$some.surname}"><a href="//vk.com/id{$some.uid}" target="_blank"><img src="{$some.photo}" alt="{$some.name} {$some.surname}" /></a></li>
+        {if $some.photo}
+        <li><a href="//{if $some.platform == 1}vk.com/id{else}fb.com/{/if}{$some.uid}" title="{$some.name} {$some.surname}" target="_blank"><img src="{$some.photo}" alt="{$some.name} {$some.surname}" /></a></li>
+        {else}
+        <li><img src="{$url}/assets/img/avatar.jpg" alt="{$some.name} {$some.surname}" title="{$some.name} {$some.surname}" /></li>
+        {/if}
+      }
       {foreachelse}
         <li class="b">{l s='Нет участников...'}</li>
       {/foreach}

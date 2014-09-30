@@ -29,6 +29,8 @@ require(PATH.'/api/payments.php');
 require(PATH.'/api/promo.php');
 require(PATH.'/api/level.php');
 require(PATH.'/api/energy.php');
+require(PATH.'/api/notifications.php');
+require(PATH.'/api/request.php');
 
 /**
  * Response codes:
@@ -89,7 +91,7 @@ class ApiController extends BaseController
 
     $this->secret();
 
-    $this->users()->online();
+    $this->users()->update();
 
     switch($call)
     {
@@ -98,6 +100,9 @@ class ApiController extends BaseController
       break;
       case 'users.leaders':
       $this->users()->leaders();
+      break;
+      case 'users.online':
+      $this->users()->online();
       break;
       case 'storage.get':
       $this->storage()->get();
@@ -126,14 +131,20 @@ class ApiController extends BaseController
       case 'level.update':
       $this->level()->update();
       break;
-      case 'energy.get':
-      $this->energy()->get();
+      case 'level.stars':
+      $this->level()->stars();
       break;
-      case 'energy.set':
-      $this->energy()->set();
+      case 'notifications.send':
+      $this->notifications()->send();
       break;
-      case 'energy.find':
-      $this->energy()->find();
+      case 'request.send':
+      $this->request()->send();
+      break;
+      case 'request.receive':
+      $this->request()->receive();
+      break;
+      case 'request.find':
+      $this->request()->find();
       break;
     }
   }
@@ -193,6 +204,12 @@ class ApiController extends BaseController
       break;
       case 4:
       $reason = 'Promo code is not found.';
+      break;
+      case 5:
+      $reason = 'UIDS count connot be less than 1.';
+      break;
+      case 6:
+      $reason = 'Undefined type of request.';
       break;
     }
 
@@ -261,7 +278,7 @@ class ApiController extends BaseController
     mysql_select_db('api.tooflya.com');
 
     $this->statistics = [];
-    for($i = 7; $i >= 0; $i--) {
+    for($i = 6; $i >= 0; $i--) {
       $this->assignGroupStatistic(false, $i);
       $this->assignGroupStatistic('storage', $i);
       $this->assignGroupStatistic('users', $i);
@@ -271,6 +288,8 @@ class ApiController extends BaseController
       $this->assignGroupStatistic('score', $i);
       $this->assignGroupStatistic('coins', $i);
       $this->assignGroupStatistic('energy', $i);
+      $this->assignGroupStatistic('notifications', $i);
+      $this->assignGroupStatistic('request', $i);
     }
 
     $this->templates->assign('statistics', $this->statistics);
@@ -304,6 +323,8 @@ class ApiController extends BaseController
   public function promo() {return new API\promo($this);}
   public function level() {return new API\level($this);}
   public function energy() {return new API\energy($this);}
+  public function notifications() {return new API\notifications($this);}
+  public function request() {return new API\request($this);}
 }
 
 /**

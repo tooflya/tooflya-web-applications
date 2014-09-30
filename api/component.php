@@ -41,6 +41,7 @@ namespace API
 
       $this->id           = $this->param('id');
       $this->uid          = $this->param('uid');
+      $this->uids         = $this->param('uids');
       $this->name         = $this->param('name');
       $this->surname      = $this->param('surname');
       $this->photo        = $this->param('photo');
@@ -59,6 +60,7 @@ namespace API
       $this->force        = $this->param('force');
       $this->friend       = $this->param('friend');
       $this->friends      = $this->param('friends');
+      $this->message      = $this->param('message');
 
       $this->key          = $this->param('key');
       $this->value        = $this->param('value');
@@ -73,14 +75,6 @@ namespace API
 
       $this->secret       = $this->param('secret');
 
-      if($this->keys || $this->keys)
-      {
-        $this->keys = explode(",", $this->keys);
-        $this->values = explode(",", $this->values);
-
-        $this->lock();
-      }
-
       switch($this->platform)
       {
         case 'standalone':
@@ -91,6 +85,9 @@ namespace API
         break;
         case 'vk':
         $this->platform = 1;
+        break;
+        case 'fb':
+        $this->platform = 2;
         break;
         // TODO: Add platforms.
       }
@@ -128,13 +125,10 @@ namespace API
      */
     protected function response($component, $data)
     {
-      if(!$this->lock)
-      {
-        $this->using($component);
-        $this->statistic($component);
+      $this->using($component);
+      $this->statistic($component);
 
-        $this->controller->response($data);
-      }
+      $this->controller->response($data);
     }
 
     /**
@@ -164,10 +158,22 @@ namespace API
      *
      *
      */
-    protected function lock()
+    protected function query($method, $params)
     {
-      $this->multiple = $this->lock ? false : true;
-      $this->lock = true;
+      $url = 'http://api.tooflya.com/' . $method;
+
+      $options = array(
+        'http' => array(
+          'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+          'method'  => 'POST',
+          'content' => http_build_query($params)
+        )
+      );
+
+      $context  = stream_context_create($options);
+      $result = file_get_contents($url, false, $context);
+
+      return $result;
     }
 
     /**
@@ -175,10 +181,30 @@ namespace API
      *
      *
      */
-    protected function unlock()
+    protected function calculateSignature($arguments, $info)
     {
-      $this->lock = false;
-      $this->multiple = false;
+      $platform = $info['platform'];
+      $secret = $info['secret'];
+
+      switch($platform)
+      {
+        default:
+        return true;
+        break;
+        case 1:
+        $keys = array();
+        foreach($arguments as $key => $value)
+        {
+          if($key != 'sig')
+          {
+            $keys[] = "$key=$value";
+          }
+        }
+        sort($keys);
+
+        return md5(join('', $keys) . $secret);
+        break;
+      }
     }
 
 
@@ -202,10 +228,10 @@ namespace API
         case 'users.create':
         return mysql_query("INSERT INTO `users` SET `uid` = '$this->uid', `platform` = '$this->platform', `secret` = '$this->secret', `application` = '$this->application', `name` = '$this->name', `surname` = '$this->surname', `photo` = '$this->photo', `language` = '$this->language', `ip` = '$this->ip', `time` = '$this->time', `join` = NOW()");
         break;
-        case 'users.update':
+        case 'users.upgrade':
         return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
-        case 'users.online':
+        case 'users.update':
         return mysql_query("UPDATE `users` SET `visit` = NOW() WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
         case 'users.user':
@@ -249,12 +275,43 @@ namespace API
 
         return $data;
         break;
+        case 'users.online':
+        $count = 0;
+        $data = array();
 
-        /**
-         *
-         * Storage component queries.
-         *
-         */
+        $uids = explode(',', $this->uids);
+
+        foreach($uids as $uid)
+        {
+          $uid = intval(trim($uid));
+          if($uid > 0) {
+            $count++;
+          }
+        }
+
+        if($count < 1)
+        {
+          $this->controller->abort(5);
+        }
+        else
+        {
+          foreach($uids as $uid)
+          {
+            $uid = intval(trim($uid));
+            if($uid > 0) {
+              $visit = mysql_result(mysql_query("SELECT UNIX_TIMESTAMP(`visit`) FROM `users` WHERE `uid` = '$uid' AND `application` = '$this->application'"), 0); // TODO: Need to test it.
+              if($visit) {
+                $data[] = array(
+                  'uid' => $uid,
+                  'online' => $visit
+                );
+              }
+            }
+          }
+        }
+
+        return $data;
+        break;
         case 'storage.get':
         return mysql_result(mysql_query("SELECT `value` FROM `storage` WHERE `key` = '$this->key' AND `uid` = '$this->uid' AND `application` = '$this->application'"), 0);
         break;
@@ -321,11 +378,17 @@ namespace API
         case 'level.set':
         if($this->force) {
           mysql_query("UPDATE `users` SET `level` = '$this->level' WHERE `secret` = '$this->secret'");
+
+          return true;
         } else {
           if($this->level > $this->queries('level.get')) {
             mysql_query("UPDATE `users` SET `level` = '$this->level' WHERE `secret` = '$this->secret'");
+
+            return true;
           }
         }
+
+        return false;
         break;
         case 'level.update':
         if($this->level == -1)
@@ -363,66 +426,57 @@ namespace API
           }
         }
         break;
-        case 'energy.get':
-        $data = array();
-
-        $query = mysql_query(
-          "SELECT
-            `users`.`uid`,
-            `users`.`name`,
-            `users`.`surname`,
-            `users`.`photo`,
-            `storage`.`value` AS `energy`
-              FROM `users`, `storage`
-            WHERE
-              `users`.`uid` IN ($this->friends)
-                AND
-              `storage`.`uid` IN ($this->friends)
-                AND
-              `storage`.`key` =  '$this->key'
-                AND
-              `storage`.`value` < 5
-                AND
-              `users`.`application` = '$this->application'
-                AND
-              `storage`.`application` = '$this->application'
-              GROUP by `users`.`uid`
-          ");
-        while(false !== ($result = mysql_fetch_assoc($query)))
-        {
-          $data[] = $result;
-        }
-
-        return $data;
+        case 'level.stars':
+        return mysql_result(mysql_query("SELECT SUM(`stars`) FROM `levels` WHERE `uid` = '$this->id' AND `application` = '$this->application'"), 0);
         break;
-        case 'energy.set':
-        mysql_query("INSERT INTO `energy` SET `application` = '$this->application', `uid1` = '$this->uid', `uid2` = '$this->friend'");
+        case 'proceed':
+        $query = mysql_query("SELECT * FROM `games` WHERE `id` = '$this->application' LIMIT 1");
 
-        $friend = mysql_fetch_assoc(mysql_query("SELECT * FROM `users` WHERE `application` = '$this->application' AND `uid` = '$this->friend' LIMIT 1"));
-        if(false/*not online*/)
+        if(mysql_num_rows($query) > 0)
         {
-          // TODO: Send notification about this present.
+          return mysql_fetch_assoc($query);
+        }
+        else
+        {
+          return false;
         }
         break;
-        case 'energy.find':
+        case 'request.send':
+        mysql_query("INSERT INTO `requests` SET `type` = '$this->type', `application` = '$this->application', `uid1` = '".$this->controller->information['uid']."', `uid2` = '$this->uid'");
+        break;
+        case 'request.find':
         $data = array();
 
-        $query1 = mysql_query("SELECT `users`.`uid`, `users`.`name`, `users`.`surname`, `users`.`photo`, `energy`.`time` FROM `users`, `energy` WHERE `energy`.`application` = '$this->application' AND `energy`.`uid2` = '$this->uid' AND `energy`.`received` = '0' AND `users`.`uid` = `energy`.`uid1`");
-        $query2 = mysql_query("UPDATE `energy` SET `received` = '1' WHERE `application` = '$this->application' AND `uid2` = '$this->uid'");
+        $minutes = $this->force ? (60 * 24) : 1;
+
+        $query1 = mysql_query("SELECT `users`.`uid`, `users`.`name`, `users`.`surname`, `users`.`photo`, UNIX_TIMESTAMP(`users`.`visit`) AS `online`, `requests`.`id`, UNIX_TIMESTAMP(`requests`.`time`) AS `time`, `requests`.`type`, `requests`.`showed`, `requests`.`received` FROM `users`, `requests` WHERE `requests`.`application` = '$this->application' AND `requests`.`uid2` = '$this->uid' AND `requests`.`received` = '0' AND `users`.`uid` = `requests`.`uid1` AND `requests`.`time` > DATE_SUB(NOW(), INTERVAL $minutes minute)");
+        $query2 = mysql_query("UPDATE `requests` SET `showed` = '1' WHERE `application` = '$this->application' AND `uid2` = '$this->uid'");
 
         while(false !== ($result = mysql_fetch_assoc($query1)))
         {
+          if(!$this->force)
+          {
+            if($result['showed'] == 1)
+            {
+              continue;
+            }
+          }
+
           $data[] = $result;
         }
 
         return $data;
         break;
+        case 'request.receive':
+        if(mysql_num_rows(mysql_query("SELECT * FROM `requests` WHERE `id` = '$this->id'")) > 0)
+        {
+          mysql_query("UPDATE `requests` SET `showed` = '1', `received` = '1' WHERE `application` = '$this->application' AND `id` = '$this->id'");
 
-        /**
-         *
-         * ? component queries.
-         *
-         */
+          return true;
+        }
+
+        return false;
+        break;
       }
     }
   }

@@ -35,63 +35,6 @@ namespace API
 
   class energy extends component
   {
-    /**
-     *
-     *
-     *
-     */
-    public function get()
-    {
-      if($this->friends)
-      {
-        $this->response('energy', array(
-          'friends' => $this->queries('energy.get'),
-          'secret' => $this->secret
-        ));
-      }
-      else
-      {
-        // TODO: Implement own energy getting.
-
-        $this->controller->abort(-1);
-      }
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function set()
-    {
-      if($this->friend)
-      {
-        $this->queries('energy.set');
-
-        $this->response('energy', array(
-          'secret' => $this->secret
-        ));
-      }
-      else
-      {
-        // TODO: Implement own energy setting.
-
-        $this->controller->abort(-1);
-      }
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function find()
-    {
-      $this->response('energy', array(
-        'restore' => $this->queries('energy.find'),
-        'secret' => $this->secret
-      ));
-    }
   }
 }
 

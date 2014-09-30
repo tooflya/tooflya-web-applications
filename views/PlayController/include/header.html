@@ -18,11 +18,8 @@
 
     <script src="{$url}/assets/js/jquery.js"></script>
     <script src="{$url}/assets/js/library.js"></script>
-    {if $available}
     <script src="{$url}/assets/js/play.js"></script>
-    {else}
     <script src="{$url}/assets/js/countdown.js"></script>
-    {/if}
     <script src="{$url}/assets/js/chart.js"></script>
 
     <!--[if lt IE 9]>
@@ -48,6 +45,7 @@
   <body>
   <div id="body">
     <div id="vk_api_transport"></div>
+    <div id="fb-root"></div>
     <header>
       <div class="content">
         <div class="title">
@@ -56,24 +54,8 @@
           </a>
         </div>
         {if $available}
-        <div class="online-users-list status">
+        <div class="online-users-list status" id="online-users-switch">
           <h2 class="success">{l s='Online users'}: <span id="online-users">0</span></h2>
-          <div class="list">
-            <ul id="online-users-list">
-            </ul>
-          </div>
-          {literal}
-          <template id="online-users-list-field-template">
-            <li id="online-users-list-field-${id}">
-              <div class="image"><img src="${photo}" /></div>
-              <div style="float: left">
-                <div class="first">${name} ${surname}</div>
-                <div class="second"><a href="//vk.com/id${id}">Link</a></div>
-              </div>
-              <div class="clearfix"></div>
-            </li>
-          </template>
-          {/literal}
         </div>
         {/if}
         <div class="clearfix"></div>

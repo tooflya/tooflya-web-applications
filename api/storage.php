@@ -42,31 +42,58 @@ namespace API
      */
     public function get()
     {
-      if($this->multiple)
+      if($this->uids || $this->keys)
       {
-        $this->lock();
+        if(!$this->uids) { $this->uids = array($this->uid); } else { $this->uids = explode(",", $this->uids); }
+        if(!$this->keys) { $this->keys = array($this->key); } else { $this->keys = explode(",", $this->keys); }
 
-        $storage = array();
-
-        for($i = 0; $i < count($this->keys); $i++)
+        if(count($this->uids) > 1)
         {
-          $this->key = $this->keys[$i];
+          $data = array();
 
-          $storage[] =  $this->queries('storage.get');
+          for($j = 0; $j < count($this->uids); $j++)
+          {
+            $storage = array();
+
+            $this->uid = $this->uids[$j];
+
+            for($i = 0; $i < count($this->keys); $i++)
+            {
+              $this->key = $this->keys[$i];
+
+              $storage[] =  $this->queries('storage.get');
+            }
+
+            $data[] = array(
+              'uid' => $this->uid,
+              'storage' => $storage
+            );
+          }
+
+          $this->response('storage', $data);
         }
+        else
+        {
+          $storage = array();
 
-        $this->unlock();
+          $this->uid = $this->uids[0];
 
-        $this->response('storage', array(
+          for($i = 0; $i < count($this->keys); $i++)
+          {
+            $this->key = $this->keys[$i];
+
+            $storage[] =  $this->queries('storage.get');
+          }
+
+          $this->response('storage', array(
           'storage' => $storage
         ));
+        }
       }
       else
       {
-        $value = $this->queries('storage.get');
-
         $this->response('storage', array(
-          'value' => $value
+          'value' => $this->queries('storage.get')
         ));
       }
     }
@@ -78,36 +105,24 @@ namespace API
      */
     public function set()
     {
-      if($this->multiple)
-      {
-        $values = [];
+      if(!$this->uids) { $this->uids = array($this->uid); } else { $this->uids = explode(",", $this->uids); }
+      if(!$this->keys) { $this->keys = array($this->key); } else { $this->keys = explode(",", $this->keys); }
+      if(!$this->values) { $this->values = array($this->value); } else { $this->values = explode(",", $this->values); }
 
-        $this->lock();
+      for($j = 0; $j < count($this->uids); $j++)
+      {
+        $this->uid = $this->uids[$j];
 
         for($i = 0; $i < count($this->keys); $i++)
         {
           $this->key = $this->keys[$i];
           $this->value = $this->values[$i];
 
-          $values[] = $this->value;
-
-          $this->set();
+          $this->queries('storage.set');
         }
-
-        $this->unlock();
-
-        $this->response('storage', array(
-          'values' => $values
-        ));
       }
-      else
-      {
-        $this->queries('storage.set');
 
-        $this->response('storage', array(
-          'value' => $this->value
-        ));
-      }
+      $this->response('storage');
     }
 
     /**

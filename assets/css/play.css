@@ -35,7 +35,7 @@ canvas {
   display: block !important;
 }
 div.canvas {
-  display: block !important;
+  display: block;
 }
 h1.status {
   margin: 0;
@@ -179,6 +179,11 @@ div.popup.popup-time-description {
   margin-top: 20px;
   padding-bottom: 0 !important;
 }
+div.popup.users-online-block {
+  padding-bottom: 0 !important;
+  min-height: 76px;
+  margin-bottom: 20px;
+}
 div.popup.popup-time-description ul {
   list-style: none;
   margin-top: 5px;
@@ -211,48 +216,34 @@ h2.thanks {
   color: #FF2DA3;
 }
 
-div.online-users-list div.list {
-  position: absolute;
-  background-color: #fff;
-  width: 200px;
-  height: 200px;
-  z-index: 10;
-  display: none;
-  border: 1px #eee solid;
-  padding: 5px;
-  border-radius: 3px;
-}
-div.online-users-list:hover > div.list {
-  display: block;
+header div.online-users-list {
+  cursor: pointer;
 }
 div.online-users-list div.list ul {
   list-style: none;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  max-height: 100%;
-  min-height: 100%;
+  margin-top: 5px;
+}
+div.online-users-list div.list ul li {
+  display: inline-block;
+  margin: 2px;
 }
 div.online-users-list div.list ul li div.image {
-  float: left;
   width: 32px;
   height: 32px;
-  margin-right: 5px;
-}
-div.online-users-list div.list ul li div.first {
-  margin-top: -5px;
-  color: #FF2DA3;
-  font-weight: 500;
-}
-div.online-users-list div.list ul li div.second {
-  margin-top: -6px;
-}
-div.online-users-list div.list ul li div.second a {
-  color: #F5A7D3;
 }
 div.online-users-list div.list ul li img {
   width: 32px;
   height: 32px;
   border-radius: 3px;
+}
+
+div.social div, div.social iframe {
+  display: inline-block;
+  max-width: 85px;
+  min-width: 85px;
+}
+div.social span {
+  vertical-align: 0 !important;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

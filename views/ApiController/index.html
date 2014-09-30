@@ -71,6 +71,90 @@ Tooflya.api.call('storage.get',
                   </code>
                 </pre>
               </div>
+              <p><b>Example 3</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('storage.get',
+{
+  uid: 1083,
+  key: 'bananas',
+  secret:'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(value) {
+    console.log(value);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Example 4</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('storage.get',
+{
+  uid: 1083,
+  keys: ['bananas', 'apples', 'coconuts'],
+  secret:'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(value) {
+    console.log(value);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Example 5</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('storage.get',
+{
+  uids: [1083, 4676],
+  key: 'bananas',
+  secret:'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(storage) {
+    console.log(storage);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Example 6</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('storage.get',
+{
+  uids: [1083, 4676],
+  keys: ['bananas', 'apples', 'coconuts'],
+  secret:'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(storage) {
+    console.log(storage);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
               <p><b>Response</b></p>
               <div>
                 <small><b>Error</b></small>
@@ -102,6 +186,19 @@ Tooflya.api.call('storage.get',
   data: {
     storage: [10, 2, 75]
   }
+}
+                  </code>
+                </pre>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: [
+    {
+      uid: 1083,
+      storage: [10, 2, 75]
+    }
+  ]
 }
                   </code>
                 </pre>
@@ -405,6 +502,61 @@ Tooflya.api.call('users.leaders',
               </div>
             </div>
           </p>
+          <p>
+            <a class="show-example" data-call="users-online"><b>users.online</b></a> <i>Method is designed to get user online status.</i>
+            <div id="users-online" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('users.online',
+{
+  uids: [23543],
+},
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    uids: [
+      {
+        uid: 23543,
+        online: false
+      }
+    ],
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
           <div>
             <p>&nbsp;</p>
             <p>Total Users tool API calls count: <b>{$statistics.usersCount} by last week</b></p>
@@ -674,6 +826,9 @@ Tooflya.api.call('level.set',
 {
   response: 1,
   data: {
+    secure: {
+      response: 1
+    },
     secret: 'ycLPvVOrTf9bimrGjZRg'
   }
 }
@@ -725,6 +880,53 @@ Tooflya.api.call('level.update',
 {
   response: 1,
   data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <p>
+            <a class="show-example" data-call="level-stars"><b>level.stars</b></a> <i>Method is designed for getting a total count of stars getting by user.</i>
+            <div id="level-stars" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('level.stars', false,
+{
+  success: function(data) {
+    console.log(data);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    count: 93,
     secret: 'ycLPvVOrTf9bimrGjZRg'
   }
 }
@@ -944,18 +1146,29 @@ Tooflya.api.call('energy.get',
               </div>
             </div>
           </p>
+        <div>
+          <p>&nbsp;</p>
+          <p>Total Energy tool API calls count: <b>{$statistics.energyCount} by last week</b></p>
+        </div>
+        <div>
+          <canvas id="energy-api-calls" width="960" height="150"></canvas>
+        </div>
+      </div>
+        <div class="class">
+          <div class="title"><span>Notifications</span> <i>tool for .</i></div>
           <p>
-            <a class="show-example" data-call="energy-set"><b>energy.set</b></a>
+            <a class="show-example" data-call="notifications-send"><b>notifications.send</b></a>
             <i>Method for</i>
-            <div id="energy-set" class="example description">
+            <div id="notifications-send" class="example description">
               <p><b>Example</b></p>
               <div class="javascript">
                 <pre>
                   <code class="language-javascript">
-Tooflya.api.call('energy.set',
+Tooflya.api.call('notifications.send',
 {
   data: {
-    uid: 1075
+    message: 15,
+    uids: [1083, 105567, 10998]
   },
   secret: 'ycLPvVOrTf9bimrGjZRg'
 },
@@ -989,71 +1202,8 @@ Tooflya.api.call('energy.set',
 {
   response: 1,
   data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="energy-find"><b>energy.find</b></a>
-            <i>Method for</i>
-            <div id="energy-find" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('energy.find',
-{
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    restore: {
-      [
-        {
-          uid: 12807,
-          name: 'Alex',
-          surname: 'Smith',
-          photo: 'http://www.example.com/photo.png'
-        },
-        {
-          uid: 12808,
-          name: 'Alex',
-          surname: 'Smith',
-          photo: 'http://www.example.com/photo.png'
-        }
-      ]
+    secure: {
+      response: 1
     },
     secret: 'ycLPvVOrTf9bimrGjZRg'
   }
@@ -1063,14 +1213,134 @@ Tooflya.api.call('energy.find',
               </div>
             </div>
           </p>
-        </div>
         <div>
           <p>&nbsp;</p>
-          <p>Total Energy tool API calls count: <b>{$statistics.energyCount} by last week</b></p>
+          <p>Total Notifications tool API calls count: <b>{$statistics.notificationsCount} by last week</b></p>
         </div>
         <div>
-          <canvas id="energy-api-calls" width="960" height="150"></canvas>
+          <canvas id="notifications-api-calls" width="960" height="150"></canvas>
         </div>
+      </div>
+        <div class="class">
+          <div class="title"><span>Request</span> <i>tool for .</i></div>
+          <p>
+            <a class="show-example" data-call="request-send"><b>request.send</b></a>
+            <i>Method for</i>
+            <div id="request-send" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('request.send',
+{
+  data: {
+    type: 'lives.send',
+    uid: 1083
+  },
+  secret: 'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(e) {
+    console.log(e);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+          <p>
+            <a class="show-example" data-call="request-find"><b>request.find</b></a>
+            <i>Method for find some requests for the current users.</i>
+            <div id="request-find" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('request.find',
+{
+  secret: 'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(e) {
+    console.log(e);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    requests: [
+      {
+        type: 'lives.send',
+        uid: 1083
+      }
+    ],
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+        <div>
+          <p>&nbsp;</p>
+          <p>Total Request tool API calls count: <b>{$statistics.requestCount} by last week</b></p>
+        </div>
+        <div>
+          <canvas id="request-api-calls" width="960" height="150"></canvas>
+        </div>
+      </div>
     </div>
     <div class="block" id="examples">
       <div class="title">
@@ -1179,7 +1449,6 @@ new Chart(document.getElementById("coins-api-calls").getContext("2d")).Line({
   labels: structure.labels,
   datasets: dataset(structure.data, 'Coins tool calls count')
 }, options);
-
 structure.clear();
 {foreach from=$statistics.energy item=value}
 structure.labels.push('{$value.time|date_format:"%d %B"}');
@@ -1188,6 +1457,24 @@ structure.data.push('{$value.count}');
 new Chart(document.getElementById("energy-api-calls").getContext("2d")).Line({
   labels: structure.labels,
   datasets: dataset(structure.data, 'Energy tool calls count')
+}, options);
+structure.clear();
+{foreach from=$statistics.notifications item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("notifications-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Notifications tool calls count')
+}, options);
+structure.clear();
+{foreach from=$statistics.request item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("request-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Request tool calls count')
 }, options);
 </script>
 {include file="ApiController/include/footer.html"}

@@ -66,7 +66,7 @@ class PlayController extends BaseController {
 
     mysql_select_db("games.tooflya.com") or die("Could not select database");
 
-    $this->templates->assign_array("SELECT * FROM `users` WHERE `application` = '$play[application]'", 'users');
+    $this->templates->assign_array("SELECT * FROM `users` WHERE `application` = '$play[application]' ORDER by RAND()", 'users');
   }
 }
 
