@@ -123,7 +123,7 @@ namespace API
             $response['response'] = array(
               'item_id' => $item['purchase'],
               'title' => $item['title'],
-              'photo_url' => 'http://www.tooflya.com/games/'.$info['alias'].'/Resources/Icons/vk-purchase-'.$item['purchase'].'.png',
+              'photo_url' => 'http://www.tooflya.com/games/'.$info['alias'].'/Resources/Icons/purchase-'.$item['purchase'].'.png',
               'price' => $item['price_vk']
             );
             break;
