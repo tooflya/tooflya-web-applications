@@ -45,6 +45,12 @@ if(true)
             'server2' => file_get_contents('http://status.tooflya.com/ajax/status.php?action=cross-origin')
           ));
           break;
+          case 'server3':
+          print json_encode(array(
+            'response' => 1,
+            'server3' => file_get_contents('http://static.tooflya.com/ajax/status.php?action=cross-origin')
+          ));
+          break;
           break;
         }
       }
