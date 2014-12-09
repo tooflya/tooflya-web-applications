@@ -132,7 +132,7 @@ class GamesController extends BaseController {
    */
   public function getBaseInfo()
   {
-    $this->templates->assign_array("SELECT * FROM `games`", 'games');
+    $this->templates->assign_array("SELECT * FROM `games` WHERE `visible` = '1'", 'games');
   }
 
   /**
@@ -142,12 +142,12 @@ class GamesController extends BaseController {
    */
   public function getExtendedInfo()
   {
-    $data = mysql_query("SELECT * FROM `games`") or die(mysql_error());
+    $data = mysql_query("SELECT * FROM `games` WHERE `visible` = '1'") or die(mysql_error());
 
     $results = array();
     while($row = mysql_fetch_assoc($data))
     {
-      $row['data'] = $this->getGameExtendedInfo($row['id']);
+      $row['data'] = $this->getGameExtendedInfo($row['game'], $row['platform']);
 
       $results[] = $row;
     }
@@ -160,29 +160,29 @@ class GamesController extends BaseController {
    *
    *
    */
-  public function getGameExtendedInfo($id)
+  public function getGameExtendedInfo($id, $platform)
   {
     if(mysql_num_rows(mysql_query("SELECT * FROM `games` WHERE `id` = '$id'")))
     {
       $data = array();
       $data['more'] = array(
         'users' => array(
-          'total' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id'"), 0),
-          'online' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `visit` > DATE_SUB(now(), INTERVAL 5 MINUTE)"), 0),
-          'new' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `join` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0),
-          'active' => mysql_num_rows(mysql_query("SELECT * FROM `visits` WHERE `application` = '$id' AND `time` > NOW() - INTERVAL 7 DAY GROUP by `uid`")),
-          'plays' => mysql_num_rows(mysql_query("SELECT * FROM `visits` WHERE `application` = '$id' AND `time` > NOW() - INTERVAL 7 DAY"))
+          'total' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `platform` = '$platform'"), 0),
+          'online' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `platform` = '$platform' AND `visit` > DATE_SUB(now(), INTERVAL 5 MINUTE)"), 0),
+          'new' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `platform` = '$platform' AND `join` > DATE_SUB(now(), INTERVAL 7 DAY)"), 0),
+          'active' => mysql_num_rows(mysql_query("SELECT * FROM `visits` WHERE `application` = '$id' AND `platform` = '$platform' AND `time` > NOW() - INTERVAL 7 DAY GROUP by `uid`")),
+          'plays' => mysql_num_rows(mysql_query("SELECT * FROM `visits` WHERE `application` = '$id' AND `platform` = '$platform' AND `time` > NOW() - INTERVAL 7 DAY"))
         ),
         'levels' => array(
-          'average' => mysql_result(mysql_query("SELECT ROUND(AVG(`level`)) FROM `users` WHERE `application` = '$id'"), 0),
-          'hard' => mysql_result(mysql_query("SELECT `level`, COUNT(`level`) AS `count` FROM `users` GROUP by `level` ORDER by `count` DESC LIMIT 1"), 0),
+          'average' => mysql_result(mysql_query("SELECT ROUND(AVG(`level`)) FROM `users` WHERE `application` = '$id' AND `platform` = '$platform'"), 0),
+          'hard' => mysql_result(mysql_query("SELECT `level`, COUNT(`level`) AS `count` FROM `users` WHERE `application` = '$id' AND `platform` = '$platform' GROUP by `level` ORDER by `count` DESC LIMIT 1"), 0),
         ),
         'finance' => array(
           'retention' => array(
-            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `purchases` = 0"), 0),
-            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `purchases` > 0"), 0)
+            'free' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `platform` = '$platform' AND `purchases` = 0"), 0),
+            'pay' => mysql_result(mysql_query("SELECT COUNT(*) FROM `users` WHERE `application` = '$id' AND `platform` = '$platform' AND `purchases` > 0"), 0)
           ),
-          'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `application` = '$id' AND `success` = TRUE"), 0)
+          'count' => mysql_result(mysql_query("SELECT COUNT(*) FROM `payments` WHERE `application` = '$id' AND `platform` = '$platform' AND `success` = TRUE"), 0)
         ),
       );
 
@@ -190,13 +190,13 @@ class GamesController extends BaseController {
       $plays = array();
       $payments = array();
       for($i = 7; $i >= 0; $i--) {
-        $users[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `join` FROM `users` WHERE `application` = '$id' AND `join` >= (CURDATE() - $i) AND `join` < (CURDATE() - $i + 1)"), 0);
-        $users[$i - 1]['visits'] = mysql_num_rows(mysql_query("SELECT * FROM `visits` WHERE `application` = '$id' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1) GROUP by `uid`"));
-        $plays[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, DAY((CURDATE() - $i)) AS `day`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `visits` WHERE `application` = '$id' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+        $users[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `join` FROM `users` WHERE `application` = '$id' AND `platform` = '$platform' AND `join` >= (CURDATE() - $i) AND `join` < (CURDATE() - $i + 1)"), 0);
+        $users[$i - 1]['visits'] = mysql_num_rows(mysql_query("SELECT * FROM `visits` WHERE `application` = '$id' AND `platform` = '$platform' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1) GROUP by `uid`"));
+        $plays[$i - 1] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, DAY((CURDATE() - $i)) AS `day`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `visits` WHERE `application` = '$id' AND `platform` = '$platform' AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
       }
       for($i = 7; $i >= 0; $i--) {
-        $payments[$i - 1]['success'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `application` = '$id' AND `success` = TRUE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
-        $payments[$i - 1]['failure'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `application` = '$id' AND `success` = FALSE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+        $payments[$i - 1]['success'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `application` = '$id' AND `platform` = '$platform' AND `success` = TRUE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
+        $payments[$i - 1]['failure'] = mysql_fetch_assoc(mysql_query("SELECT COUNT(*) AS `count`, (CURRENT_TIMESTAMP - INTERVAL $i DAY) AS `time` FROM `payments` WHERE `application` = '$id' AND `platform` = '$platform' AND `success` = FALSE AND `time` >= (CURDATE() - $i) AND `time` < (CURDATE() - $i + 1)"), 0);
       }
       $data['users'] = $users;
       $data['plays'] = $plays;

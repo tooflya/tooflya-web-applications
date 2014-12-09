@@ -25,6 +25,33 @@
  */
 namespace API
 {
+
+  /**
+   * 
+   * Replace intval with big intval function.
+   *
+   */
+  function bintval($value) {
+    $value = trim($value);
+
+    if(ctype_digit($value)) {
+      return $value;
+    }
+
+    $value = preg_replace("/[^0-9](.*)$/", '', $value);
+
+    if(ctype_digit($value)) {
+      return $value;
+    }
+
+    return 0;
+  }
+
+  /**
+   * 
+   *
+   *
+   */
   class component
   {
 
@@ -61,6 +88,10 @@ namespace API
       $this->friend       = $this->param('friend');
       $this->friends      = $this->param('friends');
       $this->message      = $this->param('message');
+      $this->receive      = $this->param('receive');
+      $this->params       = $this->param('params');
+      $this->participants = $this->param('participants');
+      $this->winner       = $this->param('winner');
 
       $this->key          = $this->param('key');
       $this->value        = $this->param('value');
@@ -226,19 +257,26 @@ namespace API
          *
          */
         case 'users.create':
+        if(!$this->uid) {
+          $this->uid = mysql_result(mysql_query("SELECT MAX(`id`) FROM `users`"), 0) + 1000;
+          $this->photo = 'photo'; // TODO: Give link to the photo.
+          $this->name = 'Guest';
+          $this->surname = $this->uid;
+        }
+
         return mysql_query("INSERT INTO `users` SET `uid` = '$this->uid', `platform` = '$this->platform', `secret` = '$this->secret', `application` = '$this->application', `name` = '$this->name', `surname` = '$this->surname', `photo` = '$this->photo', `language` = '$this->language', `ip` = '$this->ip', `time` = '$this->time', `join` = NOW()");
         break;
         case 'users.upgrade':
-        return mysql_query("UPDATE `users` SET `secret` = '$this->secret' WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
+        return mysql_query("UPDATE `users` SET `secret` = '$this->secret', `uid` = '$this->uid', `name` = '$this->name', `surname` = '$this->surname', `photo` = '$this->photo', `visit` = NOW() WHERE (`secret` = '$this->secret' OR `uid` = '$this->uid') AND `application` = '$this->application'");
         break;
         case 'users.update':
         return mysql_query("UPDATE `users` SET `visit` = NOW() WHERE `uid` = '$this->uid' AND `application` = '$this->application'");
         break;
         case 'users.user':
-        return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE `uid` = '$this->uid' AND `application` = '$this->application' LIMIT 1")) > 0;
+        return mysql_num_rows(mysql_query("SELECT * FROM `users` WHERE (`secret` = '$this->secret' OR `uid` = '$this->uid') AND `application` = '$this->application' LIMIT 1")) > 0;
         break;
         case 'users.using':
-        return mysql_query("INSERT INTO `visits` SET `uid` = '$this->uid', `application` = '$this->application'");
+        return mysql_query("INSERT INTO `visits` SET `uid` = '$this->uid', `application` = '$this->application', `platform` = '$this->platform'");
         break;
         case 'users.leaders.1':
         $data = Array();
@@ -283,7 +321,7 @@ namespace API
 
         foreach($uids as $uid)
         {
-          $uid = intval(trim($uid));
+          $uid = bintval(trim($uid));
           if($uid > 0) {
             $count++;
           }
@@ -297,9 +335,9 @@ namespace API
         {
           foreach($uids as $uid)
           {
-            $uid = intval(trim($uid));
+            $uid = bintval(trim($uid));
             if($uid > 0) {
-              $visit = mysql_result(mysql_query("SELECT UNIX_TIMESTAMP(`visit`) FROM `users` WHERE `uid` = '$uid' AND `application` = '$this->application'"), 0); // TODO: Need to test it.
+              $visit = mysql_result(mysql_query("SELECT UNIX_TIMESTAMP(`visit`) FROM `users` WHERE `uid` = '$uid' AND `application` = '$this->application'"), 0);
               if($visit) {
                 $data[] = array(
                   'uid' => $uid,
@@ -358,11 +396,11 @@ namespace API
         }
         break;
         case 'payments.visit.true':
-        mysql_query("UPDATE `payments` SET `success` = '1' WHERE `uid` = '$this->id' AND `application` = '$this->application' ORDER by `id` DESC LIMIT 1");
+        mysql_query("UPDATE `payments` SET `success` = '1' WHERE `uid` = '$this->id' AND `application` = '$this->application' AND `platform` = '$this->platform' ORDER by `id` DESC LIMIT 1");
         mysql_query("UPDATE `users` SET `purchases` = purchases + 1 WHERE `secret` = '$this->secret' LIMIT 1");
         break;
         case 'payments.visit.false':
-        mysql_query("INSERT INTO `payments` SET `uid` = '$this->id', `application` = '$this->application'");
+        mysql_query("INSERT INTO `payments` SET `uid` = '$this->id', `application` = '$this->application', `platform` = '$this->platform'");
         break;
 
         case 'promo.get':
@@ -427,7 +465,10 @@ namespace API
         }
         break;
         case 'level.stars':
-        return mysql_result(mysql_query("SELECT SUM(`stars`) FROM `levels` WHERE `uid` = '$this->id' AND `application` = '$this->application'"), 0);
+        $stars = mysql_result(mysql_query("SELECT SUM(`stars`) FROM `levels` WHERE `uid` = '$this->id' AND `application` = '$this->application'"), 0);
+
+        if($stars > 0) return $stars;
+        return 0;
         break;
         case 'proceed':
         $query = mysql_query("SELECT * FROM `games` WHERE `id` = '$this->application' LIMIT 1");
@@ -449,8 +490,11 @@ namespace API
 
         $minutes = $this->force ? (60 * 24) : 1;
 
-        $query1 = mysql_query("SELECT `users`.`uid`, `users`.`name`, `users`.`surname`, `users`.`photo`, UNIX_TIMESTAMP(`users`.`visit`) AS `online`, `requests`.`id`, UNIX_TIMESTAMP(`requests`.`time`) AS `time`, `requests`.`type`, `requests`.`showed`, `requests`.`received` FROM `users`, `requests` WHERE `requests`.`application` = '$this->application' AND `requests`.`uid2` = '$this->uid' AND `requests`.`received` = '0' AND `users`.`uid` = `requests`.`uid1` AND `requests`.`time` > DATE_SUB(NOW(), INTERVAL $minutes minute)");
-        $query2 = mysql_query("UPDATE `requests` SET `showed` = '1' WHERE `application` = '$this->application' AND `uid2` = '$this->uid'");
+        $query1 = mysql_query("SELECT `users`.`uid`, `users`.`name`, `users`.`surname`, `users`.`photo`, UNIX_TIMESTAMP(`users`.`visit`) AS `online`, `requests`.`id`, UNIX_TIMESTAMP(`requests`.`time`) AS `time`, `requests`.`type`, `requests`.`showed`, `requests`.`received` FROM `users`, `requests` WHERE `requests`.`application` = '$this->application' AND `requests`.`uid2` = '$this->uid' AND `requests`.`received` = '0' AND `users`.`uid` = `requests`.`uid1` AND `requests`.`time` > DATE_SUB(NOW(), INTERVAL $minutes minute) GROUP by `requests`.`id`");
+        if($this->receive)
+        {
+          mysql_query("UPDATE `requests` SET `showed` = '1' WHERE `application` = '$this->application' AND `uid2` = '$this->uid'");
+        }
 
         while(false !== ($result = mysql_fetch_assoc($query1)))
         {
@@ -459,6 +503,13 @@ namespace API
             if($result['showed'] == 1)
             {
               continue;
+            }
+          }
+          else
+          {
+            if($result['showed'] == 1)
+            {
+              $result['force'] = true;
             }
           }
 
@@ -476,6 +527,45 @@ namespace API
         }
 
         return false;
+        break;
+        case 'request.check':
+        $count = 0;
+        $data = array();
+
+        $uids = explode(',', $this->uids);
+
+        foreach($uids as $uid)
+        {
+          $uid = bintval(trim($uid));
+          if($uid > 0) {
+            $count++;
+          }
+        }
+
+        if($count < 0)
+        {
+          $this->controller->abort(5);
+        }
+        else
+        {
+          foreach($uids as $uid)
+          {
+            $uid = bintval(trim($uid));
+            if($uid > 0) {
+              $time = mysql_result(mysql_query("SELECT UNIX_TIMESTAMP(`time`) AS `time` FROM `requests` WHERE `uid1` = '$this->uid' AND `uid2` = '$uid' AND `type` = '$this->type'"), 0);
+
+              $data[] = array(
+                'uid' => $uid,
+                'time' => ($time > 0 ? $time : 0)
+              );
+            }
+          }
+        }
+
+        return $data;
+        break;
+        case 'buttles.send':
+        return mysql_query("INSERT INTO `buttles` SET `type` = '$this->type', `score` = '$this->score', `time` = '$this->time', `winner` = '$this->winner', `participants` = '$this->participants', `application` = '$this->application', `platform` = '$this->platform'");
         break;
       }
     }

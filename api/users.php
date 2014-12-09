@@ -43,23 +43,34 @@ namespace API
      */
     public function visit()
     {
-      $this->secret = $this->controller->secret(true);
+      if(!$this->secret || $this->secret === 0 || $this->secret === '0' || $this->secret === 'false') {
+        $this->secret = $this->controller->secret(true);
+      }
 
       $new = $this->user();
 
       if($new)
       {
         $this->upgrade();
+
+        $this->response('users', array(
+          'secret' => $this->secret
+        ));
       }
       else
       {
         $this->create();
-      }
 
-      $this->response('users', array(
-        'new' => !$new,
-        'secret' => $this->secret
-      ));
+        $this->response('users', array(
+          'secret' => $this->secret,
+          'info' => array(
+            'uid' => $this->uid,
+            'name' => $this->name,
+            'surname' => $this->surname,
+            'photo' => $this->photo
+          )
+        ));
+      }
     }
 
     /**
