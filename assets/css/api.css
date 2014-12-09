@@ -1,215 +1,24 @@
-b {
-  font-weight: 500;
-}
-img.preloader {
-  margin: 0 auto;
-  margin-top: 50px;
-  display: block;
-}
-header div.title {
-  float: left;
-}
-header div.status {
-  float: right;
-}
-header div.status h2 {
-  margin: 0;
-  padding: 0;
-  font-weight: 500;
-  letter-spacing: -2px;
-  padding-top: 5px;
-}
-header div.status h2.success {
-  color: #99ccb2;
-}
-header div.status h2.warning {
-  color: #FFC883;
-}
-header div.status h2.critical {
-  color: #d01040;
-}
-header a:hover {
-  text-decoration: none;
-}
-canvas {
-  margin-top: 10px;
-}
-h1.status {
-  margin: 0;
-  padding: 0;
-  font-weight: 500;
-  letter-spacing: -2px;
-  color: #000;
-}
-h1.status:active {
-  padding-top: 1px;
-}
-h1.status span {
-  font-weight: 400;
-  color: #72D3EB;
-}
-h1.status span sup {
-  font-size: 13px;
-  letter-spacing: 1px;
-}
-div.intro {
-  padding-bottom: 40px;
-}
-div.content {
-}
-div.content div.block {
-  padding-bottom: 40px;
-}
-div.content div.block div.title {
-  border-bottom: 1px solid #ccc;
-}
-div.content div.block div.title h3 {
-  margin-bottom: 5px;
-  color: #72D3EB;
-  font-weight: 500;
-}
-div.content div.block div.description {
-}
-div.content div.block div.description div.class {
-  padding-left: 20px;
-  padding-bottom: 20px;
-}
-div.content div.block div.description div.class p {
-  position: relative;
-  clear: both;
-  padding: 0;
-  margin: 0;
-}
-div.content div.block div.description div.class p a {
-}
-div.content div.block div.description div.class p i {
-  position: absolute;
-  left: 120px;
-  font-size: 13px;
-  color: #B9B9B9;
-}
-div.content div.block div.description div.class ul {
-  list-style: none;
-}
-div.content div.block div.description div.class ul li {
-  display: inline-block;
-  padding-right: 20px;
-  vertical-align: top;
-}
-div.content div.block div.description div.class div.title {
-  border: none;
-  padding-bottom: 10px;
-}
-div.content div.block div.description div.class div.title span {
-  color: #72D3EB;
-  text-decoration: underline;
-}
-div.content div.block div.description div.class div.title i {
-  font-size: 13px;
-  color: #B9B9B9;
-}
-div.content div.block div.description div.class div.description {
-  background-color: #eed;
-  border: 1px #ccc solid;
-  padding: 5px;
-}
-span.uptime {
-  font-size: 20px;
-}
-span.uptime.success {
-  color: #72D3EB;
-}
-span.uptime.warning {
-  color: #FFC883;
-}
-span.uptime.critical {
-  color: #d01040;
-}
-div.header {
-  margin-bottom: 10px;
-}
-div.header ul.links {
-  list-style-type: none;
-  list-style-image: none;
-  text-align: left;
-}
-div.header div.links {
-  display: block;
-  margin: 0 auto;
-}
-div.header ul.links li {
-  display: inline-block;
-  padding: 0 5px;
-}
-ul.links li:first-child {
-  padding-left: 0 !important;
-}
-ul.links li.tip ul {
-  display: none;
-  position: absolute;
-  background-color: #FFF;
-  border: 1px #ccc solid;
-  padding: 4px;
-}
-ul.links li.tip ul li {
-  display: block;
-  padding-left: 0 !important;
-}
-ul.links li.tip:hover > ul {
-  display: block;
-}
-footer ul.links li.tip ul {
-  top: -100px;
-  min-height: 100px;
-}
-ul.links li.update a {
-  color: #72D3EB;
-}
-.error .update {
-  color: #72D3EB;
-}
-.error p {
-  color: #d01040;
-  font-weight: 500;
-  padding: 0px;
-  margin: 0;
-}
-pre {
-  font-family: 'Consolas';
-  font-size: 12px;
-  line-height: 12px;
-}
-div.example {
-  display: none;
-}
-
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
-and (max-device-width : 1024px) {
-  body {
-    max-width: 100%;
-    min-width: 100px;
-    overflow-x: hidden;
-  }
-  header, footer div.footer, footer div.links {
-    padding: 0 15px;
-  }
-  section.content {
-    padding: 0 15px;
-    padding-top: 40px;
-  }
-  p {
-    text-align: justify;
-  }
-  div.content, section.content {
-    width: auto;
-    margin: 0 auto;
-  }
-  div.copyright {
-    font-size: 12px;
-  }
-  template {
-    display: none !important;
-  }
-}
+.header{color:#72D3EB;}
+nav{background-color:#72D3EB;}
+nav .brand-logo{letter-spacing:-2px;}nav .brand-logo sup{font-size:0.7em;top:-0.8em;}
+ul.table-of-contents a.active{border-left: 2px solid #72D3EB;}
+ul.tabs li.tab a{color:#72D3EB;}ul.tabs li.tab a:hover{color:#A8EAFA;}
+ul.tabs .indicator{background-color:#72D3EB;}
+.promo i{color:#72D3EB;}
+.get-started-button{background-color:#72D3EB;width:200px;height:70px;line-height:70px;font-size:18px;font-weight:400;}.get-started-button:hover{background-color:#A8EAFA;}
+footer a, p.text a{color:#72D3EB;}footer a:hover, p.text a:hover{color:#A8EAFA;}
+div.card.type div.card-image{height:100px;}
+div.card.type div.card-image span.card-title{font-weight:500;}
+div.card.type.type1 div.card-image{background-color:#72D3EB;}
+div.card.type.type2 div.card-image{background-color:#aa00ff;}
+div.card.type.type3 div.card-image{background-color:#26a69a;}
+div.card.type.type4 div.card-image{background-color:#03a9f4;}
+div.card.type.type5 div.card-image{background-color:#ffa000;}
+div.card.type.type6 div.card-image{background-color:#e65100;}
+div.card.type.type7 div.card-image{background-color:#006064;}
+div.card.type.type8 div.card-image{background-color:#e3f2fd;}
+div.card.type.type9 div.card-image{background-color:#f50057;}
+div.card.type.type10 div.card-image{background-color:#004d40;}
+div.card.type.type11 div.card-image{background-color:#e0e0e0;}
+div.card.type.type div.card-action a{color:#72D3EB;text-transform: none;}div.card.type.type1 div.card-action a:hover{color:#A8EAFA;}
+#api-documentation h2{font-size:1.7rem;font-weight:500;color:#333;margin:5px 0;}

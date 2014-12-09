@@ -277,7 +277,7 @@ class ApiController extends BaseController
   {
     mysql_select_db('api.tooflya.com');
 
-    $this->statistics = [];
+    $this->statistics = Array();
     for($i = 6; $i >= 0; $i--) {
       $this->assignGroupStatistic(false, $i);
       $this->assignGroupStatistic('storage', $i);

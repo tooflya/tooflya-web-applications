@@ -3,24 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>Tooflya API</title>
-    <meta name="viewport" id="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=no" id="viewport" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Tooflya Inc. - {l s='a unique combination of knowledge, experience and skills required for a successful IT business'}.">
     <meta name="keywords" content="Tooflya, tooflya, games, android, Android OS, free games, mobile, buy game, new games.">
     <meta name="author" content="Tooflya Inc.">
 
-    <link href="{$url}/assets/css/style.css" rel="stylesheet">
-    <link href="{$url}/assets/css/prism.css" rel="stylesheet">
+    <link href="{$url}/assets/css/style.css" rel="stylesheet" media="screen, projection">
     <link href="{$url}/assets/css/api.css" rel="stylesheet">
-
-    <script src="{$url}/assets/js/jquery.js"></script>
-    <script src="{$url}/assets/js/library.js"></script>
-    <script src="{$url}/assets/js/api.js"></script>
-    <script src="{$url}/assets/js/chart.js"></script>
-    <script src="{$url}/assets/js/prism.js"></script>
-
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <link href="{$url}/assets/css/prism.css" rel="stylesheet">
 
     <link rel="shortcut icon" href="{$url}/assets/ico/api.favicon.png">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
@@ -38,20 +28,28 @@
     }(document));
     </script>
   </head>
-  <body>
-  <div id="body">
-    <header>
+  <body data-twttr-rendered="true">
+    <div class="body">
       <div class="content">
-        <div class="title">
-          <a href="//api.tooflya.com">
-            <h1 class="status">Tooflya<span>API <sup>Beta</sup></span></h1>
-          </a>
+        <nav id="">
+          <div class="container">
+            <div class="nav-wrapper">
+              <a href="{$url}" class="brand-logo">Tooflya API <sup>Beta</sup></a>
+              <ul id="nav-mobile" class="right side-nav">
+              </ul>
+              <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </div>
+          </div>
+        </nav>
+        <div class="tabs-wrapper">
+          <div class="row white z-depth-1">
+            <div class="container">
+              <ul class="tabs">
+                <li class="tab"><a href="#api-introducing">Introducing</a></li>
+                <li class="tab"><a href="#api-documentation">Documentation</a></li>
+                <li class="tab"><a href="#api-examples">Examples</a></li>
+                <li class="tab"><a href="#api-usage">Usage</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="status">
-          <!--<h2 class="critical">Critical Problems right now</h2>-->
-          <!--<h2 class="warning">Few Warnings right now</h2>-->
-          <h2 class="success">All systems operational</h2>
-        </div>
-        <div class="clearfix"></div>
-      </div>
-    </header>

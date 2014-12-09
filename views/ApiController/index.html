@@ -1,1366 +1,616 @@
 {include file="ApiController/include/header.html"}
-<section class="content">
-  <div class="header">
-  {include file="ApiController/include/links.html"}
-  </div>
-  <div class="intro">
-    <p>
-      {l s='This API methods are used in games and applications of'}
-      <a href="//services.tooflya.com">Tooflya Network</a>.
-      {l s='On this page we have compiled documentation on all methods, statistics and use theirs system status.'}
-      {l s='If you have any questions feel free to write to the '} <a href="mailto:support@tooflya.com">support@tooflya.com</a>.
-    </p>
-  </div>
-  <div class="content">
-    <div>
-      <p>Total API calls count: <b>{$statistics.callsCount} by last week</b></p>
-    </div>
-    <div>
-      <canvas id="api-calls" width="960" height="150"></canvas>
-    </div>
-    <div class="examples">
-      <p><b>Show examples at:</b> <a><b>javascript</b></a> <!--<a>cpp</a></p>-->
-    </div>
-    <div class="block" id="documentation">
-      <div class="title">
-        <h3>Documentation</h3>
+<div class="container" id="api-introducing">
+  <div class="section">
+    <div class="row">
+      <div class="col s12 m4">
+        <div class="center promo">
+          <i class="mdi-image-flash-on"></i>
+          <p class="promo-caption">Speeds up development</p>
+          <p class="light center">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
+        </div>
       </div>
-      <div class="description">
-        <div class="class">
-          <div class="title"><span>Storage</span> <i>is a tool which implements the repository of key - value storage.</i></div>
-          <p>
-            <a class="show-example" data-call="storage-get"><b>storage.get</b></a> <i>Method returns the value of the specified key.</i>
-            <div id="storage-get" class="example description">
-              <p><b>Example 1</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.get',
-{
-  key: 'bananas',
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(value) {
-    console.log(value);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Example 2</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.get',
-{
-  keys: ['bananas', 'apples', 'coconuts'],
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(storage) {
-    console.log(storage);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Example 3</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.get',
-{
-  uid: 1083,
-  key: 'bananas',
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(value) {
-    console.log(value);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Example 4</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.get',
-{
-  uid: 1083,
-  keys: ['bananas', 'apples', 'coconuts'],
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(value) {
-    console.log(value);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Example 5</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.get',
-{
-  uids: [1083, 4676],
-  key: 'bananas',
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(storage) {
-    console.log(storage);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Example 6</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.get',
-{
-  uids: [1083, 4676],
-  keys: ['bananas', 'apples', 'coconuts'],
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(storage) {
-    console.log(storage);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    value: 10
-  }
-}
-                  </code>
-                </pre>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    storage: [10, 2, 75]
-  }
-}
-                  </code>
-                </pre>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: [
-    {
-      uid: 1083,
-      storage: [10, 2, 75]
-    }
-  ]
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="storage-set"><b>storage.set</b></a>
-            <i>Method stores the value for the specified key.</i>
-            <div id="storage-set" class="example description">
-              <p><b>Example 1</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.set',
-{
-  key: 'bananas',
-  value: 10,
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(value) {
-    console.log(value);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Example 2</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.set',
-{
-  keys: ['bananas', 'apples', 'coconuts'],
-  values: [10, 2, 75],
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(values) {
-    console.log(values);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    value: 10
-  }
-}
-                  </code>
-                </pre>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    values: [10, 2, 75]
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p><a class="show-example" data-call="storage-view"><b>storage.view</b></a>
-          <i>Method returns names and values of all stored keys.</i>
-            <div id="storage-view" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('storage.view',
-{
-  secret:'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(storage) {
-    console.log(storage);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    storage: [
-      {
-        key: 'day', value: '500'
-      },
-      {
-        key: 'week', value: '760'
-      },
-      {
-        key: 'year', value: '12 010'
-      },
-      {
-        key: 'bananas', value: '10'
-      },
-      {
-        key: 'apples', value: '2'
-      },
-      {
-        key: 'coconuts', value: '75'
-      }
-    ]
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <div>
-            <p>&nbsp;</p>
-            <p>Total Storage tool API calls count: <b>{$statistics.storageCount} by last week</b></p>
-          </div>
-          <div>
-            <canvas id="storage-api-calls" width="960" height="150"></canvas>
-          </div>
-        </div>
-        <div class="class">
-          <div class="title"><span>Users</span> <i>a set of methods which allow to identify the user and to sync personal data.</i></div>
-          <p>
-            <a class="show-example" data-call="users-visit"><b>users.visit</b></a> <i>Method is designed to sync user data and identify user on primary actions (game start, for example).</i>
-            <div id="users-visit" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('users.visit',
-{
-  uid: 12807,
-  name: 'Alex',
-  surname: 'Smith',
-  photo: 'http://www.example.com/photo.png',
-  language: 1,
-  time: -2,
-  application: 7,
-  platform: 1
-},
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    new: true,
-    storage: [
-      {
-        key: 'day', value: '500'
-      },
-      {
-        key: 'week', value: '760'
-      },
-      {
-        key: 'year', value: '12 010'
-      },
-      {
-        key: 'bananas', value: '10'
-      },
-      {
-        key: 'apples', value: '2'
-      },
-      {
-        key: 'coconuts', value: '75'
-      }
-    ],
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="users-leaders"><b>users.leaders</b></a> <i>Method is designed to .</i>
-            <div id="users-leaders" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('users.leaders',
-{
-  limit: 100,
-  type: 1,
-  level: 1
-},
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    users: [
-      {
-        name: 'Alex',
-        surname: 'Smith',
-        photo: 'http://www.example.com/photo.png',
-        rating: 55
-      }
-    ],
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="users-online"><b>users.online</b></a> <i>Method is designed to get user online status.</i>
-            <div id="users-online" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('users.online',
-{
-  uids: [23543],
-},
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    uids: [
-      {
-        uid: 23543,
-        online: false
-      }
-    ],
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <div>
-            <p>&nbsp;</p>
-            <p>Total Users tool API calls count: <b>{$statistics.usersCount} by last week</b></p>
-          </div>
-          <div>
-            <canvas id="users-api-calls" width="960" height="150"></canvas>
-          </div>
-        </div>
-        <div class="class">
-          <div class="title"><span>Payments</span> <i>?</i></div>
-          <p>
-            <a class="show-example" data-call="payments-show"><b>payments.show</b></a> <i>Method is designed to show payment box.</i>
-            <div id="payments-show" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('payments.show',
-{
-  item: params.id,
-  code: 1
-},
-{
-  cancel: function() {
-  },
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    layout: '%html_layout',
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="payments-visit"><b>payments.visit</b></a> <i>Method is designed to remember proposal to buy some virtual good.</i>
-            <div id="payments-visit" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('payments.visit', false,
-{
-  success: function() {
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <div>
-            <p>&nbsp;</p>
-            <p>Total Payments tool API calls count: <b>{$statistics.paymentsCount} by last week</b></p>
-          </div>
-          <div>
-            <canvas id="payments-api-calls" width="960" height="150"></canvas>
-          </div>
-        </div>
-        <div class="class">
-          <div class="title"><span>Promo</span> <i>a set of methods which allow to use a free promo codes for the buying some virtual goods.</i></div>
-          <p>
-            <a class="show-example" data-call="promo-get"><b>promo.get</b></a> <i>Method is designed for checking availablity of some promo code.</i>
-            <div id="promo-get" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('promo.get',
-{
-  purchase: 0,
-  promo: '?'
-},
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <div>
-            <p>&nbsp;</p>
-            <p>Total Promo tool API calls count: <b>{$statistics.promoCount} by last week</b></p>
-          </div>
-          <div>
-            <canvas id="promo-api-calls" width="960" height="150"></canvas>
-          </div>
-        </div>
-        <div class="class">
-          <div class="title"><span>Level</span> <i>a set of methods which allow check and set current level of user.</i></div>
-          <p>
-            <a class="show-example" data-call="level-get"><b>level.get</b></a> <i>Method is designed for getting current level of user.</i>
-            <div id="level-get" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('level.get', false,
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    level: 17,
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="level-set"><b>level.set</b></a> <i>Method is designed for setting current level of user.</i>
-            <div id="level-set" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('level.set',
-{
-  level: 17,
 
-  /** An optional parameter for disable smart updater. If you set force to true level will be overridden even if it smaller than current. **/
-  force: true
-},
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secure: {
-      response: 1
-    },
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="level-update"><b>level.update</b></a> <i>Method is designed for setting score and stars of specific level.</i>
-            <div id="level-update" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('level.update',
-{
-  level: 17,
-  stars: 3,
-  score: 17710
-},
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="level-stars"><b>level.stars</b></a> <i>Method is designed for getting a total count of stars getting by user.</i>
-            <div id="level-stars" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('level.stars', false,
-{
-  success: function(data) {
-    console.log(data);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    count: 93,
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <div>
-            <p>&nbsp;</p>
-            <p>Total Level tool API calls count: <b>{$statistics.levelCount} by last week</b></p>
-          </div>
-          <div>
-            <canvas id="level-api-calls" width="960" height="150"></canvas>
-          </div>
-        </div>
-        <div class="class">
-          <div class="title"><span>Score</span> <i>tool for the storing values of the game scores.</i></div>
-          <p>
-            <a class="show-example" data-call="score-set"><b>score.set</b></a>
-            <i>Method for store the value of the player score.</i>
-            <div id="score-set" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('score.set',
-{
-  data: {
-    day: 500,
-    week 760,
-    year: 12 010
-  },
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <div>
-            <p>&nbsp;</p>
-            <p>Total Score tool API calls count: <b>{$statistics.scoreCount} by last week</b></p>
-          </div>
-          <div>
-            <canvas id="score-api-calls" width="960" height="150"></canvas>
-          </div>
-        </div>
-        <div class="class">
-          <div class="title"><span>Coins</span> <i>tool for the storing values of the game coins.</i></div>
-          <p>
-            <a class="show-example" data-call="coins-set"><b>coins.set</b></a>
-            <i>Method for store the value of the player coins count.</i>
-            <div id="coins-set" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('coins.set',
-{
-  data: {
-    gold: 12,
-    silver: 412
-  },
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </p>
-        </div>
-        <div>
-          <p>&nbsp;</p>
-          <p>Total Coins tool API calls count: <b>{$statistics.coinsCount} by last week</b></p>
-        </div>
-        <div>
-          <canvas id="coins-api-calls" width="960" height="150"></canvas>
+      <div class="col s12 m4">
+        <div class="center promo">
+          <i class="mdi-social-group"></i>
+          <p class="promo-caption">User Experience Focused</p>
+          <p class="light center">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
         </div>
       </div>
-        <div class="class">
-          <div class="title"><span>Energy</span> <i>tool for .</i></div>
-          <p>
-            <a class="show-example" data-call="energy-get"><b>energy.get</b></a>
-            <i>Method for</i>
-            <div id="energy-get" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('energy.get',
-{
-  data: {
-    key: 15,
-    friends: [1083, 105567, 10998]
-  },
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    friends: {
-      [
-        {
-          uid: 12807,
-          name: 'Alex',
-          surname: 'Smith',
-          photo: 'http://www.example.com/photo.png',
-          energy: 4
-        },
-        {
-          uid: 12808,
-          name: 'Alex',
-          surname: 'Smith',
-          photo: 'http://www.example.com/photo.png',
-          energy: 0
-        }
-      ]
-    },
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-        <div>
-          <p>&nbsp;</p>
-          <p>Total Energy tool API calls count: <b>{$statistics.energyCount} by last week</b></p>
+
+      <div class="col s12 m4">
+        <div class="center promo">
+          <i class="mdi-action-settings"></i>
+          <p class="promo-caption">Easy to work with</p>
+          <p class="light center">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
         </div>
-        <div>
-          <canvas id="energy-api-calls" width="960" height="150"></canvas>
-        </div>
-      </div>
-        <div class="class">
-          <div class="title"><span>Notifications</span> <i>tool for .</i></div>
-          <p>
-            <a class="show-example" data-call="notifications-send"><b>notifications.send</b></a>
-            <i>Method for</i>
-            <div id="notifications-send" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('notifications.send',
-{
-  data: {
-    message: 15,
-    uids: [1083, 105567, 10998]
-  },
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secure: {
-      response: 1
-    },
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-        <div>
-          <p>&nbsp;</p>
-          <p>Total Notifications tool API calls count: <b>{$statistics.notificationsCount} by last week</b></p>
-        </div>
-        <div>
-          <canvas id="notifications-api-calls" width="960" height="150"></canvas>
-        </div>
-      </div>
-        <div class="class">
-          <div class="title"><span>Request</span> <i>tool for .</i></div>
-          <p>
-            <a class="show-example" data-call="request-send"><b>request.send</b></a>
-            <i>Method for</i>
-            <div id="request-send" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('request.send',
-{
-  data: {
-    type: 'lives.send',
-    uid: 1083
-  },
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-          <p>
-            <a class="show-example" data-call="request-find"><b>request.find</b></a>
-            <i>Method for find some requests for the current users.</i>
-            <div id="request-find" class="example description">
-              <p><b>Example</b></p>
-              <div class="javascript">
-                <pre>
-                  <code class="language-javascript">
-Tooflya.api.call('request.find',
-{
-  secret: 'ycLPvVOrTf9bimrGjZRg'
-},
-{
-  success: function(e) {
-    console.log(e);
-  },
-  error: function(e) {
-    console.log(e);
-  }
-});
-                  </code>
-                </pre>
-              </div>
-              <p><b>Response</b></p>
-              <div>
-                <small><b>Error</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: %error_code,
-  data: {
-    reason: 'Error reason.'
-  }
-}
-                  </code>
-                </pre>
-                <small><b>Success</b></small>
-                <pre>
-                  <code class="language-javascript">
-{
-  response: 1,
-  data: {
-    requests: [
-      {
-        type: 'lives.send',
-        uid: 1083
-      }
-    ],
-    secret: 'ycLPvVOrTf9bimrGjZRg'
-  }
-}
-                  </code>
-                </pre>
-              </div>
-            </div>
-          </p>
-        <div>
-          <p>&nbsp;</p>
-          <p>Total Request tool API calls count: <b>{$statistics.requestCount} by last week</b></p>
-        </div>
-        <div>
-          <canvas id="request-api-calls" width="960" height="150"></canvas>
-        </div>
-      </div>
-    </div>
-    <div class="block" id="examples">
-      <div class="title">
-        <h3>Examples</h3>
-      </div>
-      <div>
       </div>
     </div>
   </div>
-</section>
+  <div class="section">
+    <div class="row center">
+      <p class="text light center">
+        This API methods are used in games and applications of <a href="//network.tooflya.com">Tooflya Network</a>.
+        On this page we have compiled documentation on all methods, statistics and use theirs system status. If you have any questions feel free to write to the <a href="mailto:support@tooflya.com">support@tooflya.com</a>.
+      </p>
+      <p>
+        <a href="#api-documentation" class="btn-large waves-effect waves-light get-started-button">{l s='Get Started'}</a>
+      </p>
+    </div>
+  </div>
+</div>
+<div class="container" id="api-documentation">
+  <div class="row">
+    <div class="col hide-on-small-only m3 l2">
+      <div style="height: 1px;">
+        <ul class="section table-of-contents" data-origpos="64" data-origmargin="1.5rem" style="top: 48px; margin-top: 1.5rem;">
+          <li><a href="#api-documentation-group-users" class="active">users</a></li>
+          <li><a href="#api-documentation-group-storage">storage</a></li>
+          <li><a href="#api-documentation-group-payments">payments</a></li>
+          <li><a href="#api-documentation-group-promo">promo</a></li>
+          <li><a href="#api-documentation-group-level">level</a></li>
+          <li><a href="#api-documentation-group-score">score</a></li>
+          <li><a href="#api-documentation-group-coins">coins</a></li>
+          <li><a href="#api-documentation-group-energy">energy</a></li>
+          <li><a href="#api-documentation-group-notifications">notifications</a></li>
+          <li><a href="#api-documentation-group-request">request</a></li>
+          <li><a href="#api-documentation-group-buttles">buttles</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col s12 m9 l10">
+      <div class="section row scrollspy" id="api-documentation-group-users">
+        <h2 class="header">Users</h2>
+        <p class="caption">This is a set of methods which allow to identify the user and to sync personal data.</p>
+
+        <div class="col s12 m6">
+          <div class="card type type1">
+            <div class="card-image">
+              <span class="card-title">users.visit</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed to sync user data and identify user on primary actions (game start, for example).</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type1">
+            <div class="card-image">
+              <span class="card-title">users.leaders</span>
+            </div>  
+            <div class="card-content">
+              <p><i>No description.</i></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type1">
+            <div class="card-image">
+              <span class="card-title">users.online</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed to get user online status.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-storage">
+        <h2 class="header">Storage</h2>
+        <p class="caption">This is a a tool which implements the repository of key - value storage.</p>
+
+        <div class="col s12 m6">
+          <div class="card type type2">
+            <div class="card-image">
+              <span class="card-title">storage.get</span>
+            </div>  
+            <div class="card-content">
+              <p>Method returns the value of the specified key.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type2">
+            <div class="card-image">
+              <span class="card-title">storage.set</span>
+            </div>  
+            <div class="card-content">
+              <p>Method stores the value for the specified key.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type2">
+            <div class="card-image">
+              <span class="card-title">storage.view</span>
+            </div>  
+            <div class="card-content">
+              <p>Method returns names and values of all stored keys.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-payments">
+        <h2 class="header">Payments</h2>
+        <p class="caption"><i>No description.</i></p>
+
+        <div class="col s12 m6">
+          <div class="card type type3">
+            <div class="card-image">
+              <span class="card-title">payments.show</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed to show payment box.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type3">
+            <div class="card-image">
+              <span class="card-title">payments.visit</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed to remember proposal to buy some virtual good.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-promo">
+        <h2 class="header">Promo</h2>
+        <p class="caption">This is a set of methods which allow to use a free promo codes for the buying some virtual goods.</p>
+
+        <div class="col s12 m6">
+          <div class="card type type4">
+            <div class="card-image">
+              <span class="card-title">promo.get</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed for checking availablity of some promo code.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-level">
+        <h2 class="header">Level</h2>
+        <p class="caption">This is a set of methods which allow check and set current level of user.</p>
+
+        <div class="col s12 m6">
+          <div class="card type type5">
+            <div class="card-image">
+              <span class="card-title">level.get</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed for getting current level of user.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type5">
+            <div class="card-image">
+              <span class="card-title">level.set</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed for setting current level of user.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type5">
+            <div class="card-image">
+              <span class="card-title">level.update</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed for setting score and stars of specific level.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card type type5">
+            <div class="card-image">
+              <span class="card-title">level.stars</span>
+            </div>  
+            <div class="card-content">
+              <p>Method is designed for getting a total count of stars getting by user.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-score">
+        <h2 class="header">Score</h2>
+        <p class="caption">This is a tool for the storing values of the game scores</p>
+
+        <div class="col s12 m6">
+          <div class="card type type6">
+            <div class="card-image">
+              <span class="card-title">score.set</span>
+            </div>  
+            <div class="card-content">
+              <p>Method for store the value of the player score.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-coins">
+        <h2 class="header">Coins</h2>
+        <p class="caption">This is a tool for the storing values of the game coins.</p>
+
+        <div class="col s12 m6">
+          <div class="card type type7">
+            <div class="card-image">
+              <span class="card-title">coins.set</span>
+            </div>  
+            <div class="card-content">
+              <p>Method for store the value of the player coins count.</p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-energy">
+        <h2 class="header">Energy</h2>
+        <p class="caption"><i>No description.</i></p>
+
+        <div class="col s12 m6">
+          <div class="card type type8">
+            <div class="card-image">
+              <span class="card-title">energy.get</span>
+            </div>  
+            <div class="card-content">
+              <p><i>No description.</i></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-notifications">
+        <h2 class="header">Notifications</h2>
+        <p class="caption"><i>No description.</i></p>
+
+        <div class="col s12 m6">
+          <div class="card type type9">
+            <div class="card-image">
+              <span class="card-title">notifications.send</span>
+            </div>  
+            <div class="card-content">
+              <p><i>No description.</i></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-request">
+        <h2 class="header">Request</h2>
+        <p class="caption"><i>No description.</i></p>
+
+        <div class="col s12 m6">
+          <div class="card type type10">
+            <div class="card-image">
+              <span class="card-title">request.send</span>
+            </div>  
+            <div class="card-content">
+              <p><i>No description.</i></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section row scrollspy" id="api-documentation-group-buttles">
+        <h2 class="header">Buttles</h2>
+        <p class="caption"><i>No description.</i></p>
+
+        <div class="col s12 m6">
+          <div class="card type type11">
+            <div class="card-image">
+              <span class="card-title">buttles.send</span>
+            </div>  
+            <div class="card-content">
+              <p><i>No description.</i></p>
+            </div>
+            <div class="card-action">
+              <a href="#">Examples</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" id="api-examples">
+</div>
+<div class="container" id="api-usage">
+  <div class="row">
+    <div class="col hide-on-small-only m3 l2">
+      <div style="height: 1px;">
+        <ul class="section table-of-contents" data-origpos="64" data-origmargin="1.5rem" style="top: 48px; margin-top: 1.5rem;">
+          <li><a href="#api-usage-group-users" class="active">users</a></li>
+          <li><a href="#api-usage-group-storage">storage</a></li>
+          <li><a href="#api-usage-group-payments">payments</a></li>
+          <li><a href="#api-usage-group-promo">promo</a></li>
+          <li><a href="#api-usage-group-level">level</a></li>
+          <li><a href="#api-usage-group-score">score</a></li>
+          <li><a href="#api-usage-group-coins">coins</a></li>
+          <li><a href="#api-usage-group-energy">energy</a></li>
+          <li><a href="#api-usage-group-notifications">notifications</a></li>
+          <li><a href="#api-usage-group-request">request</a></li>
+          <li><a href="#api-usage-group-buttles">buttles</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col s12 m9 l10">
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-users">
+          <div class="col s12 m12 l12">
+            <div class="card type type1">
+              <div class="card-image">
+                <span class="card-title">users</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-users"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-storage">
+          <div class="col s12 m12 l12">
+            <div class="card type type2">
+              <div class="card-image">
+                <span class="card-title">storage</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-storage"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-payments">
+          <div class="col s12 m12 l12">
+            <div class="card type type3">
+              <div class="card-image">
+                <span class="card-title">payments</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-payments"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-promo">
+          <div class="col s12 m12 l12">
+            <div class="card type type4">
+              <div class="card-image">
+                <span class="card-title">promo</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-promo"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-level">
+          <div class="col s12 m12 l12">
+            <div class="card type type5">
+              <div class="card-image">
+                <span class="card-title">level</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-level"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-score">
+          <div class="col s12 m12 l12">
+            <div class="card type type6">
+              <div class="card-image">
+                <span class="card-title">score</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-score"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-coins">
+          <div class="col s12 m12 l12">
+            <div class="card type type7">
+              <div class="card-image">
+                <span class="card-title">coins</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-coins"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-energy">
+          <div class="col s12 m12 l12">
+            <div class="card type type8">
+              <div class="card-image">
+                <span class="card-title">energy</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-energy"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-notifications">
+          <div class="col s12 m12 l12">
+            <div class="card type type9">
+              <div class="card-image">
+                <span class="card-title">notifications</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-notifications"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-request">
+          <div class="col s12 m12 l12">
+            <div class="card type type10">
+              <div class="card-image">
+                <span class="card-title">request</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-request"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col s12 m9 l10">
+        <div class="section row scrollspy" id="api-usage-group-buttles">
+          <div class="col s12 m12 l12">
+            <div class="card type type11">
+              <div class="card-image">
+                <span class="card-title">buttles</span>
+              </div>  
+              <div class="card-content">
+                <canvas id="usage-group-buttles"></canvas>
+              </div>
+              <div class="card-action">
+                <a href="#">Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{$url}/assets/js/chart.js"></script>
 <script>
-var structure = {
-  clear: function() {
-    this.labels = [];
-    this.data = [];
-  },
-  labels: [],
-  data: []
-};
-function dataset(data, label) {
+{literal}
+function struct(data, label) {
   return [{
     label: label,
     fillColor: "rgba(174, 218, 235, 0.5)",
@@ -1372,109 +622,47 @@ function dataset(data, label) {
     data: data
   }];
 };
+var structure = function() {
+  this.keys = [];
+  this.values = [];
+};
 var options = {
-  scaleGridLineColor: "rgba(204, 204, 204, 1)",
   responsive: true,
+  scaleGridLineColor: "rgba(204, 204, 204, 0.3)",
   tooltipTemplate: "<%= datasetLabel %>: <%= value %>",
   multiTooltipTemplate: "<%= datasetLabel %>: <%= value %>"
 };
-{foreach from=$statistics.calls item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Total API calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.storage item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("storage-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Storage tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.users item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("users-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Users tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.payments item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("payments-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Payments tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.promo item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("promo-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Payments tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.level item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("level-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Payments tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.score item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("score-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Score tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.coins item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("coins-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Coins tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.energy item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("energy-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Energy tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.notifications item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("notifications-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Notifications tool calls count')
-}, options);
-structure.clear();
-{foreach from=$statistics.request item=value}
-structure.labels.push('{$value.time|date_format:"%d %B"}');
-structure.data.push('{$value.count}');
-{/foreach}
-new Chart(document.getElementById("request-api-calls").getContext("2d")).Line({
-  labels: structure.labels,
-  datasets: dataset(structure.data, 'Request tool calls count')
-}, options);
+var groups = [
+  {key: 'users', data: new structure()},
+  {key: 'storage', data: new structure()},
+  {key: 'payments', data: new structure()},
+  {key: 'promo', data: new structure()},
+  {key: 'level', data: new structure()},
+  {key: 'score', data: new structure()},
+  {key: 'coins', data: new structure()},
+  {key: 'energy', data: new structure()},
+  {key: 'notifications', data: new structure()},
+  {key: 'request', data: new structure()},
+  {key: 'buttles', data: new structure()}
+];
+{/literal}
+{foreach from=$statistics.users item=value}groups[0].data.keys.push('{$value.time|date_format:"%d %B"}');groups[0].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.storage item=value}groups[1].data.keys.push('{$value.time|date_format:"%d %B"}');groups[1].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.payments item=value}groups[2].data.keys.push('{$value.time|date_format:"%d %B"}');groups[2].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.promo item=value}groups[3].data.keys.push('{$value.time|date_format:"%d %B"}');groups[3].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.level item=value}groups[4].data.keys.push('{$value.time|date_format:"%d %B"}');groups[4].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.score item=value}groups[5].data.keys.push('{$value.time|date_format:"%d %B"}');groups[5].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.coins item=value}groups[6].data.keys.push('{$value.time|date_format:"%d %B"}');groups[6].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.energy item=value}groups[7].data.keys.push('{$value.time|date_format:"%d %B"}');groups[7].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.notifications item=value}groups[8].data.keys.push('{$value.time|date_format:"%d %B"}');groups[8].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.request item=value}groups[9].data.keys.push('{$value.time|date_format:"%d %B"}');groups[9].data.values.push('{$value.count}');{/foreach}
+{foreach from=$statistics.buttles item=value}groups[10].data.keys.push('{$value.time|date_format:"%d %B"}');groups[10].data.values.push('{$value.count}');{/foreach}
+
+groups.forEach(function(group) {
+  new Chart(document.getElementById("usage-group-" + group.key).getContext("2d")).Line({
+    labels: group.data.keys,
+    datasets: struct(group.data.values, '')
+  }, options);
+});
 </script>
 {include file="ApiController/include/footer.html"}
