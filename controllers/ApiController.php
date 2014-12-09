@@ -31,6 +31,7 @@ require(PATH.'/api/level.php');
 require(PATH.'/api/energy.php');
 require(PATH.'/api/notifications.php');
 require(PATH.'/api/request.php');
+require(PATH.'/api/buttles.php');
 
 /**
  * Response codes:
@@ -145,6 +146,12 @@ class ApiController extends BaseController
       break;
       case 'request.find':
       $this->request()->find();
+      break;
+      case 'request.check':
+      $this->request()->check();
+      break;
+      case 'buttles.send':
+      $this->buttles()->send();
       break;
     }
   }
@@ -290,6 +297,7 @@ class ApiController extends BaseController
       $this->assignGroupStatistic('energy', $i);
       $this->assignGroupStatistic('notifications', $i);
       $this->assignGroupStatistic('request', $i);
+      $this->assignGroupStatistic('buttles', $i);
     }
 
     $this->templates->assign('statistics', $this->statistics);
@@ -325,6 +333,7 @@ class ApiController extends BaseController
   public function energy() {return new API\energy($this);}
   public function notifications() {return new API\notifications($this);}
   public function request() {return new API\request($this);}
+  public function buttles() {return new API\buttles($this);}
 }
 
 /**

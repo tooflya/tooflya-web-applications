@@ -1341,6 +1341,79 @@ Tooflya.api.call('request.find',
           <canvas id="request-api-calls" width="960" height="150"></canvas>
         </div>
       </div>
+
+
+
+
+        <div class="class">
+          <div class="title"><span>Buttles</span> <i>tool for .</i></div>
+          <p>
+            <a class="show-example" data-call="buttles-send"><b>buttles.send</b></a>
+            <i>Method for</i>
+            <div id="buttles-send" class="example description">
+              <p><b>Example</b></p>
+              <div class="javascript">
+                <pre>
+                  <code class="language-javascript">
+Tooflya.api.call('buttles.send',
+{
+  data: {
+   type: 1,
+    time: 15550,
+    participants: [
+      10800
+    ],
+    winner: 10800,
+    score: 33
+  },
+  secret: 'ycLPvVOrTf9bimrGjZRg'
+},
+{
+  success: function(e) {
+    console.log(e);
+  },
+  error: function(e) {
+    console.log(e);
+  }
+});
+                  </code>
+                </pre>
+              </div>
+              <p><b>Response</b></p>
+              <div>
+                <small><b>Error</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: %error_code,
+  data: {
+    reason: 'Error reason.'
+  }
+}
+                  </code>
+                </pre>
+                <small><b>Success</b></small>
+                <pre>
+                  <code class="language-javascript">
+{
+  response: 1,
+  data: {
+    secret: 'ycLPvVOrTf9bimrGjZRg'
+  }
+}
+                  </code>
+                </pre>
+              </div>
+            </div>
+          </p>
+        <div>
+          <p>&nbsp;</p>
+          <p>Total Buttles tool API calls count: <b>{$statistics.buttlesCount} by last week</b></p>
+        </div>
+        <div>
+          <canvas id="buttles-api-calls" width="960" height="150"></canvas>
+        </div>
+      </div>
     </div>
     <div class="block" id="examples">
       <div class="title">
@@ -1475,6 +1548,15 @@ structure.data.push('{$value.count}');
 new Chart(document.getElementById("request-api-calls").getContext("2d")).Line({
   labels: structure.labels,
   datasets: dataset(structure.data, 'Request tool calls count')
+}, options);
+structure.clear();
+{foreach from=$statistics.buttles item=value}
+structure.labels.push('{$value.time|date_format:"%d %B"}');
+structure.data.push('{$value.count}');
+{/foreach}
+new Chart(document.getElementById("buttles-api-calls").getContext("2d")).Line({
+  labels: structure.labels,
+  datasets: dataset(structure.data, 'Buttles tool calls count')
 }, options);
 </script>
 {include file="ApiController/include/footer.html"}

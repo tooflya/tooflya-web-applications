@@ -1,7 +1,7 @@
 <?
 
 /**
- * @file request.php
+ * @file buttles.php
  * @category api
  *
  * @author Igor Mats from Tooflya Inc.
@@ -19,8 +19,8 @@
  */
 
 /**
- * 
- * Storage definition
+ *
+ * Users definition
  *
  */
 namespace API
@@ -33,8 +33,9 @@ namespace API
    */
   require_once('component.php');
 
-  class request extends component
+  class buttles extends component
   {
+
     /**
      *
      *
@@ -42,59 +43,9 @@ namespace API
      */
     public function send()
     {
-      switch($this->type)
-      {
-        default:
-        $this->controller->abort(6);
-        break;
-        case 'live.send':
-        case 'live.request':
-        case 'play.send':
-        break;
-      }
+      $this->queries('buttles.send');
 
-      $this->queries('request.send');
-
-      $this->response('request', array(
-        'secret' => $this->secret
-      ));
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function receive()
-    {
-      $this->response('request', array(
-        'received' => $this->queries('request.receive'),
-        'secret' => $this->secret
-      ));
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function find()
-    {
-      $this->response('request', array(
-        'requests' => $this->queries('request.find'),
-        'secret' => $this->secret
-      ));
-    }
-
-    /**
-     *
-     *
-     *
-     */
-    public function check()
-    {
-      $this->response('request', array(
-        'requests' => $this->queries('request.check'),
+      $this->response('buttles', array(
         'secret' => $this->secret
       ));
     }
